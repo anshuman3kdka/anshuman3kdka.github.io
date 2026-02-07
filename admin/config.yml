@@ -10,7 +10,7 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 media_library:
-  name: uploadcare
+  name: github
 
 collections:
   - name: poetry
