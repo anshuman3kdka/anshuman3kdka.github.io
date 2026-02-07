@@ -1,3 +1,9 @@
+backend:
+  name: github
+  repo: anshuman3kdka/anshuman3kdka.github.io
+  branch: main
+  client_id: Ov23li6QdMcxjp1u3cBw
+  client_secret: b6f24e6f051e22f3c600852944fcfb55fb66c2ed
 collections:
   poetry:
     output: true
