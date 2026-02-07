@@ -1,4 +1,6 @@
-# Poetry
+---
+title: Poetry
+---
 
 A collection of poems.
 
