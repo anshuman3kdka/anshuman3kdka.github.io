@@ -6,12 +6,6 @@ backend:
 
 publish_mode: simple
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
-
-media_library:
-  name: github
-
 collections:
   - name: poetry
     label: Poetry
