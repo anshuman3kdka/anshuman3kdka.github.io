@@ -2,46 +2,14 @@ backend:
   name: github
   repo: anshuman3kdka/anshuman3kdka.github.io
   branch: main
-  client_id: Ov23li6QdMcxjp1u3cBw
-backend:
-  name: github
-  repo: anshuman3kdka/anshuman3kdka.github.io
-  branch: main
+  client_id: YOUR_CLIENT_ID
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+publish_mode: simple
 
 collections:
   - name: poetry
     label: Poetry
     folder: poetry
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: prose
-    label: Prose
-    folder: prose
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: essays
-    label: Essays
-    folder: essays
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: projects
-    label: Projects
-    folder: projects
     create: true
     slug: "{{slug}}"
     fields:
