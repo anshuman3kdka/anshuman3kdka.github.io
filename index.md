@@ -4,10 +4,11 @@ title: Home
 
 Welcome.
 
-This is my writing archive.
+This is an archive of my writing.
 
-You can find my work here:
+## Sections
 
+- [About](/about/)
 - [Essays](/essays/)
 - [Prose](/prose/)
 - [Poetry](/poetry/)
