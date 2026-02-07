@@ -2,8 +2,10 @@
 title: Poetry
 ---
 
-A collection of poems.
-
-## Poems
-
-- [Venus in Moonlight](./venus-in-moonlight.md)
+<ul>
+{% for poem in site.poetry %}
+  <li>
+    <a href="{{ poem.url }}">{{ poem.title }}</a>
+  </li>
+{% endfor %}
+</ul>
