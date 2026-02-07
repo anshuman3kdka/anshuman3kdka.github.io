@@ -1,0 +1,9 @@
+collections:
+  poetry:
+    output: true
+  prose:
+    output: true
+  essays:
+    output: true
+  projects:
+    output: true
