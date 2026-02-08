@@ -6,12 +6,36 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
   </head>
 
   <body>
-    <main>
-      {{ content }}
-    </main>
+    <div class="page">
+      <header class="site-header">
+        <div class="brand">
+          <a class="brand-link" href="/">Anshuman3kdka</a>
+          <p class="tagline">Thoughtful writing, creative work, and projects.</p>
+        </div>
+        <nav class="site-nav">
+          <a href="/about/">About</a>
+          <a href="/essays/">Essays</a>
+          <a href="/prose/">Prose</a>
+          <a href="/poetry/">Poetry</a>
+          <a href="/projects/">Projects</a>
+          <a href="/achievements/">Achievements</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main class="content">
+        {{ content }}
+      </main>
+
+      <footer class="site-footer">
+        <span>© {{ site.time | date: "%Y" }} Anshuman3kdka</span>
+        <span class="footer-divider">•</span>
+        <span>Crafted with clarity and care.</span>
+      </footer>
+    </div>
   </body>
 </html>
