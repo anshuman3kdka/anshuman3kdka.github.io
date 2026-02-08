@@ -3,3 +3,4 @@ defaults:
       path: ""
     values:
       layout: default
+collections_dir: "."
