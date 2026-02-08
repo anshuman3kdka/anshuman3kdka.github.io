@@ -10,6 +10,13 @@ content:
       - name: title
         label: Title
         type: text
+
+      - name: author
+        label: Author
+        type: text
+        default: Anshuman3kdka
+        hidden: true
+
       - name: body
         label: Poem
         type: markdown
@@ -24,7 +31,12 @@ content:
     fields:
       - name: title
         label: Title
+
+      - name: author
         type: text
+        default: Anshuman3kdka
+        hidden: true
+
       - name: body
         label: Prose
         type: markdown
@@ -39,7 +51,12 @@ content:
     fields:
       - name: title
         label: Title
+
+      - name: author
         type: text
+        default: Anshuman3kdka
+        hidden: true
+
       - name: body
         label: Essay
         type: markdown
@@ -54,7 +71,6 @@ content:
     fields:
       - name: title
         label: Project Title
-        type: text
       - name: body
         label: Description
         type: markdown
@@ -69,7 +85,6 @@ content:
     fields:
       - name: title
         label: Achievement
-        type: text
       - name: body
         label: Details
         type: markdown
