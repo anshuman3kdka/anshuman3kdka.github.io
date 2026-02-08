@@ -3,14 +3,15 @@ defaults:
       path: ""
     values:
       layout: default
+collections_dir: "."
 collections:
-  _poetry:
+  poetry:
     output: true
-  _prose:
+  prose:
     output: true
-  _essays:
+  essays:
     output: true
-  _projects:
+  projects:
     output: true
-  _achievements:
+  achievements:
     output: true
