@@ -3,6 +3,7 @@ backend:
   repo: anshuman3kdka/anshuman3kdka.github.io
   branch: main
   auth_type: pkce
+  auth_endpoint: https://github.com/login/oauth/authorize
 
 local_backend: true
 
