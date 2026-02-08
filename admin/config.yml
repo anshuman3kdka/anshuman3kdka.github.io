@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: anshuman3kdka/anshuman3kdka.github.io
   branch: main
+  auth_type: pkce
+  auth_endpoint: https://YOUR-OAUTH-APP.netlify.app/auth
 
 local_backend: true
 
