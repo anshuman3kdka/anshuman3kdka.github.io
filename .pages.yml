@@ -1,0 +1,50 @@
+content:
+  - name: poetry
+    label: Poetry
+    path: poetry
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: Poem
+        type: markdown
+
+  - name: prose
+    label: Prose
+    path: prose
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: Prose
+        type: markdown
+
+  - name: essays
+    label: Essays
+    path: essays
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: Essay
+        type: markdown
+
+          - name: projects
+    label: projects
+    path: projects
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: projects
+
+        
+        type: markdown
