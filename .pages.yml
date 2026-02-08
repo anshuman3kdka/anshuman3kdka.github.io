@@ -45,6 +45,16 @@ content:
         type: text
       - name: body
         label: projects
-
+        type: markdown
         
+  - name: achievements
+    label: achivements
+    path: achievements
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: achievements
         type: markdown
