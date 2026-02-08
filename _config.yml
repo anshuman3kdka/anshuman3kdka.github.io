@@ -1,3 +1,8 @@
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
 collections:
   poetry:
     output: true
