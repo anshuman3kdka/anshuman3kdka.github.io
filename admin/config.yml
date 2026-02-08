@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: anshuman3kdka/anshuman3kdka.github.io
   branch: main
+  auth_type: pkce
 
 local_backend: true
 
