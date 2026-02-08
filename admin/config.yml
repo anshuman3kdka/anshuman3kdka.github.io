@@ -3,6 +3,11 @@ backend:
   repo: anshuman3kdka/anshuman3kdka.github.io
   branch: main
   auth_type: pkce
+  # Create a GitHub OAuth App for this site and paste its Client ID here.
+  app_id: REPLACE_WITH_GITHUB_OAUTH_APP_CLIENT_ID
+  # Use GitHub's OAuth endpoints directly (avoids Netlify auth redirects).
+  auth_endpoint: https://github.com/login/oauth/authorize
+  auth_token_endpoint: https://github.com/login/oauth/access_token
 
 local_backend: true
 
