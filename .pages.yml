@@ -1,7 +1,7 @@
 content:
   - name: poetry
     label: Poetry
-    path: _poetry
+    path: poetry
     type: collection
     filename: "{slug}.md"
     exclude:
@@ -23,7 +23,7 @@ content:
 
   - name: prose
     label: Prose
-    path: _prose
+    path: prose
     type: collection
     filename: "{slug}.md"
     exclude:
@@ -43,7 +43,7 @@ content:
 
   - name: essays
     label: Essays
-    path: _essays
+    path: essays
     type: collection
     filename: "{slug}.md"
     exclude:
@@ -63,7 +63,7 @@ content:
 
   - name: projects
     label: Projects
-    path: _projects
+    path: projects
     type: collection
     filename: "{slug}.md"
     exclude:
@@ -77,7 +77,7 @@ content:
 
   - name: achievements
     label: Achievements
-    path: _achievements
+    path: achievements
     type: collection
     filename: "{slug}.md"
     exclude:
