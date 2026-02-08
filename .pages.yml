@@ -3,6 +3,7 @@ content:
     label: Poetry
     path: poetry
     type: collection
+    filename: "{slug}.md"
     fields:
       - name: title
         label: Title
@@ -15,6 +16,7 @@ content:
     label: Prose
     path: prose
     type: collection
+    filename: "{slug}.md"
     fields:
       - name: title
         label: Title
@@ -27,6 +29,7 @@ content:
     label: Essays
     path: essays
     type: collection
+    filename: "{slug}.md"
     fields:
       - name: title
         label: Title
@@ -35,26 +38,28 @@ content:
         label: Essay
         type: markdown
 
-          - name: projects
-    label: projects
+  - name: projects
+    label: Projects
     path: projects
     type: collection
+    filename: "{slug}.md"
     fields:
       - name: title
-        label: Title
+        label: Project Title
         type: text
       - name: body
-        label: projects
+        label: Description
         type: markdown
-        
+
   - name: achievements
-    label: achivements
+    label: Achievements
     path: achievements
     type: collection
+    filename: "{slug}.md"
     fields:
       - name: title
-        label: Title
+        label: Achievement
         type: text
       - name: body
-        label: achievements
+        label: Details
         type: markdown
