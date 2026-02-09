@@ -6,7 +6,7 @@ const searchState = {
 const normalize = (value) => value.toLowerCase().trim();
 
 const fetchIndex = async () => {
-  const response = await fetch("/search-index.json", { cache: "force-cache" });
+  const response = await fetch("/assets/search-index.json", { cache: "force-cache" });
   if (!response.ok) {
     throw new Error("Unable to load search index.");
   }
@@ -64,28 +64,6 @@ const renderResults = (results, query, displayQuery, elements) => {
   });
 };
 
-const scoreEntry = (entry, normalizedQuery, terms) => {
-  const title = entry.title?.toLowerCase() || "";
-  const url = entry.url?.toLowerCase() || "";
-  const content = entry.content?.toLowerCase() || "";
-  const path = entry.path?.toLowerCase() || "";
-  const haystack = `${title} ${url} ${path} ${content}`;
-
-  let score = 0;
-  if (title.includes(normalizedQuery)) score += 6;
-  if (url.includes(normalizedQuery)) score += 3;
-  if (path.includes(normalizedQuery)) score += 2;
-  if (content.includes(normalizedQuery)) score += 1;
-
-  terms.forEach((term) => {
-    if (!term) return;
-    if (title.includes(term)) score += 2;
-    if (content.includes(term)) score += 1;
-  });
-
-  return { haystack, score };
-};
-
 const applySearch = (query, elements) => {
   const trimmed = query.trim();
   const normalized = normalize(trimmed);
@@ -94,24 +72,12 @@ const applySearch = (query, elements) => {
     return;
   }
 
-  const terms = normalized.split(/\s+/).filter(Boolean);
-  const scoredResults = searchState.index
-    .map((entry) => {
-      const { haystack, score } = scoreEntry(entry, normalized, terms);
-      return { entry, haystack, score };
-    })
-    .filter(({ haystack, score }) => {
-      if (haystack.includes(normalized)) return true;
-      return score > 0 && terms.every((term) => haystack.includes(term));
-    })
-    .sort((a, b) => b.score - a.score);
+  const results = searchState.index.filter((entry) => {
+    const target = `${entry.title} ${entry.url} ${entry.path} ${entry.content}`.toLowerCase();
+    return target.includes(normalized);
+  });
 
-  renderResults(
-    scoredResults.map(({ entry }) => entry),
-    normalized,
-    trimmed,
-    elements
-  );
+  renderResults(results, normalized, trimmed, elements);
 };
 
 const initSearch = async () => {
