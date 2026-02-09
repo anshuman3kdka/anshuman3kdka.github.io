@@ -12,39 +12,16 @@
   <body>
     <div class="page">
       <header class="site-header">
-        <div class="brand">
+        <div class="nav-bar">
           <a class="brand-link" href="/">Anshuman3kdka</a>
-          <p class="tagline">Thoughtful writing, creative work, and projects.</p>
+          <nav class="site-nav" aria-label="Primary">
+            <a href="/about/">About</a>
+            <a href="/essays/">Essays</a>
+            <a href="/projects/">Projects</a>
+            <a href="/poetry/">Poetry</a>
+            <a href="/contact/">Contact</a>
+          </nav>
         </div>
-        <div class="site-search" data-search>
-          <label class="search-label" for="site-search-input">Search the site</label>
-          <div class="search-field">
-            <input
-              id="site-search-input"
-              class="search-input"
-              type="search"
-              placeholder="Search every page or file..."
-              autocomplete="off"
-              aria-describedby="site-search-help site-search-status"
-              data-search-input
-            >
-            <button class="search-button" type="button" data-search-button>Search</button>
-          </div>
-          <p class="search-help" id="site-search-help">
-            Search across every page and published file on the site.
-          </p>
-          <p class="search-status" id="site-search-status" role="status" aria-live="polite"></p>
-          <ul class="search-results" data-search-results></ul>
-        </div>
-        <nav class="site-nav">
-          <a href="/about/">About</a>
-          <a href="/essays/">Essays</a>
-          <a href="/prose/">Prose</a>
-          <a href="/poetry/">Poetry</a>
-          <a href="/projects/">Projects</a>
-          <a href="/achievements/">Achievements</a>
-          <a href="/contact/">Contact</a>
-        </nav>
       </header>
 
       <main class="content">
@@ -52,9 +29,18 @@
       </main>
 
       <footer class="site-footer">
-        <span>© {{ site.time | date: "%Y" }} Anshuman3kdka</span>
-        <span class="footer-divider">•</span>
-        <span>Crafted with clarity and care.</span>
+        <div class="footer-content">
+          <div>
+            <p class="footer-title">Let’s connect</p>
+            <p class="footer-text">hello@anshuman3kdka.com · Based in Bangalore</p>
+          </div>
+          <div class="footer-links" aria-label="Social links">
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a>
+          </div>
+        </div>
+        <p class="footer-meta">© {{ site.time | date: "%Y" }} Anshuman3kdka · Crafted with clarity and care.</p>
       </footer>
     </div>
     <script src="{{ '/assets/search.js' | relative_url }}" defer></script>
