@@ -16,13 +16,10 @@ const handlePageTransitions = () => {
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a");
     if (!link) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const href = link.getAttribute("href");
-    if (!href) return;
     const isExternal = link.target === "_blank" || href.startsWith("http");
     const isAnchor = href.startsWith("#");
-    const isProtocol = href.startsWith("mailto:") || href.startsWith("tel:");
-    if (isExternal || isAnchor || isProtocol || link.hasAttribute("download")) return;
+    if (isExternal || isAnchor || link.hasAttribute("download")) return;
 
     event.preventDefault();
     document.body.classList.add("is-leaving");
