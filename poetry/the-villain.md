@@ -26,7 +26,7 @@ A revolution's thread unspun.
 Our songs grow faint, our voices thin,  
 As moonlight paints our pallid skin.  
 The natural order wears so thin:  
-Cats growl, dogs coo—the world's chagrin.
+Cats growl, dogs coo—the world's chagrin.  
 .  
 And that lark who once sang at dawn,  
 Now heralds twilight's creeping spawn.  
