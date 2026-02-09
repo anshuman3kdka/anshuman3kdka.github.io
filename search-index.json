@@ -1,0 +1,15 @@
+---
+layout: null
+---
+[
+  {%- assign pages_to_index = site.pages | where_exp: "page", "page.url != '/search-index.json'" -%}
+  {%- for page in pages_to_index -%}
+    {%- assign title = page.title | default: page.name | default: page.url -%}
+    {
+      "title": {{ title | strip_html | strip_newlines | jsonify }},
+      "url": {{ page.url | jsonify }},
+      "path": {{ page.path | jsonify }},
+      "content": {{ page.content | strip_html | strip_newlines | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}
+]
