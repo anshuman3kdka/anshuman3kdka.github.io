@@ -7,7 +7,6 @@ We shed our skins in twilight's hush,
 Our scars like constellations blush.  
 The city's heart begins to rush,  
 As change descends with fever's flush.  
-.  
 Through crowded streets we weave and wind,  
 Our former selves left far behind.  
 For some grand cause, we've been conscribed,  
@@ -27,7 +26,6 @@ Our songs grow faint, our voices thin,
 As moonlight paints our pallid skin.  
 The natural order wears so thin:  
 Cats growl, dogs coo—the world's chagrin.  
-.  
 And that lark who once sang at dawn,  
 Now heralds twilight's creeping spawn.  
 The eclipse approaches, light withdrawn—  
