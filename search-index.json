@@ -3,7 +3,6 @@ layout: null
 ---
 [
   {%- assign pages_to_index = site.pages | where_exp: "page", "page.url != '/search-index.json'" -%}
-  {%- assign static_to_index = site.static_files | where_exp: "file", "file.extname == '.md' or file.extname == '.html' or file.extname == '.txt'" -%}
   {%- for page in pages_to_index -%}
     {%- assign title = page.title | default: page.name | default: page.url -%}
     {
@@ -11,16 +10,6 @@ layout: null
       "url": {{ page.url | jsonify }},
       "path": {{ page.path | jsonify }},
       "content": {{ page.content | strip_html | strip_newlines | jsonify }}
-    }{% if forloop.last and static_to_index.size == 0 %}{% else %},{% endif %}
-  {%- endfor -%}
-  {%- for file in static_to_index -%}
-    {%- assign file_url = file.relative_path | relative_url -%}
-    {
-      "title": {{ file.name | jsonify }},
-      "url": {{ file_url | jsonify }},
-      "path": {{ file.path | jsonify }},
-      "content": null,
-      "source": {{ file_url | jsonify }}
     }{% unless forloop.last %},{% endunless %}
   {%- endfor -%}
 ]
