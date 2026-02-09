@@ -117,14 +117,13 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-5);
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-3) var(--space-5);
 }
 
 .brand-link {
   font-size: var(--step-1);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.2;
 }
 
 .site-nav {
@@ -184,16 +183,11 @@ button:focus-visible {
   padding-left: var(--space-6);
 }
 
-.page-body a:not(.button) {
+.page-body a {
   color: var(--color-accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-}
-
-.button {
-  text-decoration: none;
-  color: inherit;
 }
 
 .section {
