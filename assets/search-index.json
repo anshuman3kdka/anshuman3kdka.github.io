@@ -1,0 +1,110 @@
+[
+  {
+    "title": "About",
+    "url": "/about/",
+    "content": "I write essays, prose, and poetry. This site is an archive of my work.",
+    "path": "about/index.md"
+  },
+  {
+    "title": "Achievements",
+    "url": "/achievements/",
+    "content": "Publications, recognitions, and milestones.",
+    "path": "achievements/index.md"
+  },
+  {
+    "title": "Contact",
+    "url": "/contact/",
+    "content": "You can reach me at: [thisisanshumanp@gmail.com](mailto:thisisanshumanp@gmail.com)",
+    "path": "contact/index.md"
+  },
+  {
+    "title": "Essays",
+    "url": "/essays/",
+    "content": "Essays will appear here as they are added. {% assign essay_items = site.pages | where_exp: \"page\", \"page.path contains 'essays/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if essay_items.size > 0 %} {% for essay in essay_items %} - [{{ essay.title }}]({{ essay.url }}) {% endfor %} {% endif %}",
+    "path": "essays/index.md"
+  },
+  {
+    "title": "Home",
+    "url": "/home/",
+    "content": "Welcome. This is where my work lives.",
+    "path": "home/index.md"
+  },
+  {
+    "title": "Home",
+    "url": "/",
+    "content": "Welcome to my studio of ideas, writing, and crafted projects. This is an archive of stories, essays, and practical work—curated to be easy to explore and made for thoughtful reading.",
+    "path": "index.md"
+  },
+  {
+    "title": "Adam Won’t Know",
+    "url": "/poetry/adam-wont-know.html",
+    "content": "It’s right there, just within your reach, Care not about the trust you’ll breach, Pay no heed to my leather scales, Just pluck it out, you’ll leave no trails. . Ah! There you go, now take a bite, Nothing to do with wrong or right, The God won’t know despite his might, You’ll have all that, there shall be light. . He’ll never know what happens here, Nothing’s forbidden, have no fear, He lives too far, he loves you not, Come to me let him shed tears. . Don’t ask me why my tongue is green, Just do the deed you’ll not be seen, Our love he doesnt have to know, Just eat the fruit, and stoop so low.",
+    "path": "poetry/adam-wont-know.md"
+  },
+  {
+    "title": "Another Poet",
+    "url": "/poetry/another-poet.html",
+    "content": "The morrow’s lark, the midnight dark, The hue of noon, the evening’s moon, Such evening’s moon, with Sun pairs, And to such Sun, your warmth compares. . The hue of noon, your gentle croon, Both cause the men to sway and swoon, Both cause the men death and decay, Your touch like heatstrokes in mid-june. . The midnight dark is heaven's light, When held against your heart, a blight, A pitch black heart with empty veins, No morals known, no binds nor reins. . The morrow's lark will sing for me, My elegy, your eulogy, Another Poet falls for thee, One more life, no apologies.",
+    "path": "poetry/another-poet.md"
+  },
+  {
+    "title": "Poetry",
+    "url": "/poetry/",
+    "content": "Browse the poems archived here: {% assign poems = site.pages | where_exp: \"page\", \"page.path contains 'poetry/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if poems.size > 0 %} {% for poem in poems %} - [{{ poem.title }}]({{ poem.url }}) {% endfor %} {% else %} No poems yet. Check back soon. {% endif %}",
+    "path": "poetry/index.md"
+  },
+  {
+    "title": "Man's Greatest Invention",
+    "url": "/poetry/mans-greatest-invention.html",
+    "content": "The world has stopped, the bell has tolled, People have broken out of mould, They have rushed to the city gate, “Satan's here, a soul he has sold.” . They watch like the statues they'd always been. The light being returned to the hollowed being. Now-darkened hair ride on the wrinkled head. “The Lord is the Devil” philosophers said. . When Man perishes then God too dies, He's in our heads, but He's not lies. We thought Him up, yet still He's there, He thinks like Man, like Man He sighs. . When the men worship Him they praise Him not. They worship the richness of their own thought. The greatest invention of Man ain't wheel. Adam's the Creator, Creation is God.",
+    "path": "poetry/mans-greatest-invention.md"
+  },
+  {
+    "title": "Merchants of Lush II",
+    "url": "/poetry/merchants-of-lush-ii.html",
+    "content": "We’ll wake on dewy grass, And forget how we fell, We’ll heat, rebuild the glass, From cores would fade our hell. . Through misted panes, we gaze, At phantoms in the air, They dance in shadowed haze, With whispers faint and rare. In corridors that twist and wind, We lose ourselves, we lose our mind, In labyrinths where shadows play, Our hearts, our souls, they slowly fray. . They have been untrue from start, To wood dwellers, While… We’ve been selling our hearts, To travelers. To travelers with tales to tell, To show us all from sails to shell, Three wishes in a magic lamp, To make our heart a tragic lamb. . In secret rooms with velvet walls, We bargain dreams as evening falls, The merchants smile with eyes so cold, They trade in souls, they trade in gold. This year the tides have risen high, Traders of love have smiled so wry. They’ve pulled the strings, the doves have sung, Fall in their quicksand, silver tongue. . Through endless nights, we wandered still, Beneath the moon, above the hill, Where every shadow hid a lie, And every truth was born to die. The roads we took, the paths we chose, Led us to doors that never close, A fleeting glimpse of what was real, Lost in the haze, the fading zeal. . Their words like smoke, they filled the air, With promises so thin, so fair, But as we reached, they slipped away, Like fleeting dreams at break of day. In hollow halls, their laughter rings, A melody of broken strings, And in the end, we stand alone, In fields of ash, where seeds were sown. . They told us tales of endless light, Of kingdoms vast and stars so bright, But in the dark, we found the truth, That all we had was stolen youth. The merchants’ eyes, so deep, so black, They lead us forth, but turn us back, To where we started, where we’ll end, In circles vast, with none to mend. . And as the dawn begins to break, We see the deals we chose to make, The glass we broke, the hearts we sold, In search of warmth, in search of gold. Yet in the dew, we find a trace, Of all we lost, of all we chase, And in the light of morning's glow, We see the path we did not know. . But still we rise, on dewy grass, Forget the fall, rebuild the glass, And though the core of hell remains, We forge anew, unbind our chains.",
+    "path": "poetry/merchants-of-lush-ii.md"
+  },
+  {
+    "title": "The Circe we Need",
+    "url": "/poetry/the-circe-we-need.html",
+    "content": "Oh hello sir, nice meeting you, Men of your bearings are quite few, Please stay away, that's blood not stew! You'll soon be part of the same brew. . You see, a heart that's always true, Not affected by evil’s flu, Not saddened in the days of blue, Nor gladdened by a murder's view, Is what we need for this concoction, We'll sell it at Friday's auction, To orphans who seek adoption, Safe life was never an option. . Fear not! It's not a mutant drink, Nor for it do the werewolves sing, It does its job before you blink, Now ships will sail in seas of ink. . So please sir before you supper, Take a small minute to suffer, You'd give your heart, were you tougher, For Hecate’s sake sir! Don't stutter! . My cause is just and so are you, Come ruin this globe, build it anew.",
+    "path": "poetry/the-circe-we-need.md"
+  },
+  {
+    "title": "The Villain",
+    "url": "/poetry/the-villain.html",
+    "content": "We shed our skins in twilight's hush, Our scars like constellations blush. The city's heart begins to rush, As change descends with fever's flush. . Through crowded streets we weave and wind, Our former selves left far behind. For some grand cause, we've been conscribed, Though doubts still linger in our mind. . In parks once green, now ashen gray, We rest our bones at close of day. The world's turned inside out, they say, Yet here, like statues, we must stay. . The Thames runs red with setting sun, The Ganges' holy waters run With echoes of what we've begun— A revolution's thread unspun. . Our songs grow faint, our voices thin, As moonlight paints our pallid skin. The natural order wears so thin: Cats growl, dogs coo—the world's chagrin. . And that lark who once sang at dawn, Now heralds twilight's creeping spawn. The eclipse approaches, light withdrawn— What rises once the dark has gone?",
+    "path": "poetry/the-villain.md"
+  },
+  {
+    "title": "Venus in Moonlight",
+    "url": "/poetry/venus-in-moonlight.html",
+    "content": "And sometimes when your cup goes cold, From frost of words that went untold, You stare down, a second too long, And in that hush, a tale unfolds. . Your filtered coffee, filtered heart, A silent call, an aimless dart, The way you weaved your lies so thin, As if you were a child of Sin. . A glance thrown here, a smile thrown there, And promises of love so rare, You spoke none of it, and yet see, How easily you did ensnare. . Angelic face, Devilish grace, Whose tired sighs caused hearts to race, Whose pretenses stole sleep for days, As if Venus in Moonlight lays. . Till now I wonder how you sound, Maybe because you never spoke, Maybe your sins wore down your tongue, Maybe you choked on hearts you broke.",
+    "path": "poetry/venus-in-moonlight.md"
+  },
+  {
+    "title": "Six Till Night (Sun's Version)",
+    "url": "/poetry/{slug}-1.html",
+    "content": "The Sun has found a flare, A flame in November, A true heart not a snare, A love to remember. . A love to remember his warmth, Not tear what one can never fix. The tears he bears, the smile he wears, When he's at your doorstep at six. . From six till night, his world is yours, But all the time, his world is you. He searches all the day for shore, But six till night, his land is you. . Journeys the Wild West, Eastern skies, He needs and heals the Orcish cries. He finds home in your Elven tongue, And rhymes the song your heart has sung. . You're his red poem, you're his sunshine, You're what the Fates for him destined. You're love, you're lust, you're sin, you're crime, Go grab that kiss and say, “You're mine”.",
+    "path": "poetry/{slug}-1.md"
+  },
+  {
+    "title": "Our Epitaphs",
+    "url": "/poetry/{slug}.html",
+    "content": "An unused toothbrush beside mine It’s there for weeks, exactly nine. They ask why I keep it with me, Just ‘cause I’m waiting for springtime. . When springtime sets I’ll give it back, To who I inherently lack, My soul would be a whole once more, We’ll carve our feet on muddy track. . For future lovers who walk by, Away from world and those who pry, They’ll set eyes on our Epitaphs, “Here lies the Sun and his pink Sky” . For now the toothbrush stands forlorn, Biding the seasons not yet born, This year the cherries might not bloom, There might not be a dewy morn. . Not yet but if you wait a year, The doves will carry your prayer, The toothbrush will see spring again, You won’t know fear, shall shed no tear.",
+    "path": "poetry/{slug}.md"
+  },
+  {
+    "title": "Projects",
+    "url": "/projects/",
+    "content": "Project notes will appear here as they are added. {% assign project_items = site.pages | where_exp: \"page\", \"page.path contains 'projects/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if project_items.size > 0 %} {% for project in project_items %} - [{{ project.title }}]({{ project.url }}) {% endfor %} {% endif %}",
+    "path": "projects/index.md"
+  },
+  {
+    "title": "Prose",
+    "url": "/prose/",
+    "content": "Prose entries will appear here as they are added. {% assign prose_items = site.pages | where_exp: \"page\", \"page.path contains 'prose/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if prose_items.size > 0 %} {% for prose in prose_items %} - [{{ prose.title }}]({{ prose.url }}) {% endfor %} {% endif %}",
+    "path": "prose/index.md"
+  }
+]

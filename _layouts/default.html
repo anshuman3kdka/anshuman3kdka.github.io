@@ -16,6 +16,26 @@
           <a class="brand-link" href="/">Anshuman3kdka</a>
           <p class="tagline">Thoughtful writing, creative work, and projects.</p>
         </div>
+        <div class="site-search" data-search>
+          <label class="search-label" for="site-search-input">Search the site</label>
+          <div class="search-field">
+            <input
+              id="site-search-input"
+              class="search-input"
+              type="search"
+              placeholder="Search every page or file..."
+              autocomplete="off"
+              aria-describedby="site-search-help site-search-status"
+              data-search-input
+            >
+            <button class="search-button" type="button" data-search-button>Search</button>
+          </div>
+          <p class="search-help" id="site-search-help">
+            Search across every page and published file on the site.
+          </p>
+          <p class="search-status" id="site-search-status" role="status" aria-live="polite"></p>
+          <ul class="search-results" data-search-results></ul>
+        </div>
         <nav class="site-nav">
           <a href="/about/">About</a>
           <a href="/essays/">Essays</a>
@@ -37,5 +57,6 @@
         <span>Crafted with clarity and care.</span>
       </footer>
     </div>
+    <script src="{{ '/assets/search.js' | relative_url }}" defer></script>
   </body>
 </html>
