@@ -1,0 +1,10 @@
+{
+  "name": "anshuman3kdka-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static site build utilities",
+  "scripts": {
+    "generate:search-index": "node ./scripts/generate-search-index.mjs",
+    "build": "npm run generate:search-index"
+  }
+}

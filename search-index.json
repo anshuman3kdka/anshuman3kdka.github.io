@@ -1,15 +1,212 @@
----
-layout: null
----
 [
-  {%- assign pages_to_index = site.pages | where_exp: "page", "page.url != '/search-index.json'" -%}
-  {%- for page in pages_to_index -%}
-    {%- assign title = page.title | default: page.name | default: page.url -%}
-    {
-      "title": {{ title | strip_html | strip_newlines | jsonify }},
-      "url": {{ page.url | jsonify }},
-      "path": {{ page.path | jsonify }},
-      "content": {{ page.content | strip_html | strip_newlines | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
-  {%- endfor -%}
+  {
+    "title": "Home",
+    "url": "/",
+    "content": "Creative technologist · Writer Anshuman3kdka I build thoughtful digital experiences, write on creativity and systems, and explore how design can make ideas feel inevitable. Read the latest essays Explore projects Featured thought Designing for depth, not noise. Explore the essay collection → Featured Curated work, shaped by intent A snapshot of recent essays, experiments, and systems work that reflect my current thinking. Featured essay On quiet ambition Exploring how intentional pacing leads to meaningful creative momentum. Read essay Featured project Atlas Notes A digital notebook built for deep work, structured thinking, and clarity. View project About A short introduction I write about creativity, systems, and the craft of building ideas into lasting work. I’m a multidisciplinary creator blending writing, product thinking, and design. My work sits at the intersection of storytelling and practical execution, helping teams and readers move from insight to action. When I’m not writing, you’ll find me mapping new frameworks, collecting narratives, and building tools that make thoughtful work easier.",
+    "path": "index.md"
+  },
+  {
+    "title": "About",
+    "url": "/about/",
+    "content": "About An evolving archive of ideas and experiments. I write essays, prose, and poetry. This site is where I collect the work that shapes my practice as a writer and creative technologist. Add your photo here I build systems that help creative teams move from insight to action. My work focuses on craft, clarity, and the quiet decisions that make digital experiences feel human. Here you’ll find essays on creativity and design, project explorations, and experiments in storytelling. Each section is designed to be read slowly, with space for reflection.",
+    "path": "about/index.md"
+  },
+  {
+    "title": "Achievements",
+    "url": "/achievements/",
+    "content": "Achievements Highlights, publications, and milestones. A log of recognitions, collaborations, and outcomes as they happen. Recognition Featured writing collection A spotlight on essays that explore the craft of building thoughtful products. Milestone Creative technology practice Continuing to develop experiments that blend narrative, interface, and systems thinking.",
+    "path": "achievements/index.md"
+  },
+  {
+    "title": "Contact",
+    "url": "/contact/",
+    "content": "Contact Let’s build something thoughtful. For collaborations, writing, or product conversations, reach out directly or connect through the social channels below. Email thisisanshumanp@gmail.com The fastest way to reach me for new work or speaking requests. Send an email Location Delhi, India Available for remote collaborations and select local projects. Learn more",
+    "path": "contact/index.md"
+  },
+  {
+    "title": "Essays",
+    "url": "/essays/",
+    "content": "Essays Long-form writing on creativity, systems, and craft. A home for essays that explore how thoughtful work gets made. New posts appear here as they are published. Essay · Essays will appear here as they are added.",
+    "path": "essays/index.md"
+  },
+  {
+    "title": "ARCHEOLOGICAL SITE REPORT:",
+    "url": "/essays/Archaeological_site_report.html",
+    "content": "ARCHEOLOGICAL SITE REPORT: EXCAVATION #2005-CB Subject: The \"Campus Romance\" Paperback (Late 20th/Early 21st Century) Location: Excavated from the ruins of a specialized torture chamber known as \"The A.H. Wheeler Railway Bookstore.\" Lead Archeologist: Dr. Xylos, Curator of Pre-Apocalyptic Cringe Date: Year 4025 (Post-Logic Era) --- I. SITE OVERVIEW Fellow excavators, let us dispense with the pleasantries. We have uncovered a mass grave. Not of bodies, but of creativity. We have unearthed millions of identical rectangular artifacts, composed of decomposing wood pulp and bound in covers featuring silhouetted couples standing under umbrellas. Carbon dating suggests these texts were mass-produced during a dark age called the \"Engineering College Boom,\" a period where ancient Indian civilization decided that the only way to process the trauma of calculus was to write bad fiction about it. For decades, scholars assumed these were distinct stories. They were not. We are looking at a single, repetitive chant. A structural glitch in the human imagination. --- II. ARTIFACT ANALYSIS: THE TRINITY OF DOOM Upon closer inspection of the texts (titled things like Half-Girlfriend, Quarter-Boyfriend, or Three Mistakes of My Life Which Were Buying This Book), we find a rigid, almost religious adherence to three specific structural pillars. These pillars are load-bearing; remove one, and the entire narrative collapses into a pile of unread blog posts. A. The \"Potato\" Variant (The Protagonist) In every single text, the central figure is a male specimen of aggressive averageness. Let us call him \"The Madhav.\" Physical Description: He is consistently described as having the aesthetic appeal of a damp biscuit. He has no hobbies, no discernible personality, and his English vocabulary is limited to \"Hi,\" \"Bye,\" and \"I love you.\" The Anomaly: Despite possessing the charisma of a traffic cone, this specimen inexplicably attracts the \"Goddess\" (see below). Ancient historians are baffled. Was this a fertility idol? A representation of the Everyman's delusion? Function: His primary function is to whine. He whines about his grades. He whines about his English. He whines that the Goddess is talking to other males. He is the gravitational center of a black hole of insecurity. B. The \"Adonis\" Construct (The Threat) Orbiting the Goddess is a secondary male figure. Let us call him \"The Kabir.\" Characteristics: The Kabir is physically perfect. He plays the guitar. He is captain of the sports team. He speaks the ancient elite dialect known as \"South Delhi Accent.\" He is kind, supportive, and objectively the better choice in every conceivable metric. The Ritualistic Hatred: The narrative demands that The Madhav hates The Kabir with the fire of a thousand suns. The Madhav convinces the reader that The Kabir is \"arrogant\" simply because he showers regularly and knows how to talk to women without weeping. Fate: The Kabir must lose. In a defiance of natural selection, the narrative forces the Goddess to reject this genetic lottery winner in favor of the Potato. This suggests the ancients practiced a form of masochism we cannot fully comprehend. C. The \"Goddess\" (The Prize) The female lead. She is beautiful. She is intelligent. She is \"The Most Popular Girl in College.\" Agency: None. She exists solely to be a trophy for the Potato to unlock after he completes enough levels of self-pity. The Logic Failure: Her decision-making centers appear damaged. She spends 300 pages treating The Potato like a friend, only to suddenly realize in the Epilogue—usually at an airport or a train station—that his persistent stalking was actually \"true love.\" --- III. THE RITUAL OF THE PLOT (The Cycle of Trauma) The structural integrity of these novels relies on a sequence of events so predictable it must have been mandated by law. 1. The Ragging/orientation: The Potato meets the Goddess. He stares at her. It is creepy. She smiles. He assumes marriage is imminent. 2. The \"Friendship\" Purgatory: They become friends. The Potato hates this. He wants to own her. He calls this \"love.\" The Goddess treats him like a human being; he resents her for not treating him like a husband. 3. The Great Misunderstanding: The Potato sees the Goddess laughing with The Kabir. The Potato suffers a mental breakdown. He gets drunk. He says something unforgivable. He fails an exam. 4. The Redemption (That Isn't Redemption): The Potato does not improve himself. He does not learn a skill. He simply waits. Eventually, the Goddess’s life falls apart (usually due to parental pressure to marry an NRI), and she settles for the Potato because he is... there. He is persistent. He is the mold that refuses to be scrubbed away. --- IV. SOCIOLOGICAL CONCLUSION Why did the ancients worship this structure? We hypothesize that these texts served as a mass sedative for a generation of sexually frustrated engineering students. The \"Average Guy Gets The Girl\" narrative was not a story; it was a government-issued hallucination. It told millions of young men that they didn't need to develop personalities, hygiene, or social skills—they just needed to wait, whine, and eventually, the universe would hand them a supermodel. Final Verdict: The civilization did not die of war or famine. It died of exhaustion. It read the same plot about a boy named Rahul/Madhav/Krish chasing a girl named Ananya/Riya/Simran for forty years until their brains simply liquefied out of their ears. Recommendation: Rebury the site. Pour concrete over the entrance. Do not let the virus escape. Signed, The High Excavator (Who is currently reading a fanfiction about a toaster just to feel something real)",
+    "path": "essays/Archaeological_site_report.md"
+  },
+  {
+    "title": "Home",
+    "url": "/home/",
+    "content": "Welcome This is where my work lives. Use the navigation to explore essays, projects, and poetry.",
+    "path": "home/index.md"
+  },
+  {
+    "title": "Poetry",
+    "url": "/poetry/",
+    "content": "Poetry Poems, fragments, and experiments in language. An archive of verses, each a snapshot of a different season of thought. Poem · No poems yet. Check back soon.",
+    "path": "poetry/index.md"
+  },
+  {
+    "title": "Six Till Night (Sun's Version)",
+    "url": "/poetry/{slug}-1.html",
+    "content": "The Sun has found a flare, A flame in November, A true heart not a snare, A love to remember. . A love to remember his warmth, Not tear what one can never fix. The tears he bears, the smile he wears, When he's at your doorstep at six. . From six till night, his world is yours, But all the time, his world is you. He searches all the day for shore, But six till night, his land is you. . Journeys the Wild West, Eastern skies, He needs and heals the Orcish cries. He finds home in your Elven tongue, And rhymes the song your heart has sung. . You're his red poem, you're his sunshine, You're what the Fates for him destined. You're love, you're lust, you're sin, you're crime, Go grab that kiss and say, “You're mine”.",
+    "path": "poetry/{slug}-1.md"
+  },
+  {
+    "title": "Our Epitaphs",
+    "url": "/poetry/{slug}.html",
+    "content": "An unused toothbrush beside mine It’s there for weeks, exactly nine. They ask why I keep it with me, Just ‘cause I’m waiting for springtime. . When springtime sets I’ll give it back, To who I inherently lack, My soul would be a whole once more, We’ll carve our feet on muddy track. . For future lovers who walk by, Away from world and those who pry, They’ll set eyes on our Epitaphs, “Here lies the Sun and his pink Sky” . For now the toothbrush stands forlorn, Biding the seasons not yet born, This year the cherries might not bloom, There might not be a dewy morn. . Not yet but if you wait a year, The doves will carry your prayer, The toothbrush will see spring again, You won’t know fear, shall shed no tear.",
+    "path": "poetry/{slug}.md"
+  },
+  {
+    "title": "A merchant's Initiation",
+    "url": "/poetry/a-merchants-initiation.html",
+    "content": "One bright morn, guided by ambition, And wanderlust, His feet have come, to meet a new city, To greet new dust. Which clings on to them, like sorrow's cousin, Which we call hope, And it promises 'The city is great!' Which we call hope. Nearly noon, he has unpacked, His heart's luggage, his aching rack, He takes a whiff of city's scent, And wonders what the dust had meant. 'The city is great!' and so, he must walk, Down the new lanes. He must trust the dust, and its purple soot, And meet new names. But the city's quick, he sees not people He's seen, again. Here people walk with many stains of touch And remain sane. Twilight, and strange weariness hits, These people talk, these people kiss, And yet their love never quite fits, These people part, but never miss? These people, they're traders, they deal in hearts, And smile so dull, Not cruel, not without a soul. They are just, Transactional. Rotates endlessly, this organised Mob, No one complains. He guesses it's simpler, than finding love, And going through pains. They'll pick their pens and write of love, And in the same breath, elegies. Their tongues of crow, and words of dove, And each word is affection's fees. At midnight, he gives in to this, And buys a cold and painted kiss. He drinks the city, dark and deep, And sells the soul he meant to keep. New morning breaks on graying skies, With city dust within his eyes. He joins the march, he joins the stain, A trader now, and mostly sane.",
+    "path": "poetry/a-merchants-initiation.md"
+  },
+  {
+    "title": "Adam Won’t Know",
+    "url": "/poetry/adam-wont-know.html",
+    "content": "It’s right there, just within your reach, Care not about the trust you’ll breach, Pay no heed to my leather scales, Just pluck it out, you’ll leave no trails. . Ah! There you go, now take a bite, Nothing to do with wrong or right, The God won’t know despite his might, You’ll have all that, there shall be light. . He’ll never know what happens here, Nothing’s forbidden, have no fear, He lives too far, he loves you not, Come to me let him shed tears. . Don’t ask me why my tongue is green, Just do the deed you’ll not be seen, Our love he doesnt have to know, Just eat the fruit, and stoop so low.",
+    "path": "poetry/adam-wont-know.md"
+  },
+  {
+    "title": "Another Poet",
+    "url": "/poetry/another-poet.html",
+    "content": "The morrow’s lark, the midnight dark, The hue of noon, the evening’s moon, Such evening’s moon, with Sun pairs, And to such Sun, your warmth compares. . The hue of noon, your gentle croon, Both cause the men to sway and swoon, Both cause the men death and decay, Your touch like heatstrokes in mid-june. . The midnight dark is heaven's light, When held against your heart, a blight, A pitch black heart with empty veins, No morals known, no binds nor reins. . The morrow's lark will sing for me, My elegy, your eulogy, Another Poet falls for thee, One more life, no apologies.",
+    "path": "poetry/another-poet.md"
+  },
+  {
+    "title": "Dead Wolves Under The Tide",
+    "url": "/poetry/dead-wolves-under-the-tide.html",
+    "content": "The yarn of Fate. The farm of hate, The harm would sate but not abate, The rising tide whose time has come, The fighting side to rest is laid. . Our Destiny's beautiful face, Unperturbed by our howling bays, The Pack would move, the pup is lost, They bother not with frenzied laze. . They're laced with reddish ivy leaves, The wolves are lambs, for she believes, That's not poison, our frets should cease, We'll sit in barns, we aim to please. . “These shackles are not your bracelets, They're not to love, nor to be set, Aside from every filthy norm, With which our love is now beset.” . The morrow wakes the Christmas crow, The murder rocks him to and fro, No gleaming eyes, no smirks to throw, They take the boat the dead now row.",
+    "path": "poetry/dead-wolves-under-the-tide.md"
+  },
+  {
+    "title": "Green Kisses",
+    "url": "/poetry/green-kisses.html",
+    "content": "The night's Aurora's glowing green, Like poison ivy, poison scheme. With plotting fangs the nature teems, That's why it's green, or so it seems. . It runs in me, to green's delight, To snake inside without a fight. The venom's black, so black and bright, Glistening alone in moonless night. . Glistening in me like it's her home, The green venom, my mouth in foam. The kid in me alone does roam, The cold marble, like martyr's dome. . Let herself in without my wish, The birds of prey? Or hunts of fish? Sauntered along a dizzy bliss, Pulled me into a deep, green kiss.",
+    "path": "poetry/green-kisses.md"
+  },
+  {
+    "title": "Grey",
+    "url": "/poetry/grey.html",
+    "content": "It’s been a while since I last wrote, For there’s nothing worth writing of. A nightingale tore off her throat, For there’s nothing worth singing of. . It’s not just love that is lacking, The purple rain too, is now slack. Their eyes warn that the past repeats, They avoid red, for fear of black. . I wish I saw some new heartbreak, Some new love for poetry’s sake. The racy passions to despise, I need another love’s demise. . I don’t like the sky to be grey, Either be red, or bitter black. But grey skies? They’ve nothing to say, They just exist as poets’ rack. . I watch new couples, for new verse, Instead of red, their hearts are grey. I search for black or vicious curse, And end up dull in faded May. . Where’s his new muse? Where’s her black rose? Where’s the butterflies? Where’s your prose? Where’s the ecstasy? Why so grey? Was this the destiny you chose? . Grey kills love, don’t let it get close.",
+    "path": "poetry/grey.md"
+  },
+  {
+    "title": "Man's Greatest Invention",
+    "url": "/poetry/mans-greatest-invention.html",
+    "content": "The world has stopped, the bell has tolled, People have broken out of mould, They have rushed to the city gate, “Satan's here, a soul he has sold.” . They watch like the statues they'd always been. The light being returned to the hollowed being. Now-darkened hair ride on the wrinkled head. “The Lord is the Devil” philosophers said. . When Man perishes then God too dies, He's in our heads, but He's not lies. We thought Him up, yet still He's there, He thinks like Man, like Man He sighs. . When the men worship Him they praise Him not. They worship the richness of their own thought. The greatest invention of Man ain't wheel. Adam's the Creator, Creation is God.",
+    "path": "poetry/mans-greatest-invention.md"
+  },
+  {
+    "title": "Merchants of Lush II",
+    "url": "/poetry/merchants-of-lush-ii.html",
+    "content": "We’ll wake on dewy grass, And forget how we fell, We’ll heat, rebuild the glass, From cores would fade our hell. . Through misted panes, we gaze, At phantoms in the air, They dance in shadowed haze, With whispers faint and rare. In corridors that twist and wind, We lose ourselves, we lose our mind, In labyrinths where shadows play, Our hearts, our souls, they slowly fray. . They have been untrue from start, To wood dwellers, While… We’ve been selling our hearts, To travelers. To travelers with tales to tell, To show us all from sails to shell, Three wishes in a magic lamp, To make our heart a tragic lamb. . In secret rooms with velvet walls, We bargain dreams as evening falls, The merchants smile with eyes so cold, They trade in souls, they trade in gold. This year the tides have risen high, Traders of love have smiled so wry. They’ve pulled the strings, the doves have sung, Fall in their quicksand, silver tongue. . Through endless nights, we wandered still, Beneath the moon, above the hill, Where every shadow hid a lie, And every truth was born to die. The roads we took, the paths we chose, Led us to doors that never close, A fleeting glimpse of what was real, Lost in the haze, the fading zeal. . Their words like smoke, they filled the air, With promises so thin, so fair, But as we reached, they slipped away, Like fleeting dreams at break of day. In hollow halls, their laughter rings, A melody of broken strings, And in the end, we stand alone, In fields of ash, where seeds were sown. . They told us tales of endless light, Of kingdoms vast and stars so bright, But in the dark, we found the truth, That all we had was stolen youth. The merchants’ eyes, so deep, so black, They lead us forth, but turn us back, To where we started, where we’ll end, In circles vast, with none to mend. . And as the dawn begins to break, We see the deals we chose to make, The glass we broke, the hearts we sold, In search of warmth, in search of gold. Yet in the dew, we find a trace, Of all we lost, of all we chase, And in the light of morning's glow, We see the path we did not know. . But still we rise, on dewy grass, Forget the fall, rebuild the glass, And though the core of hell remains, We forge anew, unbind our chains.",
+    "path": "poetry/merchants-of-lush-ii.md"
+  },
+  {
+    "title": "Midnight",
+    "url": "/poetry/midnight.html",
+    "content": "The hallway light still flickers; I’ve decided not to fix it. Small hesitations suit the house now. They go unnoticed, like she did. The dust returns in polite waves. She hated clutter, but now even the ashtray feels arranged an accidental shrine to argument. I hear she’s in a town where midnight comes without sound, where windows don’t creak and the clocks have softer hands. She always wanted the kind of silence that doesn’t require approval. We kept the other kind the silence of shared rooms, the hush before someone apologizes. The curtains still hold a faint suggestion of her perfume something like rain trying not to be noticed. She took her coat, but not the scarf that held too many goodbyes. I left it by the window where she once watched the midnight trains and said nothing. The calendar remains open to June. She left in June. I do not correct it. Some months earn their permanence. If she returns and I still expect there’s tea in the drawer, and the chair still knows her shape. I sleep late now. But sometimes I wake when the clock leans toward midnight just long enough to listen for footsteps that do not arrive. . .",
+    "path": "poetry/midnight.md"
+  },
+  {
+    "title": "Prayer",
+    "url": "/poetry/prayer.html",
+    "content": "I do not command you, I only whisper. Come back, soul the figs have ripened without you. The wheat fields waited until their spines broke. Even the wind asked if you’d forgotten its name. I carried your silence through checkpoints, hid your breath inside my coat. Each night I boiled tea for two. One cup cooled. You are not a bird, and I do not cage you. But the branches you once sang from have turned to ash in your absence. Come backnot as fire, not as victory just come back. The olive tree bends to make space for you again. The world did not owe you peace. But I do. I owe you gentleness, a bed that doesn’t question your weight, and language that doesn’t break your back. Come back, and I will not ask where you’ve been. Only if you’re hungry. Only if your feet hurt. Only if you’re still mine.",
+    "path": "poetry/prayer.md"
+  },
+  {
+    "title": "The Circe we Need",
+    "url": "/poetry/the-circe-we-need.html",
+    "content": "Oh hello sir, nice meeting you, Men of your bearings are quite few, Please stay away, that's blood not stew! You'll soon be part of the same brew. . You see, a heart that's always true, Not affected by evil’s flu, Not saddened in the days of blue, Nor gladdened by a murder's view, Is what we need for this concoction, We'll sell it at Friday's auction, To orphans who seek adoption, Safe life was never an option. . Fear not! It's not a mutant drink, Nor for it do the werewolves sing, It does its job before you blink, Now ships will sail in seas of ink. . So please sir before you supper, Take a small minute to suffer, You'd give your heart, were you tougher, For Hecate’s sake sir! Don't stutter! . My cause is just and so are you, Come ruin this globe, build it anew.",
+    "path": "poetry/the-circe-we-need.md"
+  },
+  {
+    "title": "The Dead Don’t Cry",
+    "url": "/poetry/the-dead-dont-cry.html",
+    "content": "Used to say an eye for an eye, There’s sin in them her eyes so wry, You can give all, give your best try. . But the dead don’t come, And the dead don’t cry. . There’s venom in that sparkling gaze, A beauty in the moonlight lays, Hear her! How your heart she will pry. . For the dead don’t feel, And the dead don’t cry. . Your red roses, she’ll paint them black, Till all that’s yours you will then lack, You’ll fall for each lie after lie, . For the dead are false, And the dead don’t cry. . She knows no guilt, carries no fear, Of wrath of God for sins she bears, You’ll let out a self-pitying sigh, . But the dead don’t care, And the dead don’t cry. . What do you have, save a photoframe? Of who won’t again be the same, Wish she’d stayed for a last good-bye. . But the dead aren’t here, Listening to you cry. .",
+    "path": "poetry/the-dead-dont-cry.md"
+  },
+  {
+    "title": "The Hobbit's Circle",
+    "url": "/poetry/the-hobbits-circle.html",
+    "content": "Clutching the schoolbag, he sets out, With shiny shoes and polished belt, His heart so stout, no look of doubt, He'll see what's seen, he'll feel what's felt. . He climbs aboard the yellow bus, The bus that visits 'maturity', He'll see white rust, the classroom dust, Which prepares him for the City. . You see, he's quite unused to it, This world of crime, this world of grime, He loved these meadows, where would sit, A world of rhymes, no place for time. . And yet his village sends him off With passions too big for his back, Into a life of suits and scoff, To return with a huge green sack. . They say this sack will fix all \"But what's broken?\" was never asked It's said to bring you love and crawl, Into your heart like a wine flask. . And love, of course, in this world is, No heart's affair, no place for lack, But rather it's a simple choice, Of who carries the biggest sack. He travels long and votes his king, And sleeps alone with a magic Ring, He forgets wings and larks that sing, And wakes to a life of 'meaning' . And yet, and now, his feet get slow, It tires him, his sack's green glow, He sets it down, and looks down south, A place where he had started out. . An orange sunset is calling Away from crime, away from grime, He stumbles back, where Autumn's falling, In flowers of rhymes, no place for time.",
+    "path": "poetry/the-hobbits-circle.md"
+  },
+  {
+    "title": "The Illuminati Girl",
+    "url": "/poetry/the-illuminati-girl.html",
+    "content": "[Verse 1] I'm bad at this, as you'll now see, But you left not a choice for me, As you've touched something close to soul, You've fixed this hole, made me a whole. . [Bridge] Our past four days, like some past life, Away from War, away from strife, This homely warmth, no hidden knife, Like in some birth, you were my wife. . [Verse 2] My hands, my blood, my mind, my heart, A Cupid's Spring on every part, To Fates I beg, “Give us a start, The stars do cry, seeing us apart.” . [Verse 3 and Crescendo] I'd die for you, but we would live. I'd take your thirst, might also give, A laugh to those kiss-able lips, Our love would grow, as dry pain dips. . [Chorus] You write like love, you breath like love, Like Aphrodite’s favourite dove, Like Venus-spawn, a red so bright, I don't know, ‘we’ just sounds so right?? . [Verse 4] I'll feel your heart, along with blood, See your smile, but also the hurt, I'll see your eyes, I'll see your flood, Be there in your plenty… …but also dearth. . [Verse 5] Your lips like petals wreathed in dew, Of misty lilacs, ever new, Invite my own, their lush-red wine, A kiss to make sorrows divine. . [Refrain] To steal within your waiting arms, Is abode safe from life's alarms, Where fancies dwell like larks set free, And secret dreams take wing in me. . [Verse 6] These miles between us make me ache. How many more Autumns to rake? How much more hours before we make, A sweet dwelling, a moonlit lake? . [Chorus] You write like love, you breath like love, Like Aphrodite’s favourite dove, Like Venus-spawn, a red so bright, I don't know, ‘we’ just sounds so right?? . [Outro] If loving you must end in woe, Come what may we'll together flow. These ecstasies though fleet in haste … Like summer nights, too dear to waste.",
+    "path": "poetry/the-illuminati-girl.md"
+  },
+  {
+    "title": "The Star Without Earth",
+    "url": "/poetry/the-star-without-earth.html",
+    "content": "There's much to say when Earth is dead, When Sun next day sees one less head, ‘The Star of Gold,’ the Elves have told, ‘Will forget the look of his bed.’ . They say he loved the Water’s Home, On green pastures his gaze did roam, The mountains high, where snow-pines lie, He craved all, down to Ocean’s foam. . The wondrous Earth had tales to sell, Of stairs to Heaven, Gates to Hell, The fish would play, the knights would sla And coins were tossed in magic well. . He now wanders the Milky Way, To other globes he cannot say, The Verse of hearts, a brand-new start, ‘Nah, I'd rather just lose my way.’ . But when at last he lays for dreams, His sleep drifts him to mossy streams, The Earth was one, and for one Sun, Now he won't wake, that's how it seems.",
+    "path": "poetry/the-star-without-earth.md"
+  },
+  {
+    "title": "The Villain",
+    "url": "/poetry/the-villain.html",
+    "content": "We shed our skins in twilight's hush, Our scars like constellations blush. The city's heart begins to rush, As change descends with fever's flush. Through crowded streets we weave and wind, Our former selves left far behind. For some grand cause, we've been conscribed, Though doubts still linger in our mind. . In parks once green, now ashen gray, We rest our bones at close of day. The world's turned inside out, they say, Yet here, like statues, we must stay. . The Thames runs red with setting sun, The Ganges' holy waters run With echoes of what we've begun— A revolution's thread unspun. . Our songs grow faint, our voices thin, As moonlight paints our pallid skin. The natural order wears so thin: Cats growl, dogs coo—the world's chagrin. And that lark who once sang at dawn, Now heralds twilight's creeping spawn. The eclipse approaches, light withdrawn— What rises once the dark has gone?",
+    "path": "poetry/the-villain.md"
+  },
+  {
+    "title": "The Violin Elegy",
+    "url": "/poetry/the-violin-elegy.html",
+    "content": "The violins struck a higher note, My corpse flows down in wooden boat. The dead man’s curse will always float, And seep inside his lover’s throat. . His lover’s throat has faded white, She’ll ensnare you and take your sight. You’ll long the touch of fresh sunlight, She’ll buy your soul but you won’t fight. . She’ll whisper soft, alter your hue, Will make you limitlessly blue. Endless skies, no sunset to gaze, Another dead man’s grave she’ll raze. . She’ll raze the romance of the words, Slaughter the letter-carrying birds, And lust after the sinful breed, Of murderers and players of Greed. . The violins end a love story, Which was no love only gory, But tell that to Poetry’s heart, Who ends the tales that never start.",
+    "path": "poetry/the-violin-elegy.md"
+  },
+  {
+    "title": "Venus From Miles Afar",
+    "url": "/poetry/venus-from-miles-afar.html",
+    "content": "That drunken gaze from miles afar, Those drooping lids like falling star, Tell, what Satan could seduce her? Which incantation? What wizard? . Those red guards to heaven's abyss, Their touch on flesh you'll always miss, Pray tell, for whom will they part now? What Godsend will relish her kiss? . Hours would pass and so would decades, Your voice you would hear as tirades, Your wish for Venus unfulfilled, Then wage crusades after crusades. . She'll want from you the starry skies, Gift her a looking glass instead, Shut your gaze and drown in brown eyes, Or you'll be dead before you're dead.",
+    "path": "poetry/venus-from-miles-afar.md"
+  },
+  {
+    "title": "Venus in Moonlight",
+    "url": "/poetry/venus-in-moonlight.html",
+    "content": "And sometimes when your cup goes cold, From frost of words that went untold, You stare down, a second too long, And in that hush, a tale unfolds. . Your filtered coffee, filtered heart, A silent call, an aimless dart, The way you weaved your lies so thin, As if you were a child of Sin. . A glance thrown here, a smile thrown there, And promises of love so rare, You spoke none of it, and yet see, How easily you did ensnare. . Angelic face, Devilish grace, Whose tired sighs caused hearts to race, Whose pretenses stole sleep for days, As if Venus in Moonlight lays. . Till now I wonder how you sound, Maybe because you never spoke, Maybe your sins wore down your tongue, Maybe you choked on hearts you broke.",
+    "path": "poetry/venus-in-moonlight.md"
+  },
+  {
+    "title": "Web of Souls",
+    "url": "/poetry/web-of-souls.html",
+    "content": "Your filter coffee, filtered heart, A fruitless quest, an aimless dart. Like Cupid's sting has but just pain, A web of souls, no love to gain. . Your web of souls once captured me, With men like me hoping to be, The one who wins the Spider's trust, As if the Spider needed dust. . As if she saw your flesh and skin, As if you weren't just a fly. Ha! She the closest kin of sin, For such venom why would one try? . Oh, but they tried and yes I tried, To sail ahead against the tide, The web of souls like Siren's tune, The Spider's gaze caused men to swoon. . The delights of our enchantress, Lie under Saturn's chill caress.",
+    "path": "poetry/web-of-souls.md"
+  },
+  {
+    "title": "Projects",
+    "url": "/projects/",
+    "content": "Projects Systems, experiments, and product explorations. A growing archive of creative technology work, prototypes, and structured thinking tools. Project · Project notes will appear here as they are added.",
+    "path": "projects/index.md"
+  },
+  {
+    "title": "Prose",
+    "url": "/prose/",
+    "content": "Prose Narratives and reflections in long-form prose. Stories and reflective writing that sit between essays and poetry. Prose · Prose entries will appear here as they are added.",
+    "path": "prose/index.md"
+  },
+  {
+    "title": "A Letter to You (Red Pen Edit)",
+    "url": "/prose/A_letter_to_you.html",
+    "content": "A Letter to You (Red Pen Edit) In the dream, we were in a school. It was ours, but it wasn't. The CMS building is linear, but this one grew in every direction at once. It had the look of an international hospital—vast, white, with flickering lights sunken into the ceiling. Like the lights in the exam hall. Exactly like those. It was night, though there were no windows. We passed classrooms that were modern and new, unlike the worn rooms where we spend our days. The corridors narrowed as we walked. They narrowed until our arms grazed the cold walls on both sides. We were the only ones in the halls. The silence was a physical weight. Sometimes a few students would pass us, laughing as if it were a regular Tuesday. We reached the center of the building where the hallways met. They stretched out from the middle in every direction, long and thin like the legs of a spider. The lobby was huge. It had the same grey floor as the ICSE hall. In the middle of the floor, a hospital stretcher stood alone. A regular hockey stick lay on the bedsheet. A metal blade had been fixed into the wood, the sharp edge curving out. The blade was wet with blood. We moved past it and kept walking. We went down another corridor and into a classroom. The lights here were low, humming with a failing voltage. We stood in the dimness and watched the shadows. We didn't look away. Then the voltage surged. The lights turned a blinding, surgical white. We retreated to the main hall, where the air was normal again. The hockey stick was gone. The stretcher remained, but there were dark marks on the sheets that hadn't been there before. A boy was walking toward the hall. He had a casual stride. He passed us, and as he reached your side, his hand moved. A knife flashed from his pocket, swinging toward your neck. I pulled you back. The blade cut through the air where your throat had been a second before. The boy vanished. The hall was still. You pointed to the coordinator's chair. A student sat there, scrolling through a phone. A floorboard creaked behind us. When we looked back, the student was on the stretcher. The bladed hockey stick was driven through his chest. He was crying, but the liquid coming from his eyes was thick and red. We turned and walked down the next corridor. We passed the staffroom. Inside, our teacher was scolding a student for missing homework. The world skipped. Like a film frame snagging, we were passing the door again. The student was gone. Our teacher was in the chair. The hockey stick was thrust through his ribs. He looked at us and smiled kindly. He didn't move. We went back to the center of the building. The hall was empty. No chair, no stretcher, no student. The hockey stick lay in the middle of the grey floor. It was clean. There was no blood on the wood. The doors to the stairs opened. A line of juniors walked out. They were noisy and cheerful, carrying footballs and tennis balls. They were coming back from the games field in the middle of the night. They had no teacher. They followed a boy who led the line. They walked through us as if we were air. The lights began to glow. The brightness climbed until our eyes stung and the world turned into a flat, white void. We waited. When the light died down, the children were gone. Only the boy leading the line was still there. He was standing perfectly still. He had no head. The hockey stick was growing out of his neck, the blade protruding from the raw center of his shoulders. He remained standing. We held hands. We went to the stairs and started running. I tried to say something to you, but there was no sound. I stepped on the stone, but there was no noise of a footfall. The dream was mute. I was running. I couldn't feel your hand in mine anymore. I looked to my side. The space beside me was empty. I reached the bottom, but there was no reception area. I was standing in the middle of the school ground. I looked for you. I opened my mouth and let out a long, loud shout. I couldn't hear that either.",
+    "path": "prose/A_letter_to_you.md"
+  },
+  {
+    "title": "Night",
+    "url": "/prose/Night.html",
+    "content": "Night It's nighttime and the poets and thieves are awake, their hearts beating in time with something the daylight world has forgotten. The pirates are singing sea shanties that smell of salt and rum, and one of them is sharpening a blade meant for the captain's back, humming as he works. The elves are moving through the silver birch trees, and one of them carries a secret so ancient and precious that even speaking its name would shatter the stars. And sometimes, when a single blade of grass trembles in the windless dark, you'll know there's a hobbit trying to slip away on a journey that's been calling to him in dreams. But when he finally reaches that far green country he's imagined, the very same blades of grass will bend beneath his feet, and the same trampled field of corn will stretch golden and endless under the same indifferent moon. A wolf howls at the ragged edge of the forest where the wild things keep their vigil, but the sheep in their pen don't even lift their heads, lost in whatever innocent dreams sheep are granted. And high in the crumbling tower window, a candle flickers once as though some ghost has passed too close, then holds steady and bright while far below, someone counts the cobblestones in the courtyard over and over, having long ago forgotten what number they started with or why it ever mattered. I love nighttimes, when the world becomes exactly what it always was. It's nighttime and the lovers and the liars are awake. The clockmaker is oiling the gears of a timepiece that measures sorrows, and each tick is the sound of a heart breaking somewhere in the sleeping city. The fisherman is mending a net woven from moonlight and whispers, hoping to catch a dream that keeps slipping through his fingers. In the city square, the statues are stepping down from their pedestals, their marble joints creaking as they stretch limbs that have been still for a century, eager to walk the empty streets. A librarian is lighting a single lamp in the great hall, and the shadows that flee from it are shaped like the letters of a forgotten alphabet. The baker is kneading dough for tomorrow's bread, but tonight he adds a pinch of starlight and a single tear, and he doesn't know why. And the stray dog who sleeps by the market stalls lifts his head, listening to a name he was called by a thousand years ago, his tail giving one slow, hopeful thump against the cobblestones. And in the quiet, you can hear the world telling all the secrets it was too shy to speak in the sun..",
+    "path": "prose/Night.md"
+  },
+  {
+    "title": "The Cartographer’s Bidding",
+    "url": "/prose/The_cartographers_bidding.html",
+    "content": "The Cartographer’s Bidding The ink dried long before the first lung collapsed. In a silent room smelling of vellum and stale tea, a nib had scratched across a table. A tremor in the hand? A smudge of vanity? It didn’t matter. The God-Cartographer blinked, and the border zig-zagged through a meadow of lavender. Now, Sergeant Elias chokes on iron and grit. He clutches a handful of soil that looks identical to the soil three inches to his left, yet that microscopic gap is the jagged difference between “Martyr” and “Invader.” He dies defending a stroke of a pen he has never seen. Across the invisible wire, a boy with the same blue eyes and the same hollow stomach gurgles his final breath. They bleed the same shade of crimson into the same indifferent earth. It is a geometry of ghosts. A thousand years of bone, stacked high to protect a line drawn by a god whose afternoon needed filling.",
+    "path": "prose/The_cartographers_bidding.md"
+  }
 ]

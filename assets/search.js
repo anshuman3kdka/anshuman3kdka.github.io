@@ -22,6 +22,15 @@ const selectors = {
 
 const MAX_RESULTS = 14;
 
+
+const resolveIndexUrl = () => {
+  const script = document.querySelector('script[src*="/assets/search.js"], script[src$="assets/search.js"]');
+  if (!script) return "/assets/search-index.json";
+  return new URL("search-index.json", script.src).toString();
+};
+
+const SEARCH_INDEX_URL = resolveIndexUrl();
+
 const normalize = (value) => value.toLowerCase().trim();
 
 const buildSnippet = (entry, query) => {
@@ -127,7 +136,7 @@ const loadIndex = async () => {
   if (searchState.indexReady) return;
 
   if (!searchState.indexPromise) {
-    searchState.indexPromise = fetch("/assets/search-index.json", { cache: "force-cache" })
+    searchState.indexPromise = fetch(SEARCH_INDEX_URL, { cache: "force-cache" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Search index request failed.");
