@@ -330,6 +330,7 @@ button:focus-visible {
     url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=70") center/cover;
   border: 1px solid rgba(211, 178, 119, 0.28);
   box-shadow: var(--shadow-card);
+  align-self: start;
 }
 
 .hero-card p {
