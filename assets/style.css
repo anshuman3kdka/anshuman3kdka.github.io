@@ -282,7 +282,7 @@ button:focus-visible {
 
 .button-primary {
   background: var(--color-accent);
-  color: #fff;
+  color: #fff !important;
   border-color: var(--color-accent);
   box-shadow: var(--shadow-card);
 }
