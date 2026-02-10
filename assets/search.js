@@ -1,119 +1,233 @@
+/*
+  Global site search (vanilla JS)
+  - Loads the static index lazily on first open for good mobile performance.
+  - Keeps UI hidden until requested, preserving the existing page layout.
+*/
 const searchState = {
   index: [],
-  loaded: false,
+  indexReady: false,
+  indexPromise: null,
+  isOpen: false,
 };
+
+const selectors = {
+  toggle: "[data-search-toggle]",
+  overlay: "[data-search-overlay]",
+  panel: "[data-search-panel]",
+  close: "[data-search-close]",
+  input: "[data-search-input]",
+  results: "[data-search-results]",
+  status: "[data-search-status]",
+};
+
+const MAX_RESULTS = 14;
 
 const normalize = (value) => value.toLowerCase().trim();
 
-const fetchIndex = async () => {
-  const response = await fetch("/assets/search-index.json", { cache: "force-cache" });
-  if (!response.ok) {
-    throw new Error("Unable to load search index.");
-  }
-  return response.json();
-};
-
-const createSnippet = (entry, query) => {
-  const haystack = entry.content || "";
+const buildSnippet = (entry, query) => {
+  const text = entry.content || "";
   if (!query) return "";
-  const index = haystack.toLowerCase().indexOf(query);
+
+  const index = text.toLowerCase().indexOf(query);
   if (index === -1) return "";
-  const start = Math.max(0, index - 50);
-  const end = Math.min(haystack.length, index + 70);
-  const snippet = haystack.slice(start, end).trim();
-  return `${start > 0 ? "…" : ""}${snippet}${end < haystack.length ? "…" : ""}`;
+
+  const start = Math.max(0, index - 56);
+  const end = Math.min(text.length, index + 88);
+  const snippet = text.slice(start, end).replace(/\s+/g, " ").trim();
+  return `${start > 0 ? "…" : ""}${snippet}${end < text.length ? "…" : ""}`;
 };
 
-const renderResults = (results, query, displayQuery, elements) => {
-  const { resultsList, status } = elements;
-  resultsList.innerHTML = "";
+const escapeHtml = (value) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const renderStatus = (elements, message) => {
+  elements.status.textContent = message;
+};
+
+const clearResults = (elements) => {
+  elements.results.innerHTML = "";
+};
+
+const renderResults = (elements, query, results) => {
+  clearResults(elements);
 
   if (!query) {
-    status.textContent = "Type a word or phrase to explore the site.";
+    renderStatus(elements, "Type to search across essays, prose, projects, and more.");
     return;
   }
 
   if (!results.length) {
-    status.textContent = `No results for “${displayQuery}”.`;
+    renderStatus(elements, `No results found for “${query}”.`);
     return;
   }
 
-  status.textContent = `${results.length} result${results.length === 1 ? "" : "s"} for “${displayQuery}”.`;
+  renderStatus(elements, `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”.`);
 
   results.forEach((entry) => {
     const item = document.createElement("li");
+    const snippet = buildSnippet(entry, normalize(query));
 
-    const link = document.createElement("a");
-    link.href = entry.url;
-    link.textContent = entry.title;
+    item.innerHTML = `
+      <a href="${escapeHtml(entry.url)}">
+        <strong>${escapeHtml(entry.title || entry.url)}</strong>
+        <div class="search-result-meta">${escapeHtml(entry.path || entry.url)}</div>
+        ${snippet ? `<div class="search-result-snippet">${escapeHtml(snippet)}</div>` : ""}
+      </a>
+    `;
 
-    const meta = document.createElement("span");
-    meta.className = "search-meta";
-    meta.textContent = `${entry.url} • ${entry.path}`;
-
-    const snippetText = createSnippet(entry, query);
-    item.appendChild(link);
-    item.appendChild(meta);
-    if (snippetText) {
-      const snippet = document.createElement("p");
-      snippet.className = "search-snippet";
-      snippet.textContent = snippetText;
-      item.appendChild(snippet);
-    }
-    resultsList.appendChild(item);
+    elements.results.appendChild(item);
   });
 };
 
-const applySearch = (query, elements) => {
-  const trimmed = query.trim();
-  const normalized = normalize(trimmed);
+const rankResults = (entries, normalizedQuery) => {
+  const scored = entries
+    .map((entry) => {
+      const title = (entry.title || "").toLowerCase();
+      const path = (entry.path || "").toLowerCase();
+      const content = (entry.content || "").toLowerCase();
+      const url = (entry.url || "").toLowerCase();
+
+      let score = 0;
+      if (title.includes(normalizedQuery)) score += 6;
+      if (path.includes(normalizedQuery)) score += 4;
+      if (url.includes(normalizedQuery)) score += 3;
+      if (content.includes(normalizedQuery)) score += 2;
+      if (title.startsWith(normalizedQuery)) score += 2;
+
+      return { entry, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, MAX_RESULTS)
+    .map(({ entry }) => entry);
+
+  return scored;
+};
+
+const runSearch = (elements) => {
+  const raw = elements.input.value;
+  const query = raw.trim();
+  const normalized = normalize(query);
+
   if (!normalized) {
-    renderResults([], "", "", elements);
+    renderResults(elements, "", []);
     return;
   }
 
-  const results = searchState.index.filter((entry) => {
-    const target = `${entry.title} ${entry.url} ${entry.path} ${entry.content}`.toLowerCase();
-    return target.includes(normalized);
-  });
-
-  renderResults(results, normalized, trimmed, elements);
+  const matches = rankResults(searchState.index, normalized);
+  renderResults(elements, query, matches);
 };
 
-const initSearch = async () => {
-  const wrapper = document.querySelector("[data-search]");
-  if (!wrapper) return;
+const loadIndex = async () => {
+  if (searchState.indexReady) return;
 
-  const input = wrapper.querySelector("[data-search-input]");
-  const button = wrapper.querySelector("[data-search-button]");
-  const resultsList = wrapper.querySelector("[data-search-results]");
-  const status = wrapper.querySelector("#site-search-status");
+  if (!searchState.indexPromise) {
+    searchState.indexPromise = fetch("/assets/search-index.json", { cache: "force-cache" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Search index request failed.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        searchState.index = Array.isArray(data) ? data : [];
+        searchState.indexReady = true;
+      });
+  }
 
-  const elements = { resultsList, status };
-  status.textContent = "Loading search index…";
+  await searchState.indexPromise;
+};
+
+const openSearch = async (elements) => {
+  if (searchState.isOpen) return;
+
+  searchState.isOpen = true;
+  elements.overlay.hidden = false;
+
+  requestAnimationFrame(() => {
+    elements.overlay.classList.add("is-open");
+  });
+
+  document.body.classList.add("search-active");
+  elements.toggle.setAttribute("aria-expanded", "true");
+
+  renderStatus(elements, "Loading search index…");
 
   try {
-    searchState.index = await fetchIndex();
-    searchState.loaded = true;
-    status.textContent = "Search across the site by typing above.";
+    await loadIndex();
+    renderResults(elements, "", []);
+    elements.input.focus({ preventScroll: true });
   } catch (error) {
-    status.textContent = "Search is temporarily unavailable.";
-    return;
+    renderStatus(elements, "Search is temporarily unavailable.");
   }
-
-  const runSearch = () => {
-    if (!searchState.loaded) return;
-    applySearch(input.value, elements);
-  };
-
-  input.addEventListener("input", runSearch);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      runSearch();
-    }
-  });
-  button.addEventListener("click", runSearch);
 };
 
-document.addEventListener("DOMContentLoaded", initSearch);
+const closeSearch = (elements) => {
+  if (!searchState.isOpen) return;
+
+  searchState.isOpen = false;
+  elements.overlay.classList.remove("is-open");
+  document.body.classList.remove("search-active");
+  elements.toggle.setAttribute("aria-expanded", "false");
+
+  window.setTimeout(() => {
+    if (!searchState.isOpen) {
+      elements.overlay.hidden = true;
+    }
+  }, 180);
+};
+
+const initialize = () => {
+  const elements = {
+    toggle: document.querySelector(selectors.toggle),
+    overlay: document.querySelector(selectors.overlay),
+    panel: document.querySelector(selectors.panel),
+    close: document.querySelector(selectors.close),
+    input: document.querySelector(selectors.input),
+    results: document.querySelector(selectors.results),
+    status: document.querySelector(selectors.status),
+  };
+
+  if (Object.values(elements).some((node) => !node)) return;
+
+  elements.toggle.addEventListener("click", () => {
+    openSearch(elements);
+  });
+
+  elements.close.addEventListener("click", () => {
+    closeSearch(elements);
+    elements.toggle.focus({ preventScroll: true });
+  });
+
+  elements.overlay.addEventListener("click", (event) => {
+    const clickedOutside = !elements.panel.contains(event.target);
+    if (clickedOutside) {
+      closeSearch(elements);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && searchState.isOpen) {
+      closeSearch(elements);
+      elements.toggle.focus({ preventScroll: true });
+    }
+  });
+
+  elements.input.addEventListener("input", () => {
+    if (!searchState.indexReady) return;
+    runSearch(elements);
+  });
+
+  elements.results.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+    closeSearch(elements);
+  });
+};
+
+document.addEventListener("DOMContentLoaded", initialize);
