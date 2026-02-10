@@ -9,9 +9,9 @@ title: About
 </section>
 
 <section class="section prose reveal">
-  <figure style="margin: 0 0 var(--space-6) 0;">
-    <img src="https://placehold.co/800x600/1a2f25/d4a373?text=Your+Photo" alt="Profile photo placeholder" style="border-radius: var(--radius-md); box-shadow: var(--shadow-card); width: 100%; height: auto; object-fit: cover;">
-    <figcaption style="text-align: center; color: var(--color-ink-muted); font-size: var(--step--1); margin-top: var(--space-2);">Add your photo here</figcaption>
+  <figure>
+    <div class="about-portrait" role="img" aria-label="Profile photo placeholder"></div>
+    <figcaption class="about-caption">Add your photo here</figcaption>
   </figure>
   <p>I build systems that help creative teams move from insight to action. My work focuses on craft, clarity, and the quiet decisions that make digital experiences feel human.</p>
   <p>Here you’ll find essays on creativity and design, project explorations, and experiments in storytelling. Each section is designed to be read slowly, with space for reflection.</p>
