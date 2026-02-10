@@ -94,6 +94,23 @@ body {
   background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
 }
 
+/* Subtle nature texture banding via section separators */
+.section + .section {
+  position: relative;
+  padding-top: clamp(2.6rem, 5vw, 4rem);
+}
+
+.section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, 74vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -173,11 +190,7 @@ button:focus-visible {
 .site-nav a {
   font-family: var(--font-body);
   font-size: var(--step--1);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 0.9rem;
+  padding: 0.42rem 0.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
 }
@@ -218,7 +231,7 @@ button:focus-visible {
 }
 
 .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
-  max-width: 72ch;
+  max-width: 730px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -283,8 +296,8 @@ button:focus-visible {
 
 .hero {
   display: grid;
-  gap: clamp(var(--space-5), 4vw, var(--space-7));
-  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   align-items: center;
 }
 
@@ -300,7 +313,7 @@ button:focus-visible {
   font-size: var(--step-1);
   color: var(--color-ink-muted);
   margin: 0 0 var(--space-6);
-  max-width: 40ch;
+  max-width: 34ch;
 }
 
 .hero-actions {
@@ -341,7 +354,6 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 44px;
   padding: 0.72rem 1.2rem;
   border-radius: 999px;
   font-family: var(--font-body);
@@ -485,7 +497,7 @@ button:focus-visible {
 }
 
 .prose {
-  max-width: 72ch;
+  max-width: 740px;
   margin: 0 auto;
 }
 
@@ -495,7 +507,7 @@ button:focus-visible {
 .prose h4 {
   font-family: var(--font-heading);
   line-height: 1.25;
-  margin-top: clamp(1.6rem, 4vw, var(--space-7));
+  margin-top: var(--space-7);
 }
 
 .prose h1 {
@@ -519,7 +531,7 @@ button:focus-visible {
 
 .prose blockquote {
   margin: var(--space-6) 0;
-  padding: clamp(var(--space-4), 2.5vw, var(--space-5));
+  padding: var(--space-4) var(--space-5);
   border-left: 2px solid var(--color-accent);
   background: var(--color-accent-soft);
   border-radius: var(--radius-sm);
@@ -712,6 +724,11 @@ body.is-leaving .page-shell {
 
   .about-portrait {
     width: min(230px, 70vw);
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
   }
 }
 
