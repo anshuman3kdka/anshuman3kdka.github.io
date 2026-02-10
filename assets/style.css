@@ -1017,23 +1017,6 @@ body.is-leaving .page-shell {
   background: rgba(211, 178, 119, 0.08);
 }
 
-
-.search-result-button {
-  width: 100%;
-  text-align: left;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: rgba(11, 28, 20, 0.45);
-  padding: 0.65rem 0.75rem;
-  color: var(--color-ink);
-  font: inherit;
-  cursor: pointer;
-}
-
-.search-result-button:hover {
-  border-color: rgba(211, 178, 119, 0.34);
-  background: rgba(211, 178, 119, 0.08);
-}
 .search-result-meta {
   margin-top: 0.32rem;
   color: var(--color-ink-soft);

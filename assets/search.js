@@ -1,12 +1,12 @@
 /*
-  Predictable in-page search (vanilla JS)
-  Limitations by design:
-  - Searches only visible text currently present in this page's DOM.
-  - Does not crawl files, fetch remote indexes, or claim whole-site coverage.
-  - Results are either scroll targets on this page or existing anchor destinations.
+  Global site search (vanilla JS)
+  - Loads the static index lazily on first open for good mobile performance.
+  - Keeps UI hidden until requested, preserving the existing page layout.
 */
 const searchState = {
   index: [],
+  indexReady: false,
+  indexPromise: null,
   isOpen: false,
 };
 
@@ -20,10 +20,22 @@ const selectors = {
   status: "[data-search-status]",
 };
 
-const MAX_RESULTS = 16;
-const SEARCHABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a";
+const MAX_RESULTS = 14;
 
-const normalize = (value) => value.toLowerCase().replace(/\s+/g, " ").trim();
+const normalize = (value) => value.toLowerCase().trim();
+
+const buildSnippet = (entry, query) => {
+  const text = entry.content || "";
+  if (!query) return "";
+
+  const index = text.toLowerCase().indexOf(query);
+  if (index === -1) return "";
+
+  const start = Math.max(0, index - 56);
+  const end = Math.min(text.length, index + 88);
+  const snippet = text.slice(start, end).replace(/\s+/g, " ").trim();
+  return `${start > 0 ? "…" : ""}${snippet}${end < text.length ? "…" : ""}`;
+};
 
 const escapeHtml = (value) =>
   value
@@ -33,130 +45,105 @@ const escapeHtml = (value) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 
-const isVisible = (node) => {
-  if (!(node instanceof HTMLElement)) return false;
-  if (node.hidden) return false;
-
-  const style = window.getComputedStyle(node);
-  if (style.display === "none" || style.visibility === "hidden") return false;
-
-  return node.getClientRects().length > 0;
-};
-
-const ensureElementId = (node, index) => {
-  if (node.id) return node.id;
-  const generatedId = `search-target-${index}`;
-  node.id = generatedId;
-  return generatedId;
-};
-
-const buildDomIndex = () => {
-  const nodes = document.querySelectorAll(SEARCHABLE_SELECTOR);
-  const entries = [];
-
-  nodes.forEach((node, index) => {
-    if (!isVisible(node)) return;
-
-    const text = normalize(node.textContent || "");
-    if (!text) return;
-
-    const tag = node.tagName.toLowerCase();
-
-    if (tag === "a") {
-      const href = node.getAttribute("href") || "";
-      if (!href || href === "#") return;
-
-      entries.push({
-        type: "link",
-        title: text,
-        text,
-        targetHref: href,
-        meta: "Link",
-      });
-
-      return;
-    }
-
-    const id = ensureElementId(node, index);
-    entries.push({
-      type: "section",
-      title: text,
-      text,
-      targetId: id,
-      meta: tag.toUpperCase(),
-    });
-  });
-
-  return entries;
-};
-
-const scoreEntry = (entry, query) => {
-  let score = 0;
-  if (entry.title.includes(query)) score += 4;
-  if (entry.title.startsWith(query)) score += 2;
-  return score;
-};
-
-const runSearch = (rawQuery) => {
-  const query = normalize(rawQuery);
-  if (!query) return [];
-
-  return searchState.index
-    .map((entry) => ({ entry, score: scoreEntry(entry, query) }))
-    .filter(({ entry, score }) => score > 0 && entry.text.includes(query))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, MAX_RESULTS)
-    .map(({ entry }) => entry);
-};
-
 const renderStatus = (elements, message) => {
   elements.status.textContent = message;
 };
 
-const renderResults = (elements, query, results) => {
+const clearResults = (elements) => {
   elements.results.innerHTML = "";
+};
+
+const renderResults = (elements, query, results) => {
+  clearResults(elements);
 
   if (!query) {
-    renderStatus(elements, "Searches only the visible text on this page.");
+    renderStatus(elements, "Type to search across essays, prose, projects, and more.");
     return;
   }
 
   if (!results.length) {
-    renderStatus(elements, `No matching visible content on this page for “${query}”.`);
+    renderStatus(elements, `No results found for “${query}”.`);
     return;
   }
 
-  renderStatus(
-    elements,
-    `${results.length} result${results.length === 1 ? "" : "s"} on this page for “${query}”.`,
-  );
+  renderStatus(elements, `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”.`);
 
   results.forEach((entry) => {
     const item = document.createElement("li");
-
-    if (entry.type === "link") {
-      item.innerHTML = `
-        <a href="${escapeHtml(entry.targetHref)}">
-          <strong>${escapeHtml(entry.title)}</strong>
-          <div class="search-result-meta">${escapeHtml(entry.meta)} · Opens existing link</div>
-        </a>
-      `;
-      elements.results.appendChild(item);
-      return;
-    }
+    const snippet = buildSnippet(entry, normalize(query));
 
     item.innerHTML = `
-      <button type="button" class="search-result-button" data-target-id="${escapeHtml(entry.targetId)}">
-        <strong>${escapeHtml(entry.title)}</strong>
-        <div class="search-result-meta">${escapeHtml(entry.meta)} · Scroll on this page</div>
-      </button>
+      <a href="${escapeHtml(entry.url)}">
+        <strong>${escapeHtml(entry.title || entry.url)}</strong>
+        <div class="search-result-meta">${escapeHtml(entry.path || entry.url)}</div>
+        ${snippet ? `<div class="search-result-snippet">${escapeHtml(snippet)}</div>` : ""}
+      </a>
     `;
 
     elements.results.appendChild(item);
   });
 };
 
-const openSearch = (elements) => {
+const rankResults = (entries, normalizedQuery) => {
+  const scored = entries
+    .map((entry) => {
+      const title = (entry.title || "").toLowerCase();
+      const path = (entry.path || "").toLowerCase();
+      const content = (entry.content || "").toLowerCase();
+      const url = (entry.url || "").toLowerCase();
+
+      let score = 0;
+      if (title.includes(normalizedQuery)) score += 6;
+      if (path.includes(normalizedQuery)) score += 4;
+      if (url.includes(normalizedQuery)) score += 3;
+      if (content.includes(normalizedQuery)) score += 2;
+      if (title.startsWith(normalizedQuery)) score += 2;
+
+      return { entry, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, MAX_RESULTS)
+    .map(({ entry }) => entry);
+
+  return scored;
+};
+
+const runSearch = (elements) => {
+  const raw = elements.input.value;
+  const query = raw.trim();
+  const normalized = normalize(query);
+
+  if (!normalized) {
+    renderResults(elements, "", []);
+    return;
+  }
+
+  const matches = rankResults(searchState.index, normalized);
+  renderResults(elements, query, matches);
+};
+
+const loadIndex = async () => {
+  if (searchState.indexReady) return;
+
+  if (!searchState.indexPromise) {
+    searchState.indexPromise = fetch("/assets/search-index.json", { cache: "force-cache" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Search index request failed.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        searchState.index = Array.isArray(data) ? data : [];
+        searchState.indexReady = true;
+      });
+  }
+
+  await searchState.indexPromise;
+};
+
+const openSearch = async (elements) => {
   if (searchState.isOpen) return;
 
   searchState.isOpen = true;
@@ -168,8 +155,16 @@ const openSearch = (elements) => {
 
   document.body.classList.add("search-active");
   elements.toggle.setAttribute("aria-expanded", "true");
-  renderStatus(elements, "Searches only the visible text on this page.");
-  elements.input.focus({ preventScroll: true });
+
+  renderStatus(elements, "Loading search index…");
+
+  try {
+    await loadIndex();
+    renderResults(elements, "", []);
+    elements.input.focus({ preventScroll: true });
+  } catch (error) {
+    renderStatus(elements, "Search is temporarily unavailable.");
+  }
 };
 
 const closeSearch = (elements) => {
@@ -187,19 +182,6 @@ const closeSearch = (elements) => {
   }, 180);
 };
 
-const scrollToTarget = (targetId, elements) => {
-  const target = document.getElementById(targetId);
-  if (!target) return;
-
-  closeSearch(elements);
-  target.scrollIntoView({ behavior: "smooth", block: "center" });
-
-  if (target instanceof HTMLElement) {
-    target.tabIndex = -1;
-    target.focus({ preventScroll: true });
-  }
-};
-
 const initialize = () => {
   const elements = {
     toggle: document.querySelector(selectors.toggle),
@@ -212,8 +194,6 @@ const initialize = () => {
   };
 
   if (Object.values(elements).some((node) => !node)) return;
-
-  searchState.index = buildDomIndex();
 
   elements.toggle.addEventListener("click", () => {
     openSearch(elements);
@@ -239,22 +219,14 @@ const initialize = () => {
   });
 
   elements.input.addEventListener("input", () => {
-    const query = elements.input.value.trim();
-    const results = runSearch(query);
-    renderResults(elements, query, results);
+    if (!searchState.indexReady) return;
+    runSearch(elements);
   });
 
   elements.results.addEventListener("click", (event) => {
-    const scrollButton = event.target.closest("[data-target-id]");
-    if (scrollButton) {
-      scrollToTarget(scrollButton.getAttribute("data-target-id"), elements);
-      return;
-    }
-
     const link = event.target.closest("a[href]");
-    if (link) {
-      closeSearch(elements);
-    }
+    if (!link) return;
+    closeSearch(elements);
   });
 };
 
