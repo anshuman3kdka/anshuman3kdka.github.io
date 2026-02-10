@@ -287,6 +287,13 @@ button:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
+.button-primary:visited,
+.button-primary:hover,
+.button-primary:focus-visible,
+.button-primary:active {
+  color: #fff;
+}
+
 .button-primary:hover {
   transform: translateY(-2px);
   color: #fff;
