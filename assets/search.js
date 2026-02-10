@@ -1,119 +1,261 @@
+/*
+  Predictable in-page search (vanilla JS)
+  Limitations by design:
+  - Searches only visible text currently present in this page's DOM.
+  - Does not crawl files, fetch remote indexes, or claim whole-site coverage.
+  - Results are either scroll targets on this page or existing anchor destinations.
+*/
 const searchState = {
   index: [],
-  loaded: false,
+  isOpen: false,
 };
 
-const normalize = (value) => value.toLowerCase().trim();
-
-const fetchIndex = async () => {
-  const response = await fetch("/assets/search-index.json", { cache: "force-cache" });
-  if (!response.ok) {
-    throw new Error("Unable to load search index.");
-  }
-  return response.json();
+const selectors = {
+  toggle: "[data-search-toggle]",
+  overlay: "[data-search-overlay]",
+  panel: "[data-search-panel]",
+  close: "[data-search-close]",
+  input: "[data-search-input]",
+  results: "[data-search-results]",
+  status: "[data-search-status]",
 };
 
-const createSnippet = (entry, query) => {
-  const haystack = entry.content || "";
-  if (!query) return "";
-  const index = haystack.toLowerCase().indexOf(query);
-  if (index === -1) return "";
-  const start = Math.max(0, index - 50);
-  const end = Math.min(haystack.length, index + 70);
-  const snippet = haystack.slice(start, end).trim();
-  return `${start > 0 ? "…" : ""}${snippet}${end < haystack.length ? "…" : ""}`;
+const MAX_RESULTS = 16;
+const SEARCHABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a";
+
+const normalize = (value) => value.toLowerCase().replace(/\s+/g, " ").trim();
+
+const escapeHtml = (value) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const isVisible = (node) => {
+  if (!(node instanceof HTMLElement)) return false;
+  if (node.hidden) return false;
+
+  const style = window.getComputedStyle(node);
+  if (style.display === "none" || style.visibility === "hidden") return false;
+
+  return node.getClientRects().length > 0;
 };
 
-const renderResults = (results, query, displayQuery, elements) => {
-  const { resultsList, status } = elements;
-  resultsList.innerHTML = "";
+const ensureElementId = (node, index) => {
+  if (node.id) return node.id;
+  const generatedId = `search-target-${index}`;
+  node.id = generatedId;
+  return generatedId;
+};
+
+const buildDomIndex = () => {
+  const nodes = document.querySelectorAll(SEARCHABLE_SELECTOR);
+  const entries = [];
+
+  nodes.forEach((node, index) => {
+    if (!isVisible(node)) return;
+
+    const text = normalize(node.textContent || "");
+    if (!text) return;
+
+    const tag = node.tagName.toLowerCase();
+
+    if (tag === "a") {
+      const href = node.getAttribute("href") || "";
+      if (!href || href === "#") return;
+
+      entries.push({
+        type: "link",
+        title: text,
+        text,
+        targetHref: href,
+        meta: "Link",
+      });
+
+      return;
+    }
+
+    const id = ensureElementId(node, index);
+    entries.push({
+      type: "section",
+      title: text,
+      text,
+      targetId: id,
+      meta: tag.toUpperCase(),
+    });
+  });
+
+  return entries;
+};
+
+const scoreEntry = (entry, query) => {
+  let score = 0;
+  if (entry.title.includes(query)) score += 4;
+  if (entry.title.startsWith(query)) score += 2;
+  return score;
+};
+
+const runSearch = (rawQuery) => {
+  const query = normalize(rawQuery);
+  if (!query) return [];
+
+  return searchState.index
+    .map((entry) => ({ entry, score: scoreEntry(entry, query) }))
+    .filter(({ entry, score }) => score > 0 && entry.text.includes(query))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, MAX_RESULTS)
+    .map(({ entry }) => entry);
+};
+
+const renderStatus = (elements, message) => {
+  elements.status.textContent = message;
+};
+
+const renderResults = (elements, query, results) => {
+  elements.results.innerHTML = "";
 
   if (!query) {
-    status.textContent = "Type a word or phrase to explore the site.";
+    renderStatus(elements, "Searches only the visible text on this page.");
     return;
   }
 
   if (!results.length) {
-    status.textContent = `No results for “${displayQuery}”.`;
+    renderStatus(elements, `No matching visible content on this page for “${query}”.`);
     return;
   }
 
-  status.textContent = `${results.length} result${results.length === 1 ? "" : "s"} for “${displayQuery}”.`;
+  renderStatus(
+    elements,
+    `${results.length} result${results.length === 1 ? "" : "s"} on this page for “${query}”.`,
+  );
 
   results.forEach((entry) => {
     const item = document.createElement("li");
 
-    const link = document.createElement("a");
-    link.href = entry.url;
-    link.textContent = entry.title;
-
-    const meta = document.createElement("span");
-    meta.className = "search-meta";
-    meta.textContent = `${entry.url} • ${entry.path}`;
-
-    const snippetText = createSnippet(entry, query);
-    item.appendChild(link);
-    item.appendChild(meta);
-    if (snippetText) {
-      const snippet = document.createElement("p");
-      snippet.className = "search-snippet";
-      snippet.textContent = snippetText;
-      item.appendChild(snippet);
+    if (entry.type === "link") {
+      item.innerHTML = `
+        <a href="${escapeHtml(entry.targetHref)}">
+          <strong>${escapeHtml(entry.title)}</strong>
+          <div class="search-result-meta">${escapeHtml(entry.meta)} · Opens existing link</div>
+        </a>
+      `;
+      elements.results.appendChild(item);
+      return;
     }
-    resultsList.appendChild(item);
+
+    item.innerHTML = `
+      <button type="button" class="search-result-button" data-target-id="${escapeHtml(entry.targetId)}">
+        <strong>${escapeHtml(entry.title)}</strong>
+        <div class="search-result-meta">${escapeHtml(entry.meta)} · Scroll on this page</div>
+      </button>
+    `;
+
+    elements.results.appendChild(item);
   });
 };
 
-const applySearch = (query, elements) => {
-  const trimmed = query.trim();
-  const normalized = normalize(trimmed);
-  if (!normalized) {
-    renderResults([], "", "", elements);
-    return;
-  }
+const openSearch = (elements) => {
+  if (searchState.isOpen) return;
 
-  const results = searchState.index.filter((entry) => {
-    const target = `${entry.title} ${entry.url} ${entry.path} ${entry.content}`.toLowerCase();
-    return target.includes(normalized);
+  searchState.isOpen = true;
+  elements.overlay.hidden = false;
+
+  requestAnimationFrame(() => {
+    elements.overlay.classList.add("is-open");
   });
 
-  renderResults(results, normalized, trimmed, elements);
+  document.body.classList.add("search-active");
+  elements.toggle.setAttribute("aria-expanded", "true");
+  renderStatus(elements, "Searches only the visible text on this page.");
+  elements.input.focus({ preventScroll: true });
 };
 
-const initSearch = async () => {
-  const wrapper = document.querySelector("[data-search]");
-  if (!wrapper) return;
+const closeSearch = (elements) => {
+  if (!searchState.isOpen) return;
 
-  const input = wrapper.querySelector("[data-search-input]");
-  const button = wrapper.querySelector("[data-search-button]");
-  const resultsList = wrapper.querySelector("[data-search-results]");
-  const status = wrapper.querySelector("#site-search-status");
+  searchState.isOpen = false;
+  elements.overlay.classList.remove("is-open");
+  document.body.classList.remove("search-active");
+  elements.toggle.setAttribute("aria-expanded", "false");
 
-  const elements = { resultsList, status };
-  status.textContent = "Loading search index…";
+  window.setTimeout(() => {
+    if (!searchState.isOpen) {
+      elements.overlay.hidden = true;
+    }
+  }, 180);
+};
 
-  try {
-    searchState.index = await fetchIndex();
-    searchState.loaded = true;
-    status.textContent = "Search across the site by typing above.";
-  } catch (error) {
-    status.textContent = "Search is temporarily unavailable.";
-    return;
+const scrollToTarget = (targetId, elements) => {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  closeSearch(elements);
+  target.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  if (target instanceof HTMLElement) {
+    target.tabIndex = -1;
+    target.focus({ preventScroll: true });
   }
+};
 
-  const runSearch = () => {
-    if (!searchState.loaded) return;
-    applySearch(input.value, elements);
+const initialize = () => {
+  const elements = {
+    toggle: document.querySelector(selectors.toggle),
+    overlay: document.querySelector(selectors.overlay),
+    panel: document.querySelector(selectors.panel),
+    close: document.querySelector(selectors.close),
+    input: document.querySelector(selectors.input),
+    results: document.querySelector(selectors.results),
+    status: document.querySelector(selectors.status),
   };
 
-  input.addEventListener("input", runSearch);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      runSearch();
+  if (Object.values(elements).some((node) => !node)) return;
+
+  searchState.index = buildDomIndex();
+
+  elements.toggle.addEventListener("click", () => {
+    openSearch(elements);
+  });
+
+  elements.close.addEventListener("click", () => {
+    closeSearch(elements);
+    elements.toggle.focus({ preventScroll: true });
+  });
+
+  elements.overlay.addEventListener("click", (event) => {
+    const clickedOutside = !elements.panel.contains(event.target);
+    if (clickedOutside) {
+      closeSearch(elements);
     }
   });
-  button.addEventListener("click", runSearch);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && searchState.isOpen) {
+      closeSearch(elements);
+      elements.toggle.focus({ preventScroll: true });
+    }
+  });
+
+  elements.input.addEventListener("input", () => {
+    const query = elements.input.value.trim();
+    const results = runSearch(query);
+    renderResults(elements, query, results);
+  });
+
+  elements.results.addEventListener("click", (event) => {
+    const scrollButton = event.target.closest("[data-target-id]");
+    if (scrollButton) {
+      scrollToTarget(scrollButton.getAttribute("data-target-id"), elements);
+      return;
+    }
+
+    const link = event.target.closest("a[href]");
+    if (link) {
+      closeSearch(elements);
+    }
+  });
 };
 
-document.addEventListener("DOMContentLoaded", initSearch);
+document.addEventListener("DOMContentLoaded", initialize);
