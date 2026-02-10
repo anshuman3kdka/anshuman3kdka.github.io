@@ -190,6 +190,11 @@ button:focus-visible {
 .site-nav a {
   font-family: var(--font-body);
   font-size: var(--step--1);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.9rem;
   padding: 0.42rem 0.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -213,6 +218,29 @@ button:focus-visible {
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--color-rule);
   position: relative;
+  /*
+    Hero safety: this used to clip descendants when large text animated/reflowed.
+    Keep decorative effects in pseudo-elements and allow content to remain fully visible.
+  */
+  overflow: visible;
+}
+
+/* Delicate vignette to keep text contrast consistent over imagery */
+.page-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, transparent, rgba(8, 18, 13, 0.3) 75%);
+  pointer-events: none;
+}
+
+.page-body {
+  position: relative;
+  z-index: 1;
+}
+
+.page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
+  max-width: 72ch;
   overflow: hidden;
 }
 
@@ -239,6 +267,14 @@ button:focus-visible {
 .page-body > :where(p, ul, ol, blockquote) {
   margin-top: 0;
   margin-bottom: var(--space-5);
+}
+
+.page-body > :where(h1, h2, h3, h4) {
+  font-family: var(--font-heading);
+  line-height: 1.24;
+  letter-spacing: 0.005em;
+}
+
 }
 
 .page-body > :where(h1, h2, h3, h4) {
@@ -296,6 +332,19 @@ button:focus-visible {
 
 .hero {
   display: grid;
+  gap: clamp(var(--space-5), 4vw, var(--space-7));
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+/*
+  Heading safety zone:
+  - Prevent long unbroken names from bleeding into neighboring columns.
+  - Keep the main heading in normal document flow (no absolute/fixed positioning).
+*/
+.hero-content {
+  min-width: 0;
+  padding-right: clamp(0rem, 1.2vw, 1rem);
   gap: var(--space-7);
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   align-items: center;
@@ -303,6 +352,12 @@ button:focus-visible {
 
 .hero-title {
   font-family: var(--font-heading);
+  font-size: clamp(2rem, 6.5vw, var(--step-4));
+  margin: 0 0 var(--space-4);
+  line-height: 1.08;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   font-size: var(--step-4);
   margin: 0 0 var(--space-4);
   line-height: 1.05;
@@ -313,6 +368,7 @@ button:focus-visible {
   font-size: var(--step-1);
   color: var(--color-ink-muted);
   margin: 0 0 var(--space-6);
+  max-width: 40ch;
   max-width: 34ch;
 }
 
@@ -355,6 +411,7 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-height: 44px;
   padding: 0.72rem 1.2rem;
   border-radius: 999px;
   font-family: var(--font-body);
@@ -498,6 +555,7 @@ button:focus-visible {
 }
 
 .prose {
+  max-width: 72ch;
   max-width: 740px;
   margin: 0 auto;
 }
@@ -508,6 +566,7 @@ button:focus-visible {
 .prose h4 {
   font-family: var(--font-heading);
   line-height: 1.25;
+  margin-top: clamp(1.6rem, 4vw, var(--space-7));
   margin-top: var(--space-7);
 }
 
@@ -532,6 +591,7 @@ button:focus-visible {
 
 .prose blockquote {
   margin: var(--space-6) 0;
+  padding: clamp(var(--space-4), 2.5vw, var(--space-5));
   padding: var(--space-4) var(--space-5);
   border-left: 2px solid var(--color-accent);
   background: var(--color-accent-soft);
@@ -637,6 +697,9 @@ body.is-leaving .page-shell {
 */
 @media (min-width: 768px) {
   .hero {
+    /* Keep explicit gap so the featured card never intersects the heading area. */
+    grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
+    column-gap: clamp(1.4rem, 3vw, 2.5rem);
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -662,6 +725,32 @@ body.is-leaving .page-shell {
   .prose {
     max-width: 68ch;
   }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure),
+  .prose {
+    max-width: 68ch;
+  }
+
+  .page-title,
+  .section-title {
+    max-width: 20ch;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
+    column-gap: clamp(2.1rem, 4vw, 3.8rem);
+  }
+
+  .hero-content {
+    padding-right: clamp(0.4rem, 1.4vw, 1.6rem);
+  }
+}
 
   .page-title,
   .section-title,
@@ -691,6 +780,34 @@ body.is-leaving .page-shell {
     letter-spacing: 0.007em;
   }
 
+  .site-header {
+    position: static;
+    border-radius: 18px;
+  }
+
+  .nav-bar {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    gap: 0.5rem;
+    padding-bottom: 0.15rem;
+    scrollbar-width: thin;
+  }
+
+  .page-shell {
+    padding: clamp(1.1rem, 4vw, 1.5rem) clamp(0.85rem, 3.5vw, 1rem);
+    border-radius: clamp(14px, 4vw, var(--radius-lg));
+  }
+
+  .hero {
+    gap: clamp(1.05rem, 4vw, 1.4rem);
+  }
+
   .page-shell {
     padding: clamp(1.25rem, 5vw, var(--space-6)) clamp(0.9rem, 4vw, var(--space-4));
     border-radius: clamp(14px, 4vw, var(--radius-lg));
@@ -707,6 +824,13 @@ body.is-leaving .page-shell {
   }
 
   .site-nav a {
+    width: auto;
+    flex: 0 0 auto;
+    padding-inline: 0.75rem;
+  }
+
+  .section + .section {
+    padding-top: clamp(1.6rem, 5vw, 2.2rem);
     width: 100%;
     padding-inline: 0.7rem;
   }
@@ -720,6 +844,10 @@ body.is-leaving .page-shell {
   }
 
   .hero-title {
+    font-size: clamp(1.72rem, 8.2vw, 2.3rem);
+    line-height: 1.1;
+    letter-spacing: 0.002em;
+    word-break: break-all;
     line-height: 1.1;
   }
 
