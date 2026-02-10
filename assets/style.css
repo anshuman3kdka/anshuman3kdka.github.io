@@ -282,9 +282,16 @@ button:focus-visible {
 
 .button-primary {
   background: var(--color-accent);
-  color: #fff;
+  color: #fff !important;
   border-color: var(--color-accent);
   box-shadow: var(--shadow-card);
+}
+
+.button-primary:visited,
+.button-primary:hover,
+.button-primary:focus-visible,
+.button-primary:active {
+  color: #fff !important;
 }
 
 .button-primary:hover {
