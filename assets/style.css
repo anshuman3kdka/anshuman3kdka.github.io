@@ -94,6 +94,23 @@ body {
   background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
 }
 
+/* Subtle nature texture banding via section separators */
+.section + .section {
+  position: relative;
+  padding-top: clamp(2.6rem, 5vw, 4rem);
+}
+
+.section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, 74vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -173,11 +190,7 @@ button:focus-visible {
 .site-nav a {
   font-family: var(--font-body);
   font-size: var(--step--1);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 0.9rem;
+  padding: 0.42rem 0.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
 }
@@ -200,11 +213,7 @@ button:focus-visible {
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--color-rule);
   position: relative;
-  /*
-    Hero safety: this used to clip descendants when large text animated/reflowed.
-    Keep decorative effects in pseudo-elements and allow content to remain fully visible.
-  */
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* Delicate vignette to keep text contrast consistent over imagery */
@@ -222,7 +231,7 @@ button:focus-visible {
 }
 
 .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
-  max-width: 72ch;
+  max-width: 730px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -287,29 +296,16 @@ button:focus-visible {
 
 .hero {
   display: grid;
-  gap: clamp(var(--space-5), 4vw, var(--space-7));
-  grid-template-columns: 1fr;
-  align-items: start;
-}
-
-/*
-  Heading safety zone:
-  - Prevent long unbroken names from bleeding into neighboring columns.
-  - Keep the main heading in normal document flow (no absolute/fixed positioning).
-*/
-.hero-content {
-  min-width: 0;
-  padding-right: clamp(0rem, 1.2vw, 1rem);
+  gap: var(--space-7);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: center;
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.15rem, 7.3vw, var(--step-4));
+  font-size: var(--step-4);
   margin: 0 0 var(--space-4);
-  line-height: 1.1;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  line-height: 1.05;
   color: #f5f1e5;
 }
 
@@ -317,7 +313,7 @@ button:focus-visible {
   font-size: var(--step-1);
   color: var(--color-ink-muted);
   margin: 0 0 var(--space-6);
-  max-width: 40ch;
+  max-width: 34ch;
 }
 
 .hero-actions {
@@ -359,7 +355,6 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 44px;
   padding: 0.72rem 1.2rem;
   border-radius: 999px;
   font-family: var(--font-body);
@@ -503,7 +498,7 @@ button:focus-visible {
 }
 
 .prose {
-  max-width: 72ch;
+  max-width: 740px;
   margin: 0 auto;
 }
 
@@ -513,7 +508,7 @@ button:focus-visible {
 .prose h4 {
   font-family: var(--font-heading);
   line-height: 1.25;
-  margin-top: clamp(1.6rem, 4vw, var(--space-7));
+  margin-top: var(--space-7);
 }
 
 .prose h1 {
@@ -537,7 +532,7 @@ button:focus-visible {
 
 .prose blockquote {
   margin: var(--space-6) 0;
-  padding: clamp(var(--space-4), 2.5vw, var(--space-5));
+  padding: var(--space-4) var(--space-5);
   border-left: 2px solid var(--color-accent);
   background: var(--color-accent-soft);
   border-radius: var(--radius-sm);
@@ -642,9 +637,7 @@ body.is-leaving .page-shell {
 */
 @media (min-width: 768px) {
   .hero {
-    /* Keep explicit gap so the featured card never intersects the heading area. */
-    grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
-    column-gap: clamp(1.4rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .grid-2 {
@@ -671,17 +664,9 @@ body.is-leaving .page-shell {
   }
 
   .page-title,
-  .section-title {
+  .section-title,
+  .hero-title {
     max-width: 20ch;
-  }
-
-  .hero {
-    grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
-    column-gap: clamp(1.8rem, 3.4vw, 3.2rem);
-  }
-
-  .hero-content {
-    padding-right: clamp(0.4rem, 1.4vw, 1.6rem);
   }
 }
 
@@ -735,13 +720,16 @@ body.is-leaving .page-shell {
   }
 
   .hero-title {
-    font-size: clamp(1.95rem, 10vw, 2.8rem);
-    line-height: 1.12;
-    letter-spacing: 0.002em;
+    line-height: 1.1;
   }
 
   .about-portrait {
     width: min(230px, 70vw);
+  }
+
+  .button {
+    width: 100%;
+    justify-content: center;
   }
 }
 
