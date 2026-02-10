@@ -1,23 +1,23 @@
 /* Design system tokens: color, type, spacing, and motion */
 :root {
-  color-scheme: light;
-  --color-bg: #f6f4f1;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f1efea;
-  --color-ink: #111827;
-  --color-ink-muted: #4b5563;
-  --color-ink-soft: #6b7280;
-  --color-accent: #b45309;
-  --color-accent-soft: rgba(180, 83, 9, 0.12);
-  --color-border: rgba(17, 24, 39, 0.12);
-  --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.12);
-  --shadow-card: 0 18px 32px rgba(15, 23, 42, 0.08);
+  color-scheme: dark;
+  --color-bg: #0f1c15;
+  --color-surface: #1a2f25;
+  --color-surface-alt: #243e32;
+  --color-ink: #e2e8f0;
+  --color-ink-muted: #a3b18a;
+  --color-ink-soft: #8da399;
+  --color-accent: #d4a373;
+  --color-accent-soft: rgba(212, 163, 115, 0.15);
+  --color-border: rgba(226, 232, 240, 0.1);
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 18px 32px rgba(0, 0, 0, 0.25);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
 
   --font-sans: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-serif: "Source Serif 4", "Iowan Old Style", serif;
+  --font-serif: "Libre Baskerville", "Source Serif 4", "Iowan Old Style", serif;
 
   --step--1: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
   --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
@@ -53,13 +53,14 @@ body {
   font-size: var(--step-0);
   line-height: 1.7;
   color: var(--color-ink);
-  background: radial-gradient(circle at top, #fff7ed 0%, #f6f4f1 45%, #ffffff 100%);
+  background: radial-gradient(circle at top, #1a2f25 0%, #0f1c15 45%, #0a140e 100%);
   min-height: 100vh;
 }
 
 img {
   max-width: 100%;
   display: block;
+  border-radius: var(--radius-sm);
 }
 
 a {
@@ -105,7 +106,7 @@ button:focus-visible {
   position: sticky;
   top: var(--space-4);
   z-index: 20;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(15, 28, 21, 0.9);
   border: 1px solid var(--color-border);
   border-radius: 999px;
   box-shadow: var(--shadow-soft);
@@ -176,6 +177,7 @@ button:focus-visible {
 .page-body > ul,
 .page-body > ol {
   color: var(--color-ink-muted);
+  font-family: var(--font-serif);
 }
 
 .page-body > ul,
@@ -249,8 +251,8 @@ button:focus-visible {
 .hero-card {
   padding: var(--space-6);
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #fff7ed, #fef3c7);
-  border: 1px solid rgba(180, 83, 9, 0.2);
+  background: linear-gradient(135deg, #243e32, #1a2f25);
+  border: 1px solid rgba(212, 163, 115, 0.2);
   box-shadow: var(--shadow-card);
 }
 
@@ -282,7 +284,7 @@ button:focus-visible {
 
 .button-primary {
   background: var(--color-accent);
-  color: #fff !important;
+  color: var(--color-bg) !important;
   border-color: var(--color-accent);
   box-shadow: var(--shadow-card);
 }
@@ -291,16 +293,16 @@ button:focus-visible {
 .button-primary:hover,
 .button-primary:focus-visible,
 .button-primary:active {
-  color: #fff;
+  color: var(--color-bg);
 }
 
 .button-primary:hover {
   transform: translateY(-2px);
-  color: #fff;
+  color: var(--color-bg);
 }
 
 .button-primary:focus-visible {
-  color: #fff;
+  color: var(--color-bg);
 }
 
 .button-secondary {
@@ -394,7 +396,7 @@ button:focus-visible {
 }
 
 .content-item:hover {
-  border-color: rgba(180, 83, 9, 0.4);
+  border-color: rgba(212, 163, 115, 0.4);
   transform: translateY(-2px);
 }
 
@@ -439,6 +441,7 @@ button:focus-visible {
 .prose p {
   margin: var(--space-4) 0;
   color: var(--color-ink-muted);
+  font-family: var(--font-serif);
 }
 
 .prose ul,
@@ -446,6 +449,7 @@ button:focus-visible {
   margin: var(--space-4) 0;
   padding-left: var(--space-5);
   color: var(--color-ink-muted);
+  font-family: var(--font-serif);
 }
 
 .prose blockquote {
