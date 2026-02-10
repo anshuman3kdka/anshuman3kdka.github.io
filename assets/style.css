@@ -291,11 +291,16 @@ button:focus-visible {
 .button-primary:hover,
 .button-primary:focus-visible,
 .button-primary:active {
-  color: #fff !important;
+  color: #fff;
 }
 
 .button-primary:hover {
   transform: translateY(-2px);
+  color: #fff;
+}
+
+.button-primary:focus-visible {
+  color: #fff;
 }
 
 .button-secondary {
