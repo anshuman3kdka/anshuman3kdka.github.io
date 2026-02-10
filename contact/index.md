@@ -17,7 +17,7 @@ title: Contact
   </div>
   <div class="card reveal">
     <p class="card-label">Location</p>
-    <h3 class="card-title">Bangalore, India</h3>
+    <h3 class="card-title">Delhi, India</h3>
     <p class="card-text">Available for remote collaborations and select local projects.</p>
     <a class="card-link" href="/about/">Learn more</a>
   </div>
