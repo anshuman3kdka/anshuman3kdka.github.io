@@ -5,7 +5,7 @@ title: About
 <section class="section page-intro reveal">
   <p class="section-eyebrow">About</p>
   <h1 class="page-title">An evolving archive of ideas and experiments.</h1>
-  <p class="page-lead">I write essays, prose, and poetry. This site is where I collect the work that shapes my practice as a writer and creative technologist.</p>
+  
 </section>
 
 <section class="section prose reveal">
