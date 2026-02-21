@@ -4,39 +4,33 @@ title: Home
 
 <section class="section hero" aria-labelledby="hero-title">
   <div class="hero-content reveal">
-    <p class="section-eyebrow">Creative technologist · Writer</p>
+    <p class="section-eyebrow">Writer · Student · Occasionally codes</p>
     <h1 class="hero-title" id="hero-title">Anshuman3kdka</h1>
-    <p class="hero-lead">I build thoughtful digital experiences, write on creativity and systems, and explore how design can make ideas feel inevitable.</p>
+    <p class="hero-lead">I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails. Currently a student, open to work that doesn't require me to use the word 'synergy.'</p>
     <div class="hero-actions">
-      <a class="button button-primary" href="/essays/">Read the latest essays</a>
-      <a class="button button-secondary" href="/projects/">Explore projects</a>
+      <a class="button button-primary" href="/essays/">Essays →</a>
+      <a class="button button-secondary" href="/projects/">Projects →</a>
     </div>
   </div>
   <div class="hero-card reveal" role="presentation">
-    <p>Featured thought</p>
-    <h2>Designing for depth, not noise.</h2>
-    <span>Explore the essay collection →</span>
+    <p>Recent</p>
+    <h2>Building arguments, not brands.</h2>
+    <span>Read the essays →</span>
   </div>
 </section>
 
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro reveal">
-    <p class="section-eyebrow">Featured</p>
-    <h2 class="section-title" id="featured-title">Curated work, shaped by intent</h2>
-    <p class="section-subtitle">A snapshot of recent essays, experiments, and systems work that reflect my current thinking.</p>
+    <p class="section-eyebrow">Recent Work</p>
+    <h2 class="section-title" id="featured-title">Things that got finished</h2>
+    <p class="section-subtitle">Recent essays and creative work.</p>
   </div>
   <div class="grid grid-2">
     <article class="card reveal">
-      <p class="card-label">Featured essay</p>
-      <h3 class="card-title">On quiet ambition</h3>
-      <p class="card-text">Exploring how intentional pacing leads to meaningful creative momentum.</p>
+      <p class="card-label">Essay</p>
+      <h3 class="card-title">Archaeological Site Report: Campus Romance</h3>
+      <p class="card-text">An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years.</p>
       <a class="card-link" href="/essays/">Read essay</a>
-    </article>
-    <article class="card reveal">
-      <p class="card-label">Featured project</p>
-      <h3 class="card-title">Atlas Notes</h3>
-      <p class="card-text">A digital notebook built for deep work, structured thinking, and clarity.</p>
-      <a class="card-link" href="/projects/">View project</a>
     </article>
   </div>
 </section>
@@ -45,12 +39,11 @@ title: Home
   <div class="grid grid-2">
     <div class="reveal">
       <p class="section-eyebrow">About</p>
-      <h2 class="section-title" id="bio-title">A short introduction</h2>
-      <p class="section-subtitle">I write about creativity, systems, and the craft of building ideas into lasting work.</p>
+      <h2 class="section-title" id="bio-title">About</h2>
+      <p class="section-subtitle">I write things and sometimes they work.</p>
     </div>
     <div class="reveal">
-      <p>I’m a multidisciplinary creator blending writing, product thinking, and design. My work sits at the intersection of storytelling and practical execution, helping teams and readers move from insight to action.</p>
-      <p>When I’m not writing, you’ll find me mapping new frameworks, collecting narratives, and building tools that make thoughtful work easier.</p>
+      <p>When I’m not writing, I’m usually reading, or wondering why I chose the difficult hobbies.</p>
     </div>
   </div>
 </section>
