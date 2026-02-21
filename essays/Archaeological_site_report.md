@@ -3,14 +3,10 @@ title: Archaeological Site Report: Excavation #2005-CB
 author: Anshuman3kdka
 ---
 
-## EXCAVATION #2005-CB
-
 **Subject:** The "Campus Romance" Paperback (Late 20th/Early 21st Century)  
 **Location:** Excavated from the ruins of a specialized torture chamber known as "The A.H. Wheeler Railway Bookstore."  
 **Lead Archeologist:** Dr. Xylos, Curator of Pre-Apocalyptic Cringe  
 **Date:** Year 4025 (Post-Logic Era)
-
----
 
 ## I. SITE OVERVIEW
 
@@ -19,8 +15,6 @@ Fellow excavators, let us dispense with the pleasantries. We have uncovered a ma
 We have unearthed millions of identical rectangular artifacts, composed of decomposing wood pulp and bound in covers featuring silhouetted couples standing under umbrellas. Carbon dating suggests these texts were mass-produced during a dark age called the "Engineering College Boom," a period where ancient Indian civilization decided that the only way to process the trauma of calculus was to write bad fiction about it.
 
 For decades, scholars assumed these were distinct stories. They were not. We are looking at a single, repetitive chant. A structural glitch in the human imagination.
-
----
 
 ## II. ARTIFACT ANALYSIS: THE TRINITY OF DOOM
 
@@ -54,8 +48,6 @@ The female lead. She is beautiful. She is intelligent. She is "The Most Popular 
 
 - **The Logic Failure:** Her decision-making centers appear damaged. She spends 300 pages treating The Potato like a friend, only to suddenly realize in the Epilogue—usually at an airport or a train station—that his persistent stalking was actually "true love."
 
----
-
 ## III. THE RITUAL OF THE PLOT (The Cycle of Trauma)
 
 The structural integrity of these novels relies on a sequence of events so predictable it must have been mandated by law.
@@ -67,8 +59,6 @@ The structural integrity of these novels relies on a sequence of events so predi
 3. The Great Misunderstanding: The Potato sees the Goddess laughing with The Kabir. The Potato suffers a mental breakdown. He gets drunk. He says something unforgivable. He fails an exam.
 
 4. The Redemption (That Isn't Redemption): The Potato does not improve himself. He does not learn a skill. He simply waits. Eventually, the Goddess’s life falls apart (usually due to parental pressure to marry an NRI), and she settles for the Potato because he is... there. He is persistent. He is the mold that refuses to be scrubbed away.
-
----
 
 ## IV. SOCIOLOGICAL CONCLUSION
 
