@@ -982,7 +982,7 @@ body.search-active {
 .resume-name {
   font-family: var(--font-heading);
   font-size: var(--step-4);
-  margin-bottom: var(--space-2);
+  margin: 0 0 var(--space-2);
   color: #f3efdf;
 }
 
@@ -991,8 +991,14 @@ body.search-active {
   font-family: var(--font-body);
   display: flex;
   justify-content: center;
-  gap: var(--space-4);
+  gap: var(--space-3) var(--space-4);
   flex-wrap: wrap;
+}
+
+.resume-meta a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
 }
 
 .resume-section {
@@ -1017,7 +1023,7 @@ body.search-active {
 
 @media (min-width: 768px) {
   .resume-item {
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 180px minmax(0, 1fr);
     gap: var(--space-5);
   }
 }
@@ -1027,7 +1033,8 @@ body.search-active {
   color: var(--color-sage);
   font-size: var(--step--1);
   font-variant-numeric: tabular-nums;
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
+  white-space: nowrap;
 }
 
 .resume-content h3 {
@@ -1035,6 +1042,7 @@ body.search-active {
   font-size: var(--step-1);
   margin: 0 0 var(--space-1);
   color: #ebe7d9;
+  line-height: 1.3;
 }
 
 .resume-role {
@@ -1044,7 +1052,8 @@ body.search-active {
   display: block;
 }
 
-.resume-content p, .resume-content ul {
+.resume-content p,
+.resume-content ul {
   margin: 0;
   color: var(--color-ink-muted);
   font-size: var(--step-0);
@@ -1055,43 +1064,22 @@ body.search-active {
   margin-top: var(--space-2);
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-5);
+.resume-content li {
+  margin-bottom: 0.35rem;
 }
 
-.skill-category {
-  background: rgba(25, 55, 40, 0.4);
-  padding: var(--space-4);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-rule);
-}
-
-.skill-category h4 {
-  font-family: var(--font-heading);
-  color: var(--color-sage);
-  margin: 0 0 var(--space-3);
-  font-size: var(--step-0);
-  border-bottom: 1px solid rgba(232, 226, 206, 0.1);
-  padding-bottom: var(--space-2);
-}
-
-.skill-list {
-  list-style: none;
-  padding: 0;
+/* Resume conflict-safety overrides: keep native theme look even if old wrapper markup reappears */
+.page-body .resume-page {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
   margin: 0;
+  padding: 0;
 }
 
-.skill-list li {
-  color: var(--color-ink-muted);
-  margin-bottom: var(--space-2);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.skill-list li::before {
-  content: "•";
-  color: var(--color-accent);
+.page-body .resume-page .resume-header,
+.page-body .resume-page .resume-section {
+  background: transparent;
 }
