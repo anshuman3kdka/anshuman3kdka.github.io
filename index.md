@@ -1,7 +1,6 @@
 ---
 title: Home
 ---
-
 <section class="section hero" aria-labelledby="hero-title">
   <div class="hero-content reveal">
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
