@@ -1,6 +1,7 @@
 ---
-title: Archaeological Site Report: Excavation #2005-CB
+title: "Archaeological Site Report: Excavation #2005-CB"
 author: Anshuman3kdka
+permalink: /essays/archaeological-site-report/
 ---
 
 **Subject:** The "Campus Romance" Paperback (Late 20th/Early 21st Century)  
