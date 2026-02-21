@@ -973,17 +973,18 @@ body.search-active {
 
 /* Resume Styles */
 .resume-page {
-  background: #050608;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(165deg, rgba(20, 47, 34, 0.97) 0%, rgba(13, 31, 23, 0.96) 55%, rgba(10, 24, 18, 0.98) 100%);
+  border: 1px solid rgba(211, 178, 119, 0.32);
   border-radius: 18px;
   padding: clamp(1.2rem, 3vw, 2rem);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(232, 226, 206, 0.06);
 }
 
 .resume-header {
   margin-bottom: var(--space-7);
   padding-bottom: var(--space-5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(211, 178, 119, 0.34);
 }
 
 .resume-header--left {
@@ -996,11 +997,12 @@ body.search-active {
   line-height: 0.95;
   letter-spacing: 0.025em;
   margin: 0;
-  color: #f5f7fa;
+  color: var(--color-ink);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
 }
 
 .resume-meta {
-  color: #f2f3f5;
+  color: var(--color-ink-muted);
   font-family: var(--font-body);
   margin-top: var(--space-5);
 }
@@ -1016,14 +1018,14 @@ body.search-active {
 }
 
 .resume-meta a {
-  color: #9dc1ff;
-  text-decoration-thickness: 1px;
-}
-
-.resume-meta a {
   color: var(--color-accent);
   text-decoration: underline;
-  text-underline-offset: 0.14em;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.resume-meta a:hover {
+  color: #edd3a7;
 }
 
 .resume-section {
@@ -1036,7 +1038,7 @@ body.search-active {
   line-height: 1;
   margin-bottom: var(--space-4);
   letter-spacing: 0.02em;
-  color: #f5f7fa;
+  color: var(--color-accent);
 }
 
 .resume-item {
@@ -1048,21 +1050,27 @@ body.search-active {
   font-size: clamp(1.25rem, 3.2vw, 2.1rem);
   line-height: 1.25;
   margin: 0 0 var(--space-1);
-  color: #f5f7fa;
+  color: var(--color-ink);
 }
 
 .resume-role {
   font-style: italic;
-  color: #f5f7fa;
+  color: var(--color-ink-muted);
   font-weight: 400;
 }
 
 .resume-content p,
 .resume-content ul {
   margin: 0;
-  color: #f2f3f5;
+  color: var(--color-ink-muted);
   font-size: clamp(1.05rem, 2.3vw, 1.25rem);
   line-height: 1.35;
+}
+
+.resume-content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
 }
 
 .resume-content ul {

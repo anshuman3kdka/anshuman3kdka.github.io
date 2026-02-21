@@ -8,10 +8,10 @@ layout: default
     <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
     <div class="resume-meta resume-meta--stack">
       <p>New Delhi, Delhi, India</p>
-      <p>Call: <a href="tel:9214386738">[link: 9214386738]</a></p>
-      <p>Email: <a href="mailto:thisisanshumanp@gmail.com">[link: thisisanshumanp@gmail.com ]</a></p>
-      <p>LinkedIn: <a href="https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378">[link: https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378 ]</a></p>
-      <p>Portfolio: <a href="https://www.anshuman3kdka.in">[link: www.anshuman3kdka.in]</a></p>
+      <p>Call: <a href="tel:9214386738">+91 92143 86738</a></p>
+      <p>Email: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378">linkedin</a></p>
+      <p>Portfolio: <a href="https://www.anshuman3kdka.in">anshuman3kdka.in</a></p>
     </div>
   </header>
 
@@ -79,8 +79,6 @@ layout: default
         </ul>
       </div>
     </div>
-  </div>
-
     <div class="resume-item">
       <div class="resume-content">
         <h3>Bluechip Finance and Investment Society | New Delhi, India <span class="resume-role">Member</span> | Sep 2025 – Feb 2026</h3>
@@ -97,7 +95,7 @@ layout: default
 
     <div class="resume-item">
       <div class="resume-content">
-        <h3>Freelance Content Creator &amp; Writer | www.anshuman3kdka.in | 2025 – Present</h3>
+        <h3>Freelance Content Creator &amp; Writer | <a href="https://www.anshuman3kdka.in">Portfolio Website</a> | 2025 – Present</h3>
         <ul>
           <li>Manage a personal portfolio website offering services in ghostwriting, copywriting, and blogging.</li>
           <li>Draft, edit, and publish web content, focusing on brand storytelling and digital communication.</li>
