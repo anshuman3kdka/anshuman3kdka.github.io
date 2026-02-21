@@ -10,8 +10,8 @@ title: About
 
 <section class="section prose reveal">
   <figure>
-    <div class="about-portrait" role="img" aria-label="Profile photo placeholder"></div>
-    <figcaption class="about-caption">Add your photo here</figcaption>
+    <div class="about-portrait" role="img" aria-label="Portrait of Anshuman Pandey"></div>
+    <figcaption class="about-caption">Anshuman Pandey</figcaption>
   </figure>
   <p>Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail.</p>
 
