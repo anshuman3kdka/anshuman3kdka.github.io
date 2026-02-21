@@ -19,6 +19,7 @@ title: Prose
     {% for prose in prose_items %}
     <article class="content-item reveal">
       <h3><a href="{{ prose.url }}">{{ prose.title }}</a></h3>
+      <p>Prose</p>
     </article>
     {% endfor %}
   </div>

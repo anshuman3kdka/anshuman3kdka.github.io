@@ -19,6 +19,7 @@ title: Essays
     {% for essay in essay_items %}
     <article class="content-item reveal">
       <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
+      <p>Essay</p>
     </article>
     {% endfor %}
   </div>
