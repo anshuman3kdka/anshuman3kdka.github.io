@@ -3,110 +3,167 @@ title: Resume
 layout: default
 ---
 
-<div class="resume-header reveal">
-  <h1 class="resume-name">Anshuman Pandey</h1>
-  <div class="resume-meta">
-    <span>Writer · Student · Developer</span>
-    <span>Based in Delhi</span>
-    <span><a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></span>
+<style>
+  .resume-page {
+    background: #060606;
+    color: #f5f5f5;
+    border: 1px solid #1d1d1d;
+    padding: clamp(1.2rem, 3vw, 2.2rem);
+    font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+    line-height: 1.45;
+  }
+
+  .resume-page h1,
+  .resume-page h2,
+  .resume-page h3,
+  .resume-page p,
+  .resume-page li {
+    color: #f5f5f5;
+    margin-top: 0;
+  }
+
+  .resume-name {
+    margin-bottom: 1.1rem;
+    font-size: clamp(2.7rem, 8vw, 4.6rem);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  .resume-contact p {
+    margin-bottom: 0.8rem;
+    font-size: clamp(1rem, 2.8vw, 1.08rem);
+  }
+
+  .resume-page a {
+    color: #8ab4ff;
+    text-decoration: underline;
+    word-break: break-word;
+  }
+
+  .resume-section {
+    margin-top: 1.9rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  .resume-section h2 {
+    margin-bottom: 0.8rem;
+    font-size: clamp(1.65rem, 5vw, 2.8rem);
+    letter-spacing: 0.02em;
+    font-weight: 800;
+  }
+
+  .resume-section p {
+    margin-bottom: 0.6rem;
+  }
+
+  .resume-entry {
+    margin-bottom: 0.95rem;
+  }
+
+  .resume-entry .meta {
+    color: #d5d5d5;
+  }
+
+  .resume-page ul {
+    margin: 0.15rem 0 0.9rem 1.35rem;
+  }
+
+  .resume-page li {
+    margin-bottom: 0.42rem;
+  }
+</style>
+
+<section class="resume-page">
+  <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
+
+  <div class="resume-contact">
+    <p>New Delhi, Delhi, India</p>
+    <p>Call: [link: 9214386738] |</p>
+    <p>Email: [link: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a> ]</p>
+    <p>LinkedIn: [link: <a href="https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378">https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378</a> ]</p>
+    <p>Portfolio: [link: <a href="https://www.anshuman3kdka.in">www.anshuman3kdka.in</a>]</p>
   </div>
-</div>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Summary</h2>
-  <div class="resume-content">
-    <p>
-      I write essays, fiction, and poetry. My work explores literature, culture, and the intersection of technology and human experience. I am currently a student, honing my craft and building arguments that matter. I possess a strong editorial voice and a growing technical skillset in web development and AI-assisted workflows.
-    </p>
-  </div>
-</div>
+  <section class="resume-section">
+    <h2>PROFESSIONAL SUMMARY</h2>
+    <p>A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into every project while building expertise in core business concepts. Because of an interest in how brands communicate, attention often turns toward narrative-driven approaches in marketing. Alongside studies, participation occurs regularly in top-tier student groups focused on consulting, finance, and promotion - each experience shaping abilities where numbers meet online engagement. Work now includes handling independent writing assignments across platforms. Meanwhile, opportunities are being explored to apply talents in composition, elementary analytics, and strategic planning within fast-moving internship settings.</p>
+  </section>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Education</h2>
+  <section class="resume-section">
+    <h2>EDUCATION</h2>
 
-  <div class="resume-item">
-    <div class="resume-date">2021 — Present</div>
-    <div class="resume-content">
-      <h3>University of Delhi</h3>
-      <span class="resume-role">Bachelor of Arts (English Literature)</span>
-      <p>Focused on literary criticism, modernism, and creative writing. Active member of the literary society and campus editorial board.</p>
-    </div>
-  </div>
-</div>
-
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Experience</h2>
-
-  <div class="resume-item">
-    <div class="resume-date">2023 — Present</div>
-    <div class="resume-content">
-      <h3>Freelance Writer & Editor</h3>
-      <span class="resume-role">Self-Employed</span>
+    <div class="resume-entry">
+      <p><strong>Sri Venkateswara College, University of Delhi</strong> <span class="meta">| New Delhi, India <em>Bachelor of Commerce (B.Com Hons)</em> | 2025 – Present</span></p>
       <ul>
-        <li>Authored essays on cultural criticism and literary analysis, published on personal and external platforms.</li>
-        <li>Edited academic papers and creative manuscripts for peers and clients, ensuring clarity and stylistic consistency.</li>
-        <li>Developed a personal brand through "Anshuman3kdka," focusing on long-form content.</li>
+        <li>Relevant Coursework: Business Organization, Financial Accounting, Microeconomics.</li>
       </ul>
     </div>
-  </div>
 
-  <div class="resume-item">
-    <div class="resume-date">2022 — 2023</div>
-    <div class="resume-content">
-      <h3>Campus Editorial Lead</h3>
-      <span class="resume-role">College Literary Society</span>
+    <div class="resume-entry">
+      <p><strong>City Montessori School</strong> <span class="meta">| Lucknow, India <em>Higher Secondary Certificate (Commerce)</em> | Mar 2012 – Mar 2025</span></p>
       <ul>
-        <li>Led a team of 5 writers to produce the annual college magazine.</li>
-        <li>Curated submissions, managed deadlines, and oversaw the final layout and design.</li>
-        <li>Organized poetry slams and creative writing workshops for the student body.</li>
+        <li>Focus: Business, Commerce, and General Studies.</li>
       </ul>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-category">
-      <h4>Writing & Editing</h4>
-      <ul class="skill-list">
-        <li>Creative Writing (Fiction, Poetry)</li>
-        <li>Essay & Article Writing</li>
-        <li>Copy Editing & Proofreading</li>
-        <li>Editorial Strategy</li>
+  <section class="resume-section">
+    <h2>EXTRACURRICULAR &amp; LEADERSHIP EXPERIENCE</h2>
+
+    <div class="resume-entry">
+      <p><strong>180 Degrees Consulting, Sri Venkateswara College</strong> <span class="meta">| New Delhi, India <em>Junior Consultant</em> | Sep 2025 – Present</span></p>
+      <ul>
+        <li>Collaborate with a team of student consultants to provide strategic recommendations for non-profits and social enterprises.</li>
+        <li>Conduct foundational market research and assist in basic data analysis to identify operational bottlenecks and growth opportunities.</li>
+        <li>Participate in weekly problem-solving workshops to develop business analysis and structured thinking skills.</li>
       </ul>
     </div>
 
-    <div class="skill-category">
-      <h4>Technical</h4>
-      <ul class="skill-list">
-        <li>HTML & CSS</li>
-        <li>Markdown & Jekyll</li>
-        <li>Git & GitHub Pages</li>
-        <li>Prompt Engineering (AI)</li>
+    <div class="resume-entry">
+      <p><strong>MAC - The Marketing Club, SVC</strong> <span class="meta">| New Delhi, India <em>Member</em> | Sep 2025 – Present</span></p>
+      <ul>
+        <li>Contribute to brainstorming sessions for student-led marketing and advertising campaigns.</li>
+        <li>Assist in developing promotional strategies and communication materials for campus events, enhancing understanding of consumer engagement.</li>
       </ul>
     </div>
 
-    <div class="skill-category">
-      <h4>Tools</h4>
-      <ul class="skill-list">
-        <li>VS Code</li>
-        <li>Figma (Basic)</li>
-        <li>Notion & Obsidian</li>
-        <li>Microsoft Office Suite</li>
+    <div class="resume-entry">
+      <p><strong>Petrichor - The Creative Writing Society, SVC</strong> <span class="meta">| New Delhi, India <em>Member</em> | Sep 2025 – Present</span></p>
+      <ul>
+        <li>Author creative and technical pieces, contributing to the society's publications and digital platforms.</li>
+        <li>Collaborate with peers in editorial processes, refining skills in news writing, web content creation, and critical research.</li>
       </ul>
     </div>
-  </div>
-</div>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Selected Works</h2>
-  <div class="resume-content">
-    <p>A curated selection of my best writing and projects can be found on this portfolio:</p>
+    <div class="resume-entry">
+      <p><strong>Bluechip Finance and Investment Society</strong> <span class="meta">| New Delhi, India <em>Member</em> | Sep 2025 – Feb 2026</span></p>
+      <ul>
+        <li>Participated in weekly seminars and discussions focused on financial markets, investment strategies, and corporate finance.</li>
+        <li>Gained introductory exposure to financial analysis and the interpretation of fundamental market data.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2>PROJECTS &amp; FREELANCE EXPERIENCE</h2>
+    <div class="resume-entry">
+      <p><strong>Freelance Content Creator &amp; Writer</strong> <span class="meta">| <a href="https://www.anshuman3kdka.in">www.anshuman3kdka.in</a> | 2025 – Present</span></p>
+      <ul>
+        <li>Manage a personal portfolio website offering services in ghostwriting, copywriting, and blogging.</li>
+        <li>Draft, edit, and publish web content, focusing on brand storytelling and digital communication.</li>
+        <li>Independently research industry trends, including the impact of AI on content creation, to deliver relevant and engaging copy for diverse audiences.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="resume-section">
+    <h2>SKILLS</h2>
     <ul>
-      <li><a href="/essays/">Essays</a> — Long-form cultural and literary criticism.</li>
-      <li><a href="/projects/">Projects</a> — Technical and creative experiments.</li>
-      <li><a href="/creative/">Creative Writing</a> — Poetry and prose collections.</li>
+      <li><strong>Business &amp; Analysis:</strong> Introductory Market Research, Basic Data Analysis, Foundational Financial Concepts, Business Strategy.</li>
+      <li><strong>Content &amp; Communication:</strong> Copywriting, Ghostwriting, Blogging, Web Content Writing, Technical Writing, Brand Storytelling.</li>
+      <li><strong>Soft Skills:</strong> Collaborative Problem Solving, Adaptability, English Proficiency, Cross-functional Teamwork.</li>
     </ul>
-  </div>
-</div>
+  </section>
+</section>
