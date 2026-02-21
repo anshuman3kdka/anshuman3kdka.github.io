@@ -3,7 +3,7 @@ title: Resume
 layout: default
 ---
 
-<div class="resume-page reveal">
+<div class="resume-page">
   <header class="resume-header resume-header--left">
     <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
     <div class="resume-meta resume-meta--stack">
