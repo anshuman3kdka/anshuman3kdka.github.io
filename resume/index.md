@@ -47,7 +47,7 @@ layout: default
   </section>
 
   <section class="resume-section">
-    <h2 class="resume-section-title">EXTRACURRICUL AR&amp; LEADERSHIP EXPERIENCE</h2>
+    <h2 class="resume-section-title">EXTRACURRICULAR &amp; LEADERSHIP EXPERIENCE</h2>
 
     <div class="resume-item">
       <div class="resume-content">
