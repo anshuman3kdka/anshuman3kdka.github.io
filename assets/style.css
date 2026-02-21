@@ -227,7 +227,7 @@ button:focus-visible {
 }
 
 .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
-  max-width: 730px;
+  max-width: 860px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -506,7 +506,7 @@ button:focus-visible {
 }
 
 .prose {
-  max-width: 740px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -564,6 +564,24 @@ button:focus-visible {
   text-align: center;
   color: var(--color-ink-soft);
   font-size: var(--step--1);
+}
+
+@media (min-width: 800px) {
+  .about-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: start;
+    max-width: 1000px !important;
+  }
+
+  .about-layout figure {
+    margin: 0;
+  }
+
+  .about-portrait {
+    margin: 0 0 var(--space-3);
+  }
 }
 
 .site-footer {
@@ -649,7 +667,7 @@ body.is-leaving .page-shell {
   }
 
   .grid-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
   .section {
@@ -660,7 +678,7 @@ body.is-leaving .page-shell {
 @media (min-width: 1024px) {
   .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure),
   .prose {
-    max-width: 68ch;
+    max-width: 860px;
   }
 
   .page-title,
@@ -669,8 +687,8 @@ body.is-leaving .page-shell {
   }
 
   .hero {
-    grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
-    column-gap: clamp(2.1rem, 4vw, 3.8rem);
+    grid-template-columns: minmax(0, 1.25fr) minmax(22rem, 0.75fr);
+    column-gap: 4.5rem;
   }
 
   .hero-content {
@@ -678,7 +696,7 @@ body.is-leaving .page-shell {
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 768px) {
   .nav-bar {
     flex-direction: column;
     align-items: flex-start;
