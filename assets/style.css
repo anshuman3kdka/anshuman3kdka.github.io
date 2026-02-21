@@ -1081,3 +1081,11 @@ body.search-active {
 .resume-content li {
   margin-bottom: 0.45rem;
 }
+
+@media (max-width: 520px) {
+  .resume-section-title {
+    font-size: clamp(1.6rem, 8.8vw, 2.15rem);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+}
