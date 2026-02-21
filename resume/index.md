@@ -79,6 +79,7 @@ layout: default
         </ul>
       </div>
     </div>
+  </div>
 
     <div class="resume-item">
       <div class="resume-content">

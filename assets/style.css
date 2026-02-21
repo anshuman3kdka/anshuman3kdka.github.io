@@ -1020,6 +1020,12 @@ body.search-active {
   text-decoration-thickness: 1px;
 }
 
+.resume-meta a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
 .resume-section {
   margin-bottom: var(--space-7);
 }
