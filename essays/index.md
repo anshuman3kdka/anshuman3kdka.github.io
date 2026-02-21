@@ -9,7 +9,7 @@ title: Essays
 <section class="section">
   {% assign essay_items = site.pages
     | where_exp: "page", "page.path contains 'essays/'"
-    | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.url != '/essays/'"
     | sort: "title" %}
 
   {% if essay_items.size > 0 %}
