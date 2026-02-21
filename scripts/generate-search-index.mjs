@@ -51,7 +51,7 @@ const toUrl = (relativePath) => {
   if (url.endsWith('/index.md') || url.endsWith('/index.html')) {
     url = url.replace(/\/index\.(md|html)$/, '/');
   } else {
-    url = url.replace(/\.(md|html)$/, '/');
+    url = url.replace(/\.md$/, '.html');
   }
   return url;
 };

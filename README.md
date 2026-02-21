@@ -19,3 +19,8 @@ npm run generate:search-index
 ```
 
 `npm run build` currently runs the same indexing step.
+
+## Automatic indexing on content changes
+
+A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes that modify content files.
+It regenerates `search.json` and `assets/search-index.json` and commits any updates automatically.
