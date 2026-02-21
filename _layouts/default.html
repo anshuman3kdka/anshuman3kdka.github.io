@@ -57,6 +57,30 @@
       <main class="site-main" id="main-content">
         <div class="page-shell">
           <div class="page-body">
+            {% assign is_piece_page = false %}
+            {% assign piece_label = 'Writing' %}
+            {% if page.name != 'index.md' %}
+            {% if page.path contains 'poetry/' %}
+            {% assign is_piece_page = true %}
+            {% assign piece_label = 'Poetry' %}
+            {% elsif page.path contains 'prose/' %}
+            {% assign is_piece_page = true %}
+            {% assign piece_label = 'Prose' %}
+            {% elsif page.path contains 'essays/' %}
+            {% assign is_piece_page = true %}
+            {% assign piece_label = 'Essay' %}
+            {% elsif page.path contains 'projects/' %}
+            {% assign is_piece_page = true %}
+            {% assign piece_label = 'Project' %}
+            {% endif %}
+            {% endif %}
+
+            {% if is_piece_page %}
+            <header class="section page-intro reveal">
+              <p class="section-eyebrow">{{ piece_label }}</p>
+              <h1 class="page-title">{{ page.title }}</h1>
+            </header>
+            {% endif %}
             {{ content }}
           </div>
         </div>
