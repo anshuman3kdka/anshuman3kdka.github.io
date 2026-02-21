@@ -1077,3 +1077,169 @@ body.search-active {
   content: "•";
   color: var(--color-accent);
 }
+
+/*
+  Standalone Resume Page Overrides
+  Activated by body_class: resume-page in front matter
+*/
+
+body.resume-page {
+  background: #000 !important;
+  background-color: #000 !important;
+  background-image: none !important;
+  color: #fff !important;
+  overflow-x: hidden;
+}
+
+body.resume-page .site-shell,
+body.resume-page .site-main,
+body.resume-page .page-shell {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  border-radius: 0 !important;
+}
+
+body.resume-page .page-shell::after {
+  display: none !important;
+}
+
+body.resume-page .site-header,
+body.resume-page .site-footer,
+body.resume-page .skip-link,
+body.resume-page .search-toggle {
+  display: none !important;
+}
+
+body.resume-page a {
+  color: #fff;
+  text-decoration: none;
+}
+
+body.resume-page a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* Resume Component Styles */
+.resume-container {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.resume-header {
+  margin-bottom: 30px;
+  text-align: left; /* Override default centered */
+  border-bottom: none; /* Override default border */
+  padding-bottom: 0;
+}
+
+.resume-header h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.resume-header p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.resume-section {
+  margin-bottom: 30px;
+}
+
+.resume-section h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+  margin: 0 0 15px 0;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.resume-section p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.resume-item {
+  margin-bottom: 20px;
+  display: block; /* Override grid from theme */
+  gap: 0;
+}
+
+.resume-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+
+.resume-item-title {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.resume-item-date {
+  font-weight: normal;
+  color: #ccc;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0;
+}
+
+.resume-item-meta {
+  font-style: italic;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.resume-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 5px 0 0 0;
+}
+
+.resume-list li {
+  margin-bottom: 5px;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.resume-list li strong {
+  color: #fff;
+}
+
+@media print {
+  body.resume-page {
+    background-color: #000 !important;
+    -webkit-print-color-adjust: exact;
+  }
+  body.resume-page .resume-container {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+}
