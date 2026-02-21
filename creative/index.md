@@ -4,7 +4,7 @@ layout: default
 ---
 
 <div class="page-intro reveal">
-  <h1 class="page-title">{{ page.title }}</h1>
+<section></section>
 </div>
 
 <div class="grid grid-2">
