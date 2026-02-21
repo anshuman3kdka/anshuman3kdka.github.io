@@ -65,18 +65,7 @@
           <div class="page-body">
             {% assign is_piece_page = page.name != 'index.md' and (page.path contains 'poetry/' or page.path contains 'prose/' or page.path contains 'essays/' or page.path contains 'projects/') %}
             {% if is_piece_page %}
-            {% assign piece_label = 'Writing' %}
-            {% if page.path contains 'poetry/' %}
-            {% assign piece_label = 'Poetry' %}
-            {% elsif page.path contains 'prose/' %}
-            {% assign piece_label = 'Prose' %}
-            {% elsif page.path contains 'essays/' %}
-            {% assign piece_label = 'Essay' %}
-            {% elsif page.path contains 'projects/' %}
-            {% assign piece_label = 'Project' %}
-            {% endif %}
             <header class="section page-intro reveal">
-              <p class="section-eyebrow">{{ piece_label }}</p>
               <h1 class="page-title">{{ page.title }}</h1>
             </header>
             {% endif %}
