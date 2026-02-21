@@ -1,6 +1,8 @@
+---
+title: About
+---
 
-
-<section class="section page-intro reveal"><h1 class="page-title">{{ page.title }}</h1>
+<section class="section page-intro reveal">
 </section>
 
 <section class="section prose about-layout reveal">
