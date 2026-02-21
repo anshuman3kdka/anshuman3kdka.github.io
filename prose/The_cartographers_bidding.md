@@ -1,4 +1,7 @@
-# The Cartographer’s Bidding
+---
+title: The Cartographer’s Bidding
+author: Anshuman3kdka
+---
 
 The ink dried long before the first lung collapsed. In a silent room smelling of vellum and stale tea, a nib had scratched across a table. A tremor in the hand? A smudge of vanity? It didn’t matter. The God-Cartographer blinked, and the border zig-zagged through a meadow of lavender.
 
