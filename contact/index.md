@@ -3,8 +3,6 @@ title: Contact
 ---
 
 <section class="section page-intro reveal">
-  <h1 class="page-title">{{ page.title }}</h1>
-</section>
 
 <section class="section grid grid-2">
   <div class="card reveal">
