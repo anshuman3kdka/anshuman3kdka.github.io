@@ -19,7 +19,6 @@ title: Projects
     {% for project in project_items %}
     <article class="content-item reveal">
       <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
-      <p>Project · {{ project.url }}</p>
     </article>
     {% endfor %}
   </div>

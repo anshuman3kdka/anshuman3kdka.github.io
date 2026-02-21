@@ -19,7 +19,6 @@ title: Poetry
     {% for poem in poems %}
     <article class="content-item reveal">
       <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
-      <p>Poem · {{ poem.url }}</p>
     </article>
     {% endfor %}
   </div>
