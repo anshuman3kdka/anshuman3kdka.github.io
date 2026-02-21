@@ -952,3 +952,128 @@ body.search-active {
     padding: 0.8rem;
   }
 }
+
+/* Resume Styles */
+.resume-header {
+  text-align: center;
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.resume-name {
+  font-family: var(--font-heading);
+  font-size: var(--step-4);
+  margin-bottom: var(--space-2);
+  color: #f3efdf;
+}
+
+.resume-meta {
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.resume-section {
+  margin-bottom: var(--space-7);
+}
+
+.resume-section-title {
+  font-family: var(--font-heading);
+  font-size: var(--step-2);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-rule);
+  color: #f3efdf;
+}
+
+.resume-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .resume-item {
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-5);
+  }
+}
+
+.resume-date {
+  font-family: var(--font-body);
+  color: var(--color-sage);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.35rem;
+}
+
+.resume-content h3 {
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  margin: 0 0 var(--space-1);
+  color: #ebe7d9;
+}
+
+.resume-role {
+  font-style: italic;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.resume-content p, .resume-content ul {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: var(--step-0);
+}
+
+.resume-content ul {
+  padding-left: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.skill-category {
+  background: rgba(25, 55, 40, 0.4);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-rule);
+}
+
+.skill-category h4 {
+  font-family: var(--font-heading);
+  color: var(--color-sage);
+  margin: 0 0 var(--space-3);
+  font-size: var(--step-0);
+  border-bottom: 1px solid rgba(232, 226, 206, 0.1);
+  padding-bottom: var(--space-2);
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-list li {
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.skill-list li::before {
+  content: "•";
+  color: var(--color-accent);
+}
