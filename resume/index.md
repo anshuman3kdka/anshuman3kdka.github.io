@@ -3,110 +3,103 @@ title: Resume
 layout: default
 ---
 
-<div class="resume-header reveal">
-  <h1 class="resume-name">Anshuman Pandey</h1>
-  <div class="resume-meta">
-    <span>Writer · Student · Developer</span>
-    <span>Based in Delhi</span>
-    <span><a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></span>
-  </div>
-</div>
+<style>
+  .resume-revamp {
+    background: #000;
+    color: #f5f5f5;
+    padding: 2.5rem 2rem;
+    border-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.28;
+  }
+  .resume-revamp h1,
+  .resume-revamp h2 {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .resume-revamp h1 { font-size: clamp(2.8rem, 6vw, 4.6rem); margin: 0 0 2rem; }
+  .resume-revamp h2 { font-size: clamp(2rem, 4.8vw, 3.4rem); margin: 2rem 0 1rem; }
+  .resume-revamp p,
+  .resume-revamp li { font-size: clamp(1.05rem, 3vw, 1.05rem); color: #f0f0f0; }
+  .resume-revamp p { margin: 0 0 1.2rem; }
+  .resume-revamp em { font-style: italic; }
+  .resume-revamp a { color: #8ab4ff; text-decoration: underline; }
+  .resume-revamp ul { margin: -0.6rem 0 1.2rem 1.55rem; }
+  .resume-revamp li { margin-bottom: 0.55rem; }
+</style>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Summary</h2>
-  <div class="resume-content">
-    <p>
-      I write essays, fiction, and poetry. My work explores literature, culture, and the intersection of technology and human experience. I am currently a student, honing my craft and building arguments that matter. I possess a strong editorial voice and a growing technical skillset in web development and AI-assisted workflows.
-    </p>
-  </div>
-</div>
+<section class="resume-revamp reveal">
+  <h1>ANSHUMAN<br>PANDEY</h1>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Education</h2>
+  <p>New Delhi, Delhi, India</p>
 
-  <div class="resume-item">
-    <div class="resume-date">2021 — Present</div>
-    <div class="resume-content">
-      <h3>University of Delhi</h3>
-      <span class="resume-role">Bachelor of Arts (English Literature)</span>
-      <p>Focused on literary criticism, modernism, and creative writing. Active member of the literary society and campus editorial board.</p>
-    </div>
-  </div>
-</div>
+  <p>Call: [link: 9214386738] |</p>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Experience</h2>
+  <p>Email: [link: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a> ]</p>
 
-  <div class="resume-item">
-    <div class="resume-date">2023 — Present</div>
-    <div class="resume-content">
-      <h3>Freelance Writer & Editor</h3>
-      <span class="resume-role">Self-Employed</span>
-      <ul>
-        <li>Authored essays on cultural criticism and literary analysis, published on personal and external platforms.</li>
-        <li>Edited academic papers and creative manuscripts for peers and clients, ensuring clarity and stylistic consistency.</li>
-        <li>Developed a personal brand through "Anshuman3kdka," focusing on long-form content.</li>
-      </ul>
-    </div>
-  </div>
+  <p>LinkedIn: [link: <a href="https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378">https://www.google.com/search?q=linkedin.com/in/anshuman-pandey-b33362378</a> ]</p>
 
-  <div class="resume-item">
-    <div class="resume-date">2022 — 2023</div>
-    <div class="resume-content">
-      <h3>Campus Editorial Lead</h3>
-      <span class="resume-role">College Literary Society</span>
-      <ul>
-        <li>Led a team of 5 writers to produce the annual college magazine.</li>
-        <li>Curated submissions, managed deadlines, and oversaw the final layout and design.</li>
-        <li>Organized poetry slams and creative writing workshops for the student body.</li>
-      </ul>
-    </div>
-  </div>
-</div>
+  <p>Portfolio: [link: <a href="https://www.anshuman3kdka.in">www.anshuman3kdka.in</a>]</p>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-category">
-      <h4>Writing & Editing</h4>
-      <ul class="skill-list">
-        <li>Creative Writing (Fiction, Poetry)</li>
-        <li>Essay & Article Writing</li>
-        <li>Copy Editing & Proofreading</li>
-        <li>Editorial Strategy</li>
-      </ul>
-    </div>
+  <h2>PROFESSIONAL SUMMARY</h2>
+  <p>
+    A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into every project while building expertise in core business concepts. Because of an interest in how brands communicate, attention often turns toward narrative-driven approaches in marketing. Alongside studies, participation occurs regularly in top-tier student groups focused on consulting, finance, and promotion - each experience shaping abilities where numbers meet online engagement. Work now includes handling independent writing assignments across platforms. Meanwhile, opportunities are being explored to apply talents in composition, elementary analytics, and strategic planning within fast-moving internship settings.
+  </p>
 
-    <div class="skill-category">
-      <h4>Technical</h4>
-      <ul class="skill-list">
-        <li>HTML & CSS</li>
-        <li>Markdown & Jekyll</li>
-        <li>Git & GitHub Pages</li>
-        <li>Prompt Engineering (AI)</li>
-      </ul>
-    </div>
+  <h2>EDUCATION</h2>
 
-    <div class="skill-category">
-      <h4>Tools</h4>
-      <ul class="skill-list">
-        <li>VS Code</li>
-        <li>Figma (Basic)</li>
-        <li>Notion & Obsidian</li>
-        <li>Microsoft Office Suite</li>
-      </ul>
-    </div>
-  </div>
-</div>
+  <p><strong>Sri Venkateswara College, University of Delhi</strong> | New Delhi, India <em>Bachelor of Commerce (B.Com Hons)</em> | 2025 – Present</p>
+  <ul>
+    <li>Relevant Coursework: Business Organization, Financial Accounting, Microeconomics.</li>
+  </ul>
 
-<div class="resume-section reveal">
-  <h2 class="resume-section-title">Selected Works</h2>
-  <div class="resume-content">
-    <p>A curated selection of my best writing and projects can be found on this portfolio:</p>
-    <ul>
-      <li><a href="/essays/">Essays</a> — Long-form cultural and literary criticism.</li>
-      <li><a href="/projects/">Projects</a> — Technical and creative experiments.</li>
-      <li><a href="/creative/">Creative Writing</a> — Poetry and prose collections.</li>
-    </ul>
-  </div>
-</div>
+  <p><strong>City Montessori School</strong> | Lucknow, India <em>Higher Secondary Certificate (Commerce)</em> | Mar 2012 – Mar 2025</p>
+  <ul>
+    <li>Focus: Business, Commerce, and General Studies.</li>
+  </ul>
+
+  <h2>EXTRACURRICULAR &amp; LEADERSHIP EXPERIENCE</h2>
+
+  <p><strong>180 Degrees Consulting, Sri Venkateswara College</strong> | New Delhi, India <em>Junior Consultant</em> | Sep 2025 – Present</p>
+  <ul>
+    <li>Collaborate with a team of student consultants to provide strategic recommendations for non-profits and social enterprises.</li>
+    <li>Conduct foundational market research and assist in basic data analysis to identify operational bottlenecks and growth opportunities.</li>
+    <li>Participate in weekly problem-solving workshops to develop business analysis and structured thinking skills.</li>
+  </ul>
+
+  <p><strong>MAC - The Marketing Club, SVC</strong> | New Delhi, India <em>Member</em> | Sep 2025 – Present</p>
+  <ul>
+    <li>Contribute to brainstorming sessions for student-led marketing and advertising campaigns.</li>
+    <li>Assist in developing promotional strategies and communication materials for campus events, enhancing understanding of consumer engagement.</li>
+  </ul>
+
+  <p><strong>Petrichor - The Creative Writing Society, SVC</strong> | New Delhi, India <em>Member</em> | Sep 2025 – Present</p>
+  <ul>
+    <li>Author creative and technical pieces, contributing to the society's publications and digital platforms.</li>
+    <li>Collaborate with peers in editorial processes, refining skills in news writing, web content creation, and critical research.</li>
+  </ul>
+
+  <p><strong>Bluechip Finance and Investment Society</strong> | New Delhi, India <em>Member</em> | Sep 2025 – Feb 2026</p>
+  <ul>
+    <li>Participated in weekly seminars and discussions focused on financial markets, investment strategies, and corporate finance.</li>
+    <li>Gained introductory exposure to financial analysis and the interpretation of fundamental market data.</li>
+  </ul>
+
+  <h2>PROJECTS &amp; FREELANCE EXPERIENCE</h2>
+
+  <p><strong>Freelance Content Creator &amp; Writer</strong> | <a href="https://www.anshuman3kdka.in">www.anshuman3kdka.in</a> | 2025 – Present</p>
+  <ul>
+    <li>Manage a personal portfolio website offering services in ghostwriting, copywriting, and blogging.</li>
+    <li>Draft, edit, and publish web content, focusing on brand storytelling and digital communication.</li>
+    <li>Independently research industry trends, including the impact of AI on content creation, to deliver relevant and engaging copy for diverse audiences.</li>
+  </ul>
+
+  <h2>SKILLS</h2>
+  <ul>
+    <li><strong>Business &amp; Analysis:</strong> Introductory Market Research, Basic Data Analysis, Foundational Financial Concepts, Business Strategy.</li>
+    <li><strong>Content &amp; Communication:</strong> Copywriting, Ghostwriting, Blogging, Web Content Writing, Technical Writing, Brand Storytelling.</li>
+    <li><strong>Soft Skills:</strong> Collaborative Problem Solving, Adaptability, English Proficiency, Cross-functional Teamwork.</li>
+  </ul>
+</section>
