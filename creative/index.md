@@ -4,9 +4,7 @@ layout: default
 ---
 
 <div class="page-intro reveal">
-  <p class="section-eyebrow">The Workshop</p>
-  <h1 class="page-title">Poetry & Prose</h1>
-  <p class="page-lead">A collection of creative works, from structured verse to free-flowing narratives. Here lies the heart of my literary experiments.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </div>
 
 <div class="grid grid-2">

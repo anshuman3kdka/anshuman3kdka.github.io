@@ -3,9 +3,7 @@ title: Achievements
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">Achievements</p>
-  <h1 class="page-title">Highlights, publications, and milestones.</h1>
-  <p class="page-lead">A log of recognitions, collaborations, and outcomes as they happen.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section grid grid-2">

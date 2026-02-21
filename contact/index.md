@@ -3,9 +3,7 @@ title: Contact
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">Contact</p>
-  <h1 class="page-title">Let’s build something thoughtful.</h1>
-  <p class="page-lead">For collaborations, writing, or product conversations, reach out directly or connect through the social channels below.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section grid grid-2">

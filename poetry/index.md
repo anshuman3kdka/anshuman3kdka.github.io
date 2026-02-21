@@ -3,9 +3,7 @@ title: Poetry
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">Poetry</p>
-  <h1 class="page-title">Poems, fragments, and experiments in language.</h1>
-  <p class="page-lead">An archive of verses, each a snapshot of a different season of thought.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section">
@@ -19,7 +17,6 @@ title: Poetry
     {% for poem in poems %}
     <article class="content-item reveal">
       <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
-      <p>Poem</p>
     </article>
     {% endfor %}
   </div>
