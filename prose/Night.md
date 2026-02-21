@@ -1,4 +1,7 @@
-# Night
+---
+title: Night
+author: Anshuman3kdka
+---
 
 It's nighttime and the poets and thieves are awake, their hearts beating in time with something the daylight world has forgotten. The pirates are singing sea shanties that smell of salt and rum, and one of them is sharpening a blade meant for the captain's back, humming as he works. The elves are moving through the silver birch trees, and one of them carries a secret so ancient and precious that even speaking its name would shatter the stars. And sometimes, when a single blade of grass trembles in the windless dark, you'll know there's a hobbit trying to slip away on a journey that's been calling to him in dreams. But when he finally reaches that far green country he's imagined, the very same blades of grass will bend beneath his feet, and the same trampled field of corn will stretch golden and endless under the same indifferent moon. A wolf howls at the ragged edge of the forest where the wild things keep their vigil, but the sheep in their pen don't even lift their heads, lost in whatever innocent dreams sheep are granted. And high in the crumbling tower window, a candle flickers once as though some ghost has passed too close, then holds steady and bright while far below, someone counts the cobblestones in the courtyard over and over, having long ago forgotten what number they started with or why it ever mattered.
 
@@ -6,4 +9,4 @@ I love nighttimes, when the world becomes exactly what it always was.
 
 It's nighttime and the lovers and the liars are awake. The clockmaker is oiling the gears of a timepiece that measures sorrows, and each tick is the sound of a heart breaking somewhere in the sleeping city. The fisherman is mending a net woven from moonlight and whispers, hoping to catch a dream that keeps slipping through his fingers. In the city square, the statues are stepping down from their pedestals, their marble joints creaking as they stretch limbs that have been still for a century, eager to walk the empty streets. A librarian is lighting a single lamp in the great hall, and the shadows that flee from it are shaped like the letters of a forgotten alphabet. The baker is kneading dough for tomorrow's bread, but tonight he adds a pinch of starlight and a single tear, and he doesn't know why. And the stray dog who sleeps by the market stalls lifts his head, listening to a name he was called by a thousand years ago, his tail giving one slow, hopeful thump against the cobblestones.
 
-And in the quiet, you can hear the world telling all the secrets it was too shy to speak in the sun..
+And in the quiet, you can hear the world telling all the secrets it was too shy to speak in the sun.
