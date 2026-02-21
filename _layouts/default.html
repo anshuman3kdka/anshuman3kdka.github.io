@@ -63,7 +63,11 @@
       <main class="site-main" id="main-content">
         <div class="page-shell">
           <div class="page-body">
-            {% assign is_piece_page = page.name != 'index.md' and (page.path contains 'poetry/' or page.path contains 'prose/' or page.path contains 'essays/' or page.path contains 'projects/') %}
+            {% assign is_piece_dir = false %}
+            {% if page.path contains 'poetry/' or page.path contains 'prose/' or page.path contains 'essays/' or page.path contains 'projects/' %}
+            {% assign is_piece_dir = true %}
+            {% endif %}
+            {% assign is_piece_page = is_piece_dir and page.name != 'index.md' %}
             {% if is_piece_page %}
             {% assign piece_label = 'Writing' %}
             {% if page.path contains 'poetry/' %}
