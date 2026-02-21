@@ -3,9 +3,7 @@ title: Prose
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">Prose</p>
-  <h1 class="page-title">Narratives and reflections in long-form prose.</h1>
-  <p class="page-lead">Stories and reflective writing that sit between essays and poetry.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section">
@@ -19,7 +17,6 @@ title: Prose
     {% for prose in prose_items %}
     <article class="content-item reveal">
       <h3><a href="{{ prose.url }}">{{ prose.title }}</a></h3>
-      <p>Prose</p>
     </article>
     {% endfor %}
   </div>

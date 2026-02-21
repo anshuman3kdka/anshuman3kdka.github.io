@@ -3,9 +3,7 @@ title: Essays
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">Essays</p>
-  <h1 class="page-title">Long-form writing on creativity, systems, and craft.</h1>
-  <p class="page-lead">A home for essays that explore how thoughtful work gets made. New posts appear here as they are published.</p>
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section">
@@ -19,7 +17,6 @@ title: Essays
     {% for essay in essay_items %}
     <article class="content-item reveal">
       <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
-      <p>Essay</p>
     </article>
     {% endfor %}
   </div>

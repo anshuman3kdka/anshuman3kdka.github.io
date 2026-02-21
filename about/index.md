@@ -3,9 +3,7 @@ title: About
 ---
 
 <section class="section page-intro reveal">
-  <p class="section-eyebrow">About</p>
-  <h1 class="page-title">An evolving archive of ideas and experiments.</h1>
-  
+  <h1 class="page-title">{{ page.title }}</h1>
 </section>
 
 <section class="section prose reveal">
