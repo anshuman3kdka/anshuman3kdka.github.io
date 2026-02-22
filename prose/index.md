@@ -3,6 +3,7 @@ title: Prose
 ---
 
 <section class="section page-intro reveal">
+</section>
 
 <section class="section">
   {% assign prose_items = site.pages
