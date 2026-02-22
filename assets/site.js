@@ -8,16 +8,37 @@ const setLoadedState = () => {
   document.body.classList.add("is-loaded");
 };
 
+const isNavigableDocumentLink = (link, href) => {
+  if (!href) return false;
+
+  const normalizedHref = href.trim().toLowerCase();
+  if (!normalizedHref || normalizedHref.startsWith('#') || normalizedHref.startsWith('mailto:') || normalizedHref.startsWith('tel:')) {
+    return false;
+  }
+
+  if (link.target === "_blank" || link.hasAttribute("download") || link.getAttribute("rel")?.includes('external')) {
+    return false;
+  }
+
+  const isExternal = normalizedHref.startsWith('http://') || normalizedHref.startsWith('https://');
+  if (isExternal) {
+    const targetUrl = new URL(href, window.location.origin);
+    if (targetUrl.origin !== window.location.origin) return false;
+  }
+
+  const path = normalizedHref.split('?')[0].split('#')[0];
+  const extensionMatch = path.match(/\.([a-z0-9]+)$/i);
+  if (!extensionMatch) return true;
+
+  return extensionMatch[1] === 'html';
+};
+
 const handlePageTransitionClick = (event) => {
   const link = event.target.closest("a");
   if (!link) return;
 
   const href = link.getAttribute("href");
-  if (!href) return;
-
-  const isExternal = link.target === "_blank" || href.startsWith("http");
-  const isAnchor = href.startsWith("#");
-  if (isExternal || isAnchor || link.hasAttribute("download")) return;
+  if (!isNavigableDocumentLink(link, href)) return;
 
   event.preventDefault();
   document.body.classList.add("is-leaving");
@@ -73,6 +94,56 @@ const handleScrollReveal = () => {
 // Search functionality
 let searchData = null;
 let searchInitialized = false;
+let recentWorkInitialized = false;
+
+const initRecentWork = async () => {
+  if (recentWorkInitialized) return;
+
+  const recentWorkContainer = document.querySelector('[data-recent-work]');
+  if (!recentWorkContainer) return;
+
+  recentWorkInitialized = true;
+
+  try {
+    const response = await fetch('/search.json');
+    if (!response.ok) throw new Error('Failed to load content index');
+
+    const records = await response.json();
+    const recentItems = records
+      .filter((item) => ['Essays', 'Poetry', 'Prose'].includes(item.category))
+      .sort((a, b) => new Date(b.lastModified || 0) - new Date(a.lastModified || 0))
+      .slice(0, 3);
+
+    if (!recentItems.length) {
+      recentWorkContainer.innerHTML = '<article class="card reveal"><p class="card-text">No recent pieces found yet.</p></article>';
+      handleScrollReveal();
+      return;
+    }
+
+    const singularCategory = {
+      Essays: 'Essay',
+      Poetry: 'Poem',
+      Prose: 'Prose',
+    };
+
+    recentWorkContainer.innerHTML = recentItems.map((item) => {
+      const label = singularCategory[item.category] || item.category;
+      return `
+      <article class="card reveal">
+        <p class="card-label">${label}</p>
+        <h3 class="card-title">${item.title}</h3>
+        <p class="card-text">${(item.content || '').slice(0, 140)}...</p>
+        <a class="card-link" href="${item.url}">Read ${label.toLowerCase()}</a>
+      </article>
+    `;
+    }).join('');
+    handleScrollReveal();
+  } catch (error) {
+    recentWorkContainer.innerHTML = '<article class="card reveal"><p class="card-text">Unable to load recent work.</p></article>';
+    handleScrollReveal();
+    console.error(error);
+  }
+};
 
 const initSearch = () => {
   const toggle = document.querySelector('[data-search-toggle]');
@@ -84,14 +155,12 @@ const initSearch = () => {
 
   if (!toggle || !overlay || !close || !input || !results) return;
 
-  // Prevent double binding if initPage runs multiple times
   if (searchInitialized) return;
   searchInitialized = true;
 
   const openSearch = async () => {
     overlay.hidden = false;
     document.body.classList.add('search-active');
-    // Force a reflow/paint for transition
     requestAnimationFrame(() => {
       overlay.classList.add('is-open');
       input.focus();
@@ -125,7 +194,6 @@ const initSearch = () => {
   toggle.addEventListener('click', openSearch);
   close.addEventListener('click', closeSearch);
 
-  // Close on Escape or click outside panel
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
       closeSearch();
@@ -169,17 +237,16 @@ const initSearch = () => {
   });
 };
 
-// Centralized initializer used on first load and bfcache restores.
 const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
+  initRecentWork();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
 
 document.addEventListener("pageshow", (event) => {
-  // When returning from bfcache, JS state can be stale. Re-run setup safely.
   if (event.persisted) {
     initPage();
   }

@@ -17,12 +17,9 @@
     <h2 class="section-title" id="featured-title">Things that got finished</h2>
     <p class="section-subtitle">Recent essays and creative work.</p>
   </div>
-  <div class="grid grid-2">
+  <div class="grid grid-2" data-recent-work>
     <article class="card reveal">
-      <p class="card-label">Essay</p>
-      <h3 class="card-title">Archaeological Site Report: Campus Romance</h3>
-      <p class="card-text">An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years.</p>
-      <a class="card-link" href="/essays/">Read essay</a>
+      <p class="card-text">Loading recent writing…</p>
     </article>
   </div>
 </section>

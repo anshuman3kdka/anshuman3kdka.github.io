@@ -3,7 +3,7 @@ title: Essays
 ---
 
 <section class="section page-intro reveal">
-  
+</section>
 
 <section class="section">
   {% assign essay_items = site.pages

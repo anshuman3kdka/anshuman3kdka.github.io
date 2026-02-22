@@ -3,7 +3,7 @@ title: Poetry
 ---
 
 <section class="section page-intro reveal">
-  
+</section>
 
 <section class="section">
   {% assign poems = site.pages
