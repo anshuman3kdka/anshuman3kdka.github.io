@@ -9,11 +9,6 @@
       <a class="button button-secondary" href="/projects/">Projects →</a>
     </div>
   </div>
-  <div class="hero-card reveal" role="presentation">
-    <p>Recent</p>
-    <h2>Building arguments, not brands.</h2>
-    <span>Read the essays →</span>
-  </div>
 </section>
 
 <section class="section" aria-labelledby="featured-title">
@@ -29,18 +24,5 @@
       <p class="card-text">An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years.</p>
       <a class="card-link" href="/essays/">Read essay</a>
     </article>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="bio-title">
-  <div class="grid grid-2">
-    <div class="reveal">
-      <p class="section-eyebrow">About</p>
-      <h2 class="section-title" id="bio-title">About</h2>
-      <p class="section-subtitle">I write things and sometimes they work.</p>
-    </div>
-    <div class="reveal">
-      <p>When I’m not writing, I’m usually reading, or wondering why I chose the difficult hobbies.</p>
-    </div>
   </div>
 </section>
