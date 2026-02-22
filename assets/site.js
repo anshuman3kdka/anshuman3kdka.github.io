@@ -95,6 +95,41 @@ const handleScrollReveal = () => {
 let searchData = null;
 let searchInitialized = false;
 let recentWorkInitialized = false;
+let copyProtectionInitialized = false;
+
+const isEditableTarget = (target) => {
+  if (!target) return false;
+  const element = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
+  return Boolean(element?.closest('input, textarea, [contenteditable="true"]'));
+};
+
+const initCopyProtection = () => {
+  if (copyProtectionInitialized) return;
+  copyProtectionInitialized = true;
+
+  const blockClipboardEvent = (event) => {
+    if (isEditableTarget(event.target)) return;
+    event.preventDefault();
+  };
+
+  document.addEventListener('copy', blockClipboardEvent);
+  document.addEventListener('cut', blockClipboardEvent);
+  document.addEventListener('paste', blockClipboardEvent);
+
+  document.addEventListener('contextmenu', (event) => {
+    if (isEditableTarget(event.target)) return;
+    event.preventDefault();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (isEditableTarget(event.target)) return;
+
+    const key = event.key.toLowerCase();
+    if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'v'].includes(key)) {
+      event.preventDefault();
+    }
+  });
+};
 
 const initRecentWork = async () => {
   if (recentWorkInitialized) return;
@@ -242,6 +277,7 @@ const initPage = () => {
   handleScrollReveal();
   initSearch();
   initRecentWork();
+  initCopyProtection();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
