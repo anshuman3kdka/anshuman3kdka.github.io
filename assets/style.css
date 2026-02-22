@@ -570,8 +570,7 @@ button:focus-visible {
   border-radius: 50%;
   border: 1px solid rgba(232, 226, 206, 0.36);
   box-shadow: var(--shadow-card);
-  object-fit: cover;
-  background: linear-gradient(160deg, rgba(22, 50, 36, 0.72), rgba(13, 28, 20, 0.9));
+  background: url("/assets/WA_1771760315348.jpg") center/cover;
 }
 
 .about-caption {
