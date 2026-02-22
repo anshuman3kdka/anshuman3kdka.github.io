@@ -378,23 +378,27 @@ content:
         required: false
       - name: header_links
         label: Header Navigation Links
-        type: list
+        type: object
+        list: true
+        addLabel: "+header navigation link"
         required: false
         fields:
           - name: label
-            label: Link Label
+            label: Header Name
             type: text
           - name: url
-            label: Link URL
+            label: Header Link
             type: text
       - name: social_links
         label: Footer Social Links
-        type: list
+        type: object
+        list: true
+        addLabel: "+social link"
         required: false
         fields:
           - name: label
-            label: Platform Name
+            label: Social Name
             type: text
           - name: url
-            label: URL
+            label: Social Link
             type: text
