@@ -2,9 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>{{ page.title }} · Anshuman3kdka</title>
+    {% assign site_title = site.data.site.site_title | default: 'Anshuman3kdka' %}
+    {% assign site_tagline = site.data.site.site_tagline | default: 'Anshuman3kdka — essays, projects, and creative technology.' %}
+    <title>{{ page.title }} · {{ site_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Anshuman3kdka — essays, projects, and creative technology." />
+    <meta name="description" content="{{ page.description | default: site_tagline | escape }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Merriweather:wght@400;700&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,7 +48,7 @@
       <!-- Global navigation. Update nav labels/links in this file. -->
       <header class="site-header">
         <div class="nav-bar">
-          <a class="brand-link" href="/">Anshuman3kdka</a>
+          <a class="brand-link" href="/">{{ site_title }}</a>
           <nav class="site-nav" aria-label="Primary">
             <a href="/about/">About</a>
             <a href="/resume/">Resume</a>
@@ -79,13 +81,24 @@
         <div class="footer-content">
           <div>
             <p class="footer-title">Let’s connect</p>
-            <p class="footer-text"><a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a> · Based in Delhi</p>
+            <p class="footer-text">
+              {% if site.data.site.contact_email %}
+              <a href="mailto:{{ site.data.site.contact_email }}">{{ site.data.site.contact_email }}</a>
+              {% endif %}
+              {% if site.data.site.location %}
+              {% if site.data.site.contact_email %} · {% endif %}Based in {{ site.data.site.location }}
+              {% endif %}
+            </p>
           </div>
           <div class="footer-links" aria-label="Social links">
-            <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378" target="_blank" rel="noreferrer">LinkedIn</a>
+            {% if site.data.site.social_links %}
+              {% for social in site.data.site.social_links %}
+              <a href="{{ social.url }}" target="_blank" rel="noreferrer">{{ social.label }}</a>
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
-        <p class="footer-meta">© {{ site.time | date: "%Y" }} Anshuman Pandey · Built between deadlines</p>
+        <p class="footer-meta">© {{ site.time | date: "%Y" }} {{ site_title }} · Built between deadlines</p>
       </footer>
     </div>
     <script src="{{ '/assets/site.js' | relative_url }}" defer></script>
