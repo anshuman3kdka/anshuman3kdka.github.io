@@ -1,13 +1,13 @@
 site_title: Anshuman3kdka
-site_tagline: Writing portfolio
-site_description: Anshuman3kdka — essays, projects, and creative technology.
+site_tagline: I write essays, fiction, and poetry. Usually about literature,
+  occasionally about why most of it fails. Currently a student, open to work
+  that doesn't require me to use the word 'synergy.'
 brand_url: https://www.anshuman3kdka.in
 search_placeholder: Search essays, prose, projects, and achievements
 footer_heading: Let’s connect
 footer_note: Built between deadlines
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
-
 header_links:
   - label: Home
     url: /
@@ -23,7 +23,6 @@ header_links:
     url: /contact/
   - label: Resume
     url: /resume/
-
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/
