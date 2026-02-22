@@ -1,6 +1,7 @@
 ---
 title: Green Kisses
 author: Anshuman3kdka
+description: Poem poem
 featured_image: /assets/uploads/Screenshot_20260222-201636.png
 ---
 The night's Aurora's glowing green,  
