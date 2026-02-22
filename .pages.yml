@@ -136,6 +136,23 @@ content:
         label: Details
         type: markdown
 
+  - name: landing_home
+    label: Landing Home (index.md)
+    path: index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title (optional)
+        type: text
+        required: false
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Home Sections
+        type: markdown
+
   - name: about_page
     label: About Page
     path: about/index.md
@@ -147,6 +164,18 @@ content:
         required: true
       - name: description
         label: SEO Description (optional)
+        type: text
+        required: false
+      - name: portrait_image
+        label: About Portrait Image
+        type: image
+        required: false
+      - name: portrait_alt
+        label: About Portrait Alt Text
+        type: text
+        required: false
+      - name: portrait_caption
+        label: About Portrait Caption
         type: text
         required: false
       - name: body
@@ -187,6 +216,125 @@ content:
         label: Content
         type: markdown
 
+  - name: creative_page
+    label: Creative Page
+    path: creative/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: poetry_page
+    label: Poetry Listing Page
+    path: poetry/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: prose_page
+    label: Prose Listing Page
+    path: prose/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: essays_page
+    label: Essays Listing Page
+    path: essays/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: projects_page
+    label: Projects Listing Page
+    path: projects/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: achievements_page
+    label: Achievements Listing Page
+    path: achievements/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: secondary_home_page
+    label: Secondary Home Page
+    path: home/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
   - name: site_settings
     label: Site Settings
     path: _data/site.yml
@@ -197,7 +345,27 @@ content:
         type: text
         required: true
       - name: site_tagline
-        label: Tagline
+        label: Site Tagline
+        type: text
+        required: false
+      - name: site_description
+        label: Default SEO Description
+        type: text
+        required: false
+      - name: brand_url
+        label: Header Logo Link URL
+        type: text
+        required: false
+      - name: search_placeholder
+        label: Search Placeholder Text
+        type: text
+        required: false
+      - name: footer_heading
+        label: Footer Heading
+        type: text
+        required: false
+      - name: footer_note
+        label: Footer Note
         type: text
         required: false
       - name: contact_email
@@ -208,8 +376,19 @@ content:
         label: Location
         type: text
         required: false
+      - name: header_links
+        label: Header Navigation Links
+        type: list
+        required: false
+        fields:
+          - name: label
+            label: Link Label
+            type: text
+          - name: url
+            label: Link URL
+            type: text
       - name: social_links
-        label: Social Links
+        label: Footer Social Links
         type: list
         required: false
         fields:

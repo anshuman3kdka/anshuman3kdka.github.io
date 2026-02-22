@@ -15,7 +15,7 @@
     "title": "About",
     "category": "About",
     "url": "/about/",
-    "content": "Anshuman Pandey Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail. I’m An"
+    "content": "{{ page.portrait_caption | default: 'Anshuman Pandey' }} Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmad"
   },
   {
     "title": "Achievements",
