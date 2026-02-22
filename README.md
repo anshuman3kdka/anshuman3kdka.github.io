@@ -24,3 +24,13 @@ npm run generate:search-index
 
 A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes that modify content files.
 It regenerates `search.json` and `assets/search-index.json` and commits any updates automatically.
+
+## Pages CMS media uploads
+
+This repo is configured so Pages CMS can upload images to `assets/uploads/`.
+
+- In the editor, use image fields such as `Featured Image (optional)` and `Project Image (optional)`.
+- You can also add inline images inside Markdown content using the image button.
+- Uploaded files are stored in `assets/uploads/` and referenced with `/assets/uploads/<filename>`.
+
+If image uploads do not appear, verify Pages CMS has write access to the repository branch.
