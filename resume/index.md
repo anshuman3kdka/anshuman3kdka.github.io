@@ -3,7 +3,7 @@ title: Resume
 layout: default
 ---
 
-<div class="resume-page reveal">
+<div class="resume-page">
   <header class="resume-header resume-header--left">
     <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
     <div class="resume-meta resume-meta--stack">
@@ -55,7 +55,7 @@ layout: default
         <ul>
           <li>Collaborate with a team of student consultants to provide strategic recommendations for non-profits and social enterprises.</li>
           <li>Conduct foundational market research and assist in basic data analysis to identify operational bottlenecks and growth opportunities.</li>
-          <li>Participate in weekly problem-solving workshops to develop business analysis and structured thinking skills.</li>
+          <li>Participate in monthly problem-solving workshops to develop business analysis and structured thinking skills.</li>
         </ul>
       </div>
     </div>
@@ -83,7 +83,7 @@ layout: default
       <div class="resume-content">
         <h3>Bluechip Finance and Investment Society | New Delhi, India <span class="resume-role">Member</span> | Sep 2025 – Feb 2026</h3>
         <ul>
-          <li>Participated in weekly seminars and discussions focused on financial markets, investment strategies, and corporate finance.</li>
+          <li>Participated in monthly seminars and discussions focused on financial markets, investment strategies, and corporate finance.</li>
           <li>Gained introductory exposure to financial analysis and the interpretation of fundamental market data.</li>
         </ul>
       </div>
@@ -98,7 +98,7 @@ layout: default
         <h3>Freelance Content Creator &amp; Writer | <a href="https://www.anshuman3kdka.in">Portfolio Website</a> | 2025 – Present</h3>
         <ul>
           <li>Manage a personal portfolio website offering services in ghostwriting, copywriting, and blogging.</li>
-          <li>Draft, edit, and publish web content, focusing on brand storytelling and digital communication.</li>
+          <li>Draft, edit, and publish web content, focusing on storytelling and digital communication.</li>
           <li>Independently research industry trends, including the impact of AI on content creation, to deliver relevant and engaging copy for diverse audiences.</li>
         </ul>
       </div>

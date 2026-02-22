@@ -1,0 +1,44 @@
+name: Auto-update search index
+
+on:
+  push:
+    paths:
+      - '**/*.md'
+      - '**/*.html'
+      - 'scripts/generate-search-index.mjs'
+      - 'package.json'
+      - '.github/workflows/auto-update-search-index.yml'
+  workflow_dispatch:
+
+jobs:
+  update-index:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate search indexes
+        run: npm run generate:search-index
+
+      - name: Commit updated search indexes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add search.json assets/search-index.json
+          if git diff --cached --quiet; then
+            echo "No search index changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: auto-update search index"
+          git push
