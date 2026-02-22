@@ -706,8 +706,13 @@ body.is-leaving .page-shell {
     column-gap: 4.5rem;
   }
 
-  .hero-content {
-    padding-right: clamp(0.4rem, 1.4vw, 1.6rem);
+  .hero.hero--center-desktop {
+    grid-template-columns: minmax(0, 42rem);
+    justify-content: center;
+  }
+
+  .hero.hero--center-desktop .hero-content {
+    padding-right: 0;
   }
 }
 
