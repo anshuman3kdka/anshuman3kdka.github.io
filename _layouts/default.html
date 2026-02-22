@@ -68,6 +68,12 @@
             {% if is_piece_page %}
             <header class="section page-intro reveal">
               <h1 class="page-title">{{ page.title }}</h1>
+              {% assign piece_featured_image = page.featured_image | default: page.image | default: page["featured-image"] %}
+              {% if piece_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ piece_featured_image | relative_url }}" alt="Featured image for {{ page.title }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
             </header>
             {% endif %}
             {{ content }}
