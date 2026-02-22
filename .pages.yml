@@ -1,3 +1,7 @@
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
 content:
   - name: poetry
     label: Poetry
@@ -21,6 +25,11 @@ content:
         label: Poem
         type: markdown
 
+      - name: featured_image
+        label: Featured Image (optional)
+        type: image
+        required: false
+
   - name: prose
     label: Prose
     path: prose
@@ -40,6 +49,11 @@ content:
       - name: body
         label: Prose
         type: markdown
+
+      - name: featured_image
+        label: Featured Image (optional)
+        type: image
+        required: false
 
   - name: essays
     label: Essays
@@ -61,6 +75,11 @@ content:
         label: Essay
         type: markdown
 
+      - name: featured_image
+        label: Featured Image (optional)
+        type: image
+        required: false
+
   - name: projects
     label: Projects
     path: projects
@@ -74,6 +93,10 @@ content:
       - name: body
         label: Description
         type: markdown
+      - name: image
+        label: Project Image (optional)
+        type: image
+        required: false
 
   - name: achievements
     label: Achievements
@@ -88,3 +111,8 @@ content:
       - name: body
         label: Details
         type: markdown
+
+      - name: image
+        label: Image (optional)
+        type: image
+        required: false
