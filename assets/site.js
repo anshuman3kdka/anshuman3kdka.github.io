@@ -120,14 +120,23 @@ const initRecentWork = async () => {
       return;
     }
 
-    recentWorkContainer.innerHTML = recentItems.map((item) => `
+    const singularCategory = {
+      Essays: 'Essay',
+      Poetry: 'Poem',
+      Prose: 'Prose',
+    };
+
+    recentWorkContainer.innerHTML = recentItems.map((item) => {
+      const label = singularCategory[item.category] || item.category;
+      return `
       <article class="card reveal">
-        <p class="card-label">${item.category.slice(0, -1)}</p>
+        <p class="card-label">${label}</p>
         <h3 class="card-title">${item.title}</h3>
         <p class="card-text">${(item.content || '').slice(0, 140)}...</p>
-        <a class="card-link" href="${item.url}">Read ${item.category.slice(0, -1).toLowerCase()}</a>
+        <a class="card-link" href="${item.url}">Read ${label.toLowerCase()}</a>
       </article>
-    `).join('');
+    `;
+    }).join('');
     handleScrollReveal();
   } catch (error) {
     recentWorkContainer.innerHTML = '<article class="card reveal"><p class="card-text">Unable to load recent work.</p></article>';
