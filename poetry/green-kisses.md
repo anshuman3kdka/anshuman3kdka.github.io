@@ -1,8 +1,8 @@
 ---
 title: Green Kisses
 author: Anshuman3kdka
+featured_image: /assets/uploads/Screenshot_20260222-201636.png
 ---
-
 The night's Aurora's glowing green,  
 Like poison ivy, poison scheme.  
 With plotting fangs the nature teems,  
