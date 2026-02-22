@@ -1,4 +1,4 @@
-site_title: Anshuman Pandey
+site_title: Anshuman3kdka
 site_tagline: Writing portfolio
 site_description: Anshuman3kdka — essays, projects, and creative technology.
 brand_url: /
@@ -7,21 +7,3 @@ footer_heading: Let’s connect
 footer_note: Built between deadlines
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
-header_links:
-  - label: About
-    url: /about/
-  - label: Resume
-    url: /resume/
-  - label: Essays
-    url: /essays/
-  - label: Projects
-    url: /projects/
-  - label: Creative
-    url: /creative/
-  - label: Achievements
-    url: /achievements/
-  - label: Contact
-    url: /contact/
-social_links:
-  - label: LinkedIn
-    url: https://www.linkedin.com/in/anshuman-pandey-b33362378
