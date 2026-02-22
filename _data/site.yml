@@ -11,14 +11,14 @@ location: Delhi, India
 header_links:
   - label: Home
     url: /
-  - label: Essays
-    url: /essays/
-  - label: Projects
-    url: /projects/
-  - label: Creative
-    url: /creative/
   - label: About
     url: /about/
+  - label: Essays
+    url: /essays/
+  - label: Creative
+    url: /creative/
+  - label: Projects
+    url: /projects/
   - label: Contact
     url: /contact/
   - label: Resume
