@@ -24,3 +24,29 @@ npm run generate:search-index
 
 A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes that modify content files.
 It regenerates `search.json` and `assets/search-index.json` and commits any updates automatically.
+
+## Pages CMS media uploads
+
+This repo is configured so Pages CMS can upload images to `assets/uploads/`.
+
+- In the editor, use image fields such as `Featured Image (optional)` and `Project Image (optional)`.
+- You can also add inline images inside Markdown content using the image button.
+- Uploaded files are stored in `assets/uploads/` and referenced with `/assets/uploads/<filename>`.
+
+If image uploads do not appear, verify Pages CMS has write access to the repository branch.
+
+## Additional Pages CMS configuration
+
+The CMS now includes broad editing coverage for content + site chrome:
+
+1. **SEO fields:** collections and pages include optional `description` fields for metadata-friendly summaries.
+2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
+3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, search placeholder, footer heading/note, contact info, and social links.
+4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
+
+These are wired into the live layout:
+
+- `<meta name="description">` uses each page's `description` when provided.
+- Header brand text/link and navigation read from `_data/site.yml`.
+- Footer heading/text/social links read from `_data/site.yml`.
+- Homepage hero title/tagline read from `_data/site.yml`.
