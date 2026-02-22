@@ -6,9 +6,6 @@ portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
 
-<section class="section page-intro reveal">
-</section>
-
 <section class="section prose about-layout reveal">
   <figure>
     <img class="about-portrait" src="{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}" alt="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}">

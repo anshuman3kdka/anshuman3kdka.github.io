@@ -2,9 +2,6 @@
 title: Prose
 ---
 
-<section class="section page-intro reveal">
-</section>
-
 <section class="section">
   {% assign prose_items = site.pages
     | where_exp: "page", "page.path contains 'prose/'"

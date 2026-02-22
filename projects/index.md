@@ -2,9 +2,6 @@
 title: Projects
 ---
 
-<section class="section page-intro reveal">
-</section>
-
 <section class="section">
   {% assign project_items = site.pages
     | where_exp: "page", "page.path contains 'projects/'"
