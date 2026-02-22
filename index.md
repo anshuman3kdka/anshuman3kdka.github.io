@@ -1,9 +1,8 @@
-
 <section class="section hero" aria-labelledby="hero-title">
   <div class="hero-content reveal">
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
-    <h1 class="hero-title" id="hero-title">Anshuman3kdka</h1>
-    <p class="hero-lead">I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails. Currently a student, open to work that doesn't require me to use the word 'synergy.'</p>
+    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
+    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
     <div class="hero-actions">
       <a class="button button-primary" href="/essays/">Essays →</a>
       <a class="button button-secondary" href="/projects/">Projects →</a>
