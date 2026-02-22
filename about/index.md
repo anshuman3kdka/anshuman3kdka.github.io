@@ -8,7 +8,12 @@ portrait_caption: Anshuman Pandey
 
 <section class="section prose about-layout reveal">
   <figure>
-    <img class="about-portrait" src="{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}" alt="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}">
+    <div
+      class="about-portrait"
+      role="img"
+      aria-label="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}"
+      style="background-image: url('{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}');"
+    ></div>
     <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' }}</figcaption>
   </figure>
   <div class="about-text">
