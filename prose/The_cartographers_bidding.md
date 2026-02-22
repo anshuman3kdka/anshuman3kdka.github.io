@@ -2,7 +2,6 @@
 title: The Cartographer’s Bidding
 author: Anshuman3kdka
 ---
+Long after the ink hardened, the first lung gave way. Inside a quiet space where old paper and cold tea lingered in the air, metal scraped slowly over wood. Was that hesitation in the fingers? Or just pride leaving a mark? Hard to say. With a slow blink from the God-Cartographer, the boundary jolted sideways, cutting through purple flowers swaying in a field.
 
-The ink dried long before the first lung collapsed. In a silent room smelling of vellum and stale tea, a nib had scratched across a table. A tremor in the hand? A smudge of vanity? It didn’t matter. The God-Cartographer blinked, and the border zig-zagged through a meadow of lavender.
-
-Now, Sergeant Elias chokes on iron and grit. He clutches a handful of soil that looks identical to the soil three inches to his left, yet that microscopic gap is the jagged difference between “Martyr” and “Invader.” He dies defending a stroke of a pen he has never seen. Across the invisible wire, a boy with the same blue eyes and the same hollow stomach gurgles his final breath. They bleed the same shade of crimson into the same indifferent earth. It is a geometry of ghosts. A thousand years of bone, stacked high to protect a line drawn by a god whose afternoon needed filling.  
+Midnight settles where Sergeant Elias fights dust down his throat. One fist full of dirt, no different than what lies just beside it, somehow marks the splintered line between ‘martyr’ and ‘enemy’. A border drawn by the hands he never shook, claims him without warning. Across the jagged wire, a boy - same tired eyes, same empty gut - coughs up his final breath. Their blood paints matching crimson stains on an earth that does not blink. Ghost shapes form here. Not stone, but time - ten centuries of skeletons piled up, guarding some line a god drew once, yawned, and called eternal.
