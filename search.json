@@ -15,7 +15,7 @@
     "title": "About",
     "category": "About",
     "url": "/about/",
-    "content": "Anshuman Pandey Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail. I’m An"
+    "content": "Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail. I’m Anshuman Pandey - "
   },
   {
     "title": "Achievements",
@@ -63,7 +63,7 @@
     "title": "Essays",
     "category": "Essays",
     "url": "/essays/",
-    "content": "{% assign essay_items = site.pages | where_exp: \"page\", \"page.path contains 'essays/'\" | where_exp: \"page\", \"page.url != '/essays/'\" | sort: \"title\" %} {% if essay_items.size > 0 %} {% for essay in essay_items %} {{ essay.title }} {% endfor %} {% else %} Essays will appear here as they are added. {% endif %}"
+    "content": "Essays will appear here as they are added."
   },
   {
     "title": "Green Kisses",
@@ -81,13 +81,13 @@
     "title": "Home",
     "category": "Home",
     "url": "/home/",
-    "content": "{{ page.title }}"
+    "content": ""
   },
   {
     "title": "index.md",
     "category": "Page",
     "url": "/",
-    "content": "Writer · Student · Occasionally vibe-codes {{ site.data.site.site_title | default: 'Anshuman3kdka' }} {{ site.data.site.site_tagline | default: \"I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails.\" }} Essays → Projects → Recent Work Things that got finished Recent essays and creative work. Essay Archaeological Site Report: Campus Romance An excav"
+    "content": "Writer · Student · Occasionally vibe-codes Anshuman Pandey Writing portfolio Essays → Projects → Recent Work Things that got finished Recent essays and creative work. Essay Archaeological Site Report: Campus Romance An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years. Read essay"
   },
   {
     "title": "Man's Greatest Invention",
@@ -123,7 +123,7 @@
     "title": "Poetry",
     "category": "Poetry",
     "url": "/poetry/",
-    "content": "{% assign poems = site.pages | where_exp: \"page\", \"page.path contains 'poetry/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if poems.size > 0 %} {% for poem in poems %} {{ poem.title }} {% endfor %} {% else %} No poems yet. Check back soon. {% endif %}"
+    "content": "No poems yet. Check back soon."
   },
   {
     "title": "Prayer",
@@ -135,13 +135,13 @@
     "title": "Projects",
     "category": "Projects",
     "url": "/projects/",
-    "content": "{% assign project_items = site.pages | where_exp: \"page\", \"page.path contains 'projects/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if project_items.size > 0 %} {% for project in project_items %} {{ project.title }} {% endfor %} {% else %} Project notes will appear here as they are added. {% endif %}"
+    "content": "Project notes will appear here as they are added."
   },
   {
     "title": "Prose",
     "category": "Prose",
     "url": "/prose/",
-    "content": "{% assign prose_items = site.pages | where_exp: \"page\", \"page.path contains 'prose/'\" | where_exp: \"page\", \"page.name != 'index.md'\" | sort: \"title\" %} {% if prose_items.size > 0 %} {% for prose in prose_items %} {{ prose.title }} {% endfor %} {% else %} Prose entries will appear here as they are added. {% endif %}"
+    "content": "Prose entries will appear here as they are added."
   },
   {
     "title": "Resume",
