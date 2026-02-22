@@ -46,6 +46,62 @@ const extractTitle = (text, fallback) => {
   return fallback;
 };
 
+const parseSiteData = (yamlText) => {
+  const lines = yamlText.split(/\r?\n/);
+  const data = {};
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (!line || /^\s*#/.test(line)) continue;
+
+    const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!keyMatch) continue;
+
+    const [, key, rawValue] = keyMatch;
+
+    if (/^[>|]/.test(rawValue)) {
+      const blockLines = [];
+      i += 1;
+      while (i < lines.length) {
+        const blockLine = lines[i];
+        if (!/^\s+/.test(blockLine)) {
+          i -= 1;
+          break;
+        }
+        blockLines.push(blockLine.replace(/^\s{2}/, ''));
+        i += 1;
+      }
+      data[key] = blockLines.join('\n').trim();
+      continue;
+    }
+
+    data[key] = rawValue.trim().replace(/^['"]|['"]$/g, '');
+  }
+
+  return data;
+};
+
+const resolveSiteDataExpression = (expression, siteData) => {
+  const [source] = expression.split('|').map((part) => part.trim());
+  if (!source?.startsWith('site.data.site.')) return '';
+
+  const key = source.slice('site.data.site.'.length);
+  const value = siteData[key];
+
+  return typeof value === 'string' ? value : '';
+};
+
+const preprocessLiquid = (text, siteData) => {
+  const withResolvedOutput = text.replace(/{{\s*([\s\S]*?)\s*}}/g, (_, expr) => {
+    const resolved = resolveSiteDataExpression(expr, siteData);
+    return resolved;
+  });
+
+  return withResolvedOutput
+    .replace(/{%[\s\S]*?%}/g, ' ')
+    .replace(/{{[\s\S]*?}}/g, ' ');
+};
+
 const toUrl = (relativePath) => {
   let url = `/${relativePath.replace(/\\/g, '/')}`;
   if (url.endsWith('/index.md') || url.endsWith('/index.html')) {
@@ -63,6 +119,9 @@ const categoryFromPath = (relativePath) => {
 };
 
 const main = async () => {
+  const siteYaml = await fs.readFile(path.join(root, '_data', 'site.yml'), 'utf8');
+  const siteData = parseSiteData(siteYaml);
+
   const allFiles = await walk(root);
   const contentFiles = allFiles.filter((file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
@@ -89,7 +148,8 @@ const main = async () => {
   for (const file of contentFiles) {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const raw = await fs.readFile(file, 'utf8');
-    const body = stripFrontMatter(raw)
+    const preprocessed = preprocessLiquid(stripFrontMatter(raw), siteData);
+    const body = preprocessed
       .replace(/<[^>]+>/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
