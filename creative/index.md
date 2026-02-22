@@ -3,10 +3,6 @@ title: Creative Writing
 layout: default
 ---
 
-<div class="page-intro reveal">
-<section></section>
-</div>
-
 <div class="grid grid-2">
   <article class="card reveal" style="transition-delay: 100ms;">
     <p class="card-label">Collection</p>

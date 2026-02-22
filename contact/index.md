@@ -2,8 +2,6 @@
 title: Contact
 ---
 
-<section class="section page-intro reveal">
-
 <section class="section grid grid-2">
   <div class="card reveal">
     <p class="card-label">Email</p>
