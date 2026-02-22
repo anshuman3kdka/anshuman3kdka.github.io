@@ -14,21 +14,23 @@ content:
       - name: title
         label: Title
         type: text
-
+        required: true
       - name: author
         label: Author
         type: text
         default: Anshuman3kdka
         hidden: true
-
-      - name: body
-        label: Poem
-        type: markdown
-
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
       - name: featured_image
         label: Featured Image (optional)
         type: image
         required: false
+      - name: body
+        label: Poem
+        type: markdown
 
   - name: prose
     label: Prose
@@ -40,20 +42,23 @@ content:
     fields:
       - name: title
         label: Title
-
+        type: text
+        required: true
       - name: author
         type: text
         default: Anshuman3kdka
         hidden: true
-
-      - name: body
-        label: Prose
-        type: markdown
-
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
       - name: featured_image
         label: Featured Image (optional)
         type: image
         required: false
+      - name: body
+        label: Prose
+        type: markdown
 
   - name: essays
     label: Essays
@@ -65,20 +70,23 @@ content:
     fields:
       - name: title
         label: Title
-
+        type: text
+        required: true
       - name: author
         type: text
         default: Anshuman3kdka
         hidden: true
-
-      - name: body
-        label: Essay
-        type: markdown
-
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
       - name: featured_image
         label: Featured Image (optional)
         type: image
         required: false
+      - name: body
+        label: Essay
+        type: markdown
 
   - name: projects
     label: Projects
@@ -90,13 +98,19 @@ content:
     fields:
       - name: title
         label: Project Title
-      - name: body
-        label: Description
-        type: markdown
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
       - name: image
         label: Project Image (optional)
         type: image
         required: false
+      - name: body
+        label: Description
+        type: markdown
 
   - name: achievements
     label: Achievements
@@ -108,11 +122,100 @@ content:
     fields:
       - name: title
         label: Achievement
-      - name: body
-        label: Details
-        type: markdown
-
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
       - name: image
         label: Image (optional)
         type: image
         required: false
+      - name: body
+        label: Details
+        type: markdown
+
+  - name: about_page
+    label: About Page
+    path: about/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: contact_page
+    label: Contact Page
+    path: contact/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: resume_page
+    label: Resume Page
+    path: resume/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
+  - name: site_settings
+    label: Site Settings
+    path: _data/site.yml
+    type: file
+    fields:
+      - name: site_title
+        label: Site Title
+        type: text
+        required: true
+      - name: site_tagline
+        label: Tagline
+        type: text
+        required: false
+      - name: contact_email
+        label: Contact Email
+        type: text
+        required: false
+      - name: location
+        label: Location
+        type: text
+        required: false
+      - name: social_links
+        label: Social Links
+        type: list
+        required: false
+        fields:
+          - name: label
+            label: Platform Name
+            type: text
+          - name: url
+            label: URL
+            type: text
