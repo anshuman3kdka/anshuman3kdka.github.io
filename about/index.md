@@ -1,13 +1,17 @@
 ---
 title: About
+description: About Anshuman Pandey and his writing background.
+portrait_image: /assets/WA_1771760315348.jpg
+portrait_alt: Portrait of Anshuman Pandey
+portrait_caption: Anshuman Pandey
 ---
 
 <section class="section page-intro reveal">
 
 <section class="section prose about-layout reveal">
   <figure>
-    <div class="about-portrait" role="img" aria-label="Portrait of Anshuman Pandey"></div>
-    <figcaption class="about-caption">Anshuman Pandey</figcaption>
+    <img class="about-portrait" src="{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}" alt="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}">
+    <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' }}</figcaption>
   </figure>
   <div class="about-text">
     <p>Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail.</p>
