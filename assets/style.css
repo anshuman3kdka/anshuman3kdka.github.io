@@ -707,7 +707,18 @@ body.is-leaving .page-shell {
   }
 
   .hero-content {
-    padding-right: clamp(0.4rem, 1.4vw, 1.6rem);
+    padding-right: 0;
+    max-width: 42rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero-lead {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
   }
 }
 
