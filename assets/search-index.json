@@ -15,7 +15,7 @@
     "title": "About",
     "category": "About",
     "url": "/about/",
-    "content": "{{ page.portrait_caption | default: 'Anshuman Pandey' }} Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmad"
+    "content": "Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail. I’m Anshuman Pandey - "
   },
   {
     "title": "Achievements",
@@ -87,7 +87,7 @@
     "title": "index.md",
     "category": "Page",
     "url": "/",
-    "content": "Writer · Student · Occasionally vibe-codes Anshuman3kdka I write essays, fiction and poetry. Essays → Projects → Recent Work Things that got finished Recent essays and creative work. Essay Archaeological Site Report: Campus Romance An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years. Read essay"
+    "content": "Writer · Student · Occasionally vibe-codes Anshuman Pandey Writing portfolio Essays → Projects → Recent Work Things that got finished Recent essays and creative work. Essay Archaeological Site Report: Campus Romance An excavation of the Indian campus romance novel, a genre that has written the same book for twenty years. Read essay"
   },
   {
     "title": "Man's Greatest Invention",
