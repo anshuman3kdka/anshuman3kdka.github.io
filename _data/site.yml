@@ -7,4 +7,23 @@ footer_heading: Let’s connect
 footer_note: Built between deadlines
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
-social_links: LinkedIn
+
+header_links:
+  - label: Home
+    url: /
+  - label: Essays
+    url: /essays/
+  - label: Projects
+    url: /projects/
+  - label: Creative
+    url: /creative/
+  - label: About
+    url: /about/
+  - label: Contact
+    url: /contact/
+  - label: Resume
+    url: /resume/
+
+social_links:
+  - label: LinkedIn
+    url: https://www.linkedin.com/
