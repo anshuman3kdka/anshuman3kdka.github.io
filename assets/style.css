@@ -570,7 +570,12 @@ button:focus-visible {
   border-radius: 50%;
   border: 1px solid rgba(232, 226, 206, 0.36);
   box-shadow: var(--shadow-card);
-  background: url("/assets/WA_1771760315348.jpg") center/cover;
+  background-color: rgba(8, 20, 15, 0.82);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+  user-select: none;
 }
 
 .about-caption {
