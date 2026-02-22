@@ -23,6 +23,8 @@ header_links:
     url: /contact/
   - label: Resume
     url: /resume/
+  - label: Achievements
+    url: /achievements/
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/
