@@ -87,7 +87,7 @@
     "title": "index.md",
     "category": "Page",
     "url": "/",
-    "content": "Writer · Student · Occasionally vibe-codes {{ site.data.site.site_title | default: 'Anshuman3kdka' }} {{ site.data.site.site_tagline | default: \"I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails.\" }} Essays → Projects → Recent Building arguments, not brands. Read the essays → Recent Work Things that got finished Recent essays and creative work. "
+    "content": "Writer · Student · Occasionally vibe-codes {{ site.data.site.site_title | default: 'Anshuman3kdka' }} {{ site.data.site.site_tagline | default: \"I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails.\" }} Essays → Projects → Recent Work Things that got finished Recent essays and creative work. Essay Archaeological Site Report: Campus Romance An excav"
   },
   {
     "title": "Man's Greatest Invention",
