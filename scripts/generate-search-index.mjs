@@ -11,39 +11,39 @@ const walk = async (dir) => {
 
   for (const entry of entries) {
     if (entry.name.startsWith('.') && entry.name !== '.pages.yml') continue;
+
+    const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       if (ignoredDirs.has(entry.name)) continue;
-      files.push(...(await walk(path.join(dir, entry.name))));
+      files.push(...(await walk(fullPath)));
       continue;
     }
 
     const ext = path.extname(entry.name).toLowerCase();
     if (contentExtensions.has(ext)) {
-      files.push(path.join(dir, entry.name));
+      files.push(fullPath);
     }
   }
 
   return files;
 };
 
-const stripFrontMatter = (text) => {
-  if (!text.startsWith('---\n')) return text;
-  const end = text.indexOf('\n---\n', 4);
-  return end === -1 ? text : text.slice(end + 5);
-};
+const extractFrontMatter = (text) => {
+  const match = text.match(/^---\n([\s\S]*?)\n---\n?/);
+  if (!match) return { data: {}, body: text };
 
-const extractTitle = (text, fallback) => {
-  const fmMatch = text.match(/^---\n([\s\S]*?)\n---\n/);
-  if (fmMatch) {
-    const titleMatch = fmMatch[1].match(/^title:\s*(.+)$/m);
-    if (titleMatch) return titleMatch[1].trim().replace(/^['"]|['"]$/g, '');
+  const data = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const keyValue = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!keyValue) continue;
+    const [, key, rawValue] = keyValue;
+    data[key] = rawValue.trim().replace(/^['"]|['"]$/g, '');
   }
 
-  const body = stripFrontMatter(text);
-  const headingMatch = body.match(/^#\s+(.+)$/m);
-  if (headingMatch) return headingMatch[1].trim();
-
-  return fallback;
+  return {
+    data,
+    body: text.slice(match[0].length),
+  };
 };
 
 const parseSiteData = (yamlText) => {
@@ -102,7 +102,13 @@ const preprocessLiquid = (text, siteData) => {
     .replace(/{{[\s\S]*?}}/g, ' ');
 };
 
-const toUrl = (relativePath) => {
+const toUrl = (relativePath, frontMatterData = {}) => {
+  const permalink = frontMatterData.permalink;
+  if (permalink) {
+    const normalized = permalink.startsWith('/') ? permalink : `/${permalink}`;
+    return normalized.endsWith('/') ? normalized : `${normalized}/`;
+  }
+
   let url = `/${relativePath.replace(/\\/g, '/')}`;
   if (url.endsWith('/index.md') || url.endsWith('/index.html')) {
     url = url.replace(/\/index\.(md|html)$/, '/');
@@ -118,6 +124,34 @@ const categoryFromPath = (relativePath) => {
   return first.charAt(0).toUpperCase() + first.slice(1);
 };
 
+const extractTitle = (body, frontMatterData, fallback) => {
+  if (frontMatterData.title) return frontMatterData.title;
+
+  const headingMatch = body.match(/^#\s+(.+)$/m);
+  if (headingMatch) return headingMatch[1].trim();
+
+  return fallback;
+};
+
+const toPlainText = (text) => text
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/`[^`]*`/g, ' ')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+  .replace(/\[[^\]]*\]\([^)]*\)/g, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/[>#*_~-]+/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const shouldIndexFile = (relativePath) => {
+  const top = relativePath.split('/')[0];
+  const excludedTopLevel = new Set(['assets', 'scripts']);
+
+  if (excludedTopLevel.has(top) || top.startsWith('_')) return false;
+  if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return false;
+  return true;
+};
+
 const main = async () => {
   const siteYaml = await fs.readFile(path.join(root, '_data', 'site.yml'), 'utf8');
   const siteData = parseSiteData(siteYaml);
@@ -125,22 +159,7 @@ const main = async () => {
   const allFiles = await walk(root);
   const contentFiles = allFiles.filter((file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
-    const top = rel.split('/')[0];
-    const allowedTopLevel = new Set([
-      'about',
-      'achievements',
-      'contact',
-      'creative',
-      'essays',
-      'home',
-      'poetry',
-      'projects',
-      'prose',
-      'resume',
-      'index.md',
-    ]);
-
-    return allowedTopLevel.has(top);
+    return shouldIndexFile(rel);
   });
 
   const records = [];
@@ -148,17 +167,19 @@ const main = async () => {
   for (const file of contentFiles) {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const raw = await fs.readFile(file, 'utf8');
-    const preprocessed = preprocessLiquid(stripFrontMatter(raw), siteData);
-    const body = preprocessed
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    const { data: frontMatterData, body } = extractFrontMatter(raw);
+
+    if (frontMatterData.search === 'false') continue;
+
+    const preprocessed = preprocessLiquid(body, siteData);
+    const stats = await fs.stat(file);
 
     records.push({
-      title: extractTitle(raw, rel),
+      title: extractTitle(body, frontMatterData, rel),
       category: categoryFromPath(rel),
-      url: toUrl(rel),
-      content: body.slice(0, 400),
+      url: toUrl(rel, frontMatterData),
+      content: toPlainText(preprocessed).slice(0, 400),
+      lastModified: stats.mtime.toISOString(),
     });
   }
 

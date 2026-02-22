@@ -24,7 +24,7 @@
 
   /* Typography: classical serif stack only */
   --font-heading: "Libre Baskerville", "Baskerville", "Georgia", serif;
-  --font-body: "Source Serif 4", "Lora", "Merriweather", "Georgia", serif;
+  --font-body: "Source Serif 4", "Georgia", serif;
 
   --step--1: clamp(0.88rem, 0.86rem + 0.12vw, 0.96rem);
   --step-0: clamp(1.02rem, 0.96rem + 0.25vw, 1.14rem);
@@ -746,12 +746,10 @@ body.is-leaving .page-shell {
 
   .site-nav {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: wrap;
     width: 100%;
-    gap: 0.5rem;
-    padding-bottom: 0.15rem;
-    scrollbar-width: thin;
+    gap: 0.45rem;
+    justify-content: flex-start;
   }
 
   .page-shell {

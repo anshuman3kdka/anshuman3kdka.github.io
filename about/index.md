@@ -7,6 +7,7 @@ portrait_caption: Anshuman Pandey
 ---
 
 <section class="section page-intro reveal">
+</section>
 
 <section class="section prose about-layout reveal">
   <figure>
