@@ -1,14 +1,11 @@
 ---
 title: Resume
-layout: default
 ---
-
 <div class="resume-page">
   <header class="resume-header resume-header--left">
     <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
     <div class="resume-meta resume-meta--stack">
       <p>New Delhi, Delhi, India</p>
-      <p>Call: <a href="tel:9214386738">+91 92143 86738</a></p>
       <p>Email: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></p>
       <p>LinkedIn: <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378">linkedin</a></p>
       <p>Portfolio: <a href="https://www.anshuman3kdka.in">anshuman3kdka.in</a></p>
