@@ -34,11 +34,3 @@ This repo is configured so Pages CMS can upload images to `assets/uploads/`.
 - Uploaded files are stored in `assets/uploads/` and referenced with `/assets/uploads/<filename>`.
 
 If image uploads do not appear, verify Pages CMS has write access to the repository branch.
-
-## Additional Pages CMS configuration
-
-The CMS now includes three important improvements:
-
-1. **SEO fields (item 5):** collections now include `description` fields for metadata-friendly summaries.
-2. **Single-page editing (item 6):** `about/index.md`, `contact/index.md`, and `resume/index.md` are editable directly as file entries.
-3. **Site settings panel (item 8):** `_data/site.yml` is editable in CMS under `Site Settings` with title, tagline, contact, location, and social links.
