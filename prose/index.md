@@ -12,6 +12,7 @@ title: Prose
   <div class="content-list">
     {% for prose in prose_items %}
     <article class="content-item reveal">
+      {% if prose.eyebrow %}<p class="card-label">{{ prose.eyebrow }}</p>{% endif %}
       <h3><a href="{{ prose.url }}">{{ prose.title }}</a></h3>
     </article>
     {% endfor %}
