@@ -1,8 +1,8 @@
 ---
 title: Dead Wolves Under The Tide
 author: Anshuman3kdka
+eyebrow: on fate
 ---
-
 The yarn of Fate. The farm of hate,  
 The harm would sate but not abate,  
 The rising tide whose time has come,  
