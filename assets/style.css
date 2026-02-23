@@ -222,12 +222,8 @@ button:focus-visible {
 }
 
 .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
-  max-width: 72ch;
-  overflow: hidden;
-}
-
-.page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
   max-width: 860px;
+  overflow: hidden;
   margin-left: auto;
   margin-right: auto;
 }
@@ -521,16 +517,17 @@ button:focus-visible {
 
 .prose p {
   margin: var(--space-5) 0;
+}
+
+.prose p,
+.prose ul, .prose ol {
   color: var(--color-ink-muted);
   font-family: var(--font-body);
 }
 
-.prose ul,
-.prose ol {
+.prose ul, .prose ol {
   margin: var(--space-5) 0;
   padding-left: var(--space-5);
-  color: var(--color-ink-muted);
-  font-family: var(--font-body);
 }
 
 .prose blockquote {
