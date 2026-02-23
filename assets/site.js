@@ -154,7 +154,8 @@ const initSearch = () => {
     if (!searchData) {
       status.textContent = 'Loading index...';
       try {
-        const response = await fetch('/search.json');
+        const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
+        const response = await fetch(configuredSearchUrl);
         if (!response.ok) throw new Error('Failed to load search index');
         searchData = await response.json();
         status.textContent = '';
