@@ -309,6 +309,7 @@ button:focus-visible {
   - Keep the main heading in normal document flow (no absolute/fixed positioning).
 */
 .hero-content {
+  display: grid;
   min-width: 0;
   padding-right: clamp(0rem, 1.2vw, 1rem);
   gap: var(--space-7);
