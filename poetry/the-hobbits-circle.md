@@ -1,8 +1,8 @@
 ---
 title: The Hobbit's Circle
 author: Anshuman3kdka
+eyebrow: On homecoming
 ---
-
 Clutching the schoolbag, he sets out,  
 With shiny shoes and polished belt,  
 His heart so stout, no look of doubt,  
