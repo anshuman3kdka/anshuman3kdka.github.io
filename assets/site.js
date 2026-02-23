@@ -3,13 +3,13 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 let pageTransitionListenerAttached = false;
 let revealObserver = null;
 
-const setLoadedState = () => {
-  document.body.classList.remove("is-loading", "is-leaving");
+const resetNavigationState = () => {
+  document.body.classList.remove("is-loading", "is-leaving", "search-active");
   document.body.classList.add("is-loaded");
 };
 
 const resetTransientUiState = () => {
-  document.body.classList.remove("is-loading", "is-leaving", "search-active");
+  document.body.classList.remove("search-active");
 
   const overlay = document.querySelector('[data-search-overlay]');
   if (overlay) {
@@ -47,6 +47,7 @@ const isNavigableDocumentLink = (link, href) => {
 };
 
 const handlePageTransitionClick = (event) => {
+  if (document.body.classList.contains("is-leaving")) return;
   if (event.defaultPrevented) return;
   if (event.button !== 0) return;
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -66,9 +67,9 @@ const handlePageTransitionClick = (event) => {
 
 const handlePageTransitions = () => {
   if (prefersReducedMotion) {
-    setLoadedState();
+    resetNavigationState();
   } else {
-    requestAnimationFrame(setLoadedState);
+    requestAnimationFrame(resetNavigationState);
   }
 
   if (!pageTransitionListenerAttached) {
@@ -305,6 +306,7 @@ const initSearch = () => {
 };
 
 const initPage = () => {
+  resetNavigationState();
   resetTransientUiState();
   handlePageTransitions();
   handleScrollReveal();
@@ -314,6 +316,11 @@ const initPage = () => {
 document.addEventListener("DOMContentLoaded", initPage);
 
 document.addEventListener("pageshow", () => {
+  resetNavigationState();
   resetTransientUiState();
-  initPage();
+  handleScrollReveal();
+});
+
+document.addEventListener("pagehide", () => {
+  document.body.classList.remove("is-leaving", "is-loading");
 });
