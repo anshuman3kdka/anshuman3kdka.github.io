@@ -1,6 +1,7 @@
 ---
 title: Six Till Night (Sun's Version)
 author: Anshuman3kdka
+eyebrow: On belonging
 ---
 The Sun has found a flare,  
 A flame in November,  
