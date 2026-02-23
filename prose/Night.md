@@ -1,8 +1,8 @@
 ---
 title: Night
 author: Anshuman3kdka
+eyebrow: hidden worlds
 ---
-
 It's nighttime and the poets and thieves are awake, their hearts beating in time with something the daylight world has forgotten. The pirates are singing sea shanties that smell of salt and rum, and one of them is sharpening a blade meant for the captain's back, humming as he works. The elves are moving through the silver birch trees, and one of them carries a secret so ancient and precious that even speaking its name would shatter the stars. And sometimes, when a single blade of grass trembles in the windless dark, you'll know there's a hobbit trying to slip away on a journey that's been calling to him in dreams. But when he finally reaches that far green country he's imagined, the very same blades of grass will bend beneath his feet, and the same trampled field of corn will stretch golden and endless under the same indifferent moon. A wolf howls at the ragged edge of the forest where the wild things keep their vigil, but the sheep in their pen don't even lift their heads, lost in whatever innocent dreams sheep are granted. And high in the crumbling tower window, a candle flickers once as though some ghost has passed too close, then holds steady and bright while far below, someone counts the cobblestones in the courtyard over and over, having long ago forgotten what number they started with or why it ever mattered.
 
 I love nighttimes, when the world becomes exactly what it always was.
