@@ -1,8 +1,8 @@
 ---
 title: The Dead Don’t Cry
 author: Anshuman3kdka
+eyebrow: On emotional absence
 ---
-
 Used to say an eye for an eye,  
 There’s sin in them her eyes so wry,  
 You can give all, give your best try.  
