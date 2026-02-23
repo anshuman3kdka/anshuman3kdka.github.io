@@ -333,34 +333,6 @@ button:focus-visible {
   gap: var(--space-3);
 }
 
-.hero-card {
-  padding: clamp(1.5rem, 3.5vw, 2.3rem);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(160deg, rgba(25, 58, 41, 0.8), rgba(17, 38, 28, 0.94)),
-    url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=70") center/cover;
-  border: 1px solid rgba(211, 178, 119, 0.28);
-  box-shadow: var(--shadow-card);
-  align-self: start;
-}
-
-.hero-card p {
-  margin: 0 0 var(--space-3);
-  color: #d1d6be;
-}
-
-.hero-card h2 {
-  font-family: var(--font-heading);
-  font-size: var(--step-2);
-  margin: 0 0 var(--space-4);
-  line-height: 1.25;
-}
-
-.hero-card span {
-  font-weight: 600;
-  color: var(--color-accent);
-}
-
 /* Editorial button treatment: restrained, tactile, non-app-like */
 .button {
   display: inline-flex;
@@ -967,12 +939,6 @@ body.is-leaving .page-shell {
   margin-top: 0.32rem;
   color: var(--color-ink-soft);
   font-size: 0.9em;
-}
-
-.search-result-snippet {
-  margin-top: 0.36rem;
-  color: var(--color-ink-muted);
-  font-size: 0.94em;
 }
 
 body.search-active {
