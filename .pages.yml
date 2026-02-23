@@ -335,6 +335,39 @@ content:
         label: Content
         type: markdown
 
+  - name: home_page_cards
+    label: Home Page Cards
+    path: _data/home_cards.yml
+    type: file
+    fields:
+      - name: cards
+        label: Homepage Cards
+        type: object
+        list: true
+        addLabel: "+homepage card"
+        required: false
+        fields:
+          - name: type
+            label: Type of Card
+            type: text
+            required: true
+          - name: title
+            label: Card Title
+            type: text
+            required: true
+          - name: description
+            label: Card Description
+            type: text
+            required: true
+          - name: link_text
+            label: Link Text
+            type: text
+            required: true
+          - name: link_url
+            label: Link URL
+            type: text
+            required: true
+
   - name: site_settings
     label: Site Settings
     path: _data/site.yml
@@ -358,6 +391,18 @@ content:
         required: false
       - name: search_placeholder
         label: Search Placeholder Text
+        type: text
+        required: false
+      - name: featured_cards_eyebrow
+        label: Featured Cards Eyebrow Text
+        type: text
+        required: false
+      - name: featured_cards_title
+        label: Featured Cards Heading
+        type: text
+        required: false
+      - name: featured_cards_subtitle
+        label: Featured Cards Description
         type: text
         required: false
       - name: footer_heading
