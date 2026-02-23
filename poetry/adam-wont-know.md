@@ -1,8 +1,8 @@
 ---
 title: Adam Won’t Know
 author: Anshuman3kdka
+eyebrow: on temptation
 ---
-
 It’s right there, just within your reach,  
 Care not about the trust you’ll breach,  
 Pay no heed to my leather scales,  
