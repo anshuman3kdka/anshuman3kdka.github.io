@@ -1,8 +1,8 @@
 ---
 title: A merchant's Initiation
 author: Anshuman3kdka
+eyebrow: On Commodification of Love
 ---
-
 One bright morn, guided by ambition,  
 And wanderlust,  
 His feet have come, to meet a new city,  
