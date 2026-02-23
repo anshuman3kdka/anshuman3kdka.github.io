@@ -237,8 +237,6 @@ const main = async () => {
   records.sort((a, b) => a.title.localeCompare(b.title));
 
   await fs.writeFile(path.join(root, 'search.json'), `${JSON.stringify(records, null, 2)}\n`);
-  await fs.mkdir(path.join(root, 'assets'), { recursive: true });
-  await fs.writeFile(path.join(root, 'assets', 'search-index.json'), `${JSON.stringify(records, null, 2)}\n`);
 
   console.log(`Indexed ${records.length} files.`);
 };
