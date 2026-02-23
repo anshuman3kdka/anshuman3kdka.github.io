@@ -51,3 +51,21 @@ These are wired into the live layout:
 - Header brand text/link and navigation read from `_data/site.yml`.
 - Footer heading/text/social links read from `_data/site.yml`.
 - Homepage hero title/tagline read from `_data/site.yml`.
+
+## Cloudflare performance toggles (recommended)
+
+If this site is proxied through Cloudflare, enable these dashboard settings for better transfer performance:
+
+1. **Speed → Optimization**
+   - Enable **Brotli**.
+2. **Network**
+   - Enable **HTTP/3 (with QUIC)**.
+3. **0-RTT**
+   - Optional. It is safe to leave at default if you are unsure.
+
+### Quick verification checklist
+
+After changing Cloudflare settings, open the site in a private/incognito window and inspect response headers in browser devtools:
+
+- Confirm compressed assets return `content-encoding: br`.
+- Confirm the protocol is HTTP/3 where supported by browser/network.
