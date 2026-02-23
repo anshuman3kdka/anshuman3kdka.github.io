@@ -34,6 +34,20 @@ This repo is configured so Pages CMS can upload images to `assets/uploads/`.
 
 If image uploads do not appear, verify Pages CMS has write access to the repository branch.
 
+## Image optimization + publishing checklist
+
+Use this quick process before publishing posts with images:
+
+1. **Upload smaller images**
+   - Compress images before upload using free tools like Squoosh or TinyPNG.
+   - Target roughly **150–250 KB** for regular content images when possible.
+2. **Cloudflare optimization settings**
+   - Enable **Polish** if your Cloudflare plan includes it (if unavailable, skip it).
+   - Enable **Auto Minify** for **CSS, JS, and HTML** under **Speed → Optimization**.
+3. **Simple pre-publish checks**
+   - Avoid uploading huge originals directly from phone cameras.
+   - Prefer modern formats such as **WebP** when your CMS supports them.
+
 ## Additional Pages CMS configuration
 
 The CMS now includes broad editing coverage for content + site chrome:
