@@ -1,7 +1,7 @@
 ---
 title: Man's Greatest Invention
 author: Anshuman3kdka
-eyebrow: Atheism
+eyebrow: On Theism
 ---
 The world has stopped, the bell has tolled,  
 People have broken out of mould,  
