@@ -12,7 +12,7 @@ title: Essays
   <div class="content-list">
     {% for essay in essay_items %}
     <article class="content-item reveal">
-      {% if essay.eyebrow %}<p class="card-label">{{ essay.eyebrow }}</p>{% endif %}
+      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
       <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
     </article>
     {% endfor %}

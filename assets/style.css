@@ -274,6 +274,14 @@ button:focus-visible {
   margin: 0 0 var(--space-3);
 }
 
+.content-eyebrow {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(127, 154, 132, 0.74);
+  margin: 0 0 var(--space-3);
+}
+
 .section-title {
   font-family: var(--font-heading);
   font-size: var(--step-3);
@@ -761,6 +769,10 @@ body.is-leaving .page-shell {
   }
 
   .section-eyebrow {
+    letter-spacing: 0.12em;
+  }
+
+  .content-eyebrow {
     letter-spacing: 0.12em;
   }
 

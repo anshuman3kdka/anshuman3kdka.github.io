@@ -12,7 +12,7 @@ title: Achievements
   <div class="content-list">
     {% for achievement in achievement_items %}
     <article class="content-item reveal">
-      {% if achievement.eyebrow %}<p class="card-label">{{ achievement.eyebrow }}</p>{% endif %}
+      {% if achievement.eyebrow %}<p class="content-eyebrow">{{ achievement.eyebrow }}</p>{% endif %}
       <h3><a href="{{ achievement.url }}">{{ achievement.title }}</a></h3>
     </article>
     {% endfor %}
