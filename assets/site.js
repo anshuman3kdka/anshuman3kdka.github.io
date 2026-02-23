@@ -94,46 +94,6 @@ const handleScrollReveal = () => {
 // Search functionality
 let searchData = null;
 let searchInitialized = false;
-const copyProtectedContainers = new WeakSet();
-
-const isEditableTarget = (target) => {
-  if (!target) return false;
-  const element = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
-  return Boolean(element?.closest('input, textarea, [contenteditable="true"]'));
-};
-
-const initCopyProtection = () => {
-  const containers = document.querySelectorAll('[data-copy-protected], [data-paywalled-content]');
-  if (!containers.length) return;
-
-  const blockClipboardEvent = (event) => {
-    if (isEditableTarget(event.target)) return;
-    event.preventDefault();
-  };
-
-  containers.forEach((container) => {
-    if (copyProtectedContainers.has(container)) return;
-    copyProtectedContainers.add(container);
-
-    container.addEventListener('copy', blockClipboardEvent);
-    container.addEventListener('cut', blockClipboardEvent);
-    container.addEventListener('paste', blockClipboardEvent);
-
-    container.addEventListener('contextmenu', (event) => {
-      if (isEditableTarget(event.target)) return;
-      event.preventDefault();
-    });
-
-    container.addEventListener('keydown', (event) => {
-      if (isEditableTarget(event.target)) return;
-
-      const key = event.key.toLowerCase();
-      if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'v'].includes(key)) {
-        event.preventDefault();
-      }
-    });
-  });
-};
 
 const initSearch = () => {
   const toggle = document.querySelector('[data-search-toggle]');
@@ -246,8 +206,6 @@ const initPage = () => {
   handleScrollReveal();
   initSearch();
 };
-
-window.initCopyProtection = initCopyProtection;
 
 document.addEventListener("DOMContentLoaded", initPage);
 
