@@ -94,7 +94,7 @@ const handleScrollReveal = () => {
 // Search functionality
 let searchData = null;
 let searchInitialized = false;
-let copyProtectionInitialized = false;
+const copyProtectedContainers = new WeakSet();
 
 const isEditableTarget = (target) => {
   if (!target) return false;
@@ -103,30 +103,35 @@ const isEditableTarget = (target) => {
 };
 
 const initCopyProtection = () => {
-  if (copyProtectionInitialized) return;
-  copyProtectionInitialized = true;
+  const containers = document.querySelectorAll('[data-copy-protected], [data-paywalled-content]');
+  if (!containers.length) return;
 
   const blockClipboardEvent = (event) => {
     if (isEditableTarget(event.target)) return;
     event.preventDefault();
   };
 
-  document.addEventListener('copy', blockClipboardEvent);
-  document.addEventListener('cut', blockClipboardEvent);
-  document.addEventListener('paste', blockClipboardEvent);
+  containers.forEach((container) => {
+    if (copyProtectedContainers.has(container)) return;
+    copyProtectedContainers.add(container);
 
-  document.addEventListener('contextmenu', (event) => {
-    if (isEditableTarget(event.target)) return;
-    event.preventDefault();
-  });
+    container.addEventListener('copy', blockClipboardEvent);
+    container.addEventListener('cut', blockClipboardEvent);
+    container.addEventListener('paste', blockClipboardEvent);
 
-  document.addEventListener('keydown', (event) => {
-    if (isEditableTarget(event.target)) return;
-
-    const key = event.key.toLowerCase();
-    if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'v'].includes(key)) {
+    container.addEventListener('contextmenu', (event) => {
+      if (isEditableTarget(event.target)) return;
       event.preventDefault();
-    }
+    });
+
+    container.addEventListener('keydown', (event) => {
+      if (isEditableTarget(event.target)) return;
+
+      const key = event.key.toLowerCase();
+      if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'v'].includes(key)) {
+        event.preventDefault();
+      }
+    });
   });
 };
 
@@ -226,8 +231,9 @@ const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
-  initCopyProtection();
 };
+
+window.initCopyProtection = initCopyProtection;
 
 document.addEventListener("DOMContentLoaded", initPage);
 
