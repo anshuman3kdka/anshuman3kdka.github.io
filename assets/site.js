@@ -8,6 +8,19 @@ const setLoadedState = () => {
   document.body.classList.add("is-loaded");
 };
 
+const resetTransientUiState = () => {
+  document.body.classList.remove("is-loading", "is-leaving", "search-active");
+
+  const overlay = document.querySelector('[data-search-overlay]');
+  if (overlay) {
+    overlay.classList.remove('is-open');
+    overlay.hidden = true;
+  }
+
+  const siteShell = document.querySelector('.site-shell');
+  siteShell?.removeAttribute('aria-hidden');
+};
+
 const isNavigableDocumentLink = (link, href) => {
   if (!href) return false;
 
@@ -68,8 +81,20 @@ const handleScrollReveal = () => {
   const items = document.querySelectorAll(".reveal");
   if (!items.length) return;
 
+  const markVisible = () => {
+    items.forEach((item) => {
+      item.classList.add("is-visible");
+      item.style.transitionDelay = "0ms";
+    });
+  };
+
   if (prefersReducedMotion) {
-    items.forEach((item) => item.classList.add("is-visible"));
+    markVisible();
+    return;
+  }
+
+  if (typeof IntersectionObserver !== 'function') {
+    markVisible();
     return;
   }
 
@@ -280,6 +305,7 @@ const initSearch = () => {
 };
 
 const initPage = () => {
+  resetTransientUiState();
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
@@ -287,8 +313,7 @@ const initPage = () => {
 
 document.addEventListener("DOMContentLoaded", initPage);
 
-document.addEventListener("pageshow", (event) => {
-  if (event.persisted) {
-    initPage();
-  }
+document.addEventListener("pageshow", () => {
+  resetTransientUiState();
+  initPage();
 });
