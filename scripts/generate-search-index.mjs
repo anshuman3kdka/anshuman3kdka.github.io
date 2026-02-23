@@ -85,6 +85,61 @@ const parseSiteData = (yamlText) => {
   return data;
 };
 
+const normalizeUrl = (rawUrl, brandUrl = '') => {
+  if (!rawUrl) return null;
+
+  if (rawUrl.startsWith('mailto:') || rawUrl.startsWith('tel:')) return null;
+
+  let pathname = rawUrl;
+
+  if (/^https?:\/\//.test(rawUrl)) {
+    try {
+      const parsed = new URL(rawUrl);
+      if (brandUrl) {
+        const brandHost = new URL(brandUrl).host;
+        if (parsed.host !== brandHost) return null;
+      }
+      pathname = parsed.pathname || '/';
+    } catch {
+      return null;
+    }
+  }
+
+  if (!pathname.startsWith('/')) return null;
+
+  return pathname.endsWith('/') ? pathname : `${pathname}/`;
+};
+
+const parseInternalLinkUrls = (yamlText, sectionName, brandUrl = '') => {
+  const lines = yamlText.split(/\r?\n/);
+  const urls = new Set();
+  let inSection = false;
+
+  for (const line of lines) {
+    const sectionMatch = line.match(/^([A-Za-z0-9_-]+):\s*$/);
+    if (sectionMatch) {
+      inSection = sectionMatch[1] === sectionName;
+      continue;
+    }
+
+    if (!inSection) continue;
+
+    if (/^\S/.test(line)) {
+      inSection = false;
+      continue;
+    }
+
+    const urlMatch = line.match(/^\s*url:\s*(.+)\s*$/);
+    if (!urlMatch) continue;
+
+    const rawUrl = urlMatch[1].trim().replace(/^['"]|['"]$/g, '');
+    const normalized = normalizeUrl(rawUrl, brandUrl);
+    if (normalized) urls.add(normalized);
+  }
+
+  return urls;
+};
+
 const resolveSiteDataExpression = (expression, siteData) => {
   const [source] = expression.split('|').map((part) => part.trim());
   if (!source?.startsWith('site.data.site.')) return '';
@@ -168,7 +223,7 @@ const shouldIndexFile = (relativePath) => {
   if (parts.some((segment) => segment.startsWith('_'))) return false;
 
   if (parts.length === 1) {
-    return relativePath === 'index.md' || relativePath === 'index.html';
+    return false;
   }
 
   if (!allowedTopLevel.has(top)) return false;
@@ -206,6 +261,10 @@ const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
 const main = async () => {
   const siteYaml = await fs.readFile(path.join(root, '_data', 'site.yml'), 'utf8');
   const siteData = parseSiteData(siteYaml);
+  const excludedUrls = new Set([
+    ...parseInternalLinkUrls(siteYaml, 'header_links', siteData.brand_url),
+    ...parseInternalLinkUrls(siteYaml, 'social_links', siteData.brand_url),
+  ]);
 
   const allFiles = await walk(root);
   const contentFiles = allFiles.filter((file) => {
@@ -225,10 +284,14 @@ const main = async () => {
     const preprocessed = preprocessLiquid(body, siteData);
     const stats = await fs.stat(file);
 
+    const url = toUrl(rel, frontMatterData);
+
+    if (excludedUrls.has(url)) continue;
+
     records.push({
       title: extractTitle(body, frontMatterData, rel),
       category: categoryFromPath(rel),
-      url: toUrl(rel, frontMatterData),
+      url,
       content: toPlainText(preprocessed).slice(0, 400),
       lastModified: await resolveLastModified(rel, frontMatterData, stats),
     });
