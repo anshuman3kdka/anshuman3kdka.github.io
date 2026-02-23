@@ -241,37 +241,10 @@ const initSearch = () => {
   });
 };
 
-const initImagePerformance = () => {
-  const heroImage = document.querySelector('.piece-featured-media img');
-
-  if (heroImage) {
-    heroImage.setAttribute('fetchpriority', 'high');
-    heroImage.setAttribute('loading', 'eager');
-    heroImage.setAttribute('decoding', 'async');
-  }
-
-  const allImages = document.querySelectorAll('img');
-  allImages.forEach((image) => {
-    if (image === heroImage) return;
-
-    image.setAttribute('loading', 'lazy');
-    image.setAttribute('decoding', 'async');
-
-    if (!image.hasAttribute('width') && image.naturalWidth) {
-      image.setAttribute('width', image.naturalWidth);
-    }
-
-    if (!image.hasAttribute('height') && image.naturalHeight) {
-      image.setAttribute('height', image.naturalHeight);
-    }
-  });
-};
-
 const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
-  initImagePerformance();
 };
 
 window.initCopyProtection = initCopyProtection;

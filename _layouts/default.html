@@ -41,8 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="preload" href="{{ '/assets/style.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}"></noscript>
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
   </head>
 
   <body class="is-loading" data-search-url="{{ '/search.json' | relative_url }}">
@@ -101,18 +100,8 @@
               <h1 class="page-title">{{ page.title }}</h1>
               {% assign piece_featured_image = page.featured_image %}
               {% if piece_featured_image %}
-              {% assign piece_featured_image_width = page.featured_image_width | default: 1200 %}
-              {% assign piece_featured_image_height = page.featured_image_height | default: 800 %}
               <figure class="piece-featured-media">
-                <img
-                  src="{{ piece_featured_image | relative_url }}"
-                  alt="Featured image for {{ page.title }}"
-                  width="{{ piece_featured_image_width }}"
-                  height="{{ piece_featured_image_height }}"
-                  fetchpriority="high"
-                  loading="eager"
-                  decoding="async"
-                >
+                <img src="{{ piece_featured_image | relative_url }}" alt="Featured image for {{ page.title }}" loading="eager" decoding="async">
               </figure>
               {% endif %}
             </header>
