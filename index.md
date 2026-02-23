@@ -13,13 +13,25 @@
 
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro reveal">
-    <p class="section-eyebrow">Recent Work</p>
-    <h2 class="section-title" id="featured-title">Things that got finished</h2>
-    <p class="section-subtitle">Recent essays and creative work.</p>
+    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
+    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
+    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>
   </div>
-  <div class="grid grid-2" data-recent-work>
-    <article class="card reveal">
-      <p class="card-text">Loading recent writing…</p>
-    </article>
+  <div class="grid grid-2">
+    {% assign homepage_cards = site.data.home_cards.cards %}
+    {% if homepage_cards and homepage_cards.size > 0 %}
+      {% for card in homepage_cards %}
+      <article class="card reveal">
+        <p class="card-label">{{ card.type }}</p>
+        <h3 class="card-title">{{ card.title }}</h3>
+        <p class="card-text">{{ card.description }}</p>
+        <a class="card-link" href="{{ card.link_url }}">{{ card.link_text }}</a>
+      </article>
+      {% endfor %}
+    {% else %}
+      <article class="card reveal">
+        <p class="card-text">Add your first card in Pages CMS under Home Page Cards.</p>
+      </article>
+    {% endif %}
   </div>
 </section>
