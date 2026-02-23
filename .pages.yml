@@ -34,7 +34,14 @@ content:
         required: false
       - name: body
         label: Poem
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: prose
     label: Prose
@@ -66,7 +73,14 @@ content:
         required: false
       - name: body
         label: Prose
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: essays
     label: Essays
@@ -98,7 +112,14 @@ content:
         required: false
       - name: body
         label: Essay
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: projects
     label: Projects
@@ -126,7 +147,14 @@ content:
         required: false
       - name: body
         label: Description
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: achievements
     label: Achievements
@@ -154,7 +182,14 @@ content:
         required: false
       - name: body
         label: Details
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: landing_home
     label: Landing Home (index.md)
@@ -171,7 +206,14 @@ content:
         required: false
       - name: body
         label: Home Sections
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: about_page
     label: About Page
@@ -200,7 +242,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: contact_page
     label: Contact Page
@@ -217,7 +266,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: resume_page
     label: Resume Page
@@ -234,7 +290,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: creative_page
     label: Creative Page
@@ -251,7 +314,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: poetry_page
     label: Poetry Listing Page
@@ -268,7 +338,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: prose_page
     label: Prose Listing Page
@@ -285,7 +362,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: essays_page
     label: Essays Listing Page
@@ -302,7 +386,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: projects_page
     label: Projects Listing Page
@@ -319,7 +410,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: achievements_page
     label: Achievements Listing Page
@@ -336,7 +434,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: secondary_home_page
     label: Secondary Home Page
@@ -353,7 +458,14 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
 
   - name: home_page_cards
     label: Home Page Cards
