@@ -5,6 +5,22 @@ import { execFile as execFileCallback } from 'node:child_process';
 
 const execFile = promisify(execFileCallback);
 
+const RUBY_YAML_TO_JSON_SCRIPT = `
+require 'yaml'
+require 'json'
+require 'base64'
+require 'date'
+
+payload = Base64.decode64(ARGV[0] || '')
+value = YAML.safe_load(
+  payload,
+  permitted_classes: [Date, Time],
+  aliases: false,
+)
+
+print JSON.generate(value || {})
+`;
+
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache']);
@@ -32,16 +48,26 @@ const walk = async (dir) => {
   return files;
 };
 
-const extractFrontMatter = (text) => {
-  const match = text.match(/^---\n([\s\S]*?)\n---\n?/);
+const extractFrontMatter = async (text, file) => {
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (!match) return { data: {}, body: text };
 
-  const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const keyValue = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-    if (!keyValue) continue;
-    const [, key, rawValue] = keyValue;
-    data[key] = rawValue.trim().replace(/^['"]|['"]$/g, '');
+  let data = {};
+
+  try {
+    const encodedYaml = Buffer.from(match[1], 'utf8').toString('base64');
+    const { stdout } = await execFile(
+      'ruby',
+      ['-e', RUBY_YAML_TO_JSON_SCRIPT, encodedYaml],
+    );
+
+    const parsed = JSON.parse(stdout);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      data = parsed;
+    }
+  } catch (error) {
+    const message = error?.stderr?.trim() || error?.message || 'Unknown YAML parse error';
+    console.warn(`[search-index] Warning: invalid front matter in ${file}. ${message}`);
   }
 
   return {
@@ -163,8 +189,9 @@ const preprocessLiquid = (text, siteData) => {
 
 const toUrl = (relativePath, frontMatterData = {}) => {
   const permalink = frontMatterData.permalink;
-  if (permalink) {
-    const normalized = permalink.startsWith('/') ? permalink : `/${permalink}`;
+  if (typeof permalink === 'string' && permalink.trim()) {
+    const normalizedPermalink = permalink.trim();
+    const normalized = normalizedPermalink.startsWith('/') ? normalizedPermalink : `/${normalizedPermalink}`;
     return normalized.endsWith('/') ? normalized : `${normalized}/`;
   }
 
@@ -184,7 +211,9 @@ const categoryFromPath = (relativePath) => {
 };
 
 const extractTitle = (body, frontMatterData, fallback) => {
-  if (frontMatterData.title) return frontMatterData.title;
+  if (typeof frontMatterData.title === 'string' && frontMatterData.title.trim()) {
+    return frontMatterData.title;
+  }
 
   const headingMatch = body.match(/^#\s+(.+)$/m);
   if (headingMatch) return headingMatch[1].trim();
@@ -233,10 +262,14 @@ const shouldIndexFile = (relativePath) => {
 
 const toIsoString = (value) => {
   if (!value) return null;
-  const date = new Date(value);
+  const dateInput = value instanceof Date ? value : String(value);
+  const date = new Date(dateInput);
   if (Number.isNaN(date.getTime())) return null;
   return date.toISOString();
 };
+
+const isSearchDisabled = (value) => value === false
+  || (typeof value === 'string' && value.trim().toLowerCase() === 'false');
 
 const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
   const frontMatterDate = toIsoString(
@@ -277,9 +310,9 @@ const main = async () => {
   for (const file of contentFiles) {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const raw = await fs.readFile(file, 'utf8');
-    const { data: frontMatterData, body } = extractFrontMatter(raw);
+    const { data: frontMatterData, body } = await extractFrontMatter(raw, rel);
 
-    if (frontMatterData.search === 'false') continue;
+    if (isSearchDisabled(frontMatterData.search)) continue;
 
     const preprocessed = preprocessLiquid(body, siteData);
     const stats = await fs.stat(file);
