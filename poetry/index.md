@@ -12,6 +12,7 @@ title: Poetry
   <div class="content-list">
     {% for poem in poems %}
     <article class="content-item reveal">
+      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow }}</p>{% endif %}
       <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
     </article>
     {% endfor %}

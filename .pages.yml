@@ -20,6 +20,10 @@ content:
         type: text
         default: Anshuman3kdka
         hidden: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
       - name: description
         label: SEO Description (optional)
         type: text
@@ -48,6 +52,10 @@ content:
         type: text
         default: Anshuman3kdka
         hidden: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
       - name: description
         label: SEO Description (optional)
         type: text
@@ -76,6 +84,10 @@ content:
         type: text
         default: Anshuman3kdka
         hidden: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
       - name: description
         label: SEO Description (optional)
         type: text
@@ -100,6 +112,10 @@ content:
         label: Project Title
         type: text
         required: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
       - name: description
         label: SEO Description (optional)
         type: text
@@ -124,6 +140,10 @@ content:
         label: Achievement
         type: text
         required: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
       - name: description
         label: SEO Description (optional)
         type: text
