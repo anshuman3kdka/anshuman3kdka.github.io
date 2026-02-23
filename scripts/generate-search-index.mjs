@@ -1,5 +1,9 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { promisify } from 'node:util';
+import { execFile as execFileCallback } from 'node:child_process';
+
+const execFile = promisify(execFileCallback);
 
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
@@ -144,12 +148,52 @@ const toPlainText = (text) => text
   .trim();
 
 const shouldIndexFile = (relativePath) => {
-  const top = relativePath.split('/')[0];
-  const excludedTopLevel = new Set(['assets', 'scripts']);
+  const parts = relativePath.split('/');
+  const [top] = parts;
+  const allowedTopLevel = new Set([
+    'about',
+    'achievements',
+    'contact',
+    'creative',
+    'essays',
+    'home',
+    'poetry',
+    'projects',
+    'prose',
+    'resume',
+  ]);
 
-  if (excludedTopLevel.has(top) || top.startsWith('_')) return false;
+  if (parts.length === 1) return relativePath === 'index.md' || relativePath === 'index.html';
+  if (!allowedTopLevel.has(top)) return false;
   if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return false;
   return true;
+};
+
+const toIsoString = (value) => {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
+};
+
+const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
+  const frontMatterDate = toIsoString(
+    frontMatterData.last_modified_at
+      || frontMatterData.lastModified
+      || frontMatterData.updated
+      || frontMatterData.date,
+  );
+  if (frontMatterDate) return frontMatterDate;
+
+  try {
+    const { stdout } = await execFile('git', ['log', '-1', '--format=%cI', '--', file], { cwd: root });
+    const gitTimestamp = toIsoString(stdout.trim());
+    if (gitTimestamp) return gitTimestamp;
+  } catch {
+    // Fall back when git metadata is unavailable.
+  }
+
+  return fallbackStat.mtime.toISOString();
 };
 
 const main = async () => {
@@ -179,7 +223,7 @@ const main = async () => {
       category: categoryFromPath(rel),
       url: toUrl(rel, frontMatterData),
       content: toPlainText(preprocessed).slice(0, 400),
-      lastModified: stats.mtime.toISOString(),
+      lastModified: await resolveLastModified(rel, frontMatterData, stats),
     });
   }
 
