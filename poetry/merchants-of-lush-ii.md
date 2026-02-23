@@ -1,8 +1,8 @@
 ---
 title: Merchants of Lush II
 author: Anshuman3kdka
+eyebrow: On lost idealism
 ---
-
 We’ll wake on dewy grass,  
 And forget how we fell,  
 We’ll heat, rebuild the glass,  
