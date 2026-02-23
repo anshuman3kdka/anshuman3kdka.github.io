@@ -7,6 +7,7 @@
       <a class="button button-secondary" href="/projects/">Projects →</a>
     </div>
   </div>
+  <section class="section hero hero--center-desktop" aria-labelledby="hero-title">
 </section>
 
 <section class="section" aria-labelledby="featured-title">
