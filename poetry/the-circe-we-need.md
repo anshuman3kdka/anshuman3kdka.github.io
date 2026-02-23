@@ -1,8 +1,8 @@
 ---
 title: The Circe we Need
 author: Anshuman3kdka
+eyebrow: On mythic hunger
 ---
-
 Oh hello sir, nice meeting you,  
 Men of your bearings are quite few,  
 Please stay away, that's blood not stew!  
