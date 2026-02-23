@@ -1,8 +1,8 @@
 ---
 title: A Letter to You (Red Pen Edit)
 author: Anshuman3kdka
+eyebrow: Horror
 ---
-
 In the dream, we were in a school. It was ours, but it wasn't. The CMS building is linear, but this one grew in every direction at once. It had the look of an international hospital—vast, white, with flickering lights sunken into the ceiling. Like the lights in the exam hall. Exactly like those.
 
 It was night, though there were no windows. We passed classrooms that were modern and new, unlike the worn rooms where we spend our days. The corridors narrowed as we walked. They narrowed until our arms grazed the cold walls on both sides. We were the only ones in the halls.
