@@ -5,13 +5,15 @@ portrait_image: /assets/uploads/IMG_20260218_133159763 (1).jpg
 portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
+{% assign portrait_image = page.portrait_image | default: '/assets/WA_1771760315348.jpg' %}
+{% assign portrait_image_webp = page.portrait_image_webp | default: portrait_image | replace: '.jpg', '.webp' | replace: '.jpeg', '.webp' | replace: '.JPG', '.webp' | replace: '.JPEG', '.webp' %}
 <section class="section prose about-layout reveal">
   <figure>
     <div
       class="about-portrait"
       role="img"
       aria-label="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}"
-      style="background-image: url('{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}');"
+      style="background-image: image-set(url('{{ portrait_image_webp }}') type('image/webp'), url('{{ portrait_image }}') type('image/jpeg'));"
     ></div>
     <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' }}</figcaption>
   </figure>
