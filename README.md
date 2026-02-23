@@ -43,6 +43,7 @@ The CMS now includes broad editing coverage for content + site chrome:
 2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
 3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, search placeholder, footer heading/note, contact info, and social links.
 4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
+5. **Home page cards:** `_data/home_cards.yml` provides repeatable cards with type, title, description, link text, and link URL fields.
 
 These are wired into the live layout:
 
