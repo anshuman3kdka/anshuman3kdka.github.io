@@ -1,11 +1,10 @@
 ---
 title: About
 description: About Anshuman Pandey and his writing background.
-portrait_image: /assets/WA_1771760315348.jpg
+portrait_image: /assets/uploads/IMG_20260218_133159763 (1).jpg
 portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
-
 <section class="section prose about-layout reveal">
   <figure>
     <div
