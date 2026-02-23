@@ -34,6 +34,10 @@ const isNavigableDocumentLink = (link, href) => {
 };
 
 const handlePageTransitionClick = (event) => {
+  if (event.defaultPrevented) return;
+  if (event.button !== 0) return;
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
   const link = event.target.closest("a");
   if (!link) return;
 
@@ -94,63 +98,83 @@ const handleScrollReveal = () => {
 // Search functionality
 let searchData = null;
 let searchInitialized = false;
-const copyProtectedContainers = new WeakSet();
-
-const isEditableTarget = (target) => {
-  if (!target) return false;
-  const element = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
-  return Boolean(element?.closest('input, textarea, [contenteditable="true"]'));
-};
-
-const initCopyProtection = () => {
-  const containers = document.querySelectorAll('[data-copy-protected], [data-paywalled-content]');
-  if (!containers.length) return;
-
-  const blockClipboardEvent = (event) => {
-    if (isEditableTarget(event.target)) return;
-    event.preventDefault();
-  };
-
-  containers.forEach((container) => {
-    if (copyProtectedContainers.has(container)) return;
-    copyProtectedContainers.add(container);
-
-    container.addEventListener('copy', blockClipboardEvent);
-    container.addEventListener('cut', blockClipboardEvent);
-    container.addEventListener('paste', blockClipboardEvent);
-
-    container.addEventListener('contextmenu', (event) => {
-      if (isEditableTarget(event.target)) return;
-      event.preventDefault();
-    });
-
-    container.addEventListener('keydown', (event) => {
-      if (isEditableTarget(event.target)) return;
-
-      const key = event.key.toLowerCase();
-      if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'v'].includes(key)) {
-        event.preventDefault();
-      }
-    });
-  });
-};
 
 const initSearch = () => {
   const toggle = document.querySelector('[data-search-toggle]');
   const overlay = document.querySelector('[data-search-overlay]');
+  const panel = document.querySelector('[data-search-panel]');
   const close = document.querySelector('[data-search-close]');
   const input = document.querySelector('[data-search-input]');
   const results = document.querySelector('[data-search-results]');
   const status = document.querySelector('[data-search-status]');
+  const siteShell = document.querySelector('.site-shell');
+  const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  if (!toggle || !overlay || !close || !input || !results) return;
+  let previouslyFocused = null;
+  let removeTrapListener = null;
+
+  if (!toggle || !overlay || !panel || !close || !input || !results) return;
 
   if (searchInitialized) return;
   searchInitialized = true;
 
+  const syncExpandedState = (isOpen) => {
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  const setPageContentHidden = (isHidden) => {
+    if (!siteShell) return;
+    if (isHidden) {
+      siteShell.setAttribute('aria-hidden', 'true');
+    } else {
+      siteShell.removeAttribute('aria-hidden');
+    }
+  };
+
+  const addFocusTrap = () => {
+    const handleTabTrap = (event) => {
+      if (event.key !== 'Tab' || !overlay.classList.contains('is-open')) return;
+
+      const focusableElements = panel.querySelectorAll(focusableSelector);
+      if (!focusableElements.length) {
+        event.preventDefault();
+        input.focus();
+        return;
+      }
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      } else if (!event.shiftKey && activeElement === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleTabTrap);
+    return () => document.removeEventListener('keydown', handleTabTrap);
+  };
+
+  syncExpandedState(false);
+
   const openSearch = async () => {
+    if (overlay.classList.contains('is-open')) return;
+
+    previouslyFocused = document.activeElement;
     overlay.hidden = false;
     document.body.classList.add('search-active');
+    setPageContentHidden(true);
+    syncExpandedState(true);
+
+    if (removeTrapListener) {
+      removeTrapListener();
+    }
+    removeTrapListener = addFocusTrap();
+
     requestAnimationFrame(() => {
       overlay.classList.add('is-open');
       input.focus();
@@ -172,8 +196,22 @@ const initSearch = () => {
   };
 
   const closeSearch = () => {
+    if (!overlay.classList.contains('is-open')) return;
+
     overlay.classList.remove('is-open');
     document.body.classList.remove('search-active');
+    setPageContentHidden(false);
+    syncExpandedState(false);
+
+    if (removeTrapListener) {
+      removeTrapListener();
+      removeTrapListener = null;
+    }
+
+    const focusTarget = previouslyFocused instanceof HTMLElement ? previouslyFocused : toggle;
+    focusTarget.focus();
+    previouslyFocused = null;
+
     setTimeout(() => {
       overlay.hidden = true;
       input.value = '';
@@ -246,8 +284,6 @@ const initPage = () => {
   handleScrollReveal();
   initSearch();
 };
-
-window.initCopyProtection = initCopyProtection;
 
 document.addEventListener("DOMContentLoaded", initPage);
 

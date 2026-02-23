@@ -19,6 +19,16 @@ npm run generate:search-index
 
 `npm run build` currently runs the same indexing step.
 
+## Copy-protection behavior
+
+The frontend intentionally does **not** include copy-protection logic right now.
+
+- `assets/site.js` does not register `initCopyProtection` handlers.
+- There is no `window.initCopyProtection` export.
+- `data-copy-protected` / `data-paywalled-content` attributes are currently unused by the site scripts.
+
+If copy protection is reintroduced later, wire it explicitly in `initPage()` and document which templates opt in.
+
 ## Automatic indexing on content changes
 
 A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes that modify content files.

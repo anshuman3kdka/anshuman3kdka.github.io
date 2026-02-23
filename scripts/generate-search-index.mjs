@@ -280,14 +280,6 @@ const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
   );
   if (frontMatterDate) return frontMatterDate;
 
-  try {
-    const { stdout } = await execFile('git', ['log', '-1', '--format=%cI', '--', file], { cwd: root });
-    const gitTimestamp = toIsoString(stdout.trim());
-    if (gitTimestamp) return gitTimestamp;
-  } catch {
-    // Fall back when git metadata is unavailable.
-  }
-
   return fallbackStat.mtime.toISOString();
 };
 
@@ -304,6 +296,9 @@ const main = async () => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     return shouldIndexFile(rel);
   });
+  const gitLastModifiedByFile = await buildGitLastModifiedMap(
+    contentFiles.map((file) => path.relative(root, file).replace(/\\/g, '/')),
+  );
 
   const records = [];
 
@@ -326,7 +321,7 @@ const main = async () => {
       category: categoryFromPath(rel),
       url,
       content: toPlainText(preprocessed).slice(0, 400),
-      lastModified: await resolveLastModified(rel, frontMatterData, stats),
+      lastModified: resolveLastModified(rel, frontMatterData, stats, gitLastModifiedByFile),
     });
   }
 
