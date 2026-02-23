@@ -94,7 +94,6 @@ const handleScrollReveal = () => {
 // Search functionality
 let searchData = null;
 let searchInitialized = false;
-let recentWorkInitialized = false;
 let copyProtectionInitialized = false;
 
 const isEditableTarget = (target) => {
@@ -129,57 +128,6 @@ const initCopyProtection = () => {
       event.preventDefault();
     }
   });
-};
-
-const initRecentWork = async () => {
-  if (recentWorkInitialized) return;
-
-  const recentWorkContainer = document.querySelector('[data-recent-work]');
-  if (!recentWorkContainer) return;
-
-  recentWorkInitialized = true;
-
-  try {
-    const response = await fetch('/search.json');
-    if (!response.ok) throw new Error('Failed to load content index');
-
-    const records = await response.json();
-    const sectionLandingPages = new Set(['/essays/', '/poetry/', '/prose/']);
-    const recentItems = records
-      .filter((item) => ['Essays', 'Poetry', 'Prose'].includes(item.category))
-      .filter((item) => item.url && !sectionLandingPages.has(item.url))
-      .sort((a, b) => new Date(b.lastModified || 0) - new Date(a.lastModified || 0))
-      .slice(0, 3);
-
-    if (!recentItems.length) {
-      recentWorkContainer.innerHTML = '<article class="card reveal"><p class="card-text">No recent pieces found yet.</p></article>';
-      handleScrollReveal();
-      return;
-    }
-
-    const singularCategory = {
-      Essays: 'Essay',
-      Poetry: 'Poem',
-      Prose: 'Prose',
-    };
-
-    recentWorkContainer.innerHTML = recentItems.map((item) => {
-      const label = singularCategory[item.category] || item.category;
-      return `
-      <article class="card reveal">
-        <p class="card-label">${label}</p>
-        <h3 class="card-title">${item.title}</h3>
-        <p class="card-text">${(item.content || '').slice(0, 140)}...</p>
-        <a class="card-link" href="${item.url}">Read ${label.toLowerCase()}</a>
-      </article>
-    `;
-    }).join('');
-    handleScrollReveal();
-  } catch (error) {
-    recentWorkContainer.innerHTML = '<article class="card reveal"><p class="card-text">Unable to load recent work.</p></article>';
-    handleScrollReveal();
-    console.error(error);
-  }
 };
 
 const initSearch = () => {
@@ -278,7 +226,6 @@ const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
-  initRecentWork();
   initCopyProtection();
 };
 
