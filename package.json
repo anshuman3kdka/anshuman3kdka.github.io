@@ -5,6 +5,7 @@
   "description": "Static site build utilities",
   "scripts": {
     "generate:search-index": "node ./scripts/generate-search-index.mjs",
-    "build": "npm run generate:search-index"
+    "build": "npm run generate:search-index",
+    "check:seo": "./scripts/seo-health-check.sh"
   }
 }
