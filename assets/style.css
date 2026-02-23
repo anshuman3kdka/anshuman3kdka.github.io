@@ -271,7 +271,7 @@ button:focus-visible {
 }
 
 .content-eyebrow {
-  font-size: 0.82rem;
+  font-size: var(--content-eyebrow-font-size, 0.72rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: rgba(127, 154, 132, 0.74);

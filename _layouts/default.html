@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <style>
+      :root {
+        --content-eyebrow-font-size: {{ site.data.site.content_eyebrow_font_size | default: '0.72rem' }};
+      }
+    </style>
     {% assign site_title = site.data.site.site_title | default: 'Anshuman3kdka' %}
     {% assign site_tagline = site.data.site.site_tagline | default: 'Writing portfolio' %}
     {% assign site_description = site.data.site.site_description | default: 'Anshuman3kdka — essays, projects, and creative technology.' %}
