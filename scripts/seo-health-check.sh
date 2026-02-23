@@ -37,7 +37,8 @@ fi
 bad=0
 for url in "${urls[@]}"; do
   status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
-  if [[ "$status" =~ ^2|3 ]]; then
+  # Match exactly 3-digit 2xx/3xx codes so partial matches (e.g., "30" or "x200") don't slip through.
+  if [[ "$status" =~ ^[23][0-9][0-9]$ ]]; then
     printf 'OK   %s %s\n' "$status" "$url"
   else
     printf 'FAIL %s %s\n' "$status" "$url"
