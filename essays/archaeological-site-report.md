@@ -1,9 +1,8 @@
 ---
 title: "Archaeological Site Report: Excavation #2005-CB"
 author: Anshuman3kdka
-permalink: /essays/archaeological-site-report/
+eyebrow: Satire
 ---
-
 **Subject:** The "Campus Romance" Paperback (Late 20th/Early 21st Century)  
 **Location:** Excavated from the ruins of a specialized torture chamber known as "The A.H. Wheeler Railway Bookstore."  
 **Lead Archeologist:** Dr. Xylos, Curator of Pre-Apocalyptic Cringe  
