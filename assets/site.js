@@ -210,14 +210,27 @@ const initSearch = () => {
       results.innerHTML = '';
     } else {
       status.textContent = `${hits.length} result${hits.length !== 1 ? 's' : ''} found.`;
-      results.innerHTML = hits.map(hit => `
-        <li>
-          <a href="${hit.url}">
-            <div style="font-weight: 600; margin-bottom: 0.2rem;">${hit.title}</div>
-            <div class="search-result-meta">${hit.category || 'Page'}</div>
-          </a>
-        </li>
-      `).join('');
+      results.innerHTML = '';
+
+      hits.forEach((hit) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        const title = document.createElement('div');
+        const category = document.createElement('div');
+
+        link.setAttribute('href', hit.url || '#');
+
+        title.style.fontWeight = '600';
+        title.style.marginBottom = '0.2rem';
+        title.textContent = hit.title || 'Untitled';
+
+        category.classList.add('search-result-meta');
+        category.textContent = hit.category || 'Page';
+
+        link.append(title, category);
+        listItem.append(link);
+        results.append(listItem);
+      });
     }
   });
 };
