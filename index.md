@@ -1,5 +1,4 @@
 
-<section class="section hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content reveal">
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
