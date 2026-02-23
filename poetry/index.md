@@ -1,7 +1,7 @@
 ---
 title: Poetry
+description: Read all the latest poetic endeavours of Anshuman3kdka
 ---
-
 <section class="section">
   {% assign poems = site.pages
     | where_exp: "page", "page.path contains 'poetry/'"
