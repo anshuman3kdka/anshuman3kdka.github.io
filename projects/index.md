@@ -12,6 +12,7 @@ title: Projects
   <div class="content-list">
     {% for project in project_items %}
     <article class="content-item reveal">
+      {% if project.eyebrow %}<p class="card-label">{{ project.eyebrow }}</p>{% endif %}
       <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
     </article>
     {% endfor %}
