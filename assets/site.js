@@ -144,8 +144,10 @@ const initRecentWork = async () => {
     if (!response.ok) throw new Error('Failed to load content index');
 
     const records = await response.json();
+    const sectionLandingPages = new Set(['/essays/', '/poetry/', '/prose/']);
     const recentItems = records
       .filter((item) => ['Essays', 'Poetry', 'Prose'].includes(item.category))
+      .filter((item) => item.url && !sectionLandingPages.has(item.url))
       .sort((a, b) => new Date(b.lastModified || 0) - new Date(a.lastModified || 0))
       .slice(0, 3);
 
