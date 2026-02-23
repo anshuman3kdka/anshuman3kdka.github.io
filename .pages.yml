@@ -16,6 +16,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -33,6 +35,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -45,6 +49,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -61,6 +67,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -81,6 +89,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -97,6 +107,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -109,6 +121,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -125,6 +139,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -145,6 +161,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -161,6 +179,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -173,6 +193,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -189,6 +211,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -209,6 +233,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -221,6 +247,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -233,6 +261,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -249,6 +279,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -269,6 +301,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -281,6 +315,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -293,6 +329,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -309,6 +347,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -326,6 +366,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -338,6 +380,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -350,6 +394,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -367,6 +413,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -379,6 +427,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -395,6 +445,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -407,6 +459,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -419,6 +473,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -436,6 +492,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -448,6 +506,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -460,6 +520,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -477,6 +539,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -489,6 +553,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -501,6 +567,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -518,6 +586,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -530,6 +600,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -542,6 +614,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -559,6 +633,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -571,6 +647,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -583,6 +661,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -600,6 +680,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -612,6 +694,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -624,6 +708,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -641,6 +727,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -653,6 +741,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -665,6 +755,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -682,6 +774,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -694,6 +788,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -706,6 +802,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -723,6 +821,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -735,6 +835,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -747,6 +849,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -764,6 +868,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -776,6 +882,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -788,6 +896,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -812,6 +922,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
@@ -824,6 +936,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
@@ -836,6 +950,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
@@ -848,6 +964,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
@@ -870,6 +988,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -882,6 +1002,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -894,6 +1016,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -910,6 +1034,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -922,6 +1048,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -934,6 +1062,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -946,6 +1076,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -958,6 +1090,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -971,6 +1105,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -983,6 +1119,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -999,6 +1137,8 @@ content:
         type: rich-text
         options:
           toolbar:
+            - undo
+            - redo
             - bold
             - italic
             - underline
@@ -1018,6 +1158,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
@@ -1039,6 +1181,8 @@ content:
             type: rich-text
             options:
               toolbar:
+                - undo
+                - redo
                 - bold
                 - italic
                 - underline
