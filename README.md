@@ -52,20 +52,25 @@ These are wired into the live layout:
 - Footer heading/text/social links read from `_data/site.yml`.
 - Homepage hero title/tagline read from `_data/site.yml`.
 
-## Cloudflare performance toggles (recommended)
+## Cloudflare caching checklist
 
-If this site is proxied through Cloudflare, enable these dashboard settings for better transfer performance:
+After deploying content updates, keep Cloudflare caching configured for static asset performance while avoiding stale HTML.
 
-1. **Speed → Optimization**
-   - Enable **Brotli**.
-2. **Network**
-   - Enable **HTTP/3 (with QUIC)**.
-3. **0-RTT**
-   - Optional. It is safe to leave at default if you are unsure.
+1. **Caching → Configuration**
+   - Set **Browser Cache TTL** to at least **1 month** for static file reuse.
+   - Keep **Always Online** enabled.
 
-### Quick verification checklist
+2. **Rules → Cache Rules**
+   - Add rules for static paths and extensions such as:
+     - `/assets/*`
+     - `*.css`, `*.js`, `*.jpg`, `*.png`, `*.webp`, `*.svg`, `*.json`
+   - Set **Cache eligibility** to **Eligible for cache**.
+   - Set **Edge TTL** to a long duration (for example, **1 month**).
 
-After changing Cloudflare settings, open the site in a private/incognito window and inspect response headers in browser devtools:
+3. **HTML caching**
+   - Keep HTML caching conservative unless you have a clear cache-purge workflow.
+   - If you cache HTML aggressively, purge cache after publishing updates.
 
-- Confirm compressed assets return `content-encoding: br`.
-- Confirm the protocol is HTTP/3 where supported by browser/network.
+4. **Post-publish purge**
+   - Use **Caching → Purge Cache** after publishing changes.
+   - Do selective purges where possible; use full purge when needed.
