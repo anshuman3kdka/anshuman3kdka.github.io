@@ -156,7 +156,6 @@ const shouldIndexFile = (relativePath) => {
     'contact',
     'creative',
     'essays',
-    'home',
     'poetry',
     'projects',
     'prose',
@@ -172,7 +171,7 @@ const shouldIndexFile = (relativePath) => {
   }
 
   if (!allowedTopLevel.has(top)) return false;
-  if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return false;
+  if (relativePath === 'search.json' || relativePath === 'sitemap.xml' || relativePath === 'home/index.md') return false;
   return true;
 };
 

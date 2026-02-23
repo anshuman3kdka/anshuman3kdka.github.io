@@ -1,3 +1,7 @@
+---
+title: Home
+permalink: /
+---
 
 <section class="section hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content reveal">
