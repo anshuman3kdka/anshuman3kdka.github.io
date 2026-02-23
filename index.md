@@ -25,7 +25,12 @@
         <p class="card-label">{{ card.type }}</p>
         <h3 class="card-title">{{ card.title }}</h3>
         <p class="card-text">{{ card.description }}</p>
-        <a class="card-link" href="{{ card.link_url }}">{{ card.link_text }}</a>
+        {% assign card_href = card.link_url | default: '#' %}
+        {% if card_href contains '://' or card_href contains 'mailto:' or card_href contains 'tel:' or card_href contains '#' %}
+        <a class="card-link" href="{{ card_href }}">{{ card.link_text }}</a>
+        {% else %}
+        <a class="card-link" href="{{ card_href | relative_url }}">{{ card.link_text }}</a>
+        {% endif %}
       </article>
       {% endfor %}
     {% else %}
