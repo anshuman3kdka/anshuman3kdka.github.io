@@ -8,7 +8,7 @@ title: Resume
       <p>New Delhi, Delhi, India</p>
       <p>Email: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></p>
       <p>LinkedIn: <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378">linkedin</a></p>
-      <p>Portfolio: <a href="https://www.anshuman3kdka.in">anshuman3kdka.in</a></p>
+      <p>Portfolio: <a href="https://anshuman3kdka.in">anshuman3kdka.in</a></p>
     </div>
   </header>
 
@@ -92,7 +92,7 @@ title: Resume
 
     <div class="resume-item">
       <div class="resume-content">
-        <h3>Freelance Content Creator &amp; Writer | <a href="https://www.anshuman3kdka.in">Portfolio Website</a> | 2025 – Present</h3>
+        <h3>Freelance Content Creator &amp; Writer | <a href="https://anshuman3kdka.in">Portfolio Website</a> | 2025 – Present</h3>
         <ul>
           <li>Manage a personal portfolio website offering services in ghostwriting, copywriting, and blogging.</li>
           <li>Draft, edit, and publish web content, focusing on storytelling and digital communication.</li>

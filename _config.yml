@@ -4,6 +4,6 @@ defaults:
     values:
       layout: default
 collections_dir: "."
-url: "https://www.anshuman3kdka.in"
+url: "https://anshuman3kdka.in"
 plugins:
   - jekyll-sitemap

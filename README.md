@@ -51,3 +51,13 @@ These are wired into the live layout:
 - Header brand text/link and navigation read from `_data/site.yml`.
 - Footer heading/text/social links read from `_data/site.yml`.
 - Homepage hero title/tagline read from `_data/site.yml`.
+
+## DNS tab checklist (Cloudflare)
+
+Use this checklist when reviewing DNS settings for this site:
+
+1. Ensure website-serving `A`, `AAAA`, and `CNAME` records are **Proxied** (orange cloud).
+2. Remove old or unused DNS records to reduce confusion and prevent misroutes.
+3. Keep TTL set to **Auto** unless you have a specific operational reason to override it.
+4. Use one canonical hostname strategy (for example, force non-`www`) and redirect the alternate host.
+5. Add or modify `CAA` records only if you intentionally need certificate authority restrictions.
