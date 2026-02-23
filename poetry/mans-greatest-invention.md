@@ -1,8 +1,8 @@
 ---
 title: Man's Greatest Invention
 author: Anshuman3kdka
+eyebrow: On Theism
 ---
-
 The world has stopped, the bell has tolled,  
 People have broken out of mould,  
 They have rushed to the city gate,  
