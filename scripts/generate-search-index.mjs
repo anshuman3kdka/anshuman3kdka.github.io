@@ -238,7 +238,45 @@ const toIsoString = (value) => {
   return date.toISOString();
 };
 
-const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
+const gitDatePrefix = '__GIT_DATE__';
+
+const buildGitLastModifiedMap = async (contentFiles) => {
+  if (contentFiles.length === 0) return new Map();
+
+  const trackedFiles = new Set(contentFiles);
+  const lastModifiedByFile = new Map();
+
+  try {
+    const { stdout } = await execFile(
+      'git',
+      ['log', '--name-only', `--format=${gitDatePrefix}%cI`, '--', ...contentFiles],
+      { cwd: root },
+    );
+
+    let currentTimestamp = null;
+
+    for (const line of stdout.split(/\r?\n/)) {
+      if (!line) continue;
+
+      if (line.startsWith(gitDatePrefix)) {
+        currentTimestamp = toIsoString(line.slice(gitDatePrefix.length).trim());
+        continue;
+      }
+
+      if (!currentTimestamp || !trackedFiles.has(line) || lastModifiedByFile.has(line)) continue;
+      lastModifiedByFile.set(line, currentTimestamp);
+    }
+  } catch {
+    // Fall back when git metadata is unavailable.
+  }
+
+  return lastModifiedByFile;
+};
+
+const resolveLastModified = (file, frontMatterData, fallbackStat, gitLastModifiedByFile) => {
+  const gitTimestamp = gitLastModifiedByFile.get(file);
+  if (gitTimestamp) return gitTimestamp;
+
   const frontMatterDate = toIsoString(
     frontMatterData.last_modified_at
       || frontMatterData.lastModified
@@ -246,14 +284,6 @@ const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
       || frontMatterData.date,
   );
   if (frontMatterDate) return frontMatterDate;
-
-  try {
-    const { stdout } = await execFile('git', ['log', '-1', '--format=%cI', '--', file], { cwd: root });
-    const gitTimestamp = toIsoString(stdout.trim());
-    if (gitTimestamp) return gitTimestamp;
-  } catch {
-    // Fall back when git metadata is unavailable.
-  }
 
   return fallbackStat.mtime.toISOString();
 };
@@ -271,6 +301,9 @@ const main = async () => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     return shouldIndexFile(rel);
   });
+  const gitLastModifiedByFile = await buildGitLastModifiedMap(
+    contentFiles.map((file) => path.relative(root, file).replace(/\\/g, '/')),
+  );
 
   const records = [];
 
@@ -293,7 +326,7 @@ const main = async () => {
       category: categoryFromPath(rel),
       url,
       content: toPlainText(preprocessed).slice(0, 400),
-      lastModified: await resolveLastModified(rel, frontMatterData, stats),
+      lastModified: resolveLastModified(rel, frontMatterData, stats, gitLastModifiedByFile),
     });
   }
 
