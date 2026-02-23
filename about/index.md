@@ -1,7 +1,7 @@
 ---
 title: About
 description: About Anshuman Pandey and his writing background.
-portrait_image: /assets/uploads/IMG_20260218_133159763 (1) (1) (1).webp
+portrait_image: /assets/uploads/IMG_20260218_133159763 (1) (1).webp
 portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
