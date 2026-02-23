@@ -34,6 +34,10 @@ const isNavigableDocumentLink = (link, href) => {
 };
 
 const handlePageTransitionClick = (event) => {
+  if (event.defaultPrevented) return;
+  if (event.button !== 0) return;
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
   const link = event.target.closest("a");
   if (!link) return;
 
