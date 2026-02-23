@@ -84,11 +84,11 @@
       <!-- Global navigation. Update nav labels/links in this file. -->
       <header class="site-header">
         <div class="nav-bar">
-          <a class="brand-link" href="{{ site.data.site.brand_url | default: '/' }}">{{ site_title }}</a>
+          <a class="brand-link" href="{{ '/' | relative_url }}">{{ site_title }}</a>
           <nav class="site-nav" aria-label="Primary">
             {% if site.data.site.header_links %}
               {% for link in site.data.site.header_links %}
-              <a href="{{ link.url }}">{{ link.label }}</a>
+              <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
               {% endfor %}
             {% endif %}
           </nav>
