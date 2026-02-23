@@ -393,6 +393,18 @@ content:
         label: Search Placeholder Text
         type: text
         required: false
+      - name: featured_cards_eyebrow
+        label: Featured Cards Eyebrow Text
+        type: text
+        required: false
+      - name: featured_cards_title
+        label: Featured Cards Heading
+        type: text
+        required: false
+      - name: featured_cards_subtitle
+        label: Featured Cards Description
+        type: text
+        required: false
       - name: footer_heading
         label: Footer Heading
         type: text

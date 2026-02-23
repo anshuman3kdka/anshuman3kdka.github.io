@@ -13,9 +13,9 @@
 
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro reveal">
-    <p class="section-eyebrow">Featured Cards</p>
-    <h2 class="section-title" id="featured-title">Highlights from the archive</h2>
-    <p class="section-subtitle">Manage these cards in Pages CMS under Home Page Cards.</p>
+    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
+    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
+    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>
   </div>
   <div class="grid grid-2">
     {% assign homepage_cards = site.data.home_cards.cards %}
