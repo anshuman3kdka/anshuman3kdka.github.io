@@ -156,7 +156,6 @@ const shouldIndexFile = (relativePath) => {
     'contact',
     'creative',
     'essays',
-    'home',
     'poetry',
     'projects',
     'prose',
