@@ -1,6 +1,7 @@
 ---
 title: The Cartographer’s Bidding
 author: Anshuman3kdka
+eyebrow: borders and blood
 ---
 Long after the ink hardened, the first lung gave way. Inside a quiet space where old paper and cold tea lingered in the air, metal scraped slowly over wood. Was that hesitation in the fingers? Or just pride leaving a mark? Hard to say. With a slow blink from the God-Cartographer, the boundary jolted sideways, cutting through purple flowers swaying in a field.
 
