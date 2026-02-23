@@ -162,8 +162,15 @@ const shouldIndexFile = (relativePath) => {
     'prose',
     'resume',
   ]);
+  const blockedRoots = new Set(['assets', 'scripts']);
 
-  if (parts.length === 1) return relativePath === 'index.md' || relativePath === 'index.html';
+  if (blockedRoots.has(top)) return false;
+  if (parts.some((segment) => segment.startsWith('_'))) return false;
+
+  if (parts.length === 1) {
+    return relativePath === 'index.md' || relativePath === 'index.html';
+  }
+
   if (!allowedTopLevel.has(top)) return false;
   if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return false;
   return true;
