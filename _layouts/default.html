@@ -5,9 +5,39 @@
     {% assign site_title = site.data.site.site_title | default: 'Anshuman3kdka' %}
     {% assign site_tagline = site.data.site.site_tagline | default: 'Writing portfolio' %}
     {% assign site_description = site.data.site.site_description | default: 'Anshuman3kdka — essays, projects, and creative technology.' %}
+    {% assign meta_description = page.description | default: site_description %}
+    {% assign site_base_url = site.url | default: site.data.site.brand_url | default: '' %}
+    {% assign canonical_path = page.url | default: '/' %}
+    {% assign canonical_url = canonical_path | absolute_url %}
+    {% if site_base_url != '' %}
+      {% assign canonical_url = site_base_url | append: canonical_path %}
+    {% endif %}
+    {% assign social_image = page.social_image | default: page.featured_image | default: site.data.site.social_image | default: site.data.site.featured_image %}
+    {% assign social_image_url = '' %}
+    {% if social_image %}
+      {% assign social_image_url = social_image | absolute_url %}
+      {% if site_base_url != '' and social_image contains '://' == false %}
+        {% assign social_image_url = site_base_url | append: social_image %}
+      {% endif %}
+    {% endif %}
     <title>{{ page.title }} · {{ site_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ page.description | default: site_description | escape }}" />
+    <meta name="description" content="{{ meta_description | escape }}" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="{{ canonical_url | escape }}" />
+    <meta property="og:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta property="og:description" content="{{ meta_description | escape }}" />
+    <meta property="og:type" content="{{ page.og_type | default: 'website' | escape }}" />
+    <meta property="og:url" content="{{ canonical_url | escape }}" />
+    {% if social_image_url != '' %}
+    <meta property="og:image" content="{{ social_image_url | escape }}" />
+    {% endif %}
+    <meta name="twitter:card" content="{{ page.twitter_card | default: 'summary_large_image' | escape }}" />
+    <meta name="twitter:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta name="twitter:description" content="{{ meta_description | escape }}" />
+    {% if social_image_url != '' %}
+    <meta name="twitter:image" content="{{ social_image_url | escape }}" />
+    {% endif %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
