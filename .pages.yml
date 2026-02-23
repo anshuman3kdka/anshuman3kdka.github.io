@@ -425,6 +425,11 @@ content:
         label: Featured Cards Description
         type: text
         required: false
+      - name: content_eyebrow_font_size
+        label: Content Eyebrow Font Size
+        type: text
+        required: false
+        description: CSS font-size value (e.g., 0.72rem or 12px) used on prose, poetry, essays, projects, and achievements listing cards.
       - name: footer_heading
         label: Footer Heading
         type: text
