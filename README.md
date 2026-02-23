@@ -51,3 +51,26 @@ These are wired into the live layout:
 - Header brand text/link and navigation read from `_data/site.yml`.
 - Footer heading/text/social links read from `_data/site.yml`.
 - Homepage hero title/tagline read from `_data/site.yml`.
+
+## Cloudflare caching checklist
+
+After deploying content updates, keep Cloudflare caching configured for static asset performance while avoiding stale HTML.
+
+1. **Caching → Configuration**
+   - Set **Browser Cache TTL** to at least **1 month** for static file reuse.
+   - Keep **Always Online** enabled.
+
+2. **Rules → Cache Rules**
+   - Add rules for static paths and extensions such as:
+     - `/assets/*`
+     - `*.css`, `*.js`, `*.jpg`, `*.png`, `*.webp`, `*.svg`, `*.json`
+   - Set **Cache eligibility** to **Eligible for cache**.
+   - Set **Edge TTL** to a long duration (for example, **1 month**).
+
+3. **HTML caching**
+   - Keep HTML caching conservative unless you have a clear cache-purge workflow.
+   - If you cache HTML aggressively, purge cache after publishing updates.
+
+4. **Post-publish purge**
+   - Use **Caching → Purge Cache** after publishing changes.
+   - Do selective purges where possible; use full purge when needed.
