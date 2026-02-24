@@ -787,7 +787,8 @@ body.is-leaving .page-shell {
     font-size: clamp(1.72rem, 8.2vw, 2.3rem);
     line-height: 1.1;
     letter-spacing: 0.002em;
-    word-break: break-all;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .about-portrait {
