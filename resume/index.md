@@ -68,6 +68,7 @@ title: Resume
 </ul>
 </div>
 </div>
+
 <div class="resume-item">
 <div class="resume-content">
 <h3>Bluechip Finance and Investment Society | New Delhi, India <span class="resume-role">Member</span> | Sep 2025 – Feb 2026</h3>
