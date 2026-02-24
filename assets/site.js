@@ -133,16 +133,76 @@ const initSearch = () => {
   const input = document.querySelector('[data-search-input]');
   const results = document.querySelector('[data-search-results]');
   const status = document.querySelector('[data-search-status]');
+  const categoryFilter = document.querySelector('[data-search-category]');
+  const sortSelect = document.querySelector('[data-search-sort]');
   const siteShell = document.querySelector('.site-shell');
   const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
   let previouslyFocused = null;
   let removeTrapListener = null;
 
-  if (!toggle || !overlay || !panel || !close || !input || !results) return;
+  if (!toggle || !overlay || !panel || !close || !input || !results || !status || !categoryFilter || !sortSelect) return;
 
   if (searchInitialized) return;
   searchInitialized = true;
+
+  const normalizeDate = (value) => {
+    if (!value) return 0;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+  };
+
+  const splitSentences = (textValue) => {
+    if (!textValue) return [];
+    return textValue
+      .split(/(?<=[.!?])\s+/)
+      .map((sentence) => sentence.trim())
+      .filter(Boolean);
+  };
+
+  const escapeHtml = (value = '') => value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const firstMatchingSnippet = (hit, query) => {
+    if (!query) return (hit.content || '').slice(0, 170);
+    const normalizedQuery = query.toLowerCase();
+    const source = [hit.content, hit.title].find((value) => typeof value === 'string' && value.trim()) || '';
+    const sentences = splitSentences(source);
+    const matchedSentence = sentences.find((sentence) => sentence.toLowerCase().includes(normalizedQuery));
+
+    if (matchedSentence) return matchedSentence;
+
+    const words = normalizedQuery.split(/\s+/).filter(Boolean);
+    const fallback = sentences.find((sentence) => words.some((word) => sentence.toLowerCase().includes(word)));
+    return fallback || source.slice(0, 170);
+  };
+
+  const scoreHit = (hit, query) => {
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length) return 0;
+
+    const title = (hit.title || '').toLowerCase();
+    const content = (hit.content || '').toLowerCase();
+    const category = (hit.category || '').toLowerCase();
+    const tags = Array.isArray(hit.tags) ? hit.tags.join(' ').toLowerCase() : '';
+
+    let score = 0;
+    terms.forEach((term) => {
+      if (title.includes(term)) score += 6;
+      if (category.includes(term)) score += 4;
+      if (tags.includes(term)) score += 3;
+      if (content.includes(term)) score += 2;
+    });
+
+    if (title.includes(query)) score += 10;
+    if (content.includes(query)) score += 5;
+
+    return score;
+  };
 
   const syncExpandedState = (isOpen) => {
     toggle.setAttribute('aria-expanded', String(isOpen));
@@ -185,6 +245,92 @@ const initSearch = () => {
     return () => document.removeEventListener('keydown', handleTabTrap);
   };
 
+  const populateCategories = () => {
+    const categories = new Set((searchData || []).map((item) => item.category).filter(Boolean));
+    categoryFilter.innerHTML = '<option value="all">All categories</option>';
+
+    [...categories]
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((category) => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.append(option);
+      });
+  };
+
+  const renderResults = () => {
+    if (!searchData) return;
+
+    const query = input.value.toLowerCase().trim();
+    const selectedCategory = categoryFilter.value;
+    const sortBy = sortSelect.value;
+
+    const filtered = searchData
+      .map((item) => ({
+        ...item,
+        _score: scoreHit(item, query),
+      }))
+      .filter((item) => {
+        const queryMatches = !query
+          || item._score > 0
+          || (item.tags || []).some((tag) => String(tag).toLowerCase().includes(query));
+
+        const categoryMatches = selectedCategory === 'all' || item.category === selectedCategory;
+        return queryMatches && categoryMatches;
+      });
+
+    filtered.sort((a, b) => {
+      if (sortBy === 'newest') {
+        return normalizeDate(b.date || b.lastModified) - normalizeDate(a.date || a.lastModified);
+      }
+
+      if (b._score !== a._score) return b._score - a._score;
+      return normalizeDate(b.date || b.lastModified) - normalizeDate(a.date || a.lastModified);
+    });
+
+    const hits = filtered.slice(0, 40);
+    results.innerHTML = '';
+
+    if (!hits.length) {
+      status.textContent = 'No results found.';
+      return;
+    }
+
+    status.textContent = `${hits.length} result${hits.length !== 1 ? 's' : ''} found.`;
+
+    hits.forEach((hit) => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      const title = document.createElement('div');
+      const meta = document.createElement('div');
+      const snippet = document.createElement('p');
+
+      link.setAttribute('href', hit.url || '#');
+
+      title.classList.add('search-result-title');
+      title.textContent = hit.title || 'Untitled';
+
+      const dateValue = hit.date || hit.lastModified;
+      const formattedDate = dateValue ? new Date(dateValue).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }) : 'No date';
+      const tagList = (hit.tags || []).slice(0, 3);
+      const tagText = tagList.length ? ` · ${tagList.join(', ')}` : '';
+      meta.classList.add('search-result-meta');
+      meta.textContent = `${hit.category || 'Page'} · ${formattedDate}${tagText}`;
+
+      snippet.classList.add('search-result-snippet');
+      snippet.innerHTML = escapeHtml(firstMatchingSnippet(hit, query));
+
+      link.append(title, meta, snippet);
+      listItem.append(link);
+      results.append(listItem);
+    });
+  };
+
   syncExpandedState(false);
 
   const openSearch = async () => {
@@ -213,6 +359,7 @@ const initSearch = () => {
         const response = await fetch(configuredSearchUrl);
         if (!response.ok) throw new Error('Failed to load search index');
         searchData = await response.json();
+        populateCategories();
         status.textContent = '';
       } catch (error) {
         status.textContent = 'Failed to load search index.';
@@ -241,6 +388,8 @@ const initSearch = () => {
     setTimeout(() => {
       overlay.hidden = true;
       input.value = '';
+      categoryFilter.value = 'all';
+      sortSelect.value = 'relevance';
       results.innerHTML = '';
       status.textContent = '';
     }, 200);
@@ -261,48 +410,9 @@ const initSearch = () => {
     }
   });
 
-  input.addEventListener('input', () => {
-    if (!searchData) return;
-    const query = input.value.toLowerCase().trim();
-    if (!query) {
-      results.innerHTML = '';
-      status.textContent = '';
-      return;
-    }
-
-    const hits = searchData.filter(item => {
-      return (item.title && item.title.toLowerCase().includes(query)) ||
-             (item.content && item.content.toLowerCase().includes(query));
-    });
-
-    if (hits.length === 0) {
-      status.textContent = 'No results found.';
-      results.innerHTML = '';
-    } else {
-      status.textContent = `${hits.length} result${hits.length !== 1 ? 's' : ''} found.`;
-      results.innerHTML = '';
-
-      hits.forEach((hit) => {
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-        const title = document.createElement('div');
-        const category = document.createElement('div');
-
-        link.setAttribute('href', hit.url || '#');
-
-        title.style.fontWeight = '600';
-        title.style.marginBottom = '0.2rem';
-        title.textContent = hit.title || 'Untitled';
-
-        category.classList.add('search-result-meta');
-        category.textContent = hit.category || 'Page';
-
-        link.append(title, category);
-        listItem.append(link);
-        results.append(listItem);
-      });
-    }
-  });
+  input.addEventListener('input', renderResults);
+  categoryFilter.addEventListener('change', renderResults);
+  sortSelect.addEventListener('change', renderResults);
 };
 
 const initPage = () => {
