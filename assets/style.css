@@ -193,8 +193,9 @@ button:focus-visible {
 
 .page-shell {
   background:
-    linear-gradient(180deg, rgba(24, 52, 38, 0.94) 0%, rgba(19, 43, 31, 0.96) 100%),
-    url("https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1800&q=70") center/cover;
+    radial-gradient(1200px 700px at 16% 4%, color-mix(in srgb, var(--color-sage) 20%, transparent), transparent 62%),
+    radial-gradient(980px 540px at 88% 18%, color-mix(in srgb, var(--color-forest) 34%, transparent), transparent 64%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, black 10%) 0%, color-mix(in srgb, var(--color-bg-soft) 88%, black 12%) 100%);
   border-radius: var(--radius-lg);
   padding: clamp(2.2rem, 4.8vw, 4.5rem);
   box-shadow: var(--shadow-soft);
