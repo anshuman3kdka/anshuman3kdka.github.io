@@ -18,7 +18,6 @@ A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into
 
 ## EDUCATION
 
-```
 <div class="resume-item">
   <div class="resume-content">
     <h3>Sri Venkateswara College, University of Delhi | New Delhi, India <span class="resume-role">Bachelor of Commerce (B.Com Hons)</span> | 2025 – Present</h3>
@@ -36,11 +35,9 @@ A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into
     </ul>
   </div>
 </div>
-```
 
 ## EXTRACURRICULAR & LEADERSHIP EXPERIENCE
 
-```
 <div class="resume-item">
   <div class="resume-content">
     <h3>180 Degrees Consulting, Sri Venkateswara College | New Delhi, India <span class="resume-role">Junior Consultant</span> | Sep 2025 – Present</h3>
@@ -80,11 +77,9 @@ A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into
     </ul>
   </div>
 </div>
-```
 
 ## PROJECTS & FREELANCE EXPERIENCE
 
-```
 <div class="resume-item">
   <div class="resume-content">
     <h3>Freelance Content Creator &amp; Writer | <a href="https://www.anshuman3kdka.in">Portfolio Website</a> | 2025 – Present</h3>
@@ -95,7 +90,6 @@ A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into
     </ul>
   </div>
 </div>
-```
 
 ## SKILLS
 
