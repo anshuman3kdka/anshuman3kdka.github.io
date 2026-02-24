@@ -3,7 +3,7 @@ title: Resume
 ---
 <div class="resume-page">
 <header class="resume-header resume-header--left">
-<p class="resume-kicker">Curriculum Vitae</p>
+
 <h1 class="resume-name">ANSHUMAN<br>PANDEY</h1>
 <div class="resume-meta resume-meta--stack">
 <p>New Delhi, Delhi, India</p>
