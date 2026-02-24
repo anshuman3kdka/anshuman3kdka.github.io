@@ -98,3 +98,41 @@ After deploying content updates, keep Cloudflare caching configured for static a
 4. **Post-publish purge**
    - Use **Caching → Purge Cache** after publishing changes.
    - Do selective purges where possible; use full purge when needed.
+
+## Editorial workflow: monthly analytics review
+
+Use this simple routine once per month to keep analytics and editorial planning up to date.
+
+1. **Collect analytics data**
+   - Open your analytics dashboard (for example, Plausible).
+   - Record:
+     - top 3 posts/pages by views,
+     - site-wide average time on page,
+     - top on-site search terms.
+2. **Update the Insights page**
+   - Edit `insights/index.md`.
+   - Replace placeholder values in:
+     - **Top posts this month**,
+     - **Average time on page**,
+     - **Search terms readers used**,
+     - **Last updated** date.
+3. **Editorial decisions**
+   - Identify one underperforming page to improve (title, intro, internal links).
+   - Identify one high-performing topic to expand with a follow-up post.
+4. **Publish + verify**
+   - Commit your changes.
+   - Deploy the site.
+   - Open `/insights/` to confirm the update is visible.
+
+### Analytics script configuration
+
+Analytics loading is controlled via `_data/site.yml` under the `analytics` key:
+
+- `enabled`: `true` or `false`
+- `provider`: currently `plausible`
+- `domain`: your tracked domain
+- `script_src`: analytics script URL
+
+Set `enabled: true` only when you are ready to collect real traffic data.
+
+> The Insights page is intentionally not added to the main nav, so it stays semi-private unless someone has the direct URL.

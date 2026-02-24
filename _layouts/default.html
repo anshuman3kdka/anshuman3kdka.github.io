@@ -52,6 +52,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    {% assign analytics = site.data.site.analytics %}
+    {% if analytics and analytics.enabled and analytics.provider == 'plausible' and analytics.domain and analytics.script_src %}
+    <script defer data-domain="{{ analytics.domain | escape }}" src="{{ analytics.script_src | escape }}"></script>
+    {% endif %}
   </head>
 
   <body class="is-loading" data-search-url="{{ '/search.json' | relative_url }}">
