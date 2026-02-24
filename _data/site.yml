@@ -8,6 +8,11 @@ featured_cards_eyebrow: Featured Cards
 featured_cards_title: Things that got finished
 featured_cards_subtitle: Visit my latest works
 content_eyebrow_font_size: 0.72rem
+analytics:
+  enabled: false
+  provider: plausible
+  domain: www.anshuman3kdka.in
+  script_src: https://plausible.io/js/script.js
 footer_heading: Leave a review :)
 footer_note: Built between deadlines
 contact_email: thisisanshumanp@gmail.com
