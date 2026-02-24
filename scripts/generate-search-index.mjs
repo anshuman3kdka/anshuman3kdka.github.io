@@ -210,6 +210,36 @@ const categoryFromPath = (relativePath) => {
   return first.charAt(0).toUpperCase() + first.slice(1);
 };
 
+const normalizeCategory = (value, fallbackPath) => {
+  const source = typeof value === 'string' && value.trim() ? value : fallbackPath;
+  const cleaned = source
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!cleaned) return 'Page';
+
+  return cleaned
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+};
+
+const normalizeTags = (value) => {
+  if (!value) return [];
+
+  const candidates = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(',')
+      : [];
+
+  return [...new Set(candidates
+    .map((tag) => String(tag || '').trim())
+    .filter(Boolean)
+    .map((tag) => tag.toLowerCase()))];
+};
+
 const extractTitle = (body, frontMatterData, fallback) => {
   if (typeof frontMatterData.title === 'string' && frontMatterData.title.trim()) {
     return frontMatterData.title;
@@ -271,7 +301,7 @@ const toIsoString = (value) => {
 const isSearchDisabled = (value) => value === false
   || (typeof value === 'string' && value.trim().toLowerCase() === 'false');
 
-const resolveLastModified = async (file, frontMatterData, fallbackStat) => {
+const resolveLastModified = (frontMatterData, fallbackStat) => {
   const frontMatterDate = toIsoString(
     frontMatterData.last_modified_at
       || frontMatterData.lastModified
@@ -296,10 +326,6 @@ const main = async () => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     return shouldIndexFile(rel);
   });
-  const gitLastModifiedByFile = await buildGitLastModifiedMap(
-    contentFiles.map((file) => path.relative(root, file).replace(/\\/g, '/')),
-  );
-
   const records = [];
 
   for (const file of contentFiles) {
@@ -318,10 +344,13 @@ const main = async () => {
 
     records.push({
       title: extractTitle(body, frontMatterData, rel),
-      category: categoryFromPath(rel),
+      category: normalizeCategory(frontMatterData.category, categoryFromPath(rel)),
+      date: toIsoString(frontMatterData.date),
+      tags: normalizeTags(frontMatterData.tags),
+      eyebrow: typeof frontMatterData.eyebrow === 'string' ? frontMatterData.eyebrow.trim() : '',
       url,
-      content: toPlainText(preprocessed).slice(0, 400),
-      lastModified: resolveLastModified(rel, frontMatterData, stats, gitLastModifiedByFile),
+      content: toPlainText(preprocessed).slice(0, 1400),
+      lastModified: resolveLastModified(frontMatterData, stats),
     });
   }
 

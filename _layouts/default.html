@@ -80,6 +80,21 @@
           spellcheck="false"
           data-search-input
         >
+        <div class="search-controls">
+          <label class="search-filter" for="site-search-category">
+            <span>Category</span>
+            <select id="site-search-category" data-search-category>
+              <option value="all">All categories</option>
+            </select>
+          </label>
+          <label class="search-filter" for="site-search-sort">
+            <span>Sort by</span>
+            <select id="site-search-sort" data-search-sort>
+              <option value="relevance">Relevance</option>
+              <option value="newest">Newest</option>
+            </select>
+          </label>
+        </div>
         <p class="search-status" id="site-search-status" aria-live="polite" data-search-status></p>
         <ul class="search-results" data-search-results></ul>
       </div>
