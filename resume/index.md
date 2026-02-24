@@ -12,7 +12,7 @@ LinkedIn: [linkedin](https://www.linkedin.com/in/anshuman-pandey-b33362378)
 
 Portfolio: [anshuman3kdka.in](https://www.anshuman3kdka.in)
 
-### PROFESSIONAL SUMMARY
+## PROFESSIONAL SUMMARY
 
 A first-year B.Com (Hons) learner at Sri Venkateswara College brings energy into every project while building expertise in core business concepts. Because of an interest in how brands communicate, attention often turns toward narrative-driven approaches in marketing. Alongside studies, participation occurs regularly in top-tier student groups focused on consulting, finance, and promotion - each experience shaping abilities where numbers meet online engagement. Work now includes handling independent writing assignments across platforms. Meanwhile, opportunities are being explored to apply talents in composition, elementary analytics, and strategic planning within fast-moving internship settings.
 
