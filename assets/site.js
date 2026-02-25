@@ -175,35 +175,6 @@ const initSearch = () => {
     return Number.isNaN(date.getTime()) ? 0 : date.getTime();
   };
 
-  const splitSentences = (textValue) => {
-    if (!textValue) return [];
-    return textValue
-      .split(/(?<=[.!?])\s+/)
-      .map((sentence) => sentence.trim())
-      .filter(Boolean);
-  };
-
-  const escapeHtml = (value = '') => value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-
-  const firstMatchingSnippet = (hit, query) => {
-    if (!query) return (hit.content || '').slice(0, 170);
-    const normalizedQuery = query.toLowerCase();
-    const source = [hit.content, hit.title].find((value) => typeof value === 'string' && value.trim()) || '';
-    const sentences = splitSentences(source);
-    const matchedSentence = sentences.find((sentence) => sentence.toLowerCase().includes(normalizedQuery));
-
-    if (matchedSentence) return matchedSentence;
-
-    const words = normalizedQuery.split(/\s+/).filter(Boolean);
-    const fallback = sentences.find((sentence) => words.some((word) => sentence.toLowerCase().includes(word)));
-    return fallback || source.slice(0, 170);
-  };
-
   const scoreHit = (hit, query) => {
     const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
     if (!terms.length) return 0;
@@ -326,29 +297,17 @@ const initSearch = () => {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
       const title = document.createElement('div');
-      const meta = document.createElement('div');
-      const snippet = document.createElement('p');
+      const eyebrow = document.createElement('p');
 
       link.setAttribute('href', hit.url || '#');
 
       title.classList.add('search-result-title');
       title.textContent = hit.title || 'Untitled';
 
-      const dateValue = hit.date || hit.lastModified;
-      const formattedDate = dateValue ? new Date(dateValue).toLocaleDateString(undefined, {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      }) : 'No date';
-      const tagList = (hit.tags || []).slice(0, 3);
-      const tagText = tagList.length ? ` · ${tagList.join(', ')}` : '';
-      meta.classList.add('search-result-meta');
-      meta.textContent = `${hit.category || 'Page'} · ${formattedDate}${tagText}`;
+      eyebrow.classList.add('search-result-meta');
+      eyebrow.textContent = hit.eyebrow || '';
 
-      snippet.classList.add('search-result-snippet');
-      snippet.innerHTML = escapeHtml(firstMatchingSnippet(hit, query));
-
-      link.append(title, meta, snippet);
+      link.append(title, eyebrow);
       listItem.append(link);
       results.append(listItem);
     });
