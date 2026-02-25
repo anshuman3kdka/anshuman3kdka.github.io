@@ -1077,29 +1077,38 @@ body.search-active {
 }
 
 .resume-download-btn {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute !important;
+  top: clamp(1rem, 3vw, 1.5rem) !important;
+  right: clamp(1rem, 3vw, 1.5rem) !important;
+  left: auto !important;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 0.8rem;
-  background: rgba(211, 178, 119, 0.1);
-  border: 1px solid rgba(211, 178, 119, 0.4);
-  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  background: rgba(211, 178, 119, 0.12);
+  border: 1px solid rgba(211, 178, 119, 0.5);
+  border-radius: 999px;
   color: var(--color-accent);
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   cursor: pointer;
   transition: all var(--ease-gentle);
-  z-index: 5;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .resume-download-btn:hover {
-  background: rgba(211, 178, 119, 0.2);
+  background: var(--color-accent);
+  color: #172516;
   border-color: var(--color-accent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .resume-download-btn svg {
@@ -1267,8 +1276,9 @@ body.search-active {
 
   .resume-download-btn {
     padding: 0.5rem;
-    top: var(--space-2);
-    right: var(--space-2);
+    top: 0.75rem !important;
+    right: 0.75rem !important;
+    left: auto !important;
   }
 }
 
