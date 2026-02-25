@@ -2,6 +2,7 @@
   {
     "title": "A Letter to You (Red Pen Edit)",
     "category": "Prose",
+    "eyebrow": "Horror",
     "date": null,
     "tags": [],
     "url": "/prose/A_letter_to_you.html",
@@ -11,6 +12,7 @@
   {
     "title": "A merchant's Initiation",
     "category": "Poetry",
+    "eyebrow": "On Commodification of Love",
     "date": null,
     "tags": [],
     "url": "/poetry/a-merchants-initiation.html",
@@ -20,6 +22,7 @@
   {
     "title": "Adam Won’t Know",
     "category": "Poetry",
+    "eyebrow": "on temptation",
     "date": null,
     "tags": [],
     "url": "/poetry/adam-wont-know.html",
@@ -29,6 +32,7 @@
   {
     "title": "Another Poet",
     "category": "Poetry",
+    "eyebrow": "on ruinous devotion",
     "date": null,
     "tags": [],
     "url": "/poetry/another-poet.html",
@@ -38,6 +42,7 @@
   {
     "title": "Archaeological Site Report: Excavation #2005-CB",
     "category": "Essays",
+    "eyebrow": "Satire",
     "date": null,
     "tags": [],
     "url": "/essays/archaeological-site-report.html",
@@ -47,6 +52,7 @@
   {
     "title": "Dead Wolves Under The Tide",
     "category": "Poetry",
+    "eyebrow": "on fate",
     "date": null,
     "tags": [],
     "url": "/poetry/dead-wolves-under-the-tide.html",
@@ -56,6 +62,7 @@
   {
     "title": "Green Kisses",
     "category": "Poetry",
+    "eyebrow": "On Toxic seduction",
     "date": null,
     "tags": [],
     "url": "/poetry/green-kisses.html",
@@ -65,6 +72,7 @@
   {
     "title": "Grey",
     "category": "Poetry",
+    "eyebrow": "On writer's block",
     "date": null,
     "tags": [],
     "url": "/poetry/grey.html",
@@ -74,6 +82,7 @@
   {
     "title": "Home",
     "category": "Home",
+    "eyebrow": "",
     "date": null,
     "tags": [],
     "url": "/home/",
@@ -83,6 +92,7 @@
   {
     "title": "Man's Greatest Invention",
     "category": "Poetry",
+    "eyebrow": "On Theism",
     "date": null,
     "tags": [],
     "url": "/poetry/mans-greatest-invention.html",
@@ -92,6 +102,7 @@
   {
     "title": "Merchants of Lush II",
     "category": "Poetry",
+    "eyebrow": "On lost idealism",
     "date": null,
     "tags": [],
     "url": "/poetry/merchants-of-lush-ii.html",
@@ -101,6 +112,7 @@
   {
     "title": "Midnight",
     "category": "Poetry",
+    "eyebrow": "On absence",
     "date": null,
     "tags": [],
     "url": "/poetry/midnight.html",
@@ -110,6 +122,7 @@
   {
     "title": "Night",
     "category": "Prose",
+    "eyebrow": "hidden worlds",
     "date": null,
     "tags": [],
     "url": "/prose/Night.html",
@@ -119,6 +132,7 @@
   {
     "title": "Our Epitaphs",
     "category": "Poetry",
+    "eyebrow": "on waiting",
     "date": null,
     "tags": [],
     "url": "/poetry/our-epitaphs.html",
@@ -128,6 +142,7 @@
   {
     "title": "Poetry",
     "category": "Poetry",
+    "eyebrow": "",
     "date": null,
     "tags": [],
     "url": "/poetry/",
@@ -137,6 +152,7 @@
   {
     "title": "Prayer",
     "category": "Poetry",
+    "eyebrow": "on return",
     "date": null,
     "tags": [],
     "url": "/poetry/prayer.html",
@@ -146,6 +162,7 @@
   {
     "title": "Prose",
     "category": "Prose",
+    "eyebrow": "",
     "date": null,
     "tags": [],
     "url": "/prose/",
@@ -155,6 +172,7 @@
   {
     "title": "Six Till Night (Sun's Version)",
     "category": "Poetry",
+    "eyebrow": "On belonging",
     "date": null,
     "tags": [],
     "url": "/poetry/six-till-night-suns-version.html",
@@ -164,6 +182,7 @@
   {
     "title": "The Cartographer’s Bidding",
     "category": "Prose",
+    "eyebrow": "borders and blood",
     "date": null,
     "tags": [],
     "url": "/prose/The_cartographers_bidding.html",
@@ -173,6 +192,7 @@
   {
     "title": "The Circe we Need",
     "category": "Poetry",
+    "eyebrow": "On mythic hunger",
     "date": null,
     "tags": [],
     "url": "/poetry/the-circe-we-need.html",
@@ -182,6 +202,7 @@
   {
     "title": "The Dead Don’t Cry",
     "category": "Poetry",
+    "eyebrow": "On emotional absence",
     "date": null,
     "tags": [],
     "url": "/poetry/the-dead-dont-cry.html",
@@ -191,6 +212,7 @@
   {
     "title": "The Hobbit's Circle",
     "category": "Poetry",
+    "eyebrow": "On homecoming",
     "date": null,
     "tags": [],
     "url": "/poetry/the-hobbits-circle.html",
@@ -200,6 +222,7 @@
   {
     "title": "The Illuminati Girl",
     "category": "Poetry",
+    "eyebrow": "on new love",
     "date": null,
     "tags": [],
     "url": "/poetry/the-illuminati-girl.html",
@@ -209,6 +232,7 @@
   {
     "title": "The Star Without Earth",
     "category": "Poetry",
+    "eyebrow": "on grief",
     "date": null,
     "tags": [],
     "url": "/poetry/the-star-without-earth.html",
@@ -218,6 +242,7 @@
   {
     "title": "The Villain",
     "category": "Poetry",
+    "eyebrow": "on revolution",
     "date": null,
     "tags": [],
     "url": "/poetry/the-villain.html",
@@ -227,6 +252,7 @@
   {
     "title": "The Violin Elegy",
     "category": "Poetry",
+    "eyebrow": "on fatal love",
     "date": null,
     "tags": [],
     "url": "/poetry/the-violin-elegy.html",
@@ -236,6 +262,7 @@
   {
     "title": "Venus From Miles Afar",
     "category": "Poetry",
+    "eyebrow": "on unrequited longing",
     "date": null,
     "tags": [],
     "url": "/poetry/venus-from-miles-afar.html",
@@ -245,6 +272,7 @@
   {
     "title": "Venus in Moonlight",
     "category": "Poetry",
+    "eyebrow": "on silent bewitchment",
     "date": null,
     "tags": [],
     "url": "/poetry/venus-in-moonlight.html",
