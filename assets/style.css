@@ -306,17 +306,17 @@ button:focus-visible {
   - Keep the main heading in normal document flow (no absolute/fixed positioning).
 */
 .hero-content {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding-right: clamp(0rem, 1.2vw, 1rem);
-  gap: var(--space-7);
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  align-items: center;
+  gap: var(--space-3);
+  align-items: flex-start;
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  margin: 0 0 var(--space-4);
+  margin: 0;
   max-inline-size: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -328,7 +328,7 @@ button:focus-visible {
 .hero-lead {
   font-size: var(--step-1);
   color: var(--color-ink-muted);
-  margin: 0 0 var(--space-6);
+  margin: 0 0 var(--space-3);
   max-width: 34ch;
 }
 
@@ -395,7 +395,8 @@ button:focus-visible {
   background: linear-gradient(180deg, rgba(25, 55, 40, 0.85), rgba(21, 46, 34, 0.86));
   border-radius: var(--radius-md);
   border: 1px solid var(--color-rule);
-  padding: var(--space-5);
+  padding: var(--space-4);
+  max-width: 440px;
   box-shadow: var(--shadow-card);
   transition: transform var(--ease-gentle), box-shadow var(--ease-gentle), border-color var(--ease-gentle);
 }
@@ -674,6 +675,7 @@ body.is-leaving .page-shell {
 
   .grid-2 {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-content: center;
   }
 
   .section {
@@ -704,6 +706,12 @@ body.is-leaving .page-shell {
 
   .hero.hero--center-desktop .hero-content {
     padding-right: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-content .section-eyebrow {
+    margin-bottom: 0;
   }
 }
 

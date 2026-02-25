@@ -1,7 +1,7 @@
 <section class="section hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content reveal">
-    <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
+    <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
     <div class="hero-actions">
       <a class="button button-primary" href="/essays/">Essays →</a>
