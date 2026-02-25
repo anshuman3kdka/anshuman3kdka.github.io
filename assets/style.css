@@ -47,9 +47,9 @@
   --radius-md: 18px;
   --radius-sm: 12px;
 
-  --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 14px 28px rgba(0, 0, 0, 0.24);
-  --ease-gentle: 220ms ease;
+  --shadow-soft: 0 30px 60px -12px rgba(0, 0, 0, 0.45), 0 18px 36px -18px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 12px 24px -6px rgba(0, 0, 0, 0.3), 0 4px 12px -4px rgba(0, 0, 0, 0.2);
+  --ease-gentle: 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *,
@@ -77,21 +77,42 @@ body {
   overflow-x: clip;
 }
 
+/*
+  Global grain overlay
+  Adds a subtle "weathered paper" texture to everything.
+*/
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 /* Subtle nature texture banding via section separators */
 .section + .section {
   position: relative;
-  padding-top: clamp(2.6rem, 5vw, 4rem);
+  padding-top: clamp(3.5rem, 8vw, 6rem);
 }
 
+/* Ornate Baroque-style divider */
 .section + .section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(680px, 74vw);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
+  width: min(420px, 80vw);
+  height: 32px;
+  opacity: 0.4;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 20 C 30 10, 50 10, 70 20 S 110 30, 130 20 S 170 10, 190 20' stroke='%23d3b277' fill='none' stroke-width='0.5'/%3E%3Ccircle cx='100' cy='20' r='2' fill='%23d3b277'/%3E%3Cpath d='M85 20 Q 92.5 12, 100 20 Q 107.5 28, 115 20' stroke='%23d3b277' fill='none' stroke-width='0.5'/%3E%3Cpath d='M0 20 L 80 20 M 120 20 L 200 20' stroke='%23d3b277' opacity='0.3' stroke-width='0.5'/%3E%3C/svg%3E");
 }
 
 img {
@@ -142,11 +163,11 @@ button:focus-visible {
   position: sticky;
   top: clamp(0.5rem, 2vw, var(--space-4));
   z-index: 20;
-  background: rgba(14, 35, 25, 0.78);
-  border: 1px solid var(--color-rule);
+  background: rgba(14, 35, 25, 0.82);
+  border: 1px solid rgba(211, 178, 119, 0.25);
   border-radius: 999px;
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(232, 226, 206, 0.05);
+  backdrop-filter: blur(14px);
 }
 
 .nav-bar {
@@ -193,19 +214,32 @@ button:focus-visible {
 
 .page-shell {
   background:
-    radial-gradient(1200px 700px at 16% 4%, color-mix(in srgb, var(--color-sage) 20%, transparent), transparent 62%),
-    radial-gradient(980px 540px at 88% 18%, color-mix(in srgb, var(--color-forest) 34%, transparent), transparent 64%),
-    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, black 10%) 0%, color-mix(in srgb, var(--color-bg-soft) 88%, black 12%) 100%);
+    radial-gradient(1200px 700px at 16% 4%, color-mix(in srgb, var(--color-sage) 15%, transparent), transparent 65%),
+    radial-gradient(980px 540px at 88% 18%, color-mix(in srgb, var(--color-forest) 25%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, black 6%) 0%, var(--color-bg-soft) 100%);
   border-radius: var(--radius-lg);
   padding: clamp(2.2rem, 4.8vw, 4.5rem);
-  box-shadow: var(--shadow-soft);
-  border: 1px solid var(--color-rule);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 0 0 1px rgba(211, 178, 119, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   position: relative;
-  /*
-    Hero safety: this used to clip descendants when large text animated/reflowed.
-    Keep decorative effects in pseudo-elements and allow content to remain fully visible.
-  */
   overflow: visible;
+}
+
+/* Decorative brass-style corner accents for the page shell */
+.page-shell::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-3);
+  pointer-events: none;
+  border: 1px solid rgba(211, 178, 119, 0.12);
+  border-radius: calc(var(--radius-lg) - var(--space-3));
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 V0 H10 M30 0 H40 V10 M40 30 V40 H30 M10 40 H0 V30' stroke='%23d3b277' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 /* Delicate vignette to keep text contrast consistent over imagery */
@@ -213,8 +247,9 @@ button:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, transparent, rgba(8, 18, 13, 0.3) 75%);
+  background: radial-gradient(circle at 20% 20%, transparent, rgba(8, 18, 13, 0.35) 80%);
   pointer-events: none;
+  border-radius: var(--radius-lg);
 }
 
 .page-body {
@@ -345,7 +380,7 @@ button:focus-visible {
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  padding: 0.72rem 1.2rem;
+  padding: 0.72rem 1.4rem;
   border-radius: 999px;
   font-family: var(--font-body);
   font-size: var(--step--1);
@@ -354,33 +389,43 @@ button:focus-visible {
 }
 
 .button-primary {
-  background: linear-gradient(180deg, #dcc08b, var(--color-accent));
-  color: #172516 !important;
-  border-color: rgba(211, 178, 119, 0.85);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #e4c99a, var(--color-accent));
+  color: #1a2f25 !important;
+  border: 1px solid #edd3a7;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .button-primary:visited,
 .button-primary:hover,
 .button-primary:focus-visible,
 .button-primary:active {
-  color: #172516;
+  color: #1a2f25;
 }
 
 .button-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 24px -4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(180deg, #edd3a7, #dcc08b);
 }
 
 .button-secondary {
-  background: rgba(15, 35, 25, 0.5);
-  border-color: rgba(232, 226, 206, 0.24);
-  color: var(--color-ink);
+  background: rgba(13, 31, 23, 0.6);
+  border: 1px solid rgba(211, 178, 119, 0.2);
+  color: var(--color-ink-muted);
+  backdrop-filter: blur(8px);
 }
 
 .button-secondary:hover {
-  background: rgba(95, 123, 93, 0.22);
-  border-color: rgba(211, 178, 119, 0.34);
+  background: rgba(22, 48, 36, 0.7);
+  border-color: rgba(211, 178, 119, 0.4);
+  color: var(--color-ink);
+  transform: translateY(-2px);
 }
 
 .grid {
@@ -393,18 +438,37 @@ button:focus-visible {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(25, 55, 40, 0.85), rgba(21, 46, 34, 0.86));
+  background: linear-gradient(180deg, rgba(25, 55, 40, 0.9), rgba(21, 46, 34, 0.92));
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-rule);
+  border: 1px solid rgba(211, 178, 119, 0.15);
   padding: var(--space-5);
-  box-shadow: var(--shadow-card);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 1px rgba(232, 226, 206, 0.03);
   transition: transform var(--ease-gentle), box-shadow var(--ease-gentle), border-color var(--ease-gentle);
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-soft);
-  border-color: rgba(211, 178, 119, 0.3);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft), inset 0 0 20px rgba(211, 178, 119, 0.05);
+  border-color: rgba(211, 178, 119, 0.4);
+}
+
+/* Subtle inner glow for cards on hover */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(211, 178, 119, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 .card-label {
@@ -471,14 +535,33 @@ button:focus-visible {
 .content-item {
   padding: clamp(var(--space-4), 2.5vw, var(--space-5));
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-rule);
-  background: linear-gradient(180deg, rgba(25, 55, 40, 0.78), rgba(19, 42, 31, 0.82));
-  transition: border-color var(--ease-gentle), transform var(--ease-gentle), background-color var(--ease-gentle);
+  border: 1px solid rgba(211, 178, 119, 0.1);
+  background: linear-gradient(180deg, rgba(25, 55, 40, 0.7), rgba(19, 42, 31, 0.75));
+  transition: border-color var(--ease-gentle), transform var(--ease-gentle), background-color var(--ease-gentle), box-shadow var(--ease-gentle);
+  position: relative;
+  overflow: hidden;
 }
 
 .content-item:hover {
-  border-color: rgba(211, 178, 119, 0.42);
-  transform: translateY(-2px);
+  border-color: rgba(211, 178, 119, 0.35);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  background: linear-gradient(180deg, rgba(28, 62, 45, 0.8), rgba(22, 48, 36, 0.85));
+}
+
+/* Subtle inner glow for content items on hover */
+.content-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(211, 178, 119, 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.content-item:hover::after {
+  opacity: 1;
 }
 
 .content-item h3 {
@@ -540,6 +623,16 @@ button:focus-visible {
   background: var(--color-accent-soft);
   border-radius: var(--radius-sm);
   color: var(--color-ink-muted);
+}
+
+.prose::after {
+  content: "❦";
+  display: block;
+  text-align: center;
+  margin-top: var(--space-9);
+  color: var(--color-accent);
+  opacity: 0.35;
+  font-size: var(--step-1);
 }
 
 /* About page portrait */
@@ -815,24 +908,26 @@ body.is-leaving .page-shell {
   top: clamp(0.8rem, 2.2vw, 1.4rem);
   right: clamp(0.8rem, 2.2vw, 1.4rem);
   z-index: 40;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: 999px;
-  border: 1px solid var(--color-rule);
-  background: rgba(14, 35, 25, 0.82);
+  border: 1px solid rgba(211, 178, 119, 0.3);
+  background: rgba(14, 35, 25, 0.85);
   color: var(--color-ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(232, 226, 206, 0.05);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  backdrop-filter: blur(8px);
 }
 
 .search-toggle:hover {
-  transform: translateY(-1px);
-  background: rgba(21, 49, 36, 0.9);
-  border-color: rgba(211, 178, 119, 0.45);
+  transform: translateY(-2px);
+  background: rgba(21, 49, 36, 0.95);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(232, 226, 206, 0.1);
 }
 
 .search-toggle svg {
@@ -869,10 +964,10 @@ body.is-leaving .page-shell {
   max-height: min(72vh, 680px);
   overflow: auto;
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-rule);
-  background: linear-gradient(180deg, rgba(24, 52, 38, 0.96) 0%, rgba(16, 37, 27, 0.98) 100%);
-  box-shadow: var(--shadow-soft);
-  padding: 1rem;
+  border: 1px solid rgba(211, 178, 119, 0.35);
+  background: linear-gradient(180deg, rgba(24, 52, 38, 0.98) 0%, rgba(16, 37, 27, 0.99) 100%);
+  box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(232, 226, 206, 0.05);
+  padding: 1.25rem;
   transform: translateY(-8px);
   opacity: 0;
   transition: transform 180ms ease, opacity 180ms ease;

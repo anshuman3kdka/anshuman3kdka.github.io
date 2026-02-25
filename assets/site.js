@@ -121,6 +121,21 @@ const handleScrollReveal = () => {
   });
 };
 
+const handleInteractiveGlow = () => {
+  if (prefersReducedMotion) return;
+
+  const elements = document.querySelectorAll('.card, .content-item');
+  elements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty('--mouse-x', `${x}%`);
+      el.style.setProperty('--mouse-y', `${y}%`);
+    });
+  });
+};
+
 
 // Search functionality
 let searchData = null;
@@ -380,6 +395,7 @@ const initPage = () => {
   resetTransientUiState();
   handlePageTransitions();
   handleScrollReveal();
+  handleInteractiveGlow();
   initSearch();
 };
 
