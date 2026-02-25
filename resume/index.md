@@ -17,7 +17,7 @@ title: Resume
 <div class="resume-meta resume-meta--stack">
 <p>New Delhi, Delhi, India</p>
 <p>Email: <a href="mailto:thisisanshumanp@gmail.com">thisisanshumanp@gmail.com</a></p>
-<p>LinkedIn: <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378">linkedin</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/anshuman-pandey-b33362378">Anshuman Pandey</a></p>
 <p>Portfolio: <a href="https://www.anshuman3kdka.in">anshuman3kdka.in</a></p>
 </div>
 </header>
