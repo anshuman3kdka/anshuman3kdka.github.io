@@ -257,7 +257,7 @@ button:focus-visible {
   z-index: 1;
 }
 
-.page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure) {
+.page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure, header, table, pre) {
   max-width: 860px;
   overflow: hidden;
   margin-left: auto;
@@ -356,7 +356,6 @@ button:focus-visible {
   overflow-wrap: anywhere;
   word-break: break-word;
   font-size: var(--step-4);
-  margin: 0 0 var(--space-4);
   line-height: 1.05;
   color: #f5f1e5;
 }
