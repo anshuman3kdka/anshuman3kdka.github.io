@@ -121,28 +121,6 @@ const handleScrollReveal = () => {
   });
 };
 
-const randomizeFavoriteQuotes = () => {
-  const quoteGrid = document.querySelector('[data-quote-grid]');
-  if (!quoteGrid) return;
-
-  const quoteCards = Array.from(quoteGrid.querySelectorAll('[data-quote-card]'));
-  if (quoteCards.length <= 1) return;
-
-  const desiredCount = Number.parseInt(quoteGrid.dataset.quoteCount || `${quoteCards.length}`, 10);
-  const visibleCount = Number.isFinite(desiredCount)
-    ? Math.max(1, Math.min(desiredCount, quoteCards.length))
-    : quoteCards.length;
-
-  const shuffledCards = [...quoteCards]
-    .map((card) => ({ card, sortValue: Math.random() }))
-    .sort((a, b) => a.sortValue - b.sortValue)
-    .map(({ card }) => card);
-
-  quoteGrid.innerHTML = '';
-  shuffledCards.slice(0, visibleCount).forEach((card) => {
-    quoteGrid.append(card);
-  });
-};
 
 // Search functionality
 let searchData = null;
@@ -402,7 +380,6 @@ const initPage = () => {
   resetTransientUiState();
   handlePageTransitions();
   handleScrollReveal();
-  randomizeFavoriteQuotes();
   initSearch();
 };
 
