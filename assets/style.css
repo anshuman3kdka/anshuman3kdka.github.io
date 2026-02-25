@@ -1307,6 +1307,7 @@ body.search-active {
     box-shadow: none !important;
     transform: none !important;
     opacity: 1 !important;
+    position: static !important;
   }
 
   .page-shell::after {
@@ -1319,6 +1320,7 @@ body.search-active {
     border: none !important;
     padding: 0 !important;
     box-shadow: none !important;
+    position: static !important;
   }
 
   .resume-header {
@@ -1383,10 +1385,22 @@ body.search-active {
     border-left: 1.5pt solid #7f9a84 !important;
     padding: 0.1rem 0.5rem !important;
     font-size: 10.5pt !important;
+    color: #000 !important;
+  }
+
+  .resume-skills-list strong {
+    color: #000 !important;
   }
 
   a {
     color: #000 !important;
-    text-decoration: none !important;
+    text-decoration: underline !important;
+    pointer-events: auto !important;
+  }
+
+  /* Ensure text is selectable in PDF */
+  * {
+    -webkit-user-select: text !important;
+    user-select: text !important;
   }
 }
