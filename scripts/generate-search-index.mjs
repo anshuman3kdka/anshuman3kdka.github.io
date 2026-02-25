@@ -5,6 +5,9 @@ import { execFile as execFileCallback } from 'node:child_process';
 
 const execFile = promisify(execFileCallback);
 
+const SITEMAP_HEADER = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+const SITEMAP_FOOTER = '\n</urlset>';
+
 const RUBY_YAML_TO_JSON_SCRIPT = `
 require 'yaml'
 require 'json'
@@ -301,7 +304,7 @@ const toIsoString = (value) => {
 const isSearchDisabled = (value) => value === false
   || (typeof value === 'string' && value.trim().toLowerCase() === 'false');
 
-const resolveLastModified = (frontMatterData, fallbackStat) => {
+const resolveLastModified = async (frontMatterData, fallbackStat, file) => {
   const frontMatterDate = toIsoString(
     frontMatterData.last_modified_at
       || frontMatterData.lastModified
@@ -309,6 +312,14 @@ const resolveLastModified = (frontMatterData, fallbackStat) => {
       || frontMatterData.date,
   );
   if (frontMatterDate) return frontMatterDate;
+
+  try {
+    const { stdout } = await execFile('git', ['log', '-1', '--format=%cI', '--', file]);
+    const gitDate = stdout.trim();
+    if (gitDate) return toIsoString(gitDate);
+  } catch (e) {
+    // git log failed, fallback to fs.stat
+  }
 
   return fallbackStat.mtime.toISOString();
 };
@@ -327,6 +338,7 @@ const main = async () => {
     return shouldIndexFile(rel);
   });
   const records = [];
+  const sitemapUrls = [];
 
   for (const file of contentFiles) {
     const rel = path.relative(root, file).replace(/\\/g, '/');
@@ -337,10 +349,13 @@ const main = async () => {
 
     const preprocessed = preprocessLiquid(body, siteData);
     const stats = await fs.stat(file);
+    const lastModified = await resolveLastModified(frontMatterData, stats, file);
 
     const url = toUrl(rel, frontMatterData);
 
     if (excludedUrls.has(url)) continue;
+
+    const fullUrl = siteData.brand_url ? new URL(url, siteData.brand_url).href : url;
 
     records.push({
       title: extractTitle(body, frontMatterData, rel),
@@ -350,7 +365,12 @@ const main = async () => {
       tags: normalizeTags(frontMatterData.tags),
       url,
       content: toPlainText(preprocessed).slice(0, 1400),
-      lastModified: resolveLastModified(frontMatterData, stats),
+      lastModified,
+    });
+
+    sitemapUrls.push({
+      loc: fullUrl,
+      lastmod: lastModified,
     });
   }
 
@@ -358,7 +378,15 @@ const main = async () => {
 
   await fs.writeFile(path.join(root, 'search.json'), `${JSON.stringify(records, null, 2)}\n`);
 
-  console.log(`Indexed ${records.length} files.`);
+  sitemapUrls.sort((a, b) => a.loc.localeCompare(b.loc));
+  const sitemapContent = sitemapUrls.map((entry) => `  <url>
+    <loc>${entry.loc}</loc>
+    <lastmod>${entry.lastmod}</lastmod>
+  </url>`).join('\n');
+
+  await fs.writeFile(path.join(root, 'sitemap.xml'), `${SITEMAP_HEADER}\n${sitemapContent}${SITEMAP_FOOTER}`);
+
+  console.log(`Indexed ${records.length} files. Generated sitemap with ${sitemapUrls.length} URLs.`);
 };
 
 main().catch((error) => {
