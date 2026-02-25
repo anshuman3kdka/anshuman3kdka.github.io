@@ -447,46 +447,6 @@ button:focus-visible {
   max-width: 650px;
 }
 
-.quote-grid {
-  --quote-min: 240px;
-  display: grid;
-  gap: clamp(var(--space-4), 2.2vw, var(--space-5));
-  grid-template-columns: repeat(auto-fit, minmax(var(--quote-min), 1fr));
-  margin-top: var(--space-6);
-}
-
-.quote-card {
-  background: linear-gradient(160deg, rgba(28, 59, 44, 0.9) 0%, rgba(19, 41, 30, 0.9) 100%);
-  border: 1px solid rgba(232, 226, 206, 0.2);
-  border-radius: var(--radius-md);
-  padding: clamp(1rem, 2.6vw, 1.5rem);
-  box-shadow: var(--shadow-card);
-  display: grid;
-  gap: var(--space-4);
-  align-content: start;
-}
-
-.quote-text {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: clamp(1.06rem, 0.96rem + 0.38vw, 1.32rem);
-  line-height: 1.55;
-  color: #f3efdf;
-}
-
-.quote-source {
-  margin: 0;
-  color: var(--color-ink-soft);
-  font-size: var(--step--1);
-}
-
-.quote-source a {
-  color: var(--color-accent);
-}
-
-.quote-source a:hover {
-  color: #ecd4a5;
-}
 
 .piece-featured-media {
   margin: var(--space-4) 0 0;
@@ -828,19 +788,6 @@ body.is-leaving .page-shell {
     width: min(230px, 70vw);
   }
 
-  .quote-grid {
-    --quote-min: 100%;
-    gap: var(--space-4);
-  }
-
-  .quote-card {
-    padding: 1rem 0.95rem;
-  }
-
-  .quote-text {
-    font-size: clamp(1rem, 3.4vw, 1.16rem);
-    line-height: 1.62;
-  }
 
 }
 
