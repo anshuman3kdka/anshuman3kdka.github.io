@@ -123,7 +123,10 @@
       <main class="site-main" id="main-content">
         <div class="page-shell">
           <div class="page-body">
-            {% assign is_piece_page = page.name != 'index.md' and (page.path contains 'poetry/' or page.path contains 'prose/' or page.path contains 'essays/' or page.path contains 'projects/') %}
+            {% assign is_home = page.path == 'index.md' %}
+            {% assign is_resume = page.path contains 'resume/' %}
+            {% assign is_piece_page = true %}
+            {% if is_home or is_resume %}{% assign is_piece_page = false %}{% endif %}
             {% if is_piece_page %}
             <header class="section page-intro reveal">
               <h1 class="page-title">{{ page.title }}</h1>
