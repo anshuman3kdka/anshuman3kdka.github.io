@@ -345,6 +345,7 @@ const main = async () => {
     records.push({
       title: extractTitle(body, frontMatterData, rel),
       category: normalizeCategory(frontMatterData.category, categoryFromPath(rel)),
+      eyebrow: typeof frontMatterData.eyebrow === 'string' ? frontMatterData.eyebrow.trim() : '',
       date: toIsoString(frontMatterData.date),
       tags: normalizeTags(frontMatterData.tags),
       url,
