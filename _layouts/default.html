@@ -147,7 +147,13 @@
       <footer class="site-footer">
         <div class="footer-content">
           <div>
-            <p class="footer-title">{{ site.data.site.footer_heading | default: "Let's connect" }}</p>
+            <p class="footer-title">
+              {% if site.data.site.footer_review_url %}
+              <a href="{{ site.data.site.footer_review_url }}" target="_blank" rel="noreferrer">{{ site.data.site.footer_heading | default: "Leave a review" }}</a>
+              {% else %}
+              {{ site.data.site.footer_heading | default: "Let's connect" }}
+              {% endif %}
+            </p>
             <p class="footer-text">
               {% if site.data.site.contact_email %}
               <a href="mailto:{{ site.data.site.contact_email }}">{{ site.data.site.contact_email }}</a>

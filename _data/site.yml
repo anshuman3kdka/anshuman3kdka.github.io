@@ -14,6 +14,7 @@ analytics:
   domain: www.anshuman3kdka.in
   script_src: https://plausible.io/js/script.js
 footer_heading: Leave a review :)
+footer_review_url: https://tally.so/r/rjlA4v
 footer_note: Built between deadlines
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India

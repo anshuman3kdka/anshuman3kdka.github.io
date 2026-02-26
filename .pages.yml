@@ -434,6 +434,10 @@ content:
         label: Footer Heading
         type: text
         required: false
+      - name: footer_review_url
+        label: Footer Review Link URL
+        type: text
+        required: false
       - name: footer_note
         label: Footer Note
         type: text
