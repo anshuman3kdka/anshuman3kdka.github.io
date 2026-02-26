@@ -80,7 +80,7 @@ body {
 /* Subtle nature texture banding via section separators */
 .section + .section {
   position: relative;
-  padding-top: clamp(2.6rem, 5vw, 4rem);
+  padding-top: clamp(1.5rem, 5vw, 2.5rem);
 }
 
 .section + .section::before {
@@ -197,7 +197,7 @@ button:focus-visible {
     radial-gradient(980px 540px at 88% 18%, color-mix(in srgb, var(--color-forest) 34%, transparent), transparent 64%),
     linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, black 10%) 0%, color-mix(in srgb, var(--color-bg-soft) 88%, black 12%) 100%);
   border-radius: var(--radius-lg);
-  padding: clamp(2.2rem, 4.8vw, 4.5rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--color-rule);
   position: relative;
@@ -256,7 +256,7 @@ button:focus-visible {
 }
 
 .section {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
 }
 
 .section:last-child {
@@ -310,8 +310,13 @@ button:focus-visible {
   flex-direction: column;
   min-width: 0;
   padding-right: clamp(0rem, 1.2vw, 1rem);
-  gap: var(--space-3);
+  gap: var(--space-1);
   align-items: flex-start;
+}
+
+.hero-content .section-eyebrow,
+.hero-content .hero-lead {
+  margin-bottom: 0;
 }
 
 .hero-title {
@@ -328,7 +333,7 @@ button:focus-visible {
 .hero-lead {
   font-size: var(--step-1);
   color: var(--color-ink-muted);
-  margin: 0 0 var(--space-3);
+  margin: 0;
   max-width: 34ch;
 }
 
@@ -412,17 +417,17 @@ button:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-sage);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-1);
 }
 
 .card-title {
   font-size: var(--step-1);
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--space-1);
   font-family: var(--font-heading);
 }
 
 .card-text {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-3);
   color: var(--color-ink-muted);
 }
 
@@ -432,7 +437,7 @@ button:focus-visible {
 }
 
 .page-intro {
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-4);
 }
 
 .page-title {
@@ -710,7 +715,8 @@ body.is-leaving .page-shell {
     text-align: center;
   }
 
-  .hero-content .section-eyebrow {
+  .hero-content .section-eyebrow,
+  .hero-content .hero-lead {
     margin-bottom: 0;
   }
 }
@@ -751,7 +757,7 @@ body.is-leaving .page-shell {
   }
 
   .page-shell {
-    padding: clamp(1.25rem, 5vw, var(--space-6)) clamp(0.9rem, 4vw, var(--space-4));
+    padding: clamp(1rem, 5vw, 1.5rem) clamp(0.9rem, 4vw, var(--space-4));
     border-radius: clamp(14px, 4vw, var(--radius-lg));
   }
 
