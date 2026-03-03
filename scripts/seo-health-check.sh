@@ -10,18 +10,25 @@ check_url() {
   local status
   status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
   echo "$status $url"
+  [[ "$status" =~ ^[23][0-9][0-9]$ ]]
 }
 
 echo "Running SEO health check for ${BASE_URL}"
 echo
 
+failures=0
+
 echo "[1/3] Validating sitemap URL"
-check_url "$SITEMAP_URL"
+if ! check_url "$SITEMAP_URL"; then
+  failures=$((failures + 1))
+fi
 
 echo
 echo "[2/3] Validating key pages"
 for path in "${KEY_PATHS[@]}"; do
-  check_url "${BASE_URL%/}${path}"
+  if ! check_url "${BASE_URL%/}${path}"; then
+    failures=$((failures + 1))
+  fi
 done
 
 echo
@@ -31,24 +38,28 @@ mapfile -t urls < <(curl -sS "$SITEMAP_URL" | sed -n 's:.*<loc>\(.*\)</loc>.*:\1
 
 if [ "${#urls[@]}" -eq 0 ]; then
   echo "No URLs found in sitemap or sitemap unavailable."
-  exit 1
+  failures=$((failures + 1))
 fi
 
 bad=0
-for url in "${urls[@]}"; do
-  status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
-  # Match exactly 3-digit 2xx/3xx codes so partial matches (e.g., "30" or "x200") don't slip through.
-  if [[ "$status" =~ ^[23][0-9][0-9]$ ]]; then
-    printf 'OK   %s %s\n' "$status" "$url"
-  else
-    printf 'FAIL %s %s\n' "$status" "$url"
-    bad=$((bad + 1))
-  fi
-done
+if [ "${#urls[@]}" -gt 0 ]; then
+  for url in "${urls[@]}"; do
+    status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
+    # Match exactly 3-digit 2xx/3xx codes so partial matches (e.g., "30" or "x200") don't slip through.
+    if [[ "$status" =~ ^[23][0-9][0-9]$ ]]; then
+      printf 'OK   %s %s\n' "$status" "$url"
+    else
+      printf 'FAIL %s %s\n' "$status" "$url"
+      bad=$((bad + 1))
+    fi
+  done
+fi
 
-if [ "$bad" -gt 0 ]; then
+failures=$((failures + bad))
+
+if [ "$failures" -gt 0 ]; then
   echo
-  echo "Detected ${bad} failing sitemap URL(s)."
+  echo "Detected ${failures} failing URL(s) across all checks."
   exit 1
 fi
 
