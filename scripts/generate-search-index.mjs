@@ -97,6 +97,32 @@ const parseSiteData = (yamlText) => {
   const lines = yamlText.split(/\r?\n/);
   const data = {};
 
+  const stripYamlInlineComment = (value) => {
+    let inSingleQuote = false;
+    let inDoubleQuote = false;
+
+    for (let index = 0; index < value.length; index += 1) {
+      const character = value[index];
+      const previousCharacter = value[index - 1];
+
+      if (character === "'" && !inDoubleQuote) {
+        inSingleQuote = !inSingleQuote;
+        continue;
+      }
+
+      if (character === '"' && !inSingleQuote && previousCharacter !== '\\') {
+        inDoubleQuote = !inDoubleQuote;
+        continue;
+      }
+
+      if (!inSingleQuote && !inDoubleQuote && character === '#' && (index === 0 || /\s/.test(previousCharacter))) {
+        return value.slice(0, index).trim();
+      }
+    }
+
+    return value.trim();
+  };
+
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     if (!line || /^\s*#/.test(line)) continue;
@@ -121,7 +147,10 @@ const parseSiteData = (yamlText) => {
 
         const listMatch = listLine.match(/^\s*-\s*(.+?)\s*$/);
         if (listMatch) {
-          listItems.push(listMatch[1].trim().replace(/^['"]|['"]$/g, ''));
+          const listValue = stripYamlInlineComment(listMatch[1]).replace(/^['"]|['"]$/g, '');
+          if (listValue) {
+            listItems.push(listValue);
+          }
           i += 1;
           continue;
         }
@@ -157,7 +186,7 @@ const parseSiteData = (yamlText) => {
       continue;
     }
 
-    data[key] = rawValue.trim().replace(/^['"]|['"]$/g, '');
+    data[key] = stripYamlInlineComment(rawValue).replace(/^['"]|['"]$/g, '');
   }
 
   return data;
