@@ -2,6 +2,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 let pageTransitionListenerAttached = false;
 let revealObserver = null;
+let scrollProgressHandlersBound = false;
 
 const normalizePathname = (value) => {
   if (!value) return '/';
@@ -166,6 +167,37 @@ const handleScrollReveal = () => {
     item.style.transitionDelay = `${Math.min(index * 80, 320)}ms`;
     revealObserver.observe(item);
   });
+};
+
+const initScrollProgress = () => {
+  const progressBar = document.querySelector('[data-scroll-progress]');
+  const progressFill = document.querySelector('[data-scroll-progress-fill]');
+  if (!progressBar || !progressFill) return;
+
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const maxScrollableDistance = scrollHeight - clientHeight;
+
+    if (maxScrollableDistance <= 120) {
+      progressBar.hidden = true;
+      progressFill.style.width = '0%';
+      return;
+    }
+
+    progressBar.hidden = false;
+    const progress = Math.min(Math.max(scrollTop / maxScrollableDistance, 0), 1);
+    progressFill.style.width = `${progress * 100}%`;
+  };
+
+  updateScrollProgress();
+
+  if (!scrollProgressHandlersBound) {
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    scrollProgressHandlersBound = true;
+  }
 };
 
 
@@ -524,6 +556,7 @@ const initPage = () => {
   highlightCurrentNavLink();
   handlePageTransitions();
   handleScrollReveal();
+  initScrollProgress();
   initSearch();
   initRandomRead();
 };
@@ -535,6 +568,7 @@ document.addEventListener("pageshow", () => {
   resetTransientUiState();
   highlightCurrentNavLink();
   handleScrollReveal();
+  initScrollProgress();
 });
 
 document.addEventListener("pagehide", () => {
