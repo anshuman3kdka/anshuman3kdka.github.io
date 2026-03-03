@@ -513,41 +513,89 @@ const initSearch = () => {
   sortSelect.addEventListener('change', renderResults);
 };
 
-const initRandomRead = () => {
-  const randomButton = document.querySelector('[data-random-read]');
-  const randomStatus = document.querySelector('[data-random-read-status]');
-  if (!randomButton) return;
+const initRandomReadCard = () => {
+  const card = document.querySelector('[data-random-read-card]');
+  if (!card) return;
 
-  const setStatus = (message = '') => {
-    if (randomStatus) randomStatus.textContent = message;
+  const eyebrow = card.querySelector('[data-random-read-eyebrow]');
+  const title = card.querySelector('[data-random-read-title]');
+  const message = card.querySelector('[data-random-read-message]');
+  const link = card.querySelector('[data-random-read-link]');
+  const refresh = card.querySelector('[data-random-read-refresh]');
+
+  if (!eyebrow || !title || !message || !link || !refresh) return;
+
+  const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
+
+  const getReadableItems = () => getValidContentItems().filter((item) => {
+    const category = String(item.category || '').toLowerCase();
+    return allowedCategories.has(category);
+  });
+
+  const setCardState = ({
+    eyebrowText = 'Random Read',
+    titleText = 'Unable to load a random read right now.',
+    messageText = 'Please try again in a moment.',
+    href = '#',
+    linkLabel = 'Open random piece',
+    disabled = false,
+  } = {}) => {
+    eyebrow.textContent = eyebrowText;
+    title.textContent = titleText;
+    message.textContent = messageText;
+    link.textContent = linkLabel;
+    link.setAttribute('href', href);
+
+    if (disabled) {
+      link.setAttribute('aria-disabled', 'true');
+      link.classList.add('is-disabled');
+    } else {
+      link.removeAttribute('aria-disabled');
+      link.classList.remove('is-disabled');
+    }
   };
 
-  const disableRandomButton = (message) => {
-    randomButton.disabled = true;
-    randomButton.setAttribute('aria-disabled', 'true');
-    setStatus(message);
-  };
-
-  randomButton.addEventListener('click', async () => {
-    setStatus('');
+  const renderRandomItem = async () => {
+    setCardState({
+      eyebrowText: 'Random Read',
+      titleText: 'Picking a random piece…',
+      messageText: 'One sec while I grab poetry/prose/essay content.',
+      disabled: true,
+    });
 
     try {
       await loadSearchData();
-      const validItems = getValidContentItems();
+      const readableItems = getReadableItems();
 
-      if (!validItems.length) {
-        disableRandomButton('Random Read is unavailable right now.');
+      if (!readableItems.length) {
+        setCardState({
+          titleText: 'No poetry, prose, or essay items were found.',
+          messageText: 'Try again after updating search content.',
+          disabled: true,
+        });
         return;
       }
 
-      const randomIndex = Math.floor(Math.random() * validItems.length);
-      const item = validItems[randomIndex];
-      window.location.href = item.url;
+      const item = readableItems[Math.floor(Math.random() * readableItems.length)];
+      setCardState({
+        eyebrowText: item.eyebrow || item.category || 'Random Read',
+        titleText: item.title || 'Untitled piece',
+        messageText: 'A random pick from the archive.',
+        href: item.url,
+        linkLabel: 'Read this piece →',
+      });
     } catch (error) {
       console.error(error);
-      disableRandomButton('Could not load stories. Please try again later.');
+      setCardState({
+        titleText: 'Could not load random reads.',
+        messageText: 'The content index failed to load. Please try again later.',
+        disabled: true,
+      });
     }
-  });
+  };
+
+  refresh.addEventListener('click', renderRandomItem);
+  renderRandomItem();
 };
 
 const initPage = () => {
@@ -558,7 +606,7 @@ const initPage = () => {
   handleScrollReveal();
   initScrollProgress();
   initSearch();
-  initRandomRead();
+  initRandomReadCard();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
