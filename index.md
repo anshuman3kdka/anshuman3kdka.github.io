@@ -1,3 +1,8 @@
+---
+title: Home
+description: Anshuman’s personal site featuring thoughtful essays, original poetry, and hands-on projects, with notes on writing, literature, and creative experiments.
+---
+
 <section class="section hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content reveal">
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>

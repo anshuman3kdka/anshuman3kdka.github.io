@@ -1,5 +1,6 @@
 ---
 title: Achievements
+description: See milestones, recognitions, and progress snapshots that reflect consistent effort, growth, and real-world impact.
 ---
 
 <section class="section">

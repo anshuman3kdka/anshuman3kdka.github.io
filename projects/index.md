@@ -1,5 +1,6 @@
 ---
 title: Projects
+description: Build trust fast by browsing hands-on projects that show how I turn ideas into practical, user-focused outcomes.
 ---
 
 <section class="section">
