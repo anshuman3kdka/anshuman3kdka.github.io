@@ -1,5 +1,6 @@
 ---
 title: Resume
+description: Review my resume to quickly understand my education, leadership experience, and the value I can bring to new opportunities.
 ---
 <div class="resume-page">
 <button class="resume-download-btn" onclick="window.print()" aria-label="Download PDF">

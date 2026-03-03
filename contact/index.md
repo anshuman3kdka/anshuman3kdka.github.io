@@ -1,5 +1,6 @@
 ---
 title: Contact
+description: Reach out for collaborations, speaking invites, or freelance writing—this page gives you the fastest way to start a conversation with me.
 ---
 
 <section class="section grid grid-2">

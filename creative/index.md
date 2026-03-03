@@ -1,6 +1,7 @@
 ---
 title: Creative Writing
 layout: default
+description: Discover my creative writing hub featuring poetry and prose that blend emotion, imagery, and storytelling craft.
 ---
 
 <div class="grid grid-2">

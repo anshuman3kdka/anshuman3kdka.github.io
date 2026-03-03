@@ -1,5 +1,6 @@
 ---
 title: Prose
+description: Step into short fiction and narrative experiments crafted to entertain, surprise, and stay with you after the last line.
 ---
 
 <section class="section">
