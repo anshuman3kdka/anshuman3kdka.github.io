@@ -31,7 +31,6 @@ const defaultSearchIndexSections = [
   'creative',
   'essays',
   'home',
-  'insights',
   'poetry',
   'projects',
   'prose',
