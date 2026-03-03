@@ -24,6 +24,19 @@ print JSON.generate(value || {})
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache']);
+const defaultSearchIndexSections = [
+  'about',
+  'achievements',
+  'contact',
+  'creative',
+  'essays',
+  'home',
+  'insights',
+  'poetry',
+  'projects',
+  'prose',
+  'resume',
+];
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -88,6 +101,41 @@ const parseSiteData = (yamlText) => {
     if (!keyMatch) continue;
 
     const [, key, rawValue] = keyMatch;
+
+    if (rawValue.trim() === '') {
+      const listItems = [];
+      const startIndex = i;
+
+      i += 1;
+      while (i < lines.length) {
+        const listLine = lines[i];
+
+        if (!/^\s+/.test(listLine)) {
+          i -= 1;
+          break;
+        }
+
+        const listMatch = listLine.match(/^\s*-\s*(.+?)\s*$/);
+        if (listMatch) {
+          listItems.push(listMatch[1].trim().replace(/^['"]|['"]$/g, ''));
+          i += 1;
+          continue;
+        }
+
+        if (/^\s*#/.test(listLine) || /^\s*$/.test(listLine)) {
+          i += 1;
+          continue;
+        }
+
+        i = startIndex;
+        break;
+      }
+
+      if (listItems.length > 0) {
+        data[key] = listItems;
+        continue;
+      }
+    }
 
     if (/^[>|]/.test(rawValue)) {
       const blockLines = [];
@@ -261,33 +309,38 @@ const toPlainText = (text) => text
   .replace(/\s+/g, ' ')
   .trim();
 
-const shouldIndexFile = (relativePath) => {
-  const parts = relativePath.split('/');
-  const [top] = parts;
-  const allowedTopLevel = new Set([
-    'about',
-    'achievements',
-    'contact',
-    'creative',
-    'essays',
-    'home',
-    'poetry',
-    'projects',
-    'prose',
-    'resume',
-  ]);
-  const blockedRoots = new Set(['assets', 'scripts']);
-
-  if (blockedRoots.has(top)) return false;
-  if (parts.some((segment) => segment.startsWith('_'))) return false;
-
-  if (parts.length === 1) {
-    return false;
+const resolveAllowedTopLevelSections = (siteData) => {
+  const configuredSections = siteData.search_index_sections;
+  if (!Array.isArray(configuredSections) || configuredSections.length === 0) {
+    return new Set(defaultSearchIndexSections);
   }
 
-  if (!allowedTopLevel.has(top)) return false;
-  if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return false;
-  return true;
+  const normalized = configuredSections
+    .map((section) => String(section || '').trim().toLowerCase())
+    .filter(Boolean);
+
+  if (normalized.length === 0) {
+    return new Set(defaultSearchIndexSections);
+  }
+
+  return new Set(normalized);
+};
+
+const shouldIndexFile = (relativePath, allowedTopLevel) => {
+  const parts = relativePath.split('/');
+  const [top] = parts;
+  const blockedRoots = new Set(['assets', 'scripts']);
+
+  if (blockedRoots.has(top)) return { shouldIndex: false, reason: 'blocked-root' };
+  if (parts.some((segment) => segment.startsWith('_'))) return { shouldIndex: false, reason: 'private-path' };
+
+  if (parts.length === 1) {
+    return { shouldIndex: false, reason: 'root-file' };
+  }
+
+  if (!allowedTopLevel.has(top)) return { shouldIndex: false, reason: 'top-level-not-allowed' };
+  if (relativePath === 'search.json' || relativePath === 'sitemap.xml') return { shouldIndex: false, reason: 'special-file' };
+  return { shouldIndex: true };
 };
 
 const toIsoString = (value) => {
@@ -316,6 +369,7 @@ const resolveLastModified = (frontMatterData, fallbackStat) => {
 const main = async () => {
   const siteYaml = await fs.readFile(path.join(root, '_data', 'site.yml'), 'utf8');
   const siteData = parseSiteData(siteYaml);
+  const allowedTopLevelSections = resolveAllowedTopLevelSections(siteData);
   const excludedUrls = new Set([
     ...parseInternalLinkUrls(siteYaml, 'header_links', siteData.brand_url),
     ...parseInternalLinkUrls(siteYaml, 'social_links', siteData.brand_url),
@@ -324,7 +378,14 @@ const main = async () => {
   const allFiles = await walk(root);
   const contentFiles = allFiles.filter((file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
-    return shouldIndexFile(rel);
+    const decision = shouldIndexFile(rel, allowedTopLevelSections);
+
+    if (!decision.shouldIndex && decision.reason === 'top-level-not-allowed') {
+      const [top] = rel.split('/');
+      console.warn(`[search-index] Warning: skipping ${rel} because top-level directory "${top}" is not in search_index_sections.`);
+    }
+
+    return decision.shouldIndex;
   });
   const records = [];
 
