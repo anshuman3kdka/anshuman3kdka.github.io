@@ -3,7 +3,7 @@ title: Home
 description: Anshuman’s personal site featuring thoughtful essays, original poetry, and hands-on projects, with notes on writing, literature, and creative experiments.
 ---
 
-<section class="section hero hero--center-desktop" aria-labelledby="hero-title">
+<section class="section section--hero hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content reveal">
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
@@ -16,7 +16,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 </section>
 
 <section class="section" aria-labelledby="featured-title">
-  <div class="page-intro reveal">
+  <div class="page-intro page-intro--hero reveal">
     <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
     <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
     <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>

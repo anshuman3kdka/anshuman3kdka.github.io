@@ -138,7 +138,7 @@
             {% assign is_piece_page = true %}
             {% if is_home or is_resume %}{% assign is_piece_page = false %}{% endif %}
             {% if is_piece_page %}
-            <header class="section page-intro reveal">
+            <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %} reveal">
               <h1 class="page-title">{{ page.title }}</h1>
               {% assign piece_featured_image = page.featured_image %}
               {% if piece_featured_image %}
