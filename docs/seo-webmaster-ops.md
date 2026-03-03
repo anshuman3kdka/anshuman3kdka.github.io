@@ -52,18 +52,19 @@ Use each tool's URL inspection / submit URL workflow for:
 
 Use this exact checklist when working inside Google Search Console:
 
-1. Keep the **Domain** property `anshuman3kdka.in` if it is already verified.
-2. In **URL Inspection**, test only the `www` homepage:
-   - `https://www.anshuman3kdka.in/`
-3. In **Sitemaps**, submit:
+1. Open the **Domain property** for `anshuman3kdka.in` (this is preferred over a URL-prefix property).
+2. Go to **Sitemaps**.
+3. Submit:
    - `https://www.anshuman3kdka.in/sitemap.xml`
-4. In **URL Inspection**, request indexing for:
+4. Wait until sitemap status shows **Success**.
+5. Revisit after **24–72 hours** and check whether discovered URLs have increased.
+6. If sitemap shows any error, copy the **exact error message** and fix that first.
+7. Only after sitemap is clean, continue with **URL Inspection** and request indexing for:
    - `https://www.anshuman3kdka.in/`
    - `https://www.anshuman3kdka.in/about/`
    - `https://www.anshuman3kdka.in/essays/`
    - `https://www.anshuman3kdka.in/projects/`
    - `https://www.anshuman3kdka.in/creative/`
-5. Wait a few days, then re-check indexing/coverage.
 
 ### Important note about redirects
 
