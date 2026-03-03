@@ -247,8 +247,21 @@ const loadSearchData = async () => {
   if (searchDataPrepared) return searchDataPrepared;
 
   const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
-  const response = await fetch(configuredSearchUrl);
-  if (!response.ok) throw new Error('Failed to load search index');
+  const fallbackUrls = [configuredSearchUrl, 'search.json', '/search.json'];
+  let response = null;
+
+  for (const url of [...new Set(fallbackUrls)]) {
+    try {
+      const candidate = await fetch(url);
+      if (!candidate.ok) continue;
+      response = candidate;
+      break;
+    } catch (error) {
+      // Try the next fallback URL.
+    }
+  }
+
+  if (!response) throw new Error('Failed to load search index');
 
   searchData = await response.json();
   searchDataPrepared = prepareSearchData(Array.isArray(searchData) ? searchData : []);
@@ -526,11 +539,17 @@ const initRandomReadCard = () => {
   if (!eyebrow || !title || !message || !link || !refresh) return;
 
   const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
+  const allowedPathKeywords = ['/poetry/', '/prose/', '/essay/', '/essays/'];
 
-  const getReadableItems = () => getValidContentItems().filter((item) => {
-    const category = String(item.category || '').toLowerCase();
-    return allowedCategories.has(category);
-  });
+  const isAllowedReadCategory = (item) => {
+    const category = String(item.category || item.categoryLower || '').trim().toLowerCase();
+    if (allowedCategories.has(category)) return true;
+
+    const path = String(item.url || '').toLowerCase();
+    return allowedPathKeywords.some((keyword) => path.includes(keyword));
+  };
+
+  const getReadableItems = () => getValidContentItems().filter((item) => isAllowedReadCategory(item));
 
   const setCardState = ({
     eyebrowText = 'Random Read',
@@ -593,6 +612,12 @@ const initRandomReadCard = () => {
       });
     }
   };
+
+  link.addEventListener('click', (event) => {
+    if (link.getAttribute('aria-disabled') === 'true') {
+      event.preventDefault();
+    }
+  });
 
   refresh.addEventListener('click', renderRandomItem);
   renderRandomItem();
