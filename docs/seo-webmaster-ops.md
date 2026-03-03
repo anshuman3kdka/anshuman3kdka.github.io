@@ -65,6 +65,37 @@ Use this exact checklist when working inside Google Search Console:
    - `https://www.anshuman3kdka.in/creative/`
 5. Wait a few days, then re-check indexing/coverage.
 
+## 5.1) URL Inspection execution log (2026-03-03)
+
+Requested URLs for this pass:
+
+- `https://www.anshuman3kdka.in/`
+- `https://www.anshuman3kdka.in/about/`
+- `https://www.anshuman3kdka.in/essays/`
+- `https://www.anshuman3kdka.in/projects/`
+- `https://www.anshuman3kdka.in/creative/`
+
+What was attempted from automation:
+
+1. Open Google Search Console and run URL Inspection.
+2. Trigger Live Test for each URL.
+3. Click Request Indexing only when page is available.
+
+Result:
+
+- Could not complete Search Console actions from this environment due tool/browser restrictions and account-auth interaction requirements.
+- Network-based checks from this environment also returned `403` responses, so status here is not authoritative for Google indexing decisions.
+
+Manual completion steps (simple):
+
+1. Open Search Console: <https://search.google.com/search-console/>.
+2. Select property `anshuman3kdka.in`.
+3. Open **URL Inspection**.
+4. Paste each URL above, one at a time.
+5. Click **Test Live URL**.
+6. If result says the page is available/crawlable, click **Request Indexing**.
+7. If you already requested indexing for a URL today, skip it and wait a few days before retrying.
+
 ### Important note about redirects
 
 Seeing **"Page with redirect"** for the non-`www` version is expected.
