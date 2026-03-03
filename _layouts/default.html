@@ -153,14 +153,12 @@
               {% endif %}
             {% endfor %}
 
-            {% if show_page_intro %}
-            {% assign intro_title = page.title %}
-            {% if is_piece_page %}
-              {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
-            {% endif %}
+            {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
+            {% assign intro_featured_image = page.featured_image | default: page.image %}
+
+            {% if show_page_intro and is_piece_page == false %}
             <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %} reveal">
               <h1 class="page-title">{{ intro_title }}</h1>
-              {% assign intro_featured_image = page.featured_image %}
               {% if intro_featured_image %}
               <figure class="piece-featured-media">
                 <img src="{{ intro_featured_image | relative_url }}" alt="Featured image for {{ intro_title }}" loading="eager" decoding="async">
@@ -168,7 +166,20 @@
               {% endif %}
             </header>
             {% endif %}
-            {{ content }}
+
+            {% if is_piece_page %}
+            <article class="piece-detail reveal">
+              <h1 class="piece-detail-title">{{ intro_title }}</h1>
+              {% if intro_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ intro_featured_image | relative_url }}" alt="Featured image for {{ intro_title }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
+              {{ content }}
+            </article>
+            {% else %}
+              {{ content }}
+            {% endif %}
           </div>
         </div>
       </main>
