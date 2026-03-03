@@ -124,6 +124,7 @@ const handleScrollReveal = () => {
 
 // Search functionality
 let searchData = null;
+let searchDataPrepared = null;
 let searchInitialized = false;
 
 const initSearch = () => {
@@ -154,13 +155,13 @@ const initSearch = () => {
   };
 
   const scoreHit = (hit, query) => {
-    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    const terms = query.split(/\s+/).filter(Boolean);
     if (!terms.length) return 0;
 
-    const title = (hit.title || '').toLowerCase();
-    const content = (hit.content || '').toLowerCase();
-    const category = (hit.category || '').toLowerCase();
-    const tags = Array.isArray(hit.tags) ? hit.tags.join(' ').toLowerCase() : '';
+    const title = hit.titleLower || '';
+    const content = hit.contentLower || '';
+    const category = hit.categoryLower || '';
+    const tags = hit.tagsLower || '';
 
     let score = 0;
     terms.forEach((term) => {
@@ -232,13 +233,13 @@ const initSearch = () => {
   };
 
   const renderResults = () => {
-    if (!searchData) return;
+    if (!searchDataPrepared) return;
 
     const query = input.value.toLowerCase().trim();
     const selectedCategory = categoryFilter.value;
     const sortBy = sortSelect.value;
 
-    const filtered = searchData
+    const filtered = searchDataPrepared
       .map((item) => ({
         ...item,
         _score: scoreHit(item, query),
@@ -246,7 +247,7 @@ const initSearch = () => {
       .filter((item) => {
         const queryMatches = !query
           || item._score > 0
-          || (item.tags || []).some((tag) => String(tag).toLowerCase().includes(query));
+          || item.tagsLower.includes(query);
 
         const categoryMatches = selectedCategory === 'all' || item.category === selectedCategory;
         return queryMatches && categoryMatches;
@@ -291,6 +292,18 @@ const initSearch = () => {
     });
   };
 
+  const debounce = (callback, delay = 120) => {
+    let timerId;
+    return (...args) => {
+      window.clearTimeout(timerId);
+      timerId = window.setTimeout(() => {
+        callback(...args);
+      }, delay);
+    };
+  };
+
+  const debouncedRenderResults = debounce(renderResults, 120);
+
   syncExpandedState(false);
 
   const openSearch = async () => {
@@ -319,6 +332,13 @@ const initSearch = () => {
         const response = await fetch(configuredSearchUrl);
         if (!response.ok) throw new Error('Failed to load search index');
         searchData = await response.json();
+        searchDataPrepared = searchData.map((item) => ({
+          ...item,
+          titleLower: String(item.title || '').toLowerCase(),
+          contentLower: String(item.content || '').toLowerCase(),
+          categoryLower: String(item.category || '').toLowerCase(),
+          tagsLower: Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '',
+        }));
         populateCategories();
         status.textContent = '';
       } catch (error) {
@@ -370,7 +390,7 @@ const initSearch = () => {
     }
   });
 
-  input.addEventListener('input', renderResults);
+  input.addEventListener('input', debouncedRenderResults);
   categoryFilter.addEventListener('change', renderResults);
   sortSelect.addEventListener('change', renderResults);
 };
