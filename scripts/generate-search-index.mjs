@@ -61,6 +61,16 @@ const walk = async (dir) => {
   return files;
 };
 
+const parseYamlToJson = async (yamlText) => {
+  const encodedYaml = Buffer.from(yamlText, 'utf8').toString('base64');
+  const { stdout } = await execFile(
+    'ruby',
+    ['-e', RUBY_YAML_TO_JSON_SCRIPT, encodedYaml],
+  );
+
+  return JSON.parse(stdout);
+};
+
 const extractFrontMatter = async (text, file) => {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (!match) return { data: {}, body: text };
@@ -68,13 +78,7 @@ const extractFrontMatter = async (text, file) => {
   let data = {};
 
   try {
-    const encodedYaml = Buffer.from(match[1], 'utf8').toString('base64');
-    const { stdout } = await execFile(
-      'ruby',
-      ['-e', RUBY_YAML_TO_JSON_SCRIPT, encodedYaml],
-    );
-
-    const parsed = JSON.parse(stdout);
+    const parsed = await parseYamlToJson(match[1]);
     if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
       data = parsed;
     }
@@ -184,34 +188,16 @@ const normalizeUrl = (rawUrl, brandUrl = '') => {
   return pathname.endsWith('/') ? pathname : `${pathname}/`;
 };
 
-const parseInternalLinkUrls = (yamlText, sectionName, brandUrl = '') => {
-  const lines = yamlText.split(/\r?\n/);
-  const urls = new Set();
-  let inSection = false;
+const getInternalLinkUrls = (links, brandUrl = '') => {
+  if (!Array.isArray(links)) return [];
 
-  for (const line of lines) {
-    const sectionMatch = line.match(/^([A-Za-z0-9_-]+):\s*$/);
-    if (sectionMatch) {
-      inSection = sectionMatch[1] === sectionName;
-      continue;
-    }
-
-    if (!inSection) continue;
-
-    if (/^\S/.test(line)) {
-      inSection = false;
-      continue;
-    }
-
-    const urlMatch = line.match(/^\s*url:\s*(.+)\s*$/);
-    if (!urlMatch) continue;
-
-    const rawUrl = urlMatch[1].trim().replace(/^['"]|['"]$/g, '');
-    const normalized = normalizeUrl(rawUrl, brandUrl);
-    if (normalized) urls.add(normalized);
-  }
-
-  return urls;
+  return links
+    .map((link) => {
+      if (!link || typeof link !== 'object') return null;
+      const rawUrl = typeof link.url === 'string' ? link.url : '';
+      return normalizeUrl(rawUrl, brandUrl);
+    })
+    .filter(Boolean);
 };
 
 const resolveSiteDataExpression = (expression, siteData) => {
@@ -371,8 +357,8 @@ const main = async () => {
   const siteData = parseSiteData(siteYaml);
   const allowedTopLevelSections = resolveAllowedTopLevelSections(siteData);
   const excludedUrls = new Set([
-    ...parseInternalLinkUrls(siteYaml, 'header_links', siteData.brand_url),
-    ...parseInternalLinkUrls(siteYaml, 'social_links', siteData.brand_url),
+    ...getInternalLinkUrls(siteData.header_links, siteData.brand_url),
+    ...getInternalLinkUrls(siteData.social_links, siteData.brand_url),
   ]);
 
   const allFiles = await walk(root);
