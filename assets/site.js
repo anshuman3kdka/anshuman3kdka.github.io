@@ -174,6 +174,55 @@ let searchData = null;
 let searchDataPrepared = null;
 let searchInitialized = false;
 
+const isValidContentUrl = (value) => {
+  if (typeof value !== 'string') return false;
+
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+
+  const lowered = trimmed.toLowerCase();
+  if (lowered.startsWith('#') || lowered.startsWith('mailto:') || lowered.startsWith('tel:') || lowered.startsWith('javascript:')) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(trimmed, window.location.origin);
+    if (parsed.origin !== window.location.origin) return false;
+
+    const extensionMatch = parsed.pathname.match(/\.([a-z0-9]+)$/i);
+    if (!extensionMatch) return true;
+
+    return extensionMatch[1] === 'html';
+  } catch (error) {
+    return false;
+  }
+};
+
+const prepareSearchData = (items) => items
+  .filter((item) => item && typeof item === 'object')
+  .map((item) => ({
+    ...item,
+    url: String(item.url || '').trim(),
+    titleLower: String(item.title || '').toLowerCase(),
+    contentLower: String(item.content || '').toLowerCase(),
+    categoryLower: String(item.category || '').toLowerCase(),
+    tagsLower: Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '',
+  }));
+
+const getValidContentItems = () => (searchDataPrepared || []).filter((item) => isValidContentUrl(item.url));
+
+const loadSearchData = async () => {
+  if (searchDataPrepared) return searchDataPrepared;
+
+  const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
+  const response = await fetch(configuredSearchUrl);
+  if (!response.ok) throw new Error('Failed to load search index');
+
+  searchData = await response.json();
+  searchDataPrepared = prepareSearchData(Array.isArray(searchData) ? searchData : []);
+  return searchDataPrepared;
+};
+
 const initSearch = () => {
   const toggle = document.querySelector('[data-search-toggle]');
   const overlay = document.querySelector('[data-search-overlay]');
@@ -266,7 +315,7 @@ const initSearch = () => {
   };
 
   const populateCategories = () => {
-    const categories = new Set((searchData || []).map((item) => item.category).filter(Boolean));
+    const categories = new Set((searchDataPrepared || []).map((item) => item.category).filter(Boolean));
     categoryFilter.innerHTML = '<option value="all">All categories</option>';
 
     [...categories]
@@ -372,20 +421,10 @@ const initSearch = () => {
       input.focus();
     });
 
-    if (!searchData) {
+    if (!searchDataPrepared) {
       status.textContent = 'Loading index...';
       try {
-        const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
-        const response = await fetch(configuredSearchUrl);
-        if (!response.ok) throw new Error('Failed to load search index');
-        searchData = await response.json();
-        searchDataPrepared = searchData.map((item) => ({
-          ...item,
-          titleLower: String(item.title || '').toLowerCase(),
-          contentLower: String(item.content || '').toLowerCase(),
-          categoryLower: String(item.category || '').toLowerCase(),
-          tagsLower: Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '',
-        }));
+        await loadSearchData();
         populateCategories();
         status.textContent = '';
       } catch (error) {
@@ -442,6 +481,43 @@ const initSearch = () => {
   sortSelect.addEventListener('change', renderResults);
 };
 
+const initRandomRead = () => {
+  const randomButton = document.querySelector('[data-random-read]');
+  const randomStatus = document.querySelector('[data-random-read-status]');
+  if (!randomButton) return;
+
+  const setStatus = (message = '') => {
+    if (randomStatus) randomStatus.textContent = message;
+  };
+
+  const disableRandomButton = (message) => {
+    randomButton.disabled = true;
+    randomButton.setAttribute('aria-disabled', 'true');
+    setStatus(message);
+  };
+
+  randomButton.addEventListener('click', async () => {
+    setStatus('');
+
+    try {
+      await loadSearchData();
+      const validItems = getValidContentItems();
+
+      if (!validItems.length) {
+        disableRandomButton('Random Read is unavailable right now.');
+        return;
+      }
+
+      const randomIndex = Math.floor(Math.random() * validItems.length);
+      const item = validItems[randomIndex];
+      window.location.href = item.url;
+    } catch (error) {
+      console.error(error);
+      disableRandomButton('Could not load stories. Please try again later.');
+    }
+  });
+};
+
 const initPage = () => {
   resetNavigationState();
   resetTransientUiState();
@@ -449,6 +525,7 @@ const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
+  initRandomRead();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
