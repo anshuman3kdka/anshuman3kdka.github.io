@@ -198,6 +198,22 @@ button:focus-visible {
   background: rgba(211, 178, 119, 0.08);
 }
 
+.site-nav a.is-active {
+  color: #fff7e5;
+  border-color: rgba(211, 178, 119, 0.95);
+  background: rgba(211, 178, 119, 0.26);
+  font-weight: 600;
+}
+
+.site-nav a.is-active:hover {
+  border-color: rgba(211, 178, 119, 1);
+  background: rgba(211, 178, 119, 0.32);
+}
+
+.site-nav a.is-active:focus-visible {
+  outline-color: #ffe2aa;
+}
+
 .site-main {
   margin-top: clamp(1.6rem, 4vw, var(--space-7));
 }

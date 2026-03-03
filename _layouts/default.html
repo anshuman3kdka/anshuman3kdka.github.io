@@ -111,8 +111,18 @@
           <a class="brand-link" href="{{ '/' | relative_url }}">{{ site_title }}</a>
           <nav class="site-nav" aria-label="Primary">
             {% if site.data.site.header_links %}
+              {% assign current_path = page.url | default: '/' %}
+              {% assign current_path_with_slash = current_path %}
+              {% if current_path_with_slash != '/' and current_path_with_slash | slice: -1, 1 != '/' %}
+                {% assign current_path_with_slash = current_path_with_slash | append: '/' %}
+              {% endif %}
               {% for link in site.data.site.header_links %}
-              <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
+              {% assign link_path_with_slash = link.url %}
+              {% if link_path_with_slash != '/' and link_path_with_slash | slice: -1, 1 != '/' %}
+                {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
+              {% endif %}
+              {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+              <a href="{{ link.url | relative_url }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label }}</a>
               {% endfor %}
             {% endif %}
           </nav>
