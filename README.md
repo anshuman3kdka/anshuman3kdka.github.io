@@ -28,7 +28,11 @@ This repo now uses a `.gitattributes` rule:
 
 - `search.json merge=ours`
 
-During a merge, Git will keep the version from the branch you are merging *into* (your current branch), which avoids manual conflict resolution in this large generated file.
+During a local Git merge, Git will keep the version from the branch you are merging *into* (your current branch), which avoids manual conflict resolution in this large generated file.
+
+Important: GitHub's web merge flow can still show conflicts because it does not reliably apply local custom merge drivers from `.gitattributes`.
+
+To reduce conflicts in GitHub PR merges, the generator now uses each file's latest Git commit timestamp (instead of file-system modified time), so unchanged files do not churn on every regenerate.
 
 After a merge, regenerate the index so it matches your latest content:
 
