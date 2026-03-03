@@ -10,6 +10,7 @@
     {% assign site_title = site.data.site.site_title | default: 'Anshuman3kdka' %}
     {% assign site_tagline = site.data.site.site_tagline | default: 'Writing portfolio' %}
     {% assign site_description = site.data.site.site_description | default: 'Anshuman3kdka — essays, projects, and creative technology.' %}
+    {% assign resolved_page_title = page.title | default: site_title %}
     {% assign meta_description = page.description | default: site_description %}
     {% assign site_base_url = site.url | default: site.data.site.brand_url | default: '' %}
     {% assign canonical_path = page.url | default: '/' %}
@@ -25,12 +26,12 @@
         {% assign social_image_url = site_base_url | append: social_image %}
       {% endif %}
     {% endif %}
-    <title>{{ page.title }} · {{ site_title }}</title>
+    <title>{% if page.title and page.title != site_title %}{{ resolved_page_title }} · {{ site_title }}{% else %}{{ site_title }}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ meta_description | escape }}" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="{{ canonical_url | escape }}" />
-    <meta property="og:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta property="og:title" content="{{ resolved_page_title | escape }}" />
     <meta property="og:description" content="{{ meta_description | escape }}" />
     <meta property="og:type" content="{{ page.og_type | default: 'website' | escape }}" />
     <meta property="og:url" content="{{ canonical_url | escape }}" />
@@ -38,7 +39,7 @@
     <meta property="og:image" content="{{ social_image_url | escape }}" />
     {% endif %}
     <meta name="twitter:card" content="{{ page.twitter_card | default: 'summary_large_image' | escape }}" />
-    <meta name="twitter:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta name="twitter:title" content="{{ resolved_page_title | escape }}" />
     <meta name="twitter:description" content="{{ meta_description | escape }}" />
     {% if social_image_url != '' %}
     <meta name="twitter:image" content="{{ social_image_url | escape }}" />
