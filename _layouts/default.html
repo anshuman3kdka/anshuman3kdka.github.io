@@ -142,15 +142,38 @@
           <div class="page-body">
             {% assign is_home = page.path == 'index.md' %}
             {% assign is_resume = page.path contains 'resume/' %}
-            {% assign is_piece_page = true %}
-            {% if is_home or is_resume %}{% assign is_piece_page = false %}{% endif %}
-            {% if is_piece_page %}
+            {% assign show_page_intro = true %}
+            {% if is_home or is_resume %}{% assign show_page_intro = false %}{% endif %}
+
+            {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/' | split: ',' %}
+            {% assign is_piece_page = false %}
+            {% for collection_path in piece_collections %}
+              {% if page.path contains collection_path and page.name != 'index.md' %}
+                {% assign is_piece_page = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
+            {% assign intro_featured_image = page.featured_image | default: page.image %}
+
+            {% if show_page_intro and is_piece_page == false %}
             <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %} reveal">
-              <h1 class="page-title">{{ page.title }}</h1>
-              {% assign piece_featured_image = page.featured_image %}
-              {% if piece_featured_image %}
+              <h1 class="page-title">{{ intro_title }}</h1>
+              {% if intro_featured_image %}
               <figure class="piece-featured-media">
-                <img src="{{ piece_featured_image | relative_url }}" alt="Featured image for {{ page.title }}" loading="eager" decoding="async">
+                <img src="{{ intro_featured_image | relative_url }}" alt="Featured image for {{ intro_title }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
+            </header>
+            {% endif %}
+
+            {% assign content_has_h1 = content contains '<h1' %}
+            {% if is_piece_page and content_has_h1 == false %}
+            <header class="piece-detail-header section reveal">
+              <h1 class="piece-detail-title">{{ intro_title }}</h1>
+              {% if intro_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ intro_featured_image | relative_url }}" alt="Featured image for {{ intro_title }}" loading="eager" decoding="async">
               </figure>
               {% endif %}
             </header>
