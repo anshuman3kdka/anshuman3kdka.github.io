@@ -1,5 +1,6 @@
 ---
 title: Essays
+description: Explore clear, thought-provoking essays where ideas are unpacked with honesty, structure, and a fresh student perspective.
 ---
 
 <section class="section">
