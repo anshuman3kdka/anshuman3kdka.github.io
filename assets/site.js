@@ -174,6 +174,68 @@ let searchData = null;
 let searchDataPrepared = null;
 let searchInitialized = false;
 
+const isValidContentUrl = (value) => {
+  if (typeof value !== 'string') return false;
+
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+
+  const lowered = trimmed.toLowerCase();
+  if (lowered.startsWith('#') || lowered.startsWith('mailto:') || lowered.startsWith('tel:') || lowered.startsWith('javascript:')) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(trimmed, window.location.origin);
+    if (parsed.origin !== window.location.origin) return false;
+
+    const extensionMatch = parsed.pathname.match(/\.([a-z0-9]+)$/i);
+    if (!extensionMatch) return true;
+
+    return extensionMatch[1] === 'html';
+  } catch (error) {
+    return false;
+  }
+};
+
+const prepareSearchData = (items) => items
+  .filter((item) => item && typeof item === 'object')
+  .map((item) => ({
+    ...item,
+    url: String(item.url || '').trim(),
+    titleLower: String(item.title || '').toLowerCase(),
+    contentLower: String(item.content || '').toLowerCase(),
+    categoryLower: String(item.category || '').toLowerCase(),
+    tagsLower: Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '',
+  }));
+
+const getValidContentItems = () => (searchDataPrepared || []).filter((item) => isValidContentUrl(item.url));
+
+const loadSearchData = async () => {
+  if (searchDataPrepared) return searchDataPrepared;
+
+  const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
+  const fallbackUrls = [configuredSearchUrl, 'search.json', '/search.json'];
+  let response = null;
+
+  for (const url of [...new Set(fallbackUrls)]) {
+    try {
+      const candidate = await fetch(url);
+      if (!candidate.ok) continue;
+      response = candidate;
+      break;
+    } catch (error) {
+      // Try the next fallback URL.
+    }
+  }
+
+  if (!response) throw new Error('Failed to load search index');
+
+  searchData = await response.json();
+  searchDataPrepared = prepareSearchData(Array.isArray(searchData) ? searchData : []);
+  return searchDataPrepared;
+};
+
 const initSearch = () => {
   const toggle = document.querySelector('[data-search-toggle]');
   const overlay = document.querySelector('[data-search-overlay]');
@@ -266,7 +328,7 @@ const initSearch = () => {
   };
 
   const populateCategories = () => {
-    const categories = new Set((searchData || []).map((item) => item.category).filter(Boolean));
+    const categories = new Set((searchDataPrepared || []).map((item) => item.category).filter(Boolean));
     categoryFilter.innerHTML = '<option value="all">All categories</option>';
 
     [...categories]
@@ -372,20 +434,10 @@ const initSearch = () => {
       input.focus();
     });
 
-    if (!searchData) {
+    if (!searchDataPrepared) {
       status.textContent = 'Loading index...';
       try {
-        const configuredSearchUrl = document.body?.dataset.searchUrl || '/search.json';
-        const response = await fetch(configuredSearchUrl);
-        if (!response.ok) throw new Error('Failed to load search index');
-        searchData = await response.json();
-        searchDataPrepared = searchData.map((item) => ({
-          ...item,
-          titleLower: String(item.title || '').toLowerCase(),
-          contentLower: String(item.content || '').toLowerCase(),
-          categoryLower: String(item.category || '').toLowerCase(),
-          tagsLower: Array.isArray(item.tags) ? item.tags.join(' ').toLowerCase() : '',
-        }));
+        await loadSearchData();
         populateCategories();
         status.textContent = '';
       } catch (error) {
@@ -442,6 +494,103 @@ const initSearch = () => {
   sortSelect.addEventListener('change', renderResults);
 };
 
+const initRandomReadCard = () => {
+  const card = document.querySelector('[data-random-read-card]');
+  if (!card) return;
+
+  const eyebrow = card.querySelector('[data-random-read-eyebrow]');
+  const title = card.querySelector('[data-random-read-title]');
+  const message = card.querySelector('[data-random-read-message]');
+  const link = card.querySelector('[data-random-read-link]');
+  const refresh = card.querySelector('[data-random-read-refresh]');
+
+  if (!eyebrow || !title || !message || !link || !refresh) return;
+
+  const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
+  const allowedPathKeywords = ['/poetry/', '/prose/', '/essay/', '/essays/'];
+
+  const isAllowedReadCategory = (item) => {
+    const category = String(item.category || item.categoryLower || '').trim().toLowerCase();
+    if (allowedCategories.has(category)) return true;
+
+    const path = String(item.url || '').toLowerCase();
+    return allowedPathKeywords.some((keyword) => path.includes(keyword));
+  };
+
+  const getReadableItems = () => getValidContentItems().filter((item) => isAllowedReadCategory(item));
+
+  const setCardState = ({
+    eyebrowText = 'Random Read',
+    titleText = 'Unable to load a random read right now.',
+    messageText = 'Please try again in a moment.',
+    href = '#',
+    linkLabel = 'Open random piece',
+    disabled = false,
+  } = {}) => {
+    eyebrow.textContent = eyebrowText;
+    title.textContent = titleText;
+    message.textContent = messageText;
+    link.textContent = linkLabel;
+    link.setAttribute('href', href);
+
+    if (disabled) {
+      link.setAttribute('aria-disabled', 'true');
+      link.classList.add('is-disabled');
+    } else {
+      link.removeAttribute('aria-disabled');
+      link.classList.remove('is-disabled');
+    }
+  };
+
+  const renderRandomItem = async () => {
+    setCardState({
+      eyebrowText: 'Random Read',
+      titleText: 'Picking a random piece…',
+      messageText: 'One sec while I grab poetry/prose/essay content.',
+      disabled: true,
+    });
+
+    try {
+      await loadSearchData();
+      const readableItems = getReadableItems();
+
+      if (!readableItems.length) {
+        setCardState({
+          titleText: 'No poetry, prose, or essay items were found.',
+          messageText: 'Try again after updating search content.',
+          disabled: true,
+        });
+        return;
+      }
+
+      const item = readableItems[Math.floor(Math.random() * readableItems.length)];
+      setCardState({
+        eyebrowText: item.eyebrow || item.category || 'Random Read',
+        titleText: item.title || 'Untitled piece',
+        messageText: 'A random pick from the archive.',
+        href: item.url,
+        linkLabel: 'Read this piece →',
+      });
+    } catch (error) {
+      console.error(error);
+      setCardState({
+        titleText: 'Could not load random reads.',
+        messageText: 'The content index failed to load. Please try again later.',
+        disabled: true,
+      });
+    }
+  };
+
+  link.addEventListener('click', (event) => {
+    if (link.getAttribute('aria-disabled') === 'true') {
+      event.preventDefault();
+    }
+  });
+
+  refresh.addEventListener('click', renderRandomItem);
+  renderRandomItem();
+};
+
 const initPage = () => {
   resetNavigationState();
   resetTransientUiState();
@@ -449,6 +598,7 @@ const initPage = () => {
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
+  initRandomReadCard();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);

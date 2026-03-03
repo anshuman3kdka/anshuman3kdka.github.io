@@ -15,6 +15,20 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
   </div>
 </section>
 
+
+<section class="section" aria-labelledby="random-read-title">
+  <article class="card card-random-read reveal" data-random-read-card>
+    <p class="card-label">Random Read</p>
+    <p class="section-eyebrow card-random-read-eyebrow" data-random-read-eyebrow>Loading something good…</p>
+    <h2 class="card-title" id="random-read-title" data-random-read-title>Finding a random piece from poetry, prose, and essays</h2>
+    <p class="card-text" data-random-read-message>Pick a surprise read from the archive.</p>
+    <div class="card-random-read-actions">
+      <a class="card-link" href="#" data-random-read-link aria-disabled="true">Open random piece</a>
+      <button class="button button-secondary" type="button" data-random-read-refresh>Pick another</button>
+    </div>
+  </article>
+</section>
+
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro page-intro--hero reveal">
     <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
