@@ -368,7 +368,29 @@ const toIsoString = (value) => {
 const isSearchDisabled = (value) => value === false
   || (typeof value === 'string' && value.trim().toLowerCase() === 'false');
 
-const resolveLastModified = (frontMatterData, fallbackStat) => {
+const gitLastModifiedCache = new Map();
+
+const getGitLastModified = async (relativePath) => {
+  if (gitLastModifiedCache.has(relativePath)) {
+    return gitLastModifiedCache.get(relativePath);
+  }
+
+  try {
+    const { stdout } = await execFile(
+      'git',
+      ['log', '-1', '--format=%cI', '--', relativePath],
+      { cwd: root },
+    );
+    const value = toIsoString(stdout.trim());
+    gitLastModifiedCache.set(relativePath, value);
+    return value;
+  } catch {
+    gitLastModifiedCache.set(relativePath, null);
+    return null;
+  }
+};
+
+const resolveLastModified = async (frontMatterData, relativePath, fallbackStat) => {
   const frontMatterDate = toIsoString(
     frontMatterData.last_modified_at
       || frontMatterData.lastModified
@@ -376,6 +398,9 @@ const resolveLastModified = (frontMatterData, fallbackStat) => {
       || frontMatterData.date,
   );
   if (frontMatterDate) return frontMatterDate;
+
+  const gitDate = await getGitLastModified(relativePath);
+  if (gitDate) return gitDate;
 
   return fallbackStat.mtime.toISOString();
 };
@@ -425,7 +450,7 @@ const main = async () => {
       tags: normalizeTags(frontMatterData.tags),
       url,
       content: toPlainText(preprocessed).slice(0, 1400),
-      lastModified: resolveLastModified(frontMatterData, stats),
+      lastModified: await resolveLastModified(frontMatterData, rel, stats),
     });
   }
 

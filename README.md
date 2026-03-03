@@ -19,6 +19,29 @@ npm run generate:search-index
 
 `npm run build` currently runs the same indexing step.
 
+
+## Preventing `search.json` merge conflicts
+
+`search.json` is generated output, so Git line-by-line merges often conflict when two branches both regenerate it.
+
+This repo now uses a `.gitattributes` rule:
+
+- `search.json merge=ours`
+
+During a local Git merge, Git will keep the version from the branch you are merging *into* (your current branch), which avoids manual conflict resolution in this large generated file.
+
+Important: GitHub's web merge flow can still show conflicts because it does not reliably apply local custom merge drivers from `.gitattributes`.
+
+To reduce conflicts in GitHub PR merges, the generator now uses each file's latest Git commit timestamp (instead of file-system modified time), so unchanged files do not churn on every regenerate.
+
+After a merge, regenerate the index so it matches your latest content:
+
+```bash
+npm run generate:search-index
+```
+
+Then commit the refreshed `search.json` if it changed.
+
 ## Copy-protection behavior
 
 The frontend intentionally does **not** include copy-protection logic right now.
