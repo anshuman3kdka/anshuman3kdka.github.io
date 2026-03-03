@@ -538,6 +538,22 @@ button:focus-visible {
   margin: 0 0 var(--space-heading-gap);
 }
 
+
+.piece-detail {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.piece-detail-title {
+  margin: 0 0 var(--space-heading-gap);
+  font-family: var(--font-heading);
+  font-size: var(--step-3);
+}
+
+.piece-detail > :last-child {
+  margin-bottom: 0;
+}
+
 .page-lead {
   margin: 0;
   color: var(--color-ink-muted);
