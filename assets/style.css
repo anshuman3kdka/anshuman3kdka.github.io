@@ -539,9 +539,10 @@ button:focus-visible {
 }
 
 
-.piece-detail {
+.piece-detail-header {
   max-width: 860px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .piece-detail-title {
@@ -550,9 +551,6 @@ button:focus-visible {
   font-size: var(--step-3);
 }
 
-.piece-detail > :last-child {
-  margin-bottom: 0;
-}
 
 .page-lead {
   margin: 0;
