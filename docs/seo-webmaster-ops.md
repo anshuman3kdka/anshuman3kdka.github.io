@@ -46,8 +46,31 @@ Use each tool's URL inspection / submit URL workflow for:
 - `https://www.anshuman3kdka.in/essays/`
 - `https://www.anshuman3kdka.in/projects/`
 - `https://www.anshuman3kdka.in/about/`
+- `https://www.anshuman3kdka.in/creative/`
 
-## 5) Weekly coverage checks and crawl-error triage
+## 5) Google Search Console: current action checklist (plain-language)
+
+Use this exact checklist when working inside Google Search Console:
+
+1. Keep the **Domain** property `anshuman3kdka.in` if it is already verified.
+2. In **URL Inspection**, test only the `www` homepage:
+   - `https://www.anshuman3kdka.in/`
+3. In **Sitemaps**, submit:
+   - `https://www.anshuman3kdka.in/sitemap.xml`
+4. In **URL Inspection**, request indexing for:
+   - `https://www.anshuman3kdka.in/`
+   - `https://www.anshuman3kdka.in/about/`
+   - `https://www.anshuman3kdka.in/essays/`
+   - `https://www.anshuman3kdka.in/projects/`
+   - `https://www.anshuman3kdka.in/creative/`
+5. Wait a few days, then re-check indexing/coverage.
+
+### Important note about redirects
+
+Seeing **"Page with redirect"** for the non-`www` version is expected.
+That is okay as long as the `www` URL is the one getting indexed.
+
+## 6) Weekly coverage checks and crawl-error triage
 
 Every week:
 1. Review **Pages/Coverage** and **Sitemaps** in Google Search Console.
