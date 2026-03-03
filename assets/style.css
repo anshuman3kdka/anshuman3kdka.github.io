@@ -469,6 +469,35 @@ button:focus-visible {
   color: var(--color-accent);
 }
 
+.card-random-read {
+  border-color: rgba(211, 178, 119, 0.38);
+  background:
+    radial-gradient(900px 500px at 8% -8%, rgba(211, 178, 119, 0.2), transparent 62%),
+    linear-gradient(165deg, rgba(22, 50, 36, 0.92) 0%, rgba(14, 34, 25, 0.96) 100%);
+}
+
+.card-random-read-eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--color-accent-soft);
+}
+
+.card-random-read-actions {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.card-random-read .button {
+  min-height: 44px;
+}
+
+.card-link.is-disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
 .page-intro {
   margin-bottom: var(--space-intro);
 }
