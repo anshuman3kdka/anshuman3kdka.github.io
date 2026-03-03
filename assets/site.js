@@ -3,6 +3,53 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 let pageTransitionListenerAttached = false;
 let revealObserver = null;
 
+const normalizePathname = (value) => {
+  if (!value) return '/';
+
+  const rawPath = String(value).split('#')[0].split('?')[0] || '/';
+  const pathWithLeadingSlash = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+
+  if (pathWithLeadingSlash !== '/' && pathWithLeadingSlash.endsWith('/')) {
+    return pathWithLeadingSlash.slice(0, -1);
+  }
+
+  return pathWithLeadingSlash;
+};
+
+const highlightCurrentNavLink = () => {
+  const navLinks = Array.from(document.querySelectorAll('.site-nav a'));
+  if (!navLinks.length) return;
+
+  navLinks.forEach((link) => {
+    link.classList.remove('is-active');
+    link.removeAttribute('aria-current');
+  });
+
+  const currentPath = normalizePathname(window.location.pathname);
+  let bestMatch = null;
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    const linkPath = normalizePathname(new URL(href, window.location.origin).pathname);
+    const isHomeLink = linkPath === '/';
+    const isExactMatch = currentPath === linkPath;
+    const isSectionMatch = !isHomeLink && currentPath.startsWith(`${linkPath}/`);
+
+    if (!isExactMatch && !isSectionMatch) return;
+
+    if (!bestMatch || linkPath.length > bestMatch.path.length) {
+      bestMatch = { element: link, path: linkPath };
+    }
+  });
+
+  if (bestMatch) {
+    bestMatch.element.classList.add('is-active');
+    bestMatch.element.setAttribute('aria-current', 'page');
+  }
+};
+
 const resetNavigationState = () => {
   document.body.classList.remove("is-loading", "is-leaving", "search-active");
   document.body.classList.add("is-loaded");
@@ -398,6 +445,7 @@ const initSearch = () => {
 const initPage = () => {
   resetNavigationState();
   resetTransientUiState();
+  highlightCurrentNavLink();
   handlePageTransitions();
   handleScrollReveal();
   initSearch();
@@ -408,6 +456,7 @@ document.addEventListener("DOMContentLoaded", initPage);
 document.addEventListener("pageshow", () => {
   resetNavigationState();
   resetTransientUiState();
+  highlightCurrentNavLink();
   handleScrollReveal();
 });
 
