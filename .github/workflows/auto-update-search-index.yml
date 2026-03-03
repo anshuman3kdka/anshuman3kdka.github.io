@@ -2,6 +2,8 @@ name: Auto-update search index
 
 on:
   push:
+    branches:
+      - main
     paths:
       - '**/*.md'
       - '**/*.html'

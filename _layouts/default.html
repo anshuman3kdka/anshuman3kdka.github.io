@@ -177,7 +177,20 @@
               {% endif %}
             </header>
             {% endif %}
-            {{ content }}
+
+            {% if is_piece_page %}
+            <article class="piece-detail reveal">
+              <h1 class="piece-detail-title">{{ intro_title }}</h1>
+              {% if intro_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ intro_featured_image | relative_url }}" alt="Featured image for {{ intro_title }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
+              {{ content }}
+            </article>
+            {% else %}
+              {{ content }}
+            {% endif %}
           </div>
         </div>
       </main>
