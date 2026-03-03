@@ -54,8 +54,10 @@ If copy protection is reintroduced later, wire it explicitly in `initPage()` and
 
 ## Automatic indexing on content changes
 
-A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes that modify content files.
-It regenerates `search.json` and commits any updates automatically.
+A GitHub Actions workflow (`.github/workflows/auto-update-search-index.yml`) now runs on pushes to `main` when content files are modified.
+It regenerates `search.json` and commits any updates automatically on `main`.
+
+Contributor note: do **not** manually commit `search.json` from PR branches. Contributors/agents should only commit content changes in PRs; `search.json` is regenerated and committed automatically after merge on `main`.
 
 ## Pages CMS media uploads
 
@@ -132,4 +134,3 @@ Analytics loading is controlled via `_data/site.yml` under the `analytics` key:
 - `script_src`: analytics script URL
 
 Set `enabled: true` only when you are ready to collect real traffic data.
-

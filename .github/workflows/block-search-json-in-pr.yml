@@ -1,0 +1,17 @@
+name: Block search.json changes in PRs
+
+on:
+  pull_request:
+    paths:
+      - 'search.json'
+
+jobs:
+  block-search-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fail when search.json is included in PR
+        run: |
+          echo "❌ This PR includes search.json."
+          echo "Please remove search.json from your PR branch."
+          exit 1
