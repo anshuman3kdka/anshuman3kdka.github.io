@@ -6,7 +6,7 @@ description: Reach out for collaborations or  paid projects.
   <div class="card">
     <p class="card-label">Email</p>
     <h3 class="card-title">thisisanshumanp@gmail.com</h3>
-    <p class="card-text">The fastest way to reach me for paid projects or speaking requests.</p>
+    <p class="card-text">The fastest way to reach me for collaborations or projects.</p>
     <a class="card-link" href="mailto:thisisanshumanp@gmail.com">Send an email</a>
   </div>
   <div class="card">
