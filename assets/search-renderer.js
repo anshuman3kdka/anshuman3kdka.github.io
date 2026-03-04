@@ -28,7 +28,8 @@ export const renderSearchState = ({ listElement, liveRegion, message = '', resul
     empty.className = 'search-empty-state';
     empty.textContent = message;
     listElement.append(empty);
-    liveRegion.textContent = message;
+    const isHint = message.toLowerCase().includes('type at least 2 letters');
+    liveRegion.textContent = isHint ? '' : message;
     return;
   }
 

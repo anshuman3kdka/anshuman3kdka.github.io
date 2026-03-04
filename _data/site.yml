@@ -26,6 +26,8 @@ header_links:
     url: /projects/
   - label: Contact
     url: /contact/
+  - label: Search
+    url: /search/
   - label: Resume
     url: /resume/
   - label: Achievements
