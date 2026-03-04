@@ -103,7 +103,7 @@
             {% assign show_page_intro = true %}
             {% if is_home or is_resume %}{% assign show_page_intro = false %}{% endif %}
 
-            {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/' | split: ',' %}
+            {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
             {% assign is_piece_page = false %}
             {% for collection_path in piece_collections %}
               {% if page.path contains collection_path and page.name != 'index.md' %}

@@ -156,6 +156,34 @@ content:
         label: Details
         type: markdown
 
+  - name: certificates
+    label: Certificates
+    path: certificates
+    type: collection
+    filename: "{slug}.md"
+    exclude:
+      - index.md
+    fields:
+      - name: title
+        label: Certificate Title
+        type: text
+        required: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: image
+        label: Certificate Image (optional)
+        type: image
+        required: false
+      - name: body
+        label: Details
+        type: markdown
+
   - name: landing_home
     label: Landing Home (index.md)
     path: index.md
@@ -338,6 +366,23 @@ content:
         label: Content
         type: markdown
 
+  - name: certificates_page
+    label: Certificates Listing Page
+    path: certificates/index.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: text
+        required: true
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
   - name: secondary_home_page
     label: Secondary Home Page
     path: home/index.md
@@ -429,7 +474,7 @@ content:
         label: Content Eyebrow Font Size
         type: text
         required: false
-        description: CSS font-size value (e.g., 0.72rem or 12px) used on prose, poetry, essays, projects, and achievements listing cards.
+        description: CSS font-size value (e.g., 0.72rem or 12px) used on prose, poetry, essays, projects, achievements, and certificates listing cards.
       - name: footer_heading
         label: Footer Heading
         type: text

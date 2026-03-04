@@ -3,7 +3,7 @@ site_tagline: I write essays, fiction, and poetry. Usually about literature,
   occasionally about why most of it fails. Currently a student, open to work
   that doesn't require me to use the word 'synergy.'
 brand_url: https://www.anshuman3kdka.in
-search_placeholder: Search essays, prose, projects, and achievements
+search_placeholder: Search essays, prose, projects, achievements, and certificates
 featured_cards_eyebrow: Featured Cards
 featured_cards_title: Things that got finished
 featured_cards_subtitle: Visit my latest works
@@ -32,6 +32,8 @@ header_links:
     url: /resume/
   - label: Achievements
     url: /achievements/
+  - label: Certificates
+    url: /certificates/
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/anshuman-pandey-b33362378
