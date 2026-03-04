@@ -959,6 +959,31 @@ body.is-leaving .page-shell {
   opacity: 0.72;
 }
 
+
+.quick-action-link {
+  min-height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-rule);
+  background: rgba(14, 35, 25, 0.82);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.quick-action-link:hover {
+  transform: translateY(-1px);
+  background: rgba(21, 49, 36, 0.9);
+  border-color: rgba(211, 178, 119, 0.45);
+}
+
 .random-read-status {
   position: absolute;
   right: 0;
@@ -1007,6 +1032,11 @@ body.is-leaving .page-shell {
 
 
   .random-read-button {
+    min-height: 2.35rem;
+    padding-inline: 0.75rem;
+  }
+
+  .quick-action-link {
     min-height: 2.35rem;
     padding-inline: 0.75rem;
   }
