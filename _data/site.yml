@@ -14,6 +14,8 @@ footer_note: Built between lectures
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
 header_links:
+  - label: Search
+    url: /search/
   - label: About
     url: /about/
   - label: Essays

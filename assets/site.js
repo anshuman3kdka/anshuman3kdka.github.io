@@ -208,7 +208,15 @@ const loadRandomReadData = async () => {
   if (!response) throw new Error('Failed to load random read index');
 
   const data = await response.json();
-  randomReadDataPrepared = prepareRandomReadData(Array.isArray(data) ? data : []);
+  const records = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.items)
+      ? data.items
+      : Array.isArray(data?.reads)
+        ? data.reads
+        : [];
+
+  randomReadDataPrepared = prepareRandomReadData(records);
   return randomReadDataPrepared;
 };
 
@@ -236,36 +244,65 @@ const fetchRandomReadItem = async () => {
   }
 };
 
+const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = false, idleStatus = '' }) => {
+  if (!trigger) return;
+
+  let isFetching = false;
+
+  trigger.addEventListener('click', async (event) => {
+    event.preventDefault();
+    if (trigger.getAttribute('aria-disabled') === 'true') return;
+    if (isFetching) return;
+
+    isFetching = true;
+
+    if (disableWhileLoading) {
+      trigger.disabled = true;
+    }
+
+    if (statusElement) {
+      statusElement.textContent = 'Picking a piece…';
+    }
+
+    const item = await fetchRandomReadItem();
+
+    if (item?.url) {
+      if (statusElement) {
+        statusElement.textContent = `Opening ${item.title || 'piece'}…`;
+      }
+
+      document.body.classList.add('is-leaving');
+      setTimeout(() => {
+        window.location.href = item.url;
+      }, 180);
+      return;
+    }
+
+    if (statusElement) {
+      statusElement.textContent = 'No pieces found.';
+      setTimeout(() => {
+        statusElement.textContent = idleStatus;
+      }, 3000);
+    }
+
+    if (disableWhileLoading) {
+      trigger.disabled = false;
+    }
+
+    isFetching = false;
+  });
+};
+
 const initRandomReadButton = () => {
   const button = document.querySelector('[data-random-read]');
   const status = document.querySelector('[data-random-read-status]');
   if (!button || !status) return;
 
-  let isFetching = false;
-
-  button.addEventListener('click', async () => {
-    if (isFetching) return;
-
-    isFetching = true;
-    button.disabled = true;
-    status.textContent = 'Picking a piece…';
-
-    const item = await fetchRandomReadItem();
-
-    if (item && item.url) {
-      status.textContent = `Opening ${item.title || 'piece'}…`;
-      document.body.classList.add('is-leaving');
-      setTimeout(() => {
-        window.location.href = item.url;
-      }, 180);
-    } else {
-      status.textContent = 'No pieces found.';
-      button.disabled = false;
-      isFetching = false;
-      setTimeout(() => {
-        status.textContent = '';
-      }, 3000);
-    }
+  bindRandomReadTrigger({
+    trigger: button,
+    statusElement: status,
+    disableWhileLoading: true,
+    idleStatus: '',
   });
 };
 
@@ -332,10 +369,11 @@ const initRandomReadCard = () => {
     });
   };
 
-  link.addEventListener('click', (event) => {
-    if (link.getAttribute('aria-disabled') === 'true') {
-      event.preventDefault();
-    }
+  bindRandomReadTrigger({
+    trigger: link,
+    statusElement: message,
+    disableWhileLoading: false,
+    idleStatus: 'Pick a surprise read from the archive.',
   });
 
   refresh.addEventListener('click', renderRandomItem);
