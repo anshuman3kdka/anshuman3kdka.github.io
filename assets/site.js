@@ -526,18 +526,7 @@ const initSearch = () => {
   sortSelect.addEventListener('change', renderResults);
 };
 
-const initRandomReadCard = () => {
-  const card = document.querySelector('[data-random-read-card]');
-  if (!card) return;
-
-  const eyebrow = card.querySelector('[data-random-read-eyebrow]');
-  const title = card.querySelector('[data-random-read-title]');
-  const message = card.querySelector('[data-random-read-message]');
-  const link = card.querySelector('[data-random-read-link]');
-  const refresh = card.querySelector('[data-random-read-refresh]');
-
-  if (!eyebrow || !title || !message || !link || !refresh) return;
-
+const fetchRandomReadItem = async () => {
   const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
   const allowedPathKeywords = ['/poetry/', '/prose/', '/essay/', '/essays/'];
 
@@ -549,7 +538,62 @@ const initRandomReadCard = () => {
     return allowedPathKeywords.some((keyword) => path.includes(keyword));
   };
 
-  const getReadableItems = () => getValidContentItems().filter((item) => isAllowedReadCategory(item));
+  try {
+    await loadSearchData();
+    const readableItems = getValidContentItems().filter((item) => isAllowedReadCategory(item));
+
+    if (!readableItems.length) return null;
+    return readableItems[Math.floor(Math.random() * readableItems.length)];
+  } catch (error) {
+    console.error('Random read error:', error);
+    return null;
+  }
+};
+
+const initRandomReadButton = () => {
+  const button = document.querySelector('[data-random-read]');
+  const status = document.querySelector('[data-random-read-status]');
+  if (!button || !status) return;
+
+  let isFetching = false;
+
+  button.addEventListener('click', async () => {
+    if (isFetching) return;
+
+    isFetching = true;
+    button.disabled = true;
+    status.textContent = 'Picking a piece…';
+
+    const item = await fetchRandomReadItem();
+
+    if (item && item.url) {
+      status.textContent = `Opening ${item.title || 'piece'}…`;
+      document.body.classList.add('is-leaving');
+      setTimeout(() => {
+        window.location.href = item.url;
+      }, 180);
+    } else {
+      status.textContent = 'No pieces found.';
+      button.disabled = false;
+      isFetching = false;
+      setTimeout(() => {
+        status.textContent = '';
+      }, 3000);
+    }
+  });
+};
+
+const initRandomReadCard = () => {
+  const card = document.querySelector('[data-random-read-card]');
+  if (!card) return;
+
+  const eyebrow = card.querySelector('[data-random-read-eyebrow]');
+  const title = card.querySelector('[data-random-read-title]');
+  const message = card.querySelector('[data-random-read-message]');
+  const link = card.querySelector('[data-random-read-link]');
+  const refresh = card.querySelector('[data-random-read-refresh]');
+
+  if (!eyebrow || !title || !message || !link || !refresh) return;
 
   const setCardState = ({
     eyebrowText = 'Random Read',
@@ -582,35 +626,24 @@ const initRandomReadCard = () => {
       disabled: true,
     });
 
-    try {
-      await loadSearchData();
-      const readableItems = getReadableItems();
+    const item = await fetchRandomReadItem();
 
-      if (!readableItems.length) {
-        setCardState({
-          titleText: 'No poetry, prose, or essay items were found.',
-          messageText: 'Try again after updating search content.',
-          disabled: true,
-        });
-        return;
-      }
-
-      const item = readableItems[Math.floor(Math.random() * readableItems.length)];
+    if (!item) {
       setCardState({
-        eyebrowText: item.eyebrow || item.category || 'Random Read',
-        titleText: item.title || 'Untitled piece',
-        messageText: 'A random pick from the archive.',
-        href: item.url,
-        linkLabel: 'Read this piece →',
-      });
-    } catch (error) {
-      console.error(error);
-      setCardState({
-        titleText: 'Could not load random reads.',
-        messageText: 'The content index failed to load. Please try again later.',
+        titleText: 'No poetry, prose, or essay items were found.',
+        messageText: 'Try again after updating search content.',
         disabled: true,
       });
+      return;
     }
+
+    setCardState({
+      eyebrowText: item.eyebrow || item.category || 'Random Read',
+      titleText: item.title || 'Untitled piece',
+      messageText: 'A random pick from the archive.',
+      href: item.url,
+      linkLabel: 'Read this piece →',
+    });
   };
 
   link.addEventListener('click', (event) => {
@@ -632,6 +665,7 @@ const initPage = () => {
   initScrollProgress();
   initSearch();
   initRandomReadCard();
+  initRandomReadButton();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
