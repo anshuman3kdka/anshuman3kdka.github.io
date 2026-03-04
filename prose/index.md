@@ -12,14 +12,14 @@ description: Step into short fiction and narrative experiments crafted to entert
   {% if prose_items.size > 0 %}
   <div class="content-list">
     {% for prose in prose_items %}
-    <article class="content-item reveal">
+    <article class="content-item">
       {% if prose.eyebrow %}<p class="content-eyebrow">{{ prose.eyebrow }}</p>{% endif %}
       <h3><a href="{{ prose.url }}">{{ prose.title }}</a></h3>
     </article>
     {% endfor %}
   </div>
   {% else %}
-  <div class="card reveal">
+  <div class="card">
     <p class="card-text">Prose entries will appear here as they are added.</p>
   </div>
   {% endif %}
