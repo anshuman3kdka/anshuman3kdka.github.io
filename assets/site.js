@@ -208,13 +208,65 @@ const loadRandomReadData = async () => {
   if (!response) throw new Error('Failed to load random read index');
 
   const data = await response.json();
-  randomReadDataPrepared = prepareRandomReadData(Array.isArray(data) ? data : []);
+  const records = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.items)
+      ? data.items
+      : Array.isArray(data?.reads)
+        ? data.reads
+        : [];
+
+  randomReadDataPrepared = prepareRandomReadData(records);
   return randomReadDataPrepared;
+};
+
+const buildRandomReadUrlCandidates = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return [];
+
+  const candidates = [raw];
+
+  if (raw.endsWith('/')) {
+    candidates.push(`${raw}index.html`);
+    candidates.push(`${raw.slice(0, -1)}.html`);
+  } else if (raw.endsWith('.html')) {
+    const withoutHtml = raw.replace(/\.html$/i, '');
+    candidates.push(`${withoutHtml}/`);
+    candidates.push(`${withoutHtml}/index.html`);
+  } else {
+    candidates.push(`${raw}/`);
+    candidates.push(`${raw}.html`);
+    candidates.push(`${raw}/index.html`);
+  }
+
+  return [...new Set(candidates)];
+};
+
+const resolveRandomReadUrl = async (value) => {
+  const candidates = buildRandomReadUrlCandidates(value);
+
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(candidate, {
+        method: 'HEAD',
+        cache: 'no-store',
+      });
+
+      if (response.ok || response.status === 405) {
+        return candidate;
+      }
+    } catch (error) {
+      // Try the next candidate URL.
+    }
+  }
+
+  return candidates[0] || '#';
 };
 
 const fetchRandomReadItem = async () => {
   const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
   const allowedPathKeywords = ['/poetry/', '/prose/', '/essay/', '/essays/'];
+  const disallowedIndexPaths = new Set(['/poetry/', '/prose/', '/essay/', '/essays/']);
 
   const isAllowedReadCategory = (item) => {
     const category = String(item.category || item.categoryLower || '').trim().toLowerCase();
@@ -224,16 +276,76 @@ const fetchRandomReadItem = async () => {
     return allowedPathKeywords.some((keyword) => path.includes(keyword));
   };
 
+  const isSinglePiece = (item) => {
+    const path = String(item.url || '').trim().toLowerCase();
+    return path && !disallowedIndexPaths.has(path);
+  };
+
   try {
     await loadRandomReadData();
-    const readableItems = getValidContentItems().filter((item) => isAllowedReadCategory(item));
+    const readableItems = getValidContentItems().filter((item) => isAllowedReadCategory(item) && isSinglePiece(item));
 
     if (!readableItems.length) return null;
-    return readableItems[Math.floor(Math.random() * readableItems.length)];
+
+    const pickedItem = readableItems[Math.floor(Math.random() * readableItems.length)];
+    const resolvedUrl = await resolveRandomReadUrl(pickedItem.url);
+    return {
+      ...pickedItem,
+      url: resolvedUrl,
+    };
   } catch (error) {
     console.error('Random read error:', error);
     return null;
   }
+};
+
+const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = false, idleStatus = '' }) => {
+  if (!trigger) return;
+
+  let isFetching = false;
+
+  trigger.addEventListener('click', async (event) => {
+    event.preventDefault();
+    if (trigger.getAttribute('aria-disabled') === 'true') return;
+    if (isFetching) return;
+
+    isFetching = true;
+
+    if (disableWhileLoading) {
+      trigger.disabled = true;
+    }
+
+    if (statusElement) {
+      statusElement.textContent = 'Picking a piece…';
+    }
+
+    const item = await fetchRandomReadItem();
+
+    if (item?.url) {
+      if (statusElement) {
+        statusElement.textContent = `Opening ${item.title || 'piece'}…`;
+      }
+
+      document.body.classList.add('is-leaving');
+      setTimeout(() => {
+        window.location.href = item.url;
+      }, 180);
+      return;
+    }
+
+    if (statusElement) {
+      statusElement.textContent = 'No pieces found.';
+      setTimeout(() => {
+        statusElement.textContent = idleStatus;
+      }, 3000);
+    }
+
+    if (disableWhileLoading) {
+      trigger.disabled = false;
+    }
+
+    isFetching = false;
+  });
 };
 
 const initRandomReadButton = () => {
@@ -241,31 +353,11 @@ const initRandomReadButton = () => {
   const status = document.querySelector('[data-random-read-status]');
   if (!button || !status) return;
 
-  let isFetching = false;
-
-  button.addEventListener('click', async () => {
-    if (isFetching) return;
-
-    isFetching = true;
-    button.disabled = true;
-    status.textContent = 'Picking a piece…';
-
-    const item = await fetchRandomReadItem();
-
-    if (item && item.url) {
-      status.textContent = `Opening ${item.title || 'piece'}…`;
-      document.body.classList.add('is-leaving');
-      setTimeout(() => {
-        window.location.href = item.url;
-      }, 180);
-    } else {
-      status.textContent = 'No pieces found.';
-      button.disabled = false;
-      isFetching = false;
-      setTimeout(() => {
-        status.textContent = '';
-      }, 3000);
-    }
+  bindRandomReadTrigger({
+    trigger: button,
+    statusElement: status,
+    disableWhileLoading: true,
+    idleStatus: '',
   });
 };
 
@@ -332,10 +424,11 @@ const initRandomReadCard = () => {
     });
   };
 
-  link.addEventListener('click', (event) => {
-    if (link.getAttribute('aria-disabled') === 'true') {
-      event.preventDefault();
-    }
+  bindRandomReadTrigger({
+    trigger: link,
+    statusElement: message,
+    disableWhileLoading: false,
+    idleStatus: 'Pick a surprise read from the archive.',
   });
 
   refresh.addEventListener('click', renderRandomItem);
