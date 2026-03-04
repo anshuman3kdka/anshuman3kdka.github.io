@@ -500,7 +500,8 @@ button:focus-visible {
 
 .card-random-read-eyebrow {
   margin: 0 0 0.25rem;
-  color: var(--color-accent-soft);
+  color: rgba(211, 178, 119, 0.62);
+  text-shadow: 0 1px 8px rgba(8, 18, 13, 0.4);
 }
 
 .card-random-read-actions {
