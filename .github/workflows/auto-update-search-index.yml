@@ -1,4 +1,4 @@
-name: Auto-update random read index
+name: Auto-update generated indexes
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - '**/*.md'
       - '**/*.html'
       - 'scripts/generate-random-read-index.mjs'
+      - 'scripts/generate-search-index.mjs'
       - 'package.json'
       - '.github/workflows/auto-update-search-index.yml'
   workflow_dispatch:
@@ -30,17 +31,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Regenerate random read index
-        run: npm run generate:random-read-index
+      - name: Regenerate indexes
+        run: npm run build
 
-      - name: Commit updated random read index
+      - name: Commit updated indexes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add random-read.json
+          git add random-read.json search-index.json
           if git diff --cached --quiet; then
-            echo "No random read index changes to commit."
+            echo "No generated index changes to commit."
             exit 0
           fi
-          git commit -m "chore: auto-update random read index"
+          git commit -m "chore: auto-update generated indexes"
           git push
