@@ -8,7 +8,7 @@ const root = process.cwd();
 
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
-const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'creative']);
+const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'certificates']);
 
 const stopWords = new Set(['a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'to', 'was', 'with']);
 
