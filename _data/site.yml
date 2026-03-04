@@ -24,8 +24,6 @@ header_links:
     url: /creative/
   - label: Projects
     url: /projects/
-  - label: Contact
-    url: /contact/
   - label: Search
     url: /search/
   - label: Resume
