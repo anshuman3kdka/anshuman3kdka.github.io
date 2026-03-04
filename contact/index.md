@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: Reach out for collaborations, speaking invites, or  paid projects.
+description: Reach out for collaborations or  paid projects.
 ---
 <section class="section grid grid-2">
   <div class="card">
