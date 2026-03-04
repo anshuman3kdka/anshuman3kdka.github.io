@@ -220,9 +220,53 @@ const loadRandomReadData = async () => {
   return randomReadDataPrepared;
 };
 
+const buildRandomReadUrlCandidates = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return [];
+
+  const candidates = [raw];
+
+  if (raw.endsWith('/')) {
+    candidates.push(`${raw}index.html`);
+    candidates.push(`${raw.slice(0, -1)}.html`);
+  } else if (raw.endsWith('.html')) {
+    const withoutHtml = raw.replace(/\.html$/i, '');
+    candidates.push(`${withoutHtml}/`);
+    candidates.push(`${withoutHtml}/index.html`);
+  } else {
+    candidates.push(`${raw}/`);
+    candidates.push(`${raw}.html`);
+    candidates.push(`${raw}/index.html`);
+  }
+
+  return [...new Set(candidates)];
+};
+
+const resolveRandomReadUrl = async (value) => {
+  const candidates = buildRandomReadUrlCandidates(value);
+
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(candidate, {
+        method: 'HEAD',
+        cache: 'no-store',
+      });
+
+      if (response.ok || response.status === 405) {
+        return candidate;
+      }
+    } catch (error) {
+      // Try the next candidate URL.
+    }
+  }
+
+  return candidates[0] || '#';
+};
+
 const fetchRandomReadItem = async () => {
   const allowedCategories = new Set(['poetry', 'prose', 'essay', 'essays']);
   const allowedPathKeywords = ['/poetry/', '/prose/', '/essay/', '/essays/'];
+  const disallowedIndexPaths = new Set(['/poetry/', '/prose/', '/essay/', '/essays/']);
 
   const isAllowedReadCategory = (item) => {
     const category = String(item.category || item.categoryLower || '').trim().toLowerCase();
@@ -232,12 +276,23 @@ const fetchRandomReadItem = async () => {
     return allowedPathKeywords.some((keyword) => path.includes(keyword));
   };
 
+  const isSinglePiece = (item) => {
+    const path = String(item.url || '').trim().toLowerCase();
+    return path && !disallowedIndexPaths.has(path);
+  };
+
   try {
     await loadRandomReadData();
-    const readableItems = getValidContentItems().filter((item) => isAllowedReadCategory(item));
+    const readableItems = getValidContentItems().filter((item) => isAllowedReadCategory(item) && isSinglePiece(item));
 
     if (!readableItems.length) return null;
-    return readableItems[Math.floor(Math.random() * readableItems.length)];
+
+    const pickedItem = readableItems[Math.floor(Math.random() * readableItems.length)];
+    const resolvedUrl = await resolveRandomReadUrl(pickedItem.url);
+    return {
+      ...pickedItem,
+      url: resolvedUrl,
+    };
   } catch (error) {
     console.error('Random read error:', error);
     return null;
