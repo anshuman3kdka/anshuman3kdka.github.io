@@ -18,7 +18,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
         type="search"
         name="q"
         autocomplete="off"
-        placeholder="Try: night, satire, project"
+        placeholder="Try: Poetry"
         data-search-input
         aria-describedby="search-live-region"
       >
