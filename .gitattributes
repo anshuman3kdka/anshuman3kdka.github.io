@@ -1,2 +1,2 @@
 # Treat generated index as machine output and prefer current branch during merges.
-search.json merge=ours
+random-read.json merge=ours
