@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "description": "Static site build utilities",
   "scripts": {
-    "build": "npm run generate:random-read-index",
+    "build": "npm run generate:random-read-index && npm run generate:search-index",
     "check:seo": "./scripts/seo-health-check.sh",
-    "generate:random-read-index": "node ./scripts/generate-random-read-index.mjs"
+    "generate:random-read-index": "node ./scripts/generate-random-read-index.mjs",
+    "generate:search-index": "node ./scripts/generate-search-index.mjs"
   }
 }
