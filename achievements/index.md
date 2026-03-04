@@ -12,14 +12,14 @@ description: See milestones, recognitions, and progress snapshots that reflect c
   {% if achievement_items.size > 0 %}
   <div class="content-list">
     {% for achievement in achievement_items %}
-    <article class="content-item reveal">
+    <article class="content-item">
       {% if achievement.eyebrow %}<p class="content-eyebrow">{{ achievement.eyebrow }}</p>{% endif %}
       <h3><a href="{{ achievement.url }}">{{ achievement.title }}</a></h3>
     </article>
     {% endfor %}
   </div>
   {% else %}
-  <div class="card reveal">
+  <div class="card">
     <p class="card-text">Still on it! Achievements will appear here as they are added.</p>
   </div>
   {% endif %}

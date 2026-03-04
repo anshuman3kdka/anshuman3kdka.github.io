@@ -741,26 +741,6 @@ button:focus-visible {
   font-size: var(--step--1);
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Optional reveal stagger utilities for authored timing without inline styles. */
-.reveal-delay-1 {
-  transition-delay: 100ms !important;
-}
-
-.reveal-delay-2 {
-  transition-delay: 200ms !important;
-}
-
 body.is-loading .page-shell {
   opacity: 0;
   transform: translateY(12px);

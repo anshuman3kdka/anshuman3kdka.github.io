@@ -157,7 +157,7 @@
             {% assign intro_featured_image = page.featured_image | default: page.image %}
 
             {% if show_page_intro and is_piece_page == false %}
-            <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %} reveal">
+            <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %}">
               <h1 class="page-title">{{ intro_title }}</h1>
               {% if intro_featured_image %}
               <figure class="piece-featured-media">
@@ -168,7 +168,7 @@
             {% endif %}
 
             {% if is_piece_page %}
-            <header class="piece-detail-header section reveal">
+            <header class="piece-detail-header section">
               <h1 class="piece-detail-title">{{ intro_title }}</h1>
               {% if intro_featured_image %}
               <figure class="piece-featured-media">
@@ -179,7 +179,7 @@
             {% endif %}
 
             {% if is_piece_page %}
-            <article class="piece-detail reveal">
+            <article class="piece-detail">
               {{ content }}
             </article>
             {% else %}

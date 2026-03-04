@@ -1,7 +1,6 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 let pageTransitionListenerAttached = false;
-let revealObserver = null;
 let scrollProgressHandlersBound = false;
 
 const normalizePathname = (value) => {
@@ -124,49 +123,6 @@ const handlePageTransitions = () => {
     document.addEventListener("click", handlePageTransitionClick);
     pageTransitionListenerAttached = true;
   }
-};
-
-const handleScrollReveal = () => {
-  const items = document.querySelectorAll(".reveal");
-  if (!items.length) return;
-
-  const markVisible = () => {
-    items.forEach((item) => {
-      item.classList.add("is-visible");
-      item.style.transitionDelay = "0ms";
-    });
-  };
-
-  if (prefersReducedMotion) {
-    markVisible();
-    return;
-  }
-
-  if (typeof IntersectionObserver !== 'function') {
-    markVisible();
-    return;
-  }
-
-  if (revealObserver) {
-    revealObserver.disconnect();
-  }
-
-  revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  items.forEach((item, index) => {
-    item.style.transitionDelay = `${Math.min(index * 80, 320)}ms`;
-    revealObserver.observe(item);
-  });
 };
 
 const initScrollProgress = () => {
@@ -661,7 +617,6 @@ const initPage = () => {
   resetTransientUiState();
   highlightCurrentNavLink();
   handlePageTransitions();
-  handleScrollReveal();
   initScrollProgress();
   initSearch();
   initRandomReadCard();
@@ -674,7 +629,6 @@ document.addEventListener("pageshow", () => {
   resetNavigationState();
   resetTransientUiState();
   highlightCurrentNavLink();
-  handleScrollReveal();
   initScrollProgress();
 });
 

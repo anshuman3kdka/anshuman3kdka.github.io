@@ -12,14 +12,14 @@ description: Explore clear, thought-provoking essays where ideas are unpacked wi
   {% if essay_items.size > 0 %}
   <div class="content-list">
     {% for essay in essay_items %}
-    <article class="content-item reveal">
+    <article class="content-item">
       {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
       <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
     </article>
     {% endfor %}
   </div>
   {% else %}
-  <div class="card reveal">
+  <div class="card">
     <p class="card-text">Essays will appear here as they are added.</p>
   </div>
   {% endif %}

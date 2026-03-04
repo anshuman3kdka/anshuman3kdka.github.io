@@ -4,7 +4,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 ---
 
 <section class="section section--hero hero hero--center-desktop" aria-labelledby="hero-title">
-  <div class="hero-content reveal">
+  <div class="hero-content">
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
@@ -17,7 +17,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 
 <section class="section" aria-labelledby="random-read-title">
-  <article class="card card-random-read reveal" data-random-read-card>
+  <article class="card card-random-read" data-random-read-card>
     <p class="card-label">Random Read</p>
     <p class="section-eyebrow card-random-read-eyebrow" data-random-read-eyebrow>Loading something good…</p>
     <h2 class="card-title" id="random-read-title" data-random-read-title>Finding a random piece from poetry, prose, and essays</h2>
@@ -30,7 +30,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 </section>
 
 <section class="section" aria-labelledby="featured-title">
-  <div class="page-intro page-intro--hero reveal">
+  <div class="page-intro page-intro--hero">
     <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
     <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
     <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>
@@ -39,7 +39,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     {% assign homepage_cards = site.data.home_cards.cards %}
     {% if homepage_cards and homepage_cards.size > 0 %}
       {% for card in homepage_cards %}
-      <article class="card reveal">
+      <article class="card">
         <p class="card-label">{{ card.type }}</p>
         <h3 class="card-title">{{ card.title }}</h3>
         <p class="card-text">{{ card.description }}</p>
@@ -52,7 +52,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
       </article>
       {% endfor %}
     {% else %}
-      <article class="card reveal">
+      <article class="card">
         <p class="card-text">Add your first card in Pages CMS under Home Page Cards.</p>
       </article>
     {% endif %}

@@ -11,14 +11,14 @@ description: Read all the latest poetic endeavours of Anshuman3kdka
   {% if poems.size > 0 %}
   <div class="content-list">
     {% for poem in poems %}
-    <article class="content-item reveal">
+    <article class="content-item">
       {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow }}</p>{% endif %}
       <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
     </article>
     {% endfor %}
   </div>
   {% else %}
-  <div class="card reveal">
+  <div class="card">
     <p class="card-text">No poems yet. Check back soon.</p>
   </div>
   {% endif %}

@@ -5,7 +5,7 @@ portrait_image: /assets/uploads/IMG_20260218_133159763 (1) (1).webp
 portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
-<section class="section prose about-layout reveal">
+<section class="section prose about-layout">
   <figure>
     <div
       class="about-portrait"
