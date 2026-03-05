@@ -8,7 +8,7 @@ image: /assets/uploads/Screenshot_20260305-125803.webp
 
 ---
 
-It started with a reel. Not a plan, not a vision, not a career decision — a reel, at the back of a classroom, during a lecture I was present for in the loosest sense. Hostinger was selling `.in` domains for ₹9 a year. I bought one before the ad finished.
+It started with a *reel*. Not a plan, not a vision, not a career decision — a reel, at the back of a classroom, during a lecture I was present for in the loosest sense. Hostinger was selling `.in` domains for ₹9 a year. I bought one before the ad finished.
 
 I did not know what to do with it. This became apparent almost immediately.
 
