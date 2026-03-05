@@ -7,7 +7,8 @@ permalink: /sitemap-collections.xml
   {% for collection in site.collections %}
     {% assign sorted_docs = collection.docs | sort: 'url' %}
     {% for d in sorted_docs %}
-      {% if d.sitemap != false %}
+      {% assign include_doc = d.sitemap != false and d.url %}
+      {% if include_doc %}
   <url>
     <loc>{{ d.url | absolute_url | xml_escape }}</loc>
     <lastmod>{{ d.last_modified_at | default: d.date | default: site.time | date_to_xmlschema }}</lastmod>
