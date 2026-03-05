@@ -1,0 +1,23 @@
+---
+layout: null
+permalink: /sitemap-assets.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign sorted_static_files = site.static_files | sort: 'path' %}
+  {% for f in sorted_static_files %}
+    {% assign extension = f.extname | downcase %}
+    {% assign indexable_asset = false %}
+    {% if extension == '.json' or extension == '.xml' or extension == '.txt' or extension == '.webmanifest' or extension == '.css' or extension == '.js' or extension == '.png' or extension == '.jpg' or extension == '.jpeg' or extension == '.webp' or extension == '.svg' or extension == '.ico' %}
+      {% assign indexable_asset = true %}
+    {% endif %}
+    {% if indexable_asset and f.path contains '/node_modules/' == false %}
+  <url>
+    <loc>{{ f.path | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ f.modified_time | default: site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>{% if f.path contains '/assets/uploads/' %}0.4{% else %}0.5{% endif %}</priority>
+  </url>
+    {% endif %}
+  {% endfor %}
+</urlset>
