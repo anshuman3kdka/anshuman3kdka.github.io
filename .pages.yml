@@ -7,7 +7,7 @@ content:
     label: Poetry
     path: poetry
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
@@ -40,7 +40,7 @@ content:
     label: Prose
     path: prose
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
@@ -72,7 +72,7 @@ content:
     label: Essays
     path: essays
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
@@ -104,7 +104,7 @@ content:
     label: Projects
     path: projects
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
@@ -132,7 +132,7 @@ content:
     label: Achievements
     path: achievements
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
@@ -160,7 +160,7 @@ content:
     label: Certificates
     path: certificates
     type: collection
-    filename: "{slug}.md"
+    filename: "{primary}.md"
     exclude:
       - index.md
     fields:
