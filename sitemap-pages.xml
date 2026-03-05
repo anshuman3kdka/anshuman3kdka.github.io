@@ -1,0 +1,18 @@
+---
+layout: null
+permalink: /sitemap-pages.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign sorted_pages = site.pages | sort: 'url' %}
+  {% for p in sorted_pages %}
+    {% unless p.url contains '/404' or p.sitemap == false %}
+  <url>
+    <loc>{{ p.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ p.last_modified_at | default: p.date | default: site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if p.url == '/' %}daily{% elsif p.url contains '/contact/' %}monthly{% else %}weekly{% endif %}</changefreq>
+    <priority>{% if p.url == '/' %}1.0{% elsif p.url contains '/index/' %}0.7{% else %}0.8{% endif %}</priority>
+  </url>
+    {% endunless %}
+  {% endfor %}
+</urlset>

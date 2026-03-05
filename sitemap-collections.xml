@@ -1,0 +1,31 @@
+---
+layout: null
+permalink: /sitemap-collections.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign collection_url_count = 0 %}
+  {% for collection in site.collections %}
+    {% assign sorted_docs = collection.docs | sort: 'url' %}
+    {% for d in sorted_docs %}
+      {% assign include_doc = d.sitemap != false and d.url %}
+      {% if include_doc %}
+        {% assign collection_url_count = collection_url_count | plus: 1 %}
+  <url>
+    <loc>{{ d.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ d.last_modified_at | default: d.date | default: site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if collection.label == 'projects' or collection.label == 'essays' %}monthly{% else %}yearly{% endif %}</changefreq>
+    <priority>{% if collection.label == 'projects' %}0.8{% elsif collection.label == 'essays' %}0.7{% else %}0.6{% endif %}</priority>
+  </url>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% if collection_url_count == 0 %}
+  <url>
+    <loc>{{ '/' | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  {% endif %}
+</urlset>
