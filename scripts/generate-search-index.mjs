@@ -73,9 +73,26 @@ const categoryFromPath = (relativePath) => relativePath.split('/')[0];
 
 const toUrl = (relativePath, frontMatterData) => {
   const permalink = typeof frontMatterData.permalink === 'string' ? frontMatterData.permalink.trim() : '';
-  if (permalink) return permalink.endsWith('/') ? permalink : `${permalink}/`;
+  if (permalink) {
+    if (path.extname(permalink)) return permalink;
+    return permalink.endsWith('/') ? permalink : `${permalink}/`;
+  }
 
   const parsed = path.parse(relativePath);
+  const ext = parsed.ext.toLowerCase();
+
+  if (ext === '.html') {
+    if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+    return `/${parsed.dir}/${parsed.base}`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+  }
+
+  // Jekyll renders non-index Markdown pages to "filename.html" by default.
+  // Keep folder-style URLs only for index files or explicit permalinks.
+  if (ext === '.md') {
+    if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+    return `/${parsed.dir}/${parsed.name}.html`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+  }
+
   if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/');
   return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/');
 };
