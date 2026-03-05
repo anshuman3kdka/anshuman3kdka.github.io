@@ -8,10 +8,22 @@ permalink: /sitemap.xml
     <loc>{{ '/sitemap-pages.xml' | absolute_url | xml_escape }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </sitemap>
+
+  {% assign collection_url_count = 0 %}
+  {% for collection in site.collections %}
+    {% for d in collection.docs %}
+      {% if d.sitemap != false and d.url %}
+        {% assign collection_url_count = collection_url_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% if collection_url_count > 0 %}
   <sitemap>
     <loc>{{ '/sitemap-collections.xml' | absolute_url | xml_escape }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
   </sitemap>
+  {% endif %}
+
   <sitemap>
     <loc>{{ '/sitemap-assets.xml' | absolute_url | xml_escape }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
