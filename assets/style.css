@@ -687,6 +687,7 @@ button:focus-visible {
     gap: 4rem;
     align-items: start;
     max-width: 1000px !important;
+    margin: 0 auto;
   }
 
   .about-layout figure {
@@ -770,7 +771,7 @@ body.is-leaving .page-shell {
   }
 
   .grid-2 {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 440px));
     justify-content: center;
   }
 
@@ -781,9 +782,44 @@ body.is-leaving .page-shell {
   .section--hero {
     margin-bottom: var(--space-section-hero);
   }
+
+  .page-intro {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 860px;
+  }
+
+  .card-random-read {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .card-random-read-actions {
+    justify-content: center;
+  }
+
+  .content-list {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 860px;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 1024px) {
+  .page-shell {
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+
   .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure),
   .prose {
     max-width: 860px;
@@ -792,6 +828,12 @@ body.is-leaving .page-shell {
   .page-title,
   .section-title {
     max-width: 20ch;
+  }
+
+  .site-footer {
+    max-width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero {
