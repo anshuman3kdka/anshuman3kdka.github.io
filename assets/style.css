@@ -784,6 +784,27 @@ body.is-leaving .page-shell {
 }
 
 @media (min-width: 1024px) {
+  .site-shell {
+    max-width: 1360px;
+    padding-inline: clamp(1.4rem, 3.8vw, 3.2rem);
+  }
+
+  .site-main {
+    margin-top: clamp(1.1rem, 2.4vw, 2rem);
+  }
+
+  .page-shell {
+    padding: clamp(2rem, 3.8vw, 3.4rem);
+  }
+
+  .section {
+    margin-bottom: clamp(2.8rem, 5.4vw, 4.8rem);
+  }
+
+  .section--hero {
+    margin-bottom: clamp(3.1rem, 5.8vw, 5.3rem);
+  }
+
   .page-body > :where(h1, h2, h3, h4, p, ul, ol, blockquote, figure),
   .prose {
     max-width: 860px;
@@ -800,7 +821,7 @@ body.is-leaving .page-shell {
   }
 
   .hero.hero--center-desktop {
-    grid-template-columns: minmax(0, 42rem);
+    grid-template-columns: minmax(0, 50rem);
     justify-content: center;
   }
 
@@ -812,6 +833,39 @@ body.is-leaving .page-shell {
 
   .hero-content .section-eyebrow {
     margin-bottom: 0;
+  }
+
+  .hero.hero--center-desktop .hero-lead {
+    max-width: 44ch;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .card-random-read {
+    max-width: min(100%, 760px);
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2vw, 2rem);
+  }
+
+  .header-quick-actions {
+    top: auto;
+    bottom: clamp(0.95rem, 2vw, 1.4rem);
+    right: clamp(0.95rem, 2vw, 1.4rem);
+    padding: 0.3rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    background: rgba(10, 26, 19, 0.72);
+    backdrop-filter: blur(8px);
+  }
+
+  .random-read-status {
+    top: auto;
+    bottom: calc(100% + 0.35rem);
   }
 }
 
