@@ -1,24 +1,11 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { promisify } from 'node:util';
-import { execFile as execFileCallback } from 'node:child_process';
+import yaml from 'js-yaml';
 
-const execFile = promisify(execFileCallback);
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
 const allowedTopLevel = new Set(['poetry', 'prose', 'essays']);
-
-const RUBY_YAML_TO_JSON_SCRIPT = `
-require 'yaml'
-require 'json'
-require 'base64'
-require 'date'
-
-payload = Base64.decode64(ARGV[0] || '')
-value = YAML.safe_load(payload, permitted_classes: [Date, Time], aliases: false)
-print JSON.generate(value || {})
-`;
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -41,18 +28,12 @@ const walk = async (dir) => {
   return files;
 };
 
-const parseYamlToJson = async (yamlText) => {
-  const encodedYaml = Buffer.from(yamlText, 'utf8').toString('base64');
-  const { stdout } = await execFile('ruby', ['-e', RUBY_YAML_TO_JSON_SCRIPT, encodedYaml]);
-  return JSON.parse(stdout);
-};
-
 const extractFrontMatter = async (text) => {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (!match) return { data: {}, body: text };
 
   try {
-    const parsed = await parseYamlToJson(match[1]);
+    const parsed = yaml.load(match[1]);
     const data = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
     return { data, body: text.slice(match[0].length) };
   } catch {
