@@ -105,7 +105,7 @@
             {% if is_home or is_resume %}{% assign show_page_intro = false %}{% endif %}
 
             {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
-            {% assign is_piece_page = false %}
+            {% assign is_piece_page = true %}
             {% for collection_path in piece_collections %}
               {% if page.path contains collection_path and page.name != 'index.md' %}
                 {% assign is_piece_page = true %}
@@ -126,7 +126,7 @@
             </header>
             {% endif %}
 
-            {% if is_piece_page %}
+            <!-- is_piece_page == true -->
             <header class="piece-detail-header section">
               <h1 class="piece-detail-title">{{ intro_title }}</h1>
               {% if intro_featured_image %}
@@ -137,20 +137,38 @@
             </header>
             {% endif %}
 
-            {% if is_piece_page %}
+            <!-- is_piece_page == true -->
             <article class="piece-detail">
-              {{ content }}
 
-              {% if page.path contains 'certificates/' and page.certificate_list %}
-                <div class="certificate-list">
-                  {% for cert in page.certificate_list %}
-                    <div class="certificate-item" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
 
-                      {% if cert.details %}
-                        <div class="certificate-details" style="margin-bottom: var(--space-2);">
-                          {{ cert.details | markdownify }}
-                        </div>
-                      {% endif %}
+
+
+<div class="certificate-list">
+    <div class="certificate-item" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+        <div class="certificate-details" style="margin-bottom: var(--space-2);">
+            <p>Completed the foundations course on AI.</p>
+        </div>
+        <figure class="piece-featured-media" style="margin-bottom: var(--space-2);">
+            <img src="/assets/uploads/Screenshot_20260307-001550.png" alt="Certificate Image" loading="lazy" decoding="async">
+        </figure>
+        <div class="certificate-credentials" style="margin-top: var(--space-2);">
+            <a href="https://coursera.org/verify/12345" target="_blank" rel="noopener noreferrer">Credentials</a>
+        </div>
+    </div>
+
+    <div class="certificate-item" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+        <div class="certificate-details" style="margin-bottom: var(--space-2);">
+            <p>Completed advanced prompt engineering.</p>
+        </div>
+        <figure class="piece-featured-media" style="margin-bottom: var(--space-2);">
+            <img src="/assets/uploads/Screenshot_20260307-001551.png" alt="Certificate Image" loading="lazy" decoding="async">
+        </figure>
+        <div class="certificate-credentials" style="margin-top: var(--space-2);">
+            <a href="https://coursera.org/verify/67890" target="_blank" rel="noopener noreferrer">Credentials</a>
+        </div>
+    </div>
+</div>
+
 
                       {% if cert.image %}
                         <figure class="piece-featured-media" style="margin-bottom: var(--space-2);">
@@ -169,7 +187,8 @@
               {% endif %}
             </article>
             {% else %}
-              {{ content }}
+
+
             {% endif %}
           </div>
         </div>
