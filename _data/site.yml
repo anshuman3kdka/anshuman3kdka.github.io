@@ -33,3 +33,8 @@ header_links:
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/anshuman-pandey-b33362378
+analytics:
+  enabled: true
+  provider: umami
+  umami_website_id: d2d06d91-5128-41f4-be12-f48b3d6c731c
+  script_src: https://cloud.umami.is/script.js
