@@ -64,7 +64,7 @@ const isNavigableDocumentLink = (link, href) => {
   if (!href) return false;
 
   const normalizedHref = href.trim().toLowerCase();
-  if (!normalizedHref || normalizedHref.startsWith('#') || normalizedHref.startsWith('mailto:') || normalizedHref.startsWith('tel:')) {
+  if (!normalizedHref || normalizedHref.startsWith('#') || normalizedHref.startsWith('mailto:') || normalizedHref.startsWith('tel:') || normalizedHref.startsWith('javascript:') || normalizedHref.startsWith('//')) {
     return false;
   }
 
@@ -95,6 +95,13 @@ const handlePageTransitionClick = (event) => {
   if (!link) return;
 
   const href = link.getAttribute("href");
+
+  // Security: explicitly block javascript: links to prevent XSS
+  if (href?.trim().toLowerCase().startsWith('javascript:')) {
+    event.preventDefault();
+    return;
+  }
+
   if (!isNavigableDocumentLink(link, href)) return;
 
   event.preventDefault();
@@ -159,7 +166,7 @@ const isValidContentUrl = (value) => {
   if (!trimmed) return false;
 
   const lowered = trimmed.toLowerCase();
-  if (lowered.startsWith('#') || lowered.startsWith('mailto:') || lowered.startsWith('tel:') || lowered.startsWith('javascript:')) {
+  if (lowered.startsWith('#') || lowered.startsWith('mailto:') || lowered.startsWith('tel:') || lowered.startsWith('javascript:') || lowered.startsWith('//')) {
     return false;
   }
 
