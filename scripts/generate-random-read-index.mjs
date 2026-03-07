@@ -71,8 +71,8 @@ const toUrl = (relativePath, frontMatterData) => {
     return `/${parsed.dir}/${parsed.name}.html`.replace(/\/+/g, '/').replace(/\/\//g, '/');
   }
 
-  if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
-  return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+  if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/');
+  return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/');
 };
 
 const extractTitle = (body, frontMatterData, fallback) => {
