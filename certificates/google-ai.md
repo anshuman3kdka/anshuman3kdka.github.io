@@ -1,7 +1,7 @@
 ---
 title: Google AI
 eyebrow: 7 Certificates
-description: Google AI Professional Certificate
+description: 7 Google AI Professional Certificates
 certificate_list:
   - image: /assets/uploads/Screenshot_20260307-001550.webp
     details: "## AI Fundamentals"
