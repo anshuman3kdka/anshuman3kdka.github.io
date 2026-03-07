@@ -424,13 +424,6 @@ const initRandomReadCard = () => {
     });
   };
 
-  bindRandomReadTrigger({
-    trigger: link,
-    statusElement: message,
-    disableWhileLoading: false,
-    idleStatus: 'Pick a surprise read from the archive.',
-  });
-
   refresh.addEventListener('click', renderRandomItem);
   renderRandomItem();
 };
