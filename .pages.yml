@@ -176,13 +176,25 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
-      - name: image
-        label: Certificate Image (optional)
-        type: image
+      - name: certificate_list
+        label: Certificates
+        type: object
+        list: true
+        addLabel: "Add certificate"
         required: false
-      - name: body
-        label: Details
-        type: markdown
+        fields:
+          - name: image
+            label: Certificate Image (optional)
+            type: image
+            required: false
+          - name: details
+            label: Details
+            type: markdown
+            required: false
+          - name: credentials
+            label: Credentials URL (optional)
+            type: text
+            required: false
 
   - name: landing_home
     label: Landing Home (index.md)
