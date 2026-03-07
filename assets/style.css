@@ -1539,3 +1539,35 @@ body.is-leaving .page-shell {
     padding: 1rem 0.9rem;
   }
 }
+
+/* 404 Page Styles */
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(var(--space-6), 15vh, var(--space-9)) var(--space-4) clamp(var(--space-8), 20vh, 12rem);
+  min-height: 50vh;
+}
+
+.not-found-heading {
+  font-family: var(--font-heading);
+  font-size: var(--step-4);
+  color: var(--color-accent);
+  margin: 0 0 var(--space-3);
+  line-height: 1.1;
+}
+
+.not-found-message {
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  color: var(--color-ink-muted);
+  margin: 0 0 var(--space-5);
+  max-width: 32ch;
+  line-height: 1.5;
+}
+
+.not-found-link {
+  margin-top: var(--space-2);
+}
