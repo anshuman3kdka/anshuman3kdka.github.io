@@ -191,7 +191,8 @@ const getValidContentItems = () => (randomReadDataPrepared || []).filter((item) 
 const loadRandomReadData = async () => {
   if (randomReadDataPrepared) return randomReadDataPrepared;
 
-  const fallbackUrls = ['random-read.json', '/random-read.json'];
+  // ⚡ Bolt: Consolidated index file location
+  const fallbackUrls = ['/assets/search-index.json', 'assets/search-index.json'];
   let response = null;
 
   for (const url of [...new Set(fallbackUrls)]) {
