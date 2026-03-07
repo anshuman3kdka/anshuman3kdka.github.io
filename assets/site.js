@@ -149,8 +149,21 @@ const initScrollProgress = () => {
   updateScrollProgress();
 
   if (!scrollProgressHandlersBound) {
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScrollProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // ⚡ Bolt: Use requestAnimationFrame to throttle high-frequency scroll and resize
+    // events, preventing layout thrashing and main-thread blocking.
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     scrollProgressHandlersBound = true;
   }
 };
