@@ -37,7 +37,7 @@ const prepareSearchData = (items) => (Array.isArray(items) ? items : []).map((it
   };
 });
 
-export const createSearchDataLoader = ({ indexUrl = '/assets/search-index.json' } = {}) => {
+export const createSearchDataLoader = ({ indexUrl = '/search-index.json' } = {}) => {
   const load = async () => {
     if (cachedIndex) return cachedIndex;
     if (pendingRequest) return pendingRequest;

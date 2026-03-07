@@ -3,10 +3,9 @@ import path from 'node:path';
 import yaml from 'js-yaml';
 
 const root = process.cwd();
-
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
-const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'creative']);
+const allowedTopLevel = new Set(['poetry', 'prose', 'essays']);
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -72,20 +71,9 @@ const toUrl = (relativePath, frontMatterData) => {
     return `/${parsed.dir}/${parsed.name}.html`.replace(/\/+/g, '/').replace(/\/\//g, '/');
   }
 
-  if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
-  return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+  if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/');
+  return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/');
 };
-
-const stripMarkdown = (value) => String(value || '')
-  .replace(/```[\s\S]*?```/g, ' ')
-  .replace(/`([^`]+)`/g, '$1')
-  .replace(/!\[[^\]]*\]\([^\)]*\)/g, ' ')
-  .replace(/\[([^\]]+)\]\([^\)]*\)/g, '$1')
-  .replace(/^#{1,6}\s+/gm, '')
-  .replace(/[>*_~\-]{1,3}/g, ' ')
-  .replace(/<[^>]+>/g, ' ')
-  .replace(/\s+/g, ' ')
-  .trim();
 
 const extractTitle = (body, frontMatterData, fallback) => {
   if (typeof frontMatterData.title === 'string' && frontMatterData.title.trim()) return frontMatterData.title.trim();
@@ -93,17 +81,10 @@ const extractTitle = (body, frontMatterData, fallback) => {
   return headingMatch ? headingMatch[1].trim() : fallback;
 };
 
-const extractTags = (frontMatterData) => {
-  if (Array.isArray(frontMatterData.tags)) return frontMatterData.tags.map((tag) => String(tag).trim()).filter(Boolean);
-  if (typeof frontMatterData.tags === 'string') return frontMatterData.tags.split(',').map((tag) => tag.trim()).filter(Boolean);
-  return [];
-};
-
 const main = async () => {
   const allFiles = await walk(root);
 
-  // ⚡ Bolt: removed redundant token pre-calculation to reduce payload size and merge conflict noise.
-  // Tokenization is now performed client-side in assets/search-data-loader.js.
+  // ⚡ Bolt: parallelized file parsing for faster build times
   const processFile = async (file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const top = rel.split('/')[0];
@@ -114,17 +95,14 @@ const main = async () => {
     if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') return null;
 
     const category = String(frontMatterData.category || categoryFromPath(rel)).trim();
-    const excerptSource = frontMatterData.description || frontMatterData.excerpt || body;
-    const excerpt = stripMarkdown(excerptSource).slice(0, 220).trim();
+    const url = toUrl(rel, frontMatterData);
 
     return {
-      id: rel,
       title: extractTitle(body, frontMatterData, rel),
-      url: toUrl(rel, frontMatterData),
+      url,
       category,
-      tags: extractTags(frontMatterData),
+      eyebrow: typeof frontMatterData.eyebrow === 'string' ? frontMatterData.eyebrow.trim() : category,
       date: toIsoString(frontMatterData.date),
-      excerpt,
     };
   };
 
@@ -132,8 +110,8 @@ const main = async () => {
   const records = results.filter(Boolean);
 
   records.sort((a, b) => a.title.localeCompare(b.title));
-  await fs.writeFile(path.join(root, 'search-index.json'), `${JSON.stringify(records)}\n`);
-  console.log(`Indexed ${records.length} search records.`);
+  await fs.writeFile(path.join(root, 'random-read.json'), `${JSON.stringify(records, null, 2)}\n`);
+  console.log(`Indexed ${records.length} random-read records.`);
 };
 
 main().catch((error) => {
