@@ -189,7 +189,7 @@ content:
             required: false
           - name: details
             label: Details
-            type: markdown
+            type: rich-text
             required: false
           - name: credentials
             label: Credentials URL (optional)
