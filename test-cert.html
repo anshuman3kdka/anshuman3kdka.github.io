@@ -200,7 +200,7 @@
           <div>
             <p class="footer-title">
               {% if site.data.site.footer_review_url %}
-              <a href="{{ site.data.site.footer_review_url }}" target="_blank" rel="noreferrer">{{ site.data.site.footer_heading | default: "Leave a review" }}</a>
+              <a href="{{ site.data.site.footer_review_url }}" target="_blank" rel="noopener noreferrer">{{ site.data.site.footer_heading | default: "Leave a review" }}</a>
               {% else %}
               {{ site.data.site.footer_heading | default: "Let's connect" }}
               {% endif %}
@@ -217,7 +217,7 @@
           <div class="footer-links" aria-label="Social links">
             {% if site.data.site.social_links %}
               {% for social in site.data.site.social_links %}
-              <a href="{{ social.url }}" target="_blank" rel="noreferrer">{{ social.label }}</a>
+              <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">{{ social.label }}</a>
               {% endfor %}
             {% endif %}
           </div>

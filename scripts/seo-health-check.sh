@@ -8,7 +8,7 @@ KEY_PATHS=("/" "/essays/" "/projects/" "/about/")
 check_url() {
   local url="$1"
   local status
-  status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
+  status=$(curl -L -sS -o /dev/null -w '%{http_code}' -- "$url")
   echo "$status $url"
   [[ "$status" =~ ^[23][0-9][0-9]$ ]]
 }
@@ -34,7 +34,7 @@ done
 echo
 echo "[3/3] Sampling first 25 sitemap URLs for HTTP status"
 # Basic XML URL extraction without additional dependencies.
-mapfile -t urls < <(curl -sS "$SITEMAP_URL" | sed -n 's:.*<loc>\(.*\)</loc>.*:\1:p' | head -n 25)
+mapfile -t urls < <(curl -L -sS -- "$SITEMAP_URL" | sed -n 's:.*<loc>\(.*\)</loc>.*:\1:p' | head -n 25)
 
 if [ "${#urls[@]}" -eq 0 ]; then
   echo "No URLs found in sitemap or sitemap unavailable."
@@ -44,7 +44,7 @@ fi
 bad=0
 if [ "${#urls[@]}" -gt 0 ]; then
   for url in "${urls[@]}"; do
-    status=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url")
+    status=$(curl -L -sS -o /dev/null -w '%{http_code}' -- "$url")
     # Match exactly 3-digit 2xx/3xx codes so partial matches (e.g., "30" or "x200") don't slip through.
     if [[ "$status" =~ ^[23][0-9][0-9]$ ]]; then
       printf 'OK   %s %s\n' "$status" "$url"
