@@ -533,3 +533,25 @@ content:
           - name: url
             label: Social Link
             type: text
+      - name: analytics
+        label: Analytics Configuration
+        type: object
+        fields:
+          - name: enabled
+            label: Enabled
+            type: boolean
+          - name: provider
+            label: Provider (plausible or umami)
+            type: text
+          - name: umami_website_id
+            label: Umami Website ID
+            type: text
+          - name: umami_script_src
+            label: Umami Script Source
+            type: text
+          - name: domain
+            label: Plausible Domain
+            type: text
+          - name: script_src
+            label: Plausible Script Source
+            type: text
