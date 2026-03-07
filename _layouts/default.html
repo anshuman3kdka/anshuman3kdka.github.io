@@ -56,6 +56,7 @@
     {% if analytics and analytics.enabled and analytics.provider == 'plausible' and analytics.domain and analytics.script_src %}
     <script defer data-domain="{{ analytics.domain | escape }}" src="{{ analytics.script_src | escape }}"></script>
     {% endif %}
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="d2d06d91-5128-41f4-be12-f48b3d6c731c"></script>
   </head>
 
   <body class="is-loading">
