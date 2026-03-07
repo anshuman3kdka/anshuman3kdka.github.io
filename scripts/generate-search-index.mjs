@@ -116,16 +116,15 @@ const extractTags = (frontMatterData) => {
 
 const main = async () => {
   const allFiles = await walk(root);
-  const records = [];
 
-  for (const file of allFiles) {
+  const processFile = async (file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const top = rel.split('/')[0];
-    if (!allowedTopLevel.has(top)) continue;
+    if (!allowedTopLevel.has(top)) return null;
 
     const raw = await fs.readFile(file, 'utf8');
     const { data: frontMatterData, body } = await extractFrontMatter(raw);
-    if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') continue;
+    if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') return null;
 
     const title = extractTitle(body, frontMatterData, rel);
     const category = String(frontMatterData.category || categoryFromPath(rel)).trim();
@@ -138,7 +137,7 @@ const main = async () => {
     const tagTokens = dedupeTokens(tokenize(tags.join(' ')));
     const excerptTokens = dedupeTokens(tokenize(excerpt));
 
-    records.push({
+    return {
       id: rel,
       title,
       url: toUrl(rel, frontMatterData),
@@ -151,8 +150,11 @@ const main = async () => {
       tagTokens,
       excerptTokens,
       titleNormalized: normalizeText(title),
-    });
-  }
+    };
+  };
+
+  const results = await Promise.all(allFiles.map(processFile));
+  const records = results.filter(Boolean);
 
   records.sort((a, b) => a.title.localeCompare(b.title));
   await fs.writeFile(path.join(root, 'search-index.json'), `${JSON.stringify(records)}\n`);
