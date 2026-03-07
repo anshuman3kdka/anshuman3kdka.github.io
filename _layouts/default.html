@@ -101,8 +101,9 @@
           <div class="page-body">
             {% assign is_home = page.path == 'index.md' %}
             {% assign is_resume = page.path contains 'resume/' %}
+            {% assign is_404 = page.path == '404.md' %}
             {% assign show_page_intro = true %}
-            {% if is_home or is_resume %}{% assign show_page_intro = false %}{% endif %}
+            {% if is_home or is_resume or is_404 %}{% assign show_page_intro = false %}{% endif %}
 
             {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
             {% assign is_piece_page = false %}
