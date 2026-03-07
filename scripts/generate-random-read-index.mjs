@@ -83,28 +83,31 @@ const extractTitle = (body, frontMatterData, fallback) => {
 
 const main = async () => {
   const allFiles = await walk(root);
-  const records = [];
 
-  for (const file of allFiles) {
+  // ⚡ Bolt: parallelized file parsing for faster build times
+  const processFile = async (file) => {
     const rel = path.relative(root, file).replace(/\\/g, '/');
     const top = rel.split('/')[0];
-    if (!allowedTopLevel.has(top)) continue;
+    if (!allowedTopLevel.has(top)) return null;
 
     const raw = await fs.readFile(file, 'utf8');
     const { data: frontMatterData, body } = await extractFrontMatter(raw);
-    if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') continue;
+    if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') return null;
 
     const category = String(frontMatterData.category || categoryFromPath(rel)).trim();
     const url = toUrl(rel, frontMatterData);
 
-    records.push({
+    return {
       title: extractTitle(body, frontMatterData, rel),
       url,
       category,
       eyebrow: typeof frontMatterData.eyebrow === 'string' ? frontMatterData.eyebrow.trim() : category,
       date: toIsoString(frontMatterData.date),
-    });
-  }
+    };
+  };
+
+  const results = await Promise.all(allFiles.map(processFile));
+  const records = results.filter(Boolean);
 
   records.sort((a, b) => a.title.localeCompare(b.title));
   await fs.writeFile(path.join(root, 'random-read.json'), `${JSON.stringify(records, null, 2)}\n`);
