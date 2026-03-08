@@ -1,0 +1,3 @@
+## 2024-03-22 - Search Form & Skip Link Accessibility
+**Learning:** Skip-to-content links require the target element to have `tabindex="-1"` so it can programmatically receive focus and allow subsequent tabs to flow intuitively through the content. Mobile search keyboards only show a "Search" button when the input is wrapped in a `<form role="search">`, and the keyboard must be explicitly dismissed via `input.blur()` on submit. Disabled links should have their `href` attribute removed so they are dropped from the natural tab sequence.
+**Action:** Always ensure target containers of skip links use `tabindex="-1"`, always wrap search inputs in a form tag to improve mobile accessibility, and manage disabled link focus states by removing the `href` attribute.

@@ -58,6 +58,7 @@ const initSearchPage = () => {
   const input = document.querySelector('[data-search-input]');
   const list = document.querySelector('[data-search-results]');
   const liveRegion = document.querySelector('[data-search-live]');
+  const form = document.querySelector('[data-search-form]');
 
   if (!input || !list || !liveRegion) return;
 
@@ -119,6 +120,13 @@ const initSearchPage = () => {
 
   input.addEventListener('input', debouncedSearch);
   initResultKeyboardNavigation(input, list);
+
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      input.blur();
+    });
+  }
 
   renderSearchState({
     listElement: list,
