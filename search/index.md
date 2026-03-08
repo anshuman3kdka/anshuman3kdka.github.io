@@ -10,7 +10,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
   </header>
 
   <div class="search-surface">
-    <div class="search-input-wrap">
+    <form role="search" class="search-input-wrap" data-search-form>
       <label class="search-label" for="site-search-input">Search the site</label>
       <input
         id="site-search-input"
@@ -22,7 +22,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
         data-search-input
         aria-describedby="search-live-region"
       >
-    </div>
+    </form>
 
     <p class="search-hint">Tip: use 2+ letters. Multiple words work too.</p>
     <p class="search-live" id="search-live-region" data-search-live aria-live="polite"></p>

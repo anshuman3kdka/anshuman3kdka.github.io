@@ -23,7 +23,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     <h2 class="card-title" id="random-read-title" data-random-read-title>Finding a random piece from poetry, prose, and essays</h2>
     <p class="card-text" data-random-read-message>Pick a surprise read from the archive.</p>
     <div class="card-random-read-actions">
-      <a class="card-link" href="#" data-random-read-link aria-disabled="true">Open random piece</a>
+      <a class="card-link" data-random-read-link aria-disabled="true">Open random piece</a>
       <button class="button button-secondary" type="button" data-random-read-refresh>Pick another</button>
     </div>
   </article>

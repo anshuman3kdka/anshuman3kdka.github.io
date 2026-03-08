@@ -405,12 +405,13 @@ const initRandomReadCard = () => {
     title.textContent = titleText;
     message.textContent = messageText;
     link.textContent = linkLabel;
-    link.setAttribute('href', href);
 
     if (disabled) {
+      link.removeAttribute('href');
       link.setAttribute('aria-disabled', 'true');
       link.classList.add('is-disabled');
     } else {
+      link.setAttribute('href', href);
       link.removeAttribute('aria-disabled');
       link.classList.remove('is-disabled');
     }
