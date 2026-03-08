@@ -7,3 +7,4 @@ collections_dir: "."
 url: "https://www.anshuman3kdka.in"
 plugins:
   - jekyll-sitemap
+permalink: pretty
