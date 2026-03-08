@@ -60,25 +60,33 @@ const resetTransientUiState = () => {
   siteShell?.removeAttribute('aria-hidden');
 };
 
-const isNavigableDocumentLink = (link, href) => {
-  if (!href) return false;
+/**
+ * Hardened URL validation to ensure a link is safe and points to the same origin.
+ * Blocks dangerous protocols like javascript:, data:, and vbscript:.
+ */
+const isSafeInternalUrl = (url) => {
+  if (typeof url !== 'string') return false;
+  const trimmed = url.trim();
+  if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('//')) return false;
 
-  const normalizedHref = href.trim().toLowerCase();
-  if (!normalizedHref || normalizedHref.startsWith('#') || normalizedHref.startsWith('mailto:') || normalizedHref.startsWith('tel:') || normalizedHref.startsWith('javascript:') || normalizedHref.startsWith('//')) {
+  try {
+    const parsed = new URL(trimmed, window.location.origin);
+    // Only allow standard web protocols for internal site navigation
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return false;
+    return parsed.origin === window.location.origin;
+  } catch (e) {
     return false;
   }
+};
+
+const isNavigableDocumentLink = (link, href) => {
+  if (!isSafeInternalUrl(href)) return false;
 
   if (link.target === "_blank" || link.hasAttribute("download") || link.getAttribute("rel")?.includes('external')) {
     return false;
   }
 
-  const isExternal = normalizedHref.startsWith('http://') || normalizedHref.startsWith('https://');
-  if (isExternal) {
-    const targetUrl = new URL(href, window.location.origin);
-    if (targetUrl.origin !== window.location.origin) return false;
-  }
-
-  const path = normalizedHref.split('?')[0].split('#')[0];
+  const path = new URL(href, window.location.origin).pathname;
   const extensionMatch = path.match(/\.([a-z0-9]+)$/i);
   if (!extensionMatch) return true;
 
@@ -95,9 +103,11 @@ const handlePageTransitionClick = (event) => {
   if (!link) return;
 
   const href = link.getAttribute("href");
+  if (!href) return;
 
-  // Security: explicitly block javascript: links to prevent XSS
-  if (href?.trim().toLowerCase().startsWith('javascript:')) {
+  // Security: Block dangerous protocols explicitly even for non-navigable links
+  const lowered = href.trim().toLowerCase();
+  if (lowered.startsWith('javascript:') || lowered.startsWith('data:') || lowered.startsWith('vbscript:')) {
     event.preventDefault();
     return;
   }
@@ -173,20 +183,10 @@ const initScrollProgress = () => {
 let randomReadDataPrepared = null;
 
 const isValidContentUrl = (value) => {
-  if (typeof value !== 'string') return false;
-
-  const trimmed = value.trim();
-  if (!trimmed) return false;
-
-  const lowered = trimmed.toLowerCase();
-  if (lowered.startsWith('#') || lowered.startsWith('mailto:') || lowered.startsWith('tel:') || lowered.startsWith('javascript:') || lowered.startsWith('//')) {
-    return false;
-  }
+  if (!isSafeInternalUrl(value)) return false;
 
   try {
-    const parsed = new URL(trimmed, window.location.origin);
-    if (parsed.origin !== window.location.origin) return false;
-
+    const parsed = new URL(value, window.location.origin);
     const extensionMatch = parsed.pathname.match(/\.([a-z0-9]+)$/i);
     if (!extensionMatch) return true;
 
