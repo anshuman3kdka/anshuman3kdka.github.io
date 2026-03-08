@@ -67,11 +67,11 @@ const toUrl = (relativePath, frontMatterData) => {
     return `/${parsed.dir}/${parsed.base}`.replace(/\/+/g, '/').replace(/\/\//g, '/');
   }
 
-  // Jekyll renders non-index Markdown pages to "filename.html" by default.
-  // Keep folder-style URLs only for index files or explicit permalinks.
+  // Jekyll 'pretty' permalinks render non-index Markdown pages to "filename/index.html"
+  // Keep clean folder-style URLs.
   if (ext === '.md') {
     if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
-    return `/${parsed.dir}/${parsed.name}.html`.replace(/\/+/g, '/').replace(/\/\//g, '/');
+    return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/').replace(/\/\//g, '/');
   }
 
   if (parsed.name === 'index') return `/${parsed.dir}/`.replace(/\/+/g, '/');
