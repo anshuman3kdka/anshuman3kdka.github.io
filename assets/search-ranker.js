@@ -26,67 +26,73 @@ export const rankSearchResults = (records, query) => {
 
   if (terms.length === 0) return [];
 
-  const ranked = records
-    .map((record) => {
-      let score = 0;
-      let matchedTerms = 0;
+  // ⚡ Bolt: Use a single for loop instead of map().filter() chains to prevent allocating
+  // objects for unranked records and avoid an entire array iteration, reducing GC overhead.
+  const ranked = [];
 
-      const titleTokens = Array.isArray(record.titleTokens) ? record.titleTokens : [];
-      const categoryTokens = Array.isArray(record.categoryTokens) ? record.categoryTokens : [];
-      const tagTokens = Array.isArray(record.tagTokens) ? record.tagTokens : [];
-      const excerptTokens = Array.isArray(record.excerptTokens) ? record.excerptTokens : [];
+  for (let i = 0; i < records.length; i++) {
+    const record = records[i];
+    let score = 0;
+    let matchedTerms = 0;
 
-      if (record.titleNormalized === normalizedQuery) score += 120;
-      if (record.titleNormalized?.startsWith(normalizedQuery)) score += 90;
+    const titleTokens = Array.isArray(record.titleTokens) ? record.titleTokens : [];
+    const categoryTokens = Array.isArray(record.categoryTokens) ? record.categoryTokens : [];
+    const tagTokens = Array.isArray(record.tagTokens) ? record.tagTokens : [];
+    const excerptTokens = Array.isArray(record.excerptTokens) ? record.excerptTokens : [];
 
-      terms.forEach((term) => {
-        let termMatched = false;
+    if (record.titleNormalized === normalizedQuery) score += 120;
+    if (record.titleNormalized?.startsWith(normalizedQuery)) score += 90;
 
-        if (titleTokens.includes(term)) {
-          score += 24;
-          termMatched = true;
-        } else if (includesPrefix(titleTokens, term)) {
-          score += 18;
-          termMatched = true;
-        } else if (includesNearPrefix(titleTokens, term)) {
-          score += 12;
-          termMatched = true;
-        }
+    // ⚡ Bolt: Replace forEach with standard for loop to avoid closure allocations
+    for (let j = 0; j < terms.length; j++) {
+      const term = terms[j];
+      let termMatched = false;
 
-        if (tagTokens.includes(term) || categoryTokens.includes(term)) {
-          score += 14;
-          termMatched = true;
-        } else if (includesPrefix(tagTokens, term) || includesPrefix(categoryTokens, term)) {
-          score += 10;
-          termMatched = true;
-        }
+      if (titleTokens.includes(term)) {
+        score += 24;
+        termMatched = true;
+      } else if (includesPrefix(titleTokens, term)) {
+        score += 18;
+        termMatched = true;
+      } else if (includesNearPrefix(titleTokens, term)) {
+        score += 12;
+        termMatched = true;
+      }
 
-        if (excerptTokens.includes(term)) {
-          score += 8;
-          termMatched = true;
-        } else if (includesPrefix(excerptTokens, term)) {
-          score += 4;
-          termMatched = true;
-        }
+      if (tagTokens.includes(term) || categoryTokens.includes(term)) {
+        score += 14;
+        termMatched = true;
+      } else if (includesPrefix(tagTokens, term) || includesPrefix(categoryTokens, term)) {
+        score += 10;
+        termMatched = true;
+      }
 
-        if (termMatched) matchedTerms += 1;
-      });
+      if (excerptTokens.includes(term)) {
+        score += 8;
+        termMatched = true;
+      } else if (includesPrefix(excerptTokens, term)) {
+        score += 4;
+        termMatched = true;
+      }
 
-      if (matchedTerms === terms.length) score += 30;
+      if (termMatched) matchedTerms += 1;
+    }
 
-      return {
+    if (matchedTerms === terms.length) score += 30;
+
+    if (score > 0) {
+      ranked.push({
         ...record,
         score,
         matchedTerms,
         dateValue: dateScore(record.date),
-      };
-    })
-    .filter((record) => record.score > 0)
-    .sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      if (b.matchedTerms !== a.matchedTerms) return b.matchedTerms - a.matchedTerms;
-      return b.dateValue - a.dateValue;
-    });
+      });
+    }
+  }
 
-  return ranked;
+  return ranked.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    if (b.matchedTerms !== a.matchedTerms) return b.matchedTerms - a.matchedTerms;
+    return b.dateValue - a.dateValue;
+  });
 };
