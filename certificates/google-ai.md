@@ -12,4 +12,7 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260309-092113.webp
     details: "## AI for Research and Insights"
     credentials: https://coursera.org/share/1119b9488b6abe2cd025abf107b47a46
+  - image: /assets/uploads/Screenshot_20260309-093016.webp
+    details: "## AI for Writing and Communicating"
+    credentials: https://www.coursera.org/account/accomplishments/records/J31SOI1FB50C
 ---
