@@ -1,5 +1,5 @@
 ---
-title: Google AI
+title: Google
 eyebrow: 7 Certificates
 description: 7 Google AI Professional Certificates
 certificate_list:
