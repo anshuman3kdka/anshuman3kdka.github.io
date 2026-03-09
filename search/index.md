@@ -17,6 +17,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
         class="search-input"
         type="search"
         name="q"
+        maxlength="100"
         autocomplete="off"
         placeholder="Try: Poetry"
         data-search-input
