@@ -9,8 +9,8 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
     <div class="hero-actions">
-      <a class="button button-primary" href="/essays/">Essays →</a>
-      <a class="button button-secondary" href="/projects/">Projects →</a>
+      <a class="button button-primary" href="/essays/">Essays <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="/projects/">Projects <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>

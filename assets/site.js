@@ -404,7 +404,7 @@ const initRandomReadCard = () => {
     eyebrow.textContent = eyebrowText;
     title.textContent = titleText;
     message.textContent = messageText;
-    link.textContent = linkLabel;
+    link.innerHTML = linkLabel;
 
     if (disabled) {
       link.removeAttribute('href');
@@ -441,7 +441,7 @@ const initRandomReadCard = () => {
       titleText: item.title || 'Untitled piece',
       messageText: 'A random pick from the archive.',
       href: item.url,
-      linkLabel: 'Read this piece →',
+      linkLabel: 'Read this piece <span aria-hidden="true">→</span>',
     });
   };
 
