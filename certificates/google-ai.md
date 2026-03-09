@@ -21,4 +21,7 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260309-210944.webp
     details: "## AI for Data Analysis"
     credentials: https://www.coursera.org/account/accomplishments/records/SIRCXRLMPW25
+  - image: /assets/uploads/Screenshot_20260309-211441.webp
+    details: "## AI for App Building"
+    credentials: https://www.coursera.org/account/accomplishments/records/0GE6N0QQ1QAR
 ---
