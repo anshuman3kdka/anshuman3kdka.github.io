@@ -18,4 +18,6 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260309-204741.webp
     details: "## AI for Content Creation"
     credentials: https://www.coursera.org/account/accomplishments/records/8GMFL72UP9J4
+  - details: "## AI for Data Analysis"
+    credentials: https://www.coursera.org/account/accomplishments/records/SIRCXRLMPW25
 ---
