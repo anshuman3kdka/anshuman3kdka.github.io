@@ -9,6 +9,7 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260307-162931.webp
     details: "## AI for Brainstorming and Planning"
     credentials: https://coursera.org/share/5d2794f55c97f07a70608e6beef27d7c
-  - details: "## AI for Research and Insights"
+  - image: /assets/uploads/Screenshot_20260309-092113.webp
+    details: "## AI for Research and Insights"
     credentials: https://coursera.org/share/1119b9488b6abe2cd025abf107b47a46
 ---
