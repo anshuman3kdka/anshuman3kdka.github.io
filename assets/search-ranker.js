@@ -10,7 +10,7 @@ export const tokenize = (value) => normalizeText(value)
   .split(' ')
   .filter((token) => token.length > 1 && !stopWords.has(token));
 
-const includesPrefix = (tokens, queryToken) => tokens.some((token) => token.startsWith(queryToken));
+const includesPrefix = (tokens, queryToken) => tokens.some((token) => token === queryToken || (queryToken.length >= 3 && token.startsWith(queryToken)));
 
 const includesNearPrefix = (tokens, queryToken) => {
   if (queryToken.length < 4) return false;
@@ -84,7 +84,7 @@ export const rankSearchResults = (records, query) => {
 
     if (matchedTerms === terms.length) score += 30;
 
-    if (score > 0) {
+    if (score > 0 && matchedTerms === terms.length) {
       ranked.push({
         ...record,
         score,
