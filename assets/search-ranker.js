@@ -1,10 +1,14 @@
-const normalizeText = (value) => String(value || '')
+const stopWords = new Set(['a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'to', 'was', 'with']);
+
+export const normalizeText = (value) => String(value || '')
   .toLowerCase()
   .replace(/[^\p{L}\p{N}\s]/gu, ' ')
   .replace(/\s+/g, ' ')
   .trim();
 
-const tokenize = (value) => normalizeText(value).split(' ').filter((token) => token.length > 0);
+export const tokenize = (value) => normalizeText(value)
+  .split(' ')
+  .filter((token) => token.length > 1 && !stopWords.has(token));
 
 const includesPrefix = (tokens, queryToken) => tokens.some((token) => token.startsWith(queryToken));
 

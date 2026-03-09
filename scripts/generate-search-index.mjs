@@ -8,8 +8,6 @@ const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
 const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'creative', 'certificates']);
 
-const stopWords = new Set(['a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'to', 'was', 'with']);
-
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
   const files = [];
@@ -78,19 +76,6 @@ const toUrl = (relativePath, frontMatterData) => {
   return `/${parsed.dir}/${parsed.name}/`.replace(/\/+/g, '/');
 };
 
-const normalizeText = (value) => String(value || '')
-  .toLowerCase()
-  .replace(/[^\p{L}\p{N}\s]/gu, ' ')
-  .replace(/\s+/g, ' ')
-  .trim();
-
-const tokenize = (value) => normalizeText(value)
-  .split(' ')
-  .map((word) => word.trim())
-  .filter((word) => word.length > 1 && !stopWords.has(word));
-
-const dedupeTokens = (tokens) => [...new Set(tokens)];
-
 const stripMarkdown = (value) => String(value || '')
   .replace(/```[\s\S]*?```/g, ' ')
   .replace(/`([^`]+)`/g, '$1')
@@ -132,11 +117,6 @@ const main = async () => {
     const excerptSource = frontMatterData.description || frontMatterData.excerpt || body;
     const excerpt = stripMarkdown(excerptSource).slice(0, 220).trim();
 
-    const titleTokens = dedupeTokens(tokenize(title));
-    const categoryTokens = dedupeTokens(tokenize(category));
-    const tagTokens = dedupeTokens(tokenize(tags.join(' ')));
-    const excerptTokens = dedupeTokens(tokenize(excerpt));
-
     return {
       id: rel,
       title,
@@ -145,11 +125,6 @@ const main = async () => {
       tags,
       date: toIsoString(frontMatterData.date),
       excerpt,
-      titleTokens,
-      categoryTokens,
-      tagTokens,
-      excerptTokens,
-      titleNormalized: normalizeText(title),
     };
   };
 
@@ -157,6 +132,8 @@ const main = async () => {
   const records = results.filter(Boolean);
 
   records.sort((a, b) => a.title.localeCompare(b.title));
+  // ⚡ Bolt: removed pre-calculated tokens to reduce JSON payload size by ~50%.
+  // Tokens are now generated client-side in search-data-loader.js.
   await fs.writeFile(path.join(root, 'search-index.json'), `${JSON.stringify(records)}\n`);
   console.log(`Indexed ${records.length} search records.`);
 };
