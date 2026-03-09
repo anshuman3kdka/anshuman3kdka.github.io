@@ -265,18 +265,19 @@ const buildRandomReadUrlCandidates = (value) => {
 const resolveRandomReadUrl = async (value) => {
   const candidates = buildRandomReadUrlCandidates(value);
 
-  for (const candidate of candidates) {
-    try {
-      const response = await fetch(candidate, {
-        method: 'HEAD',
-        cache: 'no-store',
-      });
+  // ⚡ Bolt: Use Ordered Parallelism to initiate all candidate requests concurrently,
+  // but await them in priority order to return the fastest valid high-priority match
+  // without blocking on slower, lower-priority requests.
+  const requests = candidates.map((candidate) =>
+    fetch(candidate, { method: 'HEAD', cache: 'no-store' })
+      .then((response) => ({ candidate, ok: response.ok || response.status === 405 }))
+      .catch(() => ({ candidate, ok: false }))
+  );
 
-      if (response.ok || response.status === 405) {
-        return candidate;
-      }
-    } catch (error) {
-      // Try the next candidate URL.
+  for (const request of requests) {
+    const result = await request;
+    if (result.ok) {
+      return result.candidate;
     }
   }
 
