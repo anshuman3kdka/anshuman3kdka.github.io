@@ -24,4 +24,6 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260309-211441.webp
     details: "## AI for App Building"
     credentials: https://www.coursera.org/account/accomplishments/records/0GE6N0QQ1QAR
+  - details: "# Google AI"
+    credentials: https://www.coursera.org/account/accomplishments/professional-cert/certificate/FQ6TS1R3UNH8
 ---
