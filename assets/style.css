@@ -1018,7 +1018,14 @@ body.is-leaving .page-shell {
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   text-decoration: none;
+}
+
+.quick-action-icon {
+  flex-shrink: 0;
+  display: block;
 }
 
 .quick-action-link:hover {
