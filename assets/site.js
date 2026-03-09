@@ -265,18 +265,19 @@ const buildRandomReadUrlCandidates = (value) => {
 const resolveRandomReadUrl = async (value) => {
   const candidates = buildRandomReadUrlCandidates(value);
 
-  for (const candidate of candidates) {
-    try {
-      const response = await fetch(candidate, {
-        method: 'HEAD',
-        cache: 'no-store',
-      });
+  // ⚡ Bolt: Initiate all HEAD requests in parallel to reduce network latency.
+  // We map candidates to promises and then await them sequentially in priority order.
+  // This allows early return if a high-priority URL resolves quickly, while still
+  // having lower-priority requests already in flight if needed.
+  const fetchPromises = candidates.map((url) => fetch(url, {
+    method: 'HEAD',
+    cache: 'no-store',
+  }).catch(() => null));
 
-      if (response.ok || response.status === 405) {
-        return candidate;
-      }
-    } catch (error) {
-      // Try the next candidate URL.
+  for (let i = 0; i < fetchPromises.length; i++) {
+    const response = await fetchPromises[i];
+    if (response && (response.ok || response.status === 405)) {
+      return candidates[i];
     }
   }
 
