@@ -15,4 +15,7 @@ certificate_list:
   - image: /assets/uploads/Screenshot_20260309-093016.webp
     details: "## AI for Writing and Communicating"
     credentials: https://www.coursera.org/account/accomplishments/records/J31SOI1FB50C
+  - image: /assets/uploads/Screenshot_20260309-204741.webp
+    details: "## AI for Content Creation"
+    credentials: https://www.coursera.org/account/accomplishments/records/8GMFL72UP9J4
 ---
