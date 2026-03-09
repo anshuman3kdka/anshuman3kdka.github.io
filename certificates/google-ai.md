@@ -4,12 +4,8 @@ eyebrow: 7 Certificates
 description: 7 Google AI Professional Certificates
 certificate_list:
   - image: /assets/uploads/Screenshot_20260309-221425.webp
-    details: >-
-      # Google AI
-
-
-      > Issued upon completion of 7 foundational courses for AI proficiency
-      across multiple fields.
+    details: "> Issued upon completion of 7 foundational courses for **AI**
+      proficiency across multiple fields."
     credentials: https://www.coursera.org/account/accomplishments/professional-cert/certificate/FQ6TS1R3UNH8
   - image: /assets/uploads/Screenshot_20260307-001550.webp
     details: "## AI Fundamentals"
