@@ -9,8 +9,8 @@ class SearchDataError extends Error {
   }
 }
 
-let cachedIndex = null;
-let pendingRequest = null;
+const cachedByUrl = new Map();
+const pendingByUrl = new Map();
 
 const dedupeTokens = (tokens) => [...new Set(tokens)];
 
@@ -84,10 +84,10 @@ export const createSearchDataLoader = ({ indexUrl } = {}) => {
   }
 
   const load = async () => {
-    if (cachedIndex) return cachedIndex;
-    if (pendingRequest) return pendingRequest;
+    if (cachedByUrl.has(resolvedIndexUrl)) return cachedByUrl.get(resolvedIndexUrl);
+    if (pendingByUrl.has(resolvedIndexUrl)) return pendingByUrl.get(resolvedIndexUrl);
 
-    pendingRequest = fetch(resolvedIndexUrl)
+    const pendingRequest = fetch(resolvedIndexUrl)
       .then((response) => {
         if (!response.ok) {
           throw new SearchDataError(`Unable to load search index: ${response.status}`, {
@@ -104,12 +104,15 @@ export const createSearchDataLoader = ({ indexUrl } = {}) => {
       })
       .then((items) => {
         const rawItems = Array.isArray(items) ? items : [];
-        cachedIndex = processIndexItems(rawItems);
-        return cachedIndex;
+        const processedItems = processIndexItems(rawItems);
+        cachedByUrl.set(resolvedIndexUrl, processedItems);
+        return processedItems;
       })
       .finally(() => {
-        pendingRequest = null;
+        pendingByUrl.delete(resolvedIndexUrl);
       });
+
+    pendingByUrl.set(resolvedIndexUrl, pendingRequest);
 
     return pendingRequest;
   };
