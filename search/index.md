@@ -21,6 +21,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
         placeholder="Try: Poetry"
         data-search-input
         aria-describedby="search-live-region"
+        maxlength="100"
       >
     </form>
 
