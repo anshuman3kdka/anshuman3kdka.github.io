@@ -33,9 +33,15 @@ export const renderSearchState = ({ listElement, liveRegion, message = '', resul
     return;
   }
 
+  // ⚡ Bolt: Use a DocumentFragment to batch DOM updates when rendering results.
+  // This prevents multiple reflows/repaints as items are appended to the list.
+  const fragment = document.createDocumentFragment();
+
   results.forEach((item) => {
-    listElement.append(createResultItem(item));
+    fragment.append(createResultItem(item));
   });
+
+  listElement.append(fragment);
 
   liveRegion.textContent = `${results.length} result${results.length === 1 ? '' : 's'} found.`;
 };
