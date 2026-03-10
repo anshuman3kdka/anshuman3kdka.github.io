@@ -5,18 +5,55 @@ let pendingRequest = null;
 
 const dedupeTokens = (tokens) => [...new Set(tokens)];
 
+const buildPrefixBuckets = (tokens) => {
+  const prefixes3 = new Map();
+  const prefixes4 = new Map();
+
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token.length >= 3) {
+      const key3 = token.slice(0, 3);
+      const bucket3 = prefixes3.get(key3);
+      if (bucket3) bucket3.push(token);
+      else prefixes3.set(key3, [token]);
+    }
+
+    if (token.length >= 4) {
+      const key4 = token.slice(0, 4);
+      const bucket4 = prefixes4.get(key4);
+      if (bucket4) bucket4.push(token);
+      else prefixes4.set(key4, [token]);
+    }
+  }
+
+  return { prefixes3, prefixes4 };
+};
+
 const processIndexItems = (items) => items.map((item) => {
   const title = String(item.title || '');
   const category = String(item.category || '');
   const tags = Array.isArray(item.tags) ? item.tags : [];
   const excerpt = String(item.excerpt || '');
 
+  const titleTokens = dedupeTokens(tokenize(title));
+  const categoryTokens = dedupeTokens(tokenize(category));
+  const tagTokens = dedupeTokens(tokenize(tags.join(' ')));
+  const excerptTokens = dedupeTokens(tokenize(excerpt));
+
   return {
     ...item,
-    titleTokens: dedupeTokens(tokenize(title)),
-    categoryTokens: dedupeTokens(tokenize(category)),
-    tagTokens: dedupeTokens(tokenize(tags.join(' '))),
-    excerptTokens: dedupeTokens(tokenize(excerpt)),
+    titleTokens,
+    categoryTokens,
+    tagTokens,
+    excerptTokens,
+    titleTokenSet: new Set(titleTokens),
+    categoryTokenSet: new Set(categoryTokens),
+    tagTokenSet: new Set(tagTokens),
+    excerptTokenSet: new Set(excerptTokens),
+    titlePrefixBuckets: buildPrefixBuckets(titleTokens),
+    categoryPrefixBuckets: buildPrefixBuckets(categoryTokens),
+    tagPrefixBuckets: buildPrefixBuckets(tagTokens),
+    excerptPrefixBuckets: buildPrefixBuckets(excerptTokens),
     titleNormalized: normalizeText(title),
   };
 });
