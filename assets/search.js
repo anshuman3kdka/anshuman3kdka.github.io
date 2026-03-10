@@ -14,6 +14,26 @@ const debounce = (fn, delay) => {
   };
 };
 
+const readQueryFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('q') ?? '';
+};
+
+const updateUrlQuery = (rawValue) => {
+  const nextValue = rawValue.trim();
+  const url = new URL(window.location.href);
+
+  if (nextValue) {
+    url.searchParams.set('q', nextValue);
+  } else {
+    url.searchParams.delete('q');
+  }
+
+  history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+};
+
+const isValidQuery = (value) => value.trim().length >= MIN_QUERY_LENGTH;
+
 const initResultKeyboardNavigation = (input, list) => {
   input.addEventListener('keydown', (event) => {
     if (event.key !== 'ArrowDown') return;
@@ -74,7 +94,7 @@ const initSearchPage = () => {
   const runSearch = async () => {
     const query = input.value.trim();
 
-    if (query.length < MIN_QUERY_LENGTH) {
+    if (!isValidQuery(query)) {
       renderSearchState({
         listElement: list,
         liveRegion,
@@ -118,7 +138,10 @@ const initSearchPage = () => {
     });
   }, { once: true });
 
-  input.addEventListener('input', debouncedSearch);
+  input.addEventListener('input', () => {
+    updateUrlQuery(input.value);
+    debouncedSearch();
+  });
   initResultKeyboardNavigation(input, list);
 
   if (form) {
@@ -126,6 +149,20 @@ const initSearchPage = () => {
       event.preventDefault();
       input.blur();
     });
+  }
+
+  const initialQuery = readQueryFromUrl();
+  input.value = initialQuery;
+
+  if (isValidQuery(initialQuery)) {
+    runSearch().catch(() => {
+      renderSearchState({
+        listElement: list,
+        liveRegion,
+        message: 'Search is temporarily unavailable.',
+      });
+    });
+    return;
   }
 
   renderSearchState({
