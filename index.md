@@ -5,9 +5,9 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 <section class="section section--hero hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content">
-    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
+    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' | escape }}</h1>
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
-    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
+    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." | escape }}</p>
     <div class="hero-actions">
       <a class="button button-primary" href="/essays/">Essays <span aria-hidden="true">→</span></a>
       <a class="button button-secondary" href="/projects/">Projects <span aria-hidden="true">→</span></a>
@@ -31,23 +31,23 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro page-intro--hero">
-    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
-    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
-    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>
+    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" | escape }}</p>
+    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" | escape }}</h2>
+    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." | escape }}</p>
   </div>
   <div class="grid grid-2">
     {% assign homepage_cards = site.data.home_cards.cards %}
     {% if homepage_cards and homepage_cards.size > 0 %}
       {% for card in homepage_cards %}
       <article class="card">
-        <p class="card-label">{{ card.type }}</p>
-        <h3 class="card-title">{{ card.title }}</h3>
-        <p class="card-text">{{ card.description }}</p>
+        <p class="card-label">{{ card.type | escape }}</p>
+        <h3 class="card-title">{{ card.title | escape }}</h3>
+        <p class="card-text">{{ card.description | escape }}</p>
         {% assign card_href = card.link_url | default: '#' %}
         {% if card_href contains '://' or card_href contains 'mailto:' or card_href contains 'tel:' or card_href contains '#' %}
-        <a class="card-link" href="{{ card_href }}">{{ card.link_text }}</a>
+        <a class="card-link" href="{{ card_href | escape }}">{{ card.link_text | escape }}</a>
         {% else %}
-        <a class="card-link" href="{{ card_href | relative_url }}">{{ card.link_text }}</a>
+        <a class="card-link" href="{{ card_href | relative_url | escape }}">{{ card.link_text | escape }}</a>
         {% endif %}
       </article>
       {% endfor %}
