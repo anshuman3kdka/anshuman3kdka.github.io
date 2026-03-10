@@ -22,16 +22,23 @@ The script scans Markdown/HTML content files and writes compact records to `sear
 - `tags`
 - `date`
 - `excerpt`
-- pre-normalized token fields (`titleTokens`, `categoryTokens`, `tagTokens`, `excerptTokens`, `titleNormalized`)
 
-To keep payload size small, only a short excerpt is saved. Full article bodies are not shipped in the search index.
+To keep payload size small, only compact display/search fields are saved in JSON. Full article bodies are not shipped in the search index, and token helper fields are intentionally **not** stored in `search-index.json`.
 
-Pre-normalization is done at build-time:
+Pre-normalization is done at runtime in `assets/search-data-loader.js` after the JSON is loaded:
 
 - lowercase conversion
 - punctuation stripping
 - token splitting
 - short/common stop-word trimming
+
+Search data flow (high-level):
+
+1. generator script (`scripts/generate-search-index.mjs`)
+2. compact `search-index.json`
+3. loader preprocessing (`assets/search-data-loader.js`)
+4. ranker scoring (`assets/search-ranker.js`)
+5. renderer output (`assets/search-renderer.js`)
 
 Run index generation manually:
 
@@ -47,6 +54,10 @@ The browser code is split into small files for easier editing:
 - `assets/search-ranker.js`: applies lightweight scoring and sorting.
 - `assets/search-renderer.js`: renders empty states + result cards and updates live region text.
 - `assets/search.js`: wires page behavior (debounce, keyboard handling, result caps).
+
+Troubleshooting (`indexUrl` / base path):
+
+- `createSearchDataLoader()` defaults to `indexUrl: '/search-index.json'` (site root). If your site is served from a subpath (for example a project page under `/repo-name/`), pass a subpath-aware URL so fetch points to the correct file location.
 
 ### Scoring weights and behavior
 
