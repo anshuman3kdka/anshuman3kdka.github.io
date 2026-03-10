@@ -11,14 +11,14 @@ description: Discover my creative writing hub featuring poetry and prose that bl
       <p class="card-label">Collection</p>
       <h2 class="card-title">Poetry</h2>
       <p class="card-text">Verses on love, loss, and the quiet moments in between. Exploring rhythm, rhyme, and free verse.</p>
-      <a class="button button-primary" href="/poetry/">Read Poetry →</a>
+      <a class="button button-primary" href="/poetry/">Read Poetry <span aria-hidden="true">→</span></a>
     </article>
 
     <article class="card">
       <p class="card-label">Collection</p>
       <h2 class="card-title">Prose</h2>
       <p class="card-text">Short stories, flash fiction, and narrative experiments. Characters and worlds built from the ground up.</p>
-      <a class="button button-primary" href="/prose/">Read Prose →</a>
+      <a class="button button-primary" href="/prose/">Read Prose <span aria-hidden="true">→</span></a>
     </article>
   </div>
 </section>
