@@ -8,6 +8,25 @@ const DEBOUNCE_MS = 120;
 
 const SEARCH_ERROR_MESSAGE = 'Search is temporarily unavailable.';
 
+const isValidQuery = (query) => String(query || '').trim().length >= MIN_QUERY_LENGTH;
+
+const readQueryFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  return (params.get('q') || '').trim();
+};
+
+const writeQueryToUrl = (query) => {
+  const params = new URLSearchParams(window.location.search);
+  const trimmedQuery = String(query || '').trim();
+
+  if (trimmedQuery) params.set('q', trimmedQuery);
+  else params.delete('q');
+
+  const queryString = params.toString();
+  const nextUrl = `${window.location.pathname}${queryString ? `?${queryString}` : ''}${window.location.hash}`;
+  window.history.replaceState({}, '', nextUrl);
+};
+
 const buildSearchFailureState = (error) => {
   const code = error?.code || 'search_unknown_failure';
   const liveRegionMessageByCode = {
@@ -111,6 +130,7 @@ const initSearchPage = () => {
 
   const runSearch = async () => {
     const query = input.value.trim();
+    writeQueryToUrl(query);
 
     if (!isValidQuery(query)) {
       renderSearchState({
