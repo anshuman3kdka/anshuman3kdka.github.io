@@ -59,7 +59,21 @@ const processIndexItems = (items) => items.map((item) => {
 });
 
 export const createSearchDataLoader = ({ indexUrl } = {}) => {
-  const resolvedIndexUrl = indexUrl || '/search-index.json';
+  const fallbackIndexUrl = new URL('search-index.json', `${window.location.origin}/`).toString();
+  const candidateIndexUrl = (indexUrl ?? '').trim() || fallbackIndexUrl;
+
+  let resolvedIndexUrl;
+  try {
+    // Always normalize to one absolute URL so future cache keys stay canonical.
+    resolvedIndexUrl = new URL(candidateIndexUrl, window.location.href).toString();
+  } catch (error) {
+    throw new Error(`Search setup error: invalid index URL "${candidateIndexUrl}".`);
+  }
+
+  if (!resolvedIndexUrl) {
+    throw new Error('Search setup error: search index URL resolved to an empty value.');
+  }
+
   const load = async () => {
     if (cachedIndex) return cachedIndex;
     if (pendingRequest) return pendingRequest;
