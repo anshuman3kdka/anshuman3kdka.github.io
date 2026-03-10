@@ -62,7 +62,8 @@ const initSearchPage = () => {
 
   if (!input || !list || !liveRegion) return;
 
-  const loader = createSearchDataLoader();
+  const indexUrl = input.dataset.searchIndexUrl;
+  const loader = createSearchDataLoader({ indexUrl });
   let records = null;
 
   const ensureLoaded = async () => {

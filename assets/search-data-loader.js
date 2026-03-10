@@ -21,12 +21,13 @@ const processIndexItems = (items) => items.map((item) => {
   };
 });
 
-export const createSearchDataLoader = ({ indexUrl = '/search-index.json' } = {}) => {
+export const createSearchDataLoader = ({ indexUrl } = {}) => {
+  const resolvedIndexUrl = indexUrl || '/search-index.json';
   const load = async () => {
     if (cachedIndex) return cachedIndex;
     if (pendingRequest) return pendingRequest;
 
-    pendingRequest = fetch(indexUrl)
+    pendingRequest = fetch(resolvedIndexUrl)
       .then((response) => {
         if (!response.ok) throw new Error(`Unable to load search index: ${response.status}`);
         return response.json();
