@@ -20,8 +20,17 @@ const createResultItem = (item) => {
   return li;
 };
 
-export const renderSearchState = ({ listElement, liveRegion, message = '', results = [] }) => {
+export const renderSearchState = ({
+  listElement,
+  liveRegion,
+  message = '',
+  liveRegionMessage = '',
+  debugCode = '',
+  results = [],
+}) => {
   listElement.innerHTML = '';
+  listElement.dataset.searchDebugCode = debugCode || '';
+  liveRegion.dataset.searchDebugCode = debugCode || '';
 
   if (message) {
     const empty = document.createElement('li');
@@ -29,7 +38,8 @@ export const renderSearchState = ({ listElement, liveRegion, message = '', resul
     empty.textContent = message;
     listElement.append(empty);
     const isHint = message.toLowerCase().includes('type at least 2 letters');
-    liveRegion.textContent = isHint ? '' : message;
+    const announcement = liveRegionMessage || message;
+    liveRegion.textContent = isHint ? '' : announcement;
     return;
   }
 
