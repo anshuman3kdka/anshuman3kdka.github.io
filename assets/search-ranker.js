@@ -1,4 +1,6 @@
 const stopWords = new Set(['a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'to', 'was', 'with']);
+const emptySet = new Set();
+const emptyPrefixes = { prefixes3: new Map(), prefixes4: new Map() };
 
 export const normalizeText = (value) => String(value || '')
   .toLowerCase()
@@ -10,12 +12,33 @@ export const tokenize = (value) => normalizeText(value)
   .split(' ')
   .filter((token) => token.length > 1 && !stopWords.has(token));
 
-const includesPrefix = (tokens, queryToken) => tokens.some((token) => token === queryToken || (queryToken.length >= 3 && token.startsWith(queryToken)));
+const getPrefixCandidates = (prefixBuckets, queryToken) => {
+  if (!prefixBuckets || queryToken.length < 3) return [];
+  if (queryToken.length >= 4) return prefixBuckets.prefixes4.get(queryToken.slice(0, 4)) || [];
+  return prefixBuckets.prefixes3.get(queryToken.slice(0, 3)) || [];
+};
 
-const includesNearPrefix = (tokens, queryToken) => {
+const includesPrefix = (tokenSet, prefixBuckets, queryToken) => {
+  if (tokenSet?.has(queryToken)) return true;
+  if (queryToken.length < 3) return false;
+
+  const candidates = getPrefixCandidates(prefixBuckets, queryToken);
+  for (let i = 0; i < candidates.length; i++) {
+    if (candidates[i].startsWith(queryToken)) return true;
+  }
+  return false;
+};
+
+const includesNearPrefix = (prefixBuckets, queryToken) => {
   if (queryToken.length < 4) return false;
   const shorter = queryToken.slice(0, -1);
-  return tokens.some((token) => token.startsWith(shorter));
+  const candidates = getPrefixCandidates(prefixBuckets, shorter);
+
+  for (let i = 0; i < candidates.length; i++) {
+    if (candidates[i].startsWith(shorter)) return true;
+  }
+
+  return false;
 };
 
 const dateScore = (dateString) => {
@@ -39,10 +62,14 @@ export const rankSearchResults = (records, query) => {
     let score = 0;
     let matchedTerms = 0;
 
-    const titleTokens = Array.isArray(record.titleTokens) ? record.titleTokens : [];
-    const categoryTokens = Array.isArray(record.categoryTokens) ? record.categoryTokens : [];
-    const tagTokens = Array.isArray(record.tagTokens) ? record.tagTokens : [];
-    const excerptTokens = Array.isArray(record.excerptTokens) ? record.excerptTokens : [];
+    const titleTokenSet = record.titleTokenSet instanceof Set ? record.titleTokenSet : emptySet;
+    const categoryTokenSet = record.categoryTokenSet instanceof Set ? record.categoryTokenSet : emptySet;
+    const tagTokenSet = record.tagTokenSet instanceof Set ? record.tagTokenSet : emptySet;
+    const excerptTokenSet = record.excerptTokenSet instanceof Set ? record.excerptTokenSet : emptySet;
+    const titlePrefixBuckets = record.titlePrefixBuckets || emptyPrefixes;
+    const categoryPrefixBuckets = record.categoryPrefixBuckets || emptyPrefixes;
+    const tagPrefixBuckets = record.tagPrefixBuckets || emptyPrefixes;
+    const excerptPrefixBuckets = record.excerptPrefixBuckets || emptyPrefixes;
 
     if (record.titleNormalized === normalizedQuery) score += 120;
     if (record.titleNormalized?.startsWith(normalizedQuery)) score += 90;
@@ -52,29 +79,29 @@ export const rankSearchResults = (records, query) => {
       const term = terms[j];
       let termMatched = false;
 
-      if (titleTokens.includes(term)) {
+      if (titleTokenSet.has(term)) {
         score += 24;
         termMatched = true;
-      } else if (includesPrefix(titleTokens, term)) {
+      } else if (includesPrefix(titleTokenSet, titlePrefixBuckets, term)) {
         score += 18;
         termMatched = true;
-      } else if (includesNearPrefix(titleTokens, term)) {
+      } else if (includesNearPrefix(titlePrefixBuckets, term)) {
         score += 12;
         termMatched = true;
       }
 
-      if (tagTokens.includes(term) || categoryTokens.includes(term)) {
+      if (tagTokenSet.has(term) || categoryTokenSet.has(term)) {
         score += 14;
         termMatched = true;
-      } else if (includesPrefix(tagTokens, term) || includesPrefix(categoryTokens, term)) {
+      } else if (includesPrefix(tagTokenSet, tagPrefixBuckets, term) || includesPrefix(categoryTokenSet, categoryPrefixBuckets, term)) {
         score += 10;
         termMatched = true;
       }
 
-      if (excerptTokens.includes(term)) {
+      if (excerptTokenSet.has(term)) {
         score += 8;
         termMatched = true;
-      } else if (includesPrefix(excerptTokens, term)) {
+      } else if (includesPrefix(excerptTokenSet, excerptPrefixBuckets, term)) {
         score += 4;
         termMatched = true;
       }

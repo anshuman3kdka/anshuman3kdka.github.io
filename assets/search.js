@@ -82,7 +82,8 @@ const initSearchPage = () => {
 
   if (!input || !list || !liveRegion) return;
 
-  const loader = createSearchDataLoader();
+  const indexUrl = input.dataset.searchIndexUrl;
+  const loader = createSearchDataLoader({ indexUrl });
   let records = null;
 
   const ensureLoaded = async () => {
@@ -94,7 +95,7 @@ const initSearchPage = () => {
   const runSearch = async () => {
     const query = input.value.trim();
 
-    if (query.length < MIN_QUERY_LENGTH) {
+    if (!isValidQuery(query)) {
       renderSearchState({
         listElement: list,
         liveRegion,
@@ -156,6 +157,20 @@ const initSearchPage = () => {
       });
       input.blur();
     });
+  }
+
+  const initialQuery = readQueryFromUrl();
+  input.value = initialQuery;
+
+  if (isValidQuery(initialQuery)) {
+    runSearch().catch(() => {
+      renderSearchState({
+        listElement: list,
+        liveRegion,
+        message: 'Search is temporarily unavailable.',
+      });
+    });
+    return;
   }
 
   renderSearchState({
