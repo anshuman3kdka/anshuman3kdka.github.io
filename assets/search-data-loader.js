@@ -1,5 +1,14 @@
 import { tokenize, normalizeText } from './search-ranker.js';
 
+class SearchDataError extends Error {
+  constructor(message, { code, cause } = {}) {
+    super(message);
+    this.name = 'SearchDataError';
+    this.code = code;
+    this.cause = cause;
+  }
+}
+
 let cachedIndex = null;
 let pendingRequest = null;
 
@@ -66,8 +75,18 @@ export const createSearchDataLoader = ({ indexUrl } = {}) => {
 
     pendingRequest = fetch(resolvedIndexUrl)
       .then((response) => {
-        if (!response.ok) throw new Error(`Unable to load search index: ${response.status}`);
-        return response.json();
+        if (!response.ok) {
+          throw new SearchDataError(`Unable to load search index: ${response.status}`, {
+            code: 'index_fetch_failed',
+          });
+        }
+
+        return response.json().catch((error) => {
+          throw new SearchDataError('Unable to parse search index JSON.', {
+            code: 'index_parse_failed',
+            cause: error,
+          });
+        });
       })
       .then((items) => {
         const rawItems = Array.isArray(items) ? items : [];

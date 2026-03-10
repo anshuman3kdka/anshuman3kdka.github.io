@@ -6,6 +6,23 @@ const MIN_QUERY_LENGTH = 2;
 const MAX_RESULTS = 20;
 const DEBOUNCE_MS = 120;
 
+const SEARCH_ERROR_MESSAGE = 'Search is temporarily unavailable.';
+
+const buildSearchFailureState = (error) => {
+  const code = error?.code || 'search_unknown_failure';
+  const liveRegionMessageByCode = {
+    index_fetch_failed: 'Search is temporarily unavailable. Please try again in a little while.',
+    index_parse_failed: 'Search is temporarily unavailable right now. Please try again shortly.',
+    search_unknown_failure: 'Search is temporarily unavailable.',
+  };
+
+  return {
+    message: SEARCH_ERROR_MESSAGE,
+    liveRegionMessage: liveRegionMessageByCode[code] || liveRegionMessageByCode.search_unknown_failure,
+    debugCode: code,
+  };
+};
+
 const debounce = (fn, delay) => {
   let timer = null;
 
@@ -124,11 +141,12 @@ const initSearchPage = () => {
   };
 
   const performSearch = () => {
-    runSearch().catch(() => {
+    runSearch().catch((error) => {
+      console.error('Search failed', error);
       renderSearchState({
         listElement: list,
         liveRegion,
-        message: 'Search is temporarily unavailable.',
+        ...buildSearchFailureState(error),
       });
     });
   };
@@ -136,7 +154,8 @@ const initSearchPage = () => {
   const debouncedSearch = debounce(performSearch, DEBOUNCE_MS);
 
   input.addEventListener('focus', () => {
-    ensureLoaded().catch(() => {
+    ensureLoaded().catch((error) => {
+      console.error('Search failed', error);
       // Ignore eager-load failure until user types.
     });
   }, { once: true });
@@ -148,11 +167,12 @@ const initSearchPage = () => {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       debouncedSearch.cancel();
-      await runSearch().catch(() => {
+      await runSearch().catch((error) => {
+        console.error('Search failed', error);
         renderSearchState({
           listElement: list,
           liveRegion,
-          message: 'Search is temporarily unavailable.',
+          ...buildSearchFailureState(error),
         });
       });
       input.blur();
@@ -163,11 +183,12 @@ const initSearchPage = () => {
   input.value = initialQuery;
 
   if (isValidQuery(initialQuery)) {
-    runSearch().catch(() => {
+    runSearch().catch((error) => {
+      console.error('Search failed', error);
       renderSearchState({
         listElement: list,
         liveRegion,
-        message: 'Search is temporarily unavailable.',
+        ...buildSearchFailureState(error),
       });
     });
     return;
