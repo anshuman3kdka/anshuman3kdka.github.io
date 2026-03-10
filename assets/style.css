@@ -745,18 +745,39 @@ button:focus-visible {
 
 body.is-loading .page-shell {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transform: translateY(8px);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
 body.is-loaded .page-shell {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
 }
 
 body.is-leaving .page-shell {
   opacity: 0;
   transform: translateY(-8px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+/* Semantic navigation transitions (fallback remains body.is-leaving above). */
+body.is-transition-soft-zoom-in.is-leaving .page-shell {
+  opacity: 0;
+  transform: translate3d(0, -4px, 0) scale(1.02);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+body.is-transition-page-turn.is-leaving .page-shell {
+  opacity: 0;
+  transform: translate3d(-24px, 0, 0) rotate(-1.4deg);
+  transform-origin: 58% 50%;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+body.is-transition-dissolve-lift.is-leaving .page-shell {
+  opacity: 0;
+  transform: translate3d(0, -14px, 0) scale(0.99);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 
 

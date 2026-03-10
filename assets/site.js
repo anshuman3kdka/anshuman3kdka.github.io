@@ -2,6 +2,14 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 let pageTransitionListenerAttached = false;
 let scrollProgressHandlersBound = false;
+const NAV_TRANSITION_CLASS_PREFIX = 'is-transition-';
+const NAV_TRANSITION_STORAGE_KEY = 'nav-transition-preset';
+
+const TRANSITION_PRESETS = {
+  SOFT_ZOOM_IN: 'soft-zoom-in',
+  PAGE_TURN: 'page-turn',
+  DISSOLVE_LIFT: 'dissolve-lift',
+};
 
 const normalizePathname = (value) => {
   if (!value) return '/';
@@ -53,6 +61,109 @@ const highlightCurrentNavLink = () => {
 const resetNavigationState = () => {
   document.body.classList.remove("is-loading", "is-leaving");
   document.body.classList.add("is-loaded");
+};
+
+const clearTransitionPresetClasses = () => {
+  Object.values(TRANSITION_PRESETS).forEach((preset) => {
+    document.body.classList.remove(`${NAV_TRANSITION_CLASS_PREFIX}${preset}`);
+  });
+};
+
+const classifyRoute = (pathname) => {
+  const normalizedPath = normalizePathname(pathname);
+  if (normalizedPath === '/') return 'home';
+
+  const routePatterns = [
+    ['poetry', /^\/poetry(?:\/|$)/],
+    ['prose', /^\/prose(?:\/|$)/],
+    ['essays', /^\/essays(?:\/|$)/],
+    ['projects', /^\/projects(?:\/|$)/],
+    ['contact', /^\/contact(?:\/|$)/],
+  ];
+
+  const matchedCategory = routePatterns.find(([, pattern]) => pattern.test(normalizedPath));
+  return matchedCategory ? matchedCategory[0] : 'unknown';
+};
+
+const isPieceCategory = (category) => {
+  return category === 'poetry' || category === 'prose' || category === 'essays';
+};
+
+const resolveTransitionPreset = (fromPathname, toPathname) => {
+  const fromCategory = classifyRoute(fromPathname);
+  const toCategory = classifyRoute(toPathname);
+
+  if (fromCategory === 'home' && isPieceCategory(toCategory)) {
+    return TRANSITION_PRESETS.SOFT_ZOOM_IN;
+  }
+
+  if (isPieceCategory(fromCategory) && isPieceCategory(toCategory)) {
+    return TRANSITION_PRESETS.PAGE_TURN;
+  }
+
+  if (isPieceCategory(fromCategory) && toCategory === 'home') {
+    return TRANSITION_PRESETS.DISSOLVE_LIFT;
+  }
+
+  return null;
+};
+
+const applyTransitionPreset = (preset) => {
+  clearTransitionPresetClasses();
+  if (!preset) return;
+  document.body.classList.add(`${NAV_TRANSITION_CLASS_PREFIX}${preset}`);
+};
+
+const runNavigableTransition = (href) => {
+  const fallbackDurationMs = 180;
+
+  try {
+    const targetPathname = new URL(href, window.location.origin).pathname;
+    const transitionPreset = resolveTransitionPreset(window.location.pathname, targetPathname);
+    const transitionDurationMs = transitionPreset ? 220 : fallbackDurationMs;
+
+    applyTransitionPreset(transitionPreset);
+
+    if (transitionPreset) {
+      sessionStorage.setItem(NAV_TRANSITION_STORAGE_KEY, transitionPreset);
+    } else {
+      sessionStorage.removeItem(NAV_TRANSITION_STORAGE_KEY);
+    }
+
+    document.body.classList.add('is-leaving');
+    setTimeout(() => {
+      window.location.href = href;
+    }, transitionDurationMs);
+  } catch (error) {
+    // Strict fallback: keep the original simple transition behavior.
+    clearTransitionPresetClasses();
+    try {
+      sessionStorage.removeItem(NAV_TRANSITION_STORAGE_KEY);
+    } catch (_storageError) {
+      // No-op: storage can fail in private contexts.
+    }
+
+    document.body.classList.add('is-leaving');
+    setTimeout(() => {
+      window.location.href = href;
+    }, fallbackDurationMs);
+  }
+};
+
+const hydrateTransitionPresetFromStorage = () => {
+  try {
+    const savedPreset = sessionStorage.getItem(NAV_TRANSITION_STORAGE_KEY);
+    if (!savedPreset) return;
+
+    const isKnownPreset = Object.values(TRANSITION_PRESETS).includes(savedPreset);
+    if (isKnownPreset) {
+      applyTransitionPreset(savedPreset);
+    }
+
+    sessionStorage.removeItem(NAV_TRANSITION_STORAGE_KEY);
+  } catch (error) {
+    clearTransitionPresetClasses();
+  }
 };
 
 const resetTransientUiState = () => {
@@ -115,10 +226,7 @@ const handlePageTransitionClick = (event) => {
   if (!isNavigableDocumentLink(link, href)) return;
 
   event.preventDefault();
-  document.body.classList.add("is-leaving");
-  setTimeout(() => {
-    window.location.href = href;
-  }, 180);
+  runNavigableTransition(href);
 };
 
 const handlePageTransitions = () => {
@@ -346,10 +454,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
         statusElement.textContent = `Opening ${item.title || 'piece'}…`;
       }
 
-      document.body.classList.add('is-leaving');
-      setTimeout(() => {
-        window.location.href = item.url;
-      }, 180);
+      runNavigableTransition(item.url);
       return;
     }
 
@@ -450,6 +555,7 @@ const initRandomReadCard = () => {
 };
 
 const initPage = () => {
+  hydrateTransitionPresetFromStorage();
   resetNavigationState();
   resetTransientUiState();
   highlightCurrentNavLink();
@@ -469,5 +575,6 @@ document.addEventListener("pageshow", () => {
 });
 
 document.addEventListener("pagehide", () => {
+  clearTransitionPresetClasses();
   document.body.classList.remove("is-leaving", "is-loading");
 });
