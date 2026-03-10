@@ -1,4 +1,7 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const PAGE_TRANSITION_STORAGE_KEY = 'page-transition-direction';
+const PAGE_TRANSITION_DURATION_MS = prefersReducedMotion ? 0 : 180;
+const PAGE_ENTERING_CLEANUP_MS = prefersReducedMotion ? 0 : 120;
 
 let pageTransitionListenerAttached = false;
 let scrollProgressHandlersBound = false;
@@ -51,8 +54,41 @@ const highlightCurrentNavLink = () => {
 };
 
 const resetNavigationState = () => {
-  document.body.classList.remove("is-loading", "is-leaving");
+  document.body.classList.remove("is-loading", "is-leaving", "is-leaving-forward", "is-leaving-back");
   document.body.classList.add("is-loaded");
+};
+
+const applyEnteringDirection = () => {
+  const direction = sessionStorage.getItem(PAGE_TRANSITION_STORAGE_KEY);
+  sessionStorage.removeItem(PAGE_TRANSITION_STORAGE_KEY);
+
+  if (direction === 'back') {
+    document.body.classList.add('is-entering-back');
+    return;
+  }
+
+  if (direction === 'forward') {
+    document.body.classList.add('is-entering-forward');
+    return;
+  }
+
+  const navigationEntry = performance.getEntriesByType('navigation')[0];
+  if (navigationEntry?.type === 'back_forward') {
+    document.body.classList.add('is-entering-back');
+  } else {
+    document.body.classList.add('is-entering-forward');
+  }
+};
+
+const beginPageNavigation = ({ href, direction = 'forward' }) => {
+  if (!href) return;
+
+  document.body.classList.add('is-leaving', direction === 'back' ? 'is-leaving-back' : 'is-leaving-forward');
+  sessionStorage.setItem(PAGE_TRANSITION_STORAGE_KEY, direction);
+
+  setTimeout(() => {
+    window.location.href = href;
+  }, PAGE_TRANSITION_DURATION_MS);
 };
 
 const resetTransientUiState = () => {
@@ -115,17 +151,20 @@ const handlePageTransitionClick = (event) => {
   if (!isNavigableDocumentLink(link, href)) return;
 
   event.preventDefault();
-  document.body.classList.add("is-leaving");
-  setTimeout(() => {
-    window.location.href = href;
-  }, 180);
+  beginPageNavigation({ href, direction: 'forward' });
 };
 
 const handlePageTransitions = () => {
+  applyEnteringDirection();
+
   if (prefersReducedMotion) {
     resetNavigationState();
+    document.body.classList.remove('is-entering-forward', 'is-entering-back');
   } else {
     requestAnimationFrame(resetNavigationState);
+    setTimeout(() => {
+      document.body.classList.remove('is-entering-forward', 'is-entering-back');
+    }, PAGE_ENTERING_CLEANUP_MS);
   }
 
   if (!pageTransitionListenerAttached) {
@@ -346,10 +385,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
         statusElement.textContent = `Opening ${item.title || 'piece'}…`;
       }
 
-      document.body.classList.add('is-leaving');
-      setTimeout(() => {
-        window.location.href = item.url;
-      }, 180);
+      beginPageNavigation({ href: item.url, direction: 'forward' });
       return;
     }
 
@@ -469,5 +505,5 @@ document.addEventListener("pageshow", () => {
 });
 
 document.addEventListener("pagehide", () => {
-  document.body.classList.remove("is-leaving", "is-loading");
+  document.body.classList.remove("is-leaving", "is-loading", "is-leaving-forward", "is-leaving-back");
 });
