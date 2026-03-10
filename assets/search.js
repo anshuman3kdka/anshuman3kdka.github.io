@@ -8,41 +8,34 @@ const DEBOUNCE_MS = 120;
 
 const debounce = (fn, delay) => {
   let timer = null;
-  return (...args) => {
+
+  const debounced = (...args) => {
     window.clearTimeout(timer);
     timer = window.setTimeout(() => fn(...args), delay);
   };
+
+  debounced.cancel = () => {
+    window.clearTimeout(timer);
+    timer = null;
+  };
+
+  return debounced;
 };
 
-const readQueryFromUrl = () => {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('q') ?? '';
-};
-
-const updateUrlQuery = (rawValue) => {
-  const nextValue = rawValue.trim();
-  const url = new URL(window.location.href);
-
-  if (nextValue) {
-    url.searchParams.set('q', nextValue);
-  } else {
-    url.searchParams.delete('q');
-  }
-
-  history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
-};
-
-const isValidQuery = (value) => value.trim().length >= MIN_QUERY_LENGTH;
-
-const initResultKeyboardNavigation = (input, list) => {
+const initResultKeyboardNavigation = (input, list, { wrapAround = false } = {}) => {
   input.addEventListener('keydown', (event) => {
-    if (event.key !== 'ArrowDown') return;
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
 
     const links = list.querySelectorAll('.search-result-link');
     if (!links.length) return;
 
     event.preventDefault();
-    links[0].focus();
+    if (event.key === 'ArrowDown') {
+      links[0].focus();
+      return;
+    }
+
+    links[links.length - 1].focus();
   });
 
   list.addEventListener('keydown', (event) => {
@@ -54,14 +47,20 @@ const initResultKeyboardNavigation = (input, list) => {
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      const nextIndex = Math.min(currentIndex + 1, links.length - 1);
+      const nextIndex = wrapAround
+        ? (currentIndex + 1) % links.length
+        : Math.min(currentIndex + 1, links.length - 1);
       links[nextIndex].focus();
     }
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       if (currentIndex === 0) {
-        input.focus();
+        if (wrapAround) {
+          links[links.length - 1].focus();
+        } else {
+          input.focus();
+        }
       } else {
         links[currentIndex - 1].focus();
       }
@@ -79,6 +78,7 @@ const initSearchPage = () => {
   const list = document.querySelector('[data-search-results]');
   const liveRegion = document.querySelector('[data-search-live]');
   const form = document.querySelector('[data-search-form]');
+  const wrapResultNavigation = form?.dataset.searchWrapAround === 'true';
 
   if (!input || !list || !liveRegion) return;
 
@@ -123,7 +123,7 @@ const initSearchPage = () => {
     });
   };
 
-  const debouncedSearch = debounce(() => {
+  const performSearch = () => {
     runSearch().catch(() => {
       renderSearchState({
         listElement: list,
@@ -131,7 +131,9 @@ const initSearchPage = () => {
         message: 'Search is temporarily unavailable.',
       });
     });
-  }, DEBOUNCE_MS);
+  };
+
+  const debouncedSearch = debounce(performSearch, DEBOUNCE_MS);
 
   input.addEventListener('focus', () => {
     ensureLoaded().catch(() => {
@@ -139,15 +141,20 @@ const initSearchPage = () => {
     });
   }, { once: true });
 
-  input.addEventListener('input', () => {
-    updateUrlQuery(input.value);
-    debouncedSearch();
-  });
-  initResultKeyboardNavigation(input, list);
+  input.addEventListener('input', debouncedSearch);
+  initResultKeyboardNavigation(input, list, { wrapAround: wrapResultNavigation });
 
   if (form) {
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      debouncedSearch.cancel();
+      await runSearch().catch(() => {
+        renderSearchState({
+          listElement: list,
+          liveRegion,
+          message: 'Search is temporarily unavailable.',
+        });
+      });
       input.blur();
     });
   }
