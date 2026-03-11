@@ -9,6 +9,8 @@ on:
       - '**/*.html'
       - 'scripts/generate-random-read-index.mjs'
       - 'scripts/generate-search-index.mjs'
+      - 'scripts/generate-hero-quotes.py'
+      - 'assets/uploads/hero-quotes.pdf'
       - 'package.json'
       - '.github/workflows/auto-update-search-index.yml'
   workflow_dispatch:
@@ -38,7 +40,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add random-read.json search-index.json
+          git add random-read.json search-index.json _data/hero_quotes.json
           if git diff --cached --quiet; then
             echo "No generated index changes to commit."
             exit 0
