@@ -69,19 +69,20 @@ const clearTransitionPresetClasses = () => {
   });
 };
 
+const ROUTE_PATTERNS = [
+  ['poetry', /^\/poetry(?:\/|$)/],
+  ['prose', /^\/prose(?:\/|$)/],
+  ['essays', /^\/essays(?:\/|$)/],
+  ['projects', /^\/projects(?:\/|$)/],
+  ['contact', /^\/contact(?:\/|$)/],
+];
+
 const classifyRoute = (pathname) => {
   const normalizedPath = normalizePathname(pathname);
   if (normalizedPath === '/') return 'home';
 
-  const routePatterns = [
-    ['poetry', /^\/poetry(?:\/|$)/],
-    ['prose', /^\/prose(?:\/|$)/],
-    ['essays', /^\/essays(?:\/|$)/],
-    ['projects', /^\/projects(?:\/|$)/],
-    ['contact', /^\/contact(?:\/|$)/],
-  ];
-
-  const matchedCategory = routePatterns.find(([, pattern]) => pattern.test(normalizedPath));
+  // ⚡ Bolt: Reused ROUTE_PATTERNS array to prevent allocating regex objects and arrays on every navigation
+  const matchedCategory = ROUTE_PATTERNS.find(([, pattern]) => pattern.test(normalizedPath));
   return matchedCategory ? matchedCategory[0] : 'unknown';
 };
 
@@ -281,7 +282,7 @@ const initScrollProgress = () => {
     // ⚡ Bolt: Use requestAnimationFrame to throttle high-frequency scroll and resize
     // events, preventing layout thrashing and main-thread blocking.
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
     scrollProgressHandlersBound = true;
   }
 };
