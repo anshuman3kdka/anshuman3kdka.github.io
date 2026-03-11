@@ -3,9 +3,12 @@ title: Poetry
 description: Read all the latest poetic endeavours of Anshuman3kdka
 ---
 <section class="section">
+  {% assign current_time = 'now' | date: '%s' %}
   {% assign poems = site.pages
     | where_exp: "page", "page.path contains 'poetry/'"
     | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "title" %}
 
   {% if poems.size > 0 %}

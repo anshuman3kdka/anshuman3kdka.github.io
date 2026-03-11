@@ -32,6 +32,17 @@ content:
         label: Featured Image (optional)
         type: image
         required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
+        required: false
       - name: body
         label: Poem
         type: markdown
@@ -63,6 +74,17 @@ content:
       - name: featured_image
         label: Featured Image (optional)
         type: image
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
         required: false
       - name: body
         label: Prose
@@ -96,6 +118,17 @@ content:
         label: Featured Image (optional)
         type: image
         required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
+        required: false
       - name: body
         label: Essay
         type: markdown
@@ -123,6 +156,17 @@ content:
       - name: image
         label: Project Image (optional)
         type: image
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
         required: false
       - name: body
         label: Description
@@ -152,6 +196,17 @@ content:
         label: Image (optional)
         type: image
         required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
+        required: false
       - name: body
         label: Details
         type: markdown
@@ -175,6 +230,17 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
         required: false
       - name: certificate_list
         label: Certificates

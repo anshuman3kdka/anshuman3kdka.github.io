@@ -125,6 +125,15 @@
 
             {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
             {% assign intro_featured_image = page.featured_image | default: page.image %}
+            {% assign current_time = 'now' | date: '%s' %}
+            {% assign page_publish_time = page.publish_date | date: '%s' %}
+            {% assign is_published_piece = true %}
+            {% if is_piece_page and page.draft == true %}
+              {% assign is_published_piece = false %}
+            {% endif %}
+            {% if is_piece_page and page.publish_date and page.publish_date != '' and page_publish_time > current_time %}
+              {% assign is_published_piece = false %}
+            {% endif %}
 
             {% if show_page_intro and is_piece_page == false %}
             <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class }}{% endif %}">
@@ -137,7 +146,7 @@
             </header>
             {% endif %}
 
-            {% if is_piece_page %}
+            {% if is_piece_page and is_published_piece %}
             <header class="piece-detail-header section">
               <h1 class="piece-detail-title">{{ intro_title }}</h1>
               {% if intro_featured_image %}
@@ -148,7 +157,7 @@
             </header>
             {% endif %}
 
-            {% if is_piece_page %}
+            {% if is_piece_page and is_published_piece %}
             <article class="piece-detail">
               {{ content }}
 
@@ -179,6 +188,12 @@
                 </div>
               {% endif %}
             </article>
+            {% elsif is_piece_page %}
+            <section class="section">
+              <div class="card">
+                <p class="card-text">This entry is not published yet.</p>
+              </div>
+            </section>
             {% else %}
               {{ content }}
             {% endif %}
