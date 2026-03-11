@@ -2,6 +2,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 let pageTransitionListenerAttached = false;
 let scrollProgressHandlersBound = false;
+let quoteRotatorTimeoutId = null;
 const NAV_TRANSITION_CLASS_PREFIX = 'is-transition-';
 const NAV_TRANSITION_STORAGE_KEY = 'nav-transition-preset';
 
@@ -563,6 +564,7 @@ const initPage = () => {
   initScrollProgress();
   initRandomReadCard();
   initRandomReadButton();
+  initQuoteRotator();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
