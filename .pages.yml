@@ -445,6 +445,22 @@ content:
             type: text
             required: true
 
+  - name: home_quote_rotator
+    label: Home Quote Rotator
+    path: _data/home_quote_rotator.yml
+    type: file
+    fields:
+      - name: enabled
+        label: Enable quote rotator
+        type: boolean
+        required: false
+      - name: quotes
+        label: Quotes
+        type: text
+        list: true
+        addLabel: "Add Item"
+        required: false
+
   - name: site_settings
     label: Site Settings
     path: _data/site.yml
