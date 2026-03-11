@@ -12,7 +12,8 @@ The homepage hero can rotate one-line quotes without manually editing code each 
 
 ### Non-technical update workflow
 
-1. Replace the PDF file at: `assets/uploads/hero-quotes.pdf`
+1. Upload/replace your PDF at: `assets/uploads/hero-quotes.pdf`
+   - If that exact filename is not used, the generator also accepts `hero_quotes.pdf` or a single `.pdf` file inside `assets/uploads/`.
 2. Run publish/build (or run `npm run build` locally).
 3. The site automatically extracts lines from the PDF and updates hero quotes.
 
@@ -22,7 +23,7 @@ The quote extractor script is:
 
 What it does automatically:
 
-- reads the fixed PDF path (`assets/uploads/hero-quotes.pdf`)
+- reads `assets/uploads/hero-quotes.pdf` (with safe fallback to common CMS naming variants)
 - trims each extracted line
 - removes empty lines
 - removes duplicates
