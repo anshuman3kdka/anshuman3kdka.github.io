@@ -11,6 +11,7 @@ on:
       - 'scripts/generate-search-index.mjs'
       - 'scripts/generate-hero-quotes.py'
       - 'assets/uploads/hero-quotes.pdf'
+      - 'assets/uploads/quotes/*.pdf'
       - 'package.json'
       - '.github/workflows/auto-update-search-index.yml'
   workflow_dispatch:

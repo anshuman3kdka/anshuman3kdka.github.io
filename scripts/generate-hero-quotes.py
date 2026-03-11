@@ -5,7 +5,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path.cwd()
-PDF_PATH = ROOT / "assets" / "uploads" / "hero-quotes.pdf"
+UPLOADS_DIR = ROOT / "assets" / "uploads"
+QUOTES_UPLOADS_DIR = UPLOADS_DIR / "quotes"
+PRIMARY_PDF_PATH = QUOTES_UPLOADS_DIR / "hero-quotes.pdf"
 OUTPUT_PATH = ROOT / "_data" / "hero_quotes.json"
 
 
@@ -62,9 +64,42 @@ def read_pdf_text_with_pdftotext(pdf_path: Path) -> str:
     return result.stdout or ""
 
 
-def write_output(quotes: list[str], source_found: bool) -> None:
+def resolve_pdf_path() -> Path | None:
+    if PRIMARY_PDF_PATH.exists():
+        return PRIMARY_PDF_PATH
+
+    # Backward-compatibility: older location before quotes subfolder was introduced.
+    legacy_primary_pdf = UPLOADS_DIR / "hero-quotes.pdf"
+    if legacy_primary_pdf.exists():
+        return legacy_primary_pdf
+
+    if not UPLOADS_DIR.exists():
+        return None
+
+    # Common alternate names from CMS/manual uploads.
+    preferred_variants = ["hero_quotes.pdf", "Hero-Quotes.pdf", "Hero_Quotes.pdf"]
+    candidate_dirs = [folder for folder in [QUOTES_UPLOADS_DIR, UPLOADS_DIR] if folder.exists()]
+    all_pdfs = []
+    for folder in candidate_dirs:
+        all_pdfs.extend(
+            sorted(path for path in folder.iterdir() if path.is_file() and path.suffix.lower() == ".pdf")
+        )
+
+    for variant in preferred_variants:
+        for folder in candidate_dirs:
+            candidate = folder / variant
+            if candidate in all_pdfs:
+                return candidate
+
+    if len(all_pdfs) == 1:
+        return all_pdfs[0]
+
+    return None
+
+
+def write_output(quotes: list[str], source_found: bool, source_pdf: str = "assets/uploads/quotes/hero-quotes.pdf") -> None:
     payload = {
-        "source_pdf": "assets/uploads/hero-quotes.pdf",
+        "source_pdf": source_pdf,
         "source_found": source_found,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "quotes": quotes,
@@ -75,23 +110,33 @@ def write_output(quotes: list[str], source_found: bool) -> None:
 
 
 def main() -> int:
-    if not PDF_PATH.exists():
+    pdf_path = resolve_pdf_path()
+
+    if not pdf_path:
         write_output([], False)
-        print("No hero quote PDF found. Wrote empty _data/hero_quotes.json.")
+        print(
+            "No quote PDF found. Add assets/uploads/quotes/hero-quotes.pdf "
+            "(or a single PDF in assets/uploads/quotes) and rerun."
+        )
         return 0
 
-    raw_text = read_pdf_text_with_pypdf(PDF_PATH)
+    source_pdf = str(pdf_path.relative_to(ROOT)).replace("\\", "/")
+
+    raw_text = read_pdf_text_with_pypdf(pdf_path)
     if not raw_text:
-        raw_text = read_pdf_text_with_pdftotext(PDF_PATH)
+        raw_text = read_pdf_text_with_pdftotext(pdf_path)
 
     if not raw_text:
-        write_output([], True)
-        print("Could not extract text from hero quote PDF. Wrote empty quote list.")
+        write_output([], True, source_pdf)
+        print(
+            f"Found {source_pdf} but could not extract text. "
+            "Install pypdf or pdftotext in your environment and rerun."
+        )
         return 0
 
     quotes = extract_quotes(raw_text)
-    write_output(quotes, True)
-    print(f"Generated {len(quotes)} hero quotes from assets/uploads/hero-quotes.pdf.")
+    write_output(quotes, True, source_pdf)
+    print(f"Generated {len(quotes)} hero quotes from {source_pdf}.")
     return 0
 
 
