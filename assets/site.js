@@ -587,7 +587,7 @@ const initQuoteRotator = () => {
     return;
   }
 
-  if (quotes.length <= 1) return;
+  if (!quotes.length) return;
 
   if (quoteRotatorTimeoutId) {
     window.clearTimeout(quoteRotatorTimeoutId);
@@ -596,7 +596,10 @@ const initQuoteRotator = () => {
 
   const displayDurationMs = Number.parseInt(rotator.dataset.quoteInterval || '5000', 10) || 5000;
   const fadeDurationMs = Number.parseInt(rotator.dataset.quoteFadeMs || '600', 10) || 600;
-  let currentIndex = 0;
+  let currentIndex = Math.floor(Math.random() * quotes.length);
+  quoteTextElement.textContent = quotes[currentIndex];
+
+  if (quotes.length === 1) return;
 
   const transitionQuote = () => {
     rotator.classList.add('is-fading');
