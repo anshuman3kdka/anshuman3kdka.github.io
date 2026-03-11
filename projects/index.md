@@ -5,9 +5,12 @@ description: Build trust fast by browsing hands-on projects that show how I turn
 ---
 
 <section class="section section--tight">
+  {% assign current_time = 'now' | date: '%s' %}
   {% assign project_items = site.pages
     | where_exp: "page", "page.path contains 'projects/'"
     | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "title" %}
 
   {% if project_items.size > 0 %}

@@ -4,9 +4,12 @@ description: Explore clear, thought-provoking essays where ideas are unpacked wi
 ---
 
 <section class="section">
+  {% assign current_time = 'now' | date: '%s' %}
   {% assign essay_items = site.pages
     | where_exp: "page", "page.path contains 'essays/'"
     | where_exp: "page", "page.url != '/essays/'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "title" %}
 
   {% if essay_items.size > 0 %}
