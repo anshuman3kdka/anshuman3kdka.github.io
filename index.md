@@ -9,7 +9,8 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
     {% assign quote_rotator = site.data.home_quote_rotator %}
-    {% if quote_rotator.enabled and quote_rotator.quotes and quote_rotator.quotes.size > 0 %}
+    {% assign quote_rotator_enabled = quote_rotator.enabled | append: '' | downcase %}
+    {% if quote_rotator_enabled == 'true' and quote_rotator.quotes and quote_rotator.quotes.size > 0 %}
     <div class="hero-quote-rotator" data-quote-rotator data-quote-interval="5000" data-quote-fade-ms="600" aria-live="polite">
       <p class="hero-quote-rotator-text" data-quote-rotator-text>
         {{ quote_rotator.quotes | first | strip }}
