@@ -555,66 +555,6 @@ const initRandomReadCard = () => {
   renderRandomItem();
 };
 
-const pickRandomQuoteIndex = (quotes, previousIndex) => {
-  if (!Array.isArray(quotes) || quotes.length === 0) return -1;
-  if (quotes.length === 1) return 0;
-
-  let nextIndex = previousIndex;
-  while (nextIndex === previousIndex) {
-    nextIndex = Math.floor(Math.random() * quotes.length);
-  }
-
-  return nextIndex;
-};
-
-const initQuoteRotator = () => {
-  const rotator = document.querySelector('[data-quote-rotator]');
-  if (!rotator) return;
-
-  const quoteTextElement = rotator.querySelector('[data-quote-rotator-text]');
-  const quoteDataElement = rotator.querySelector('[data-quote-rotator-items]');
-  if (!quoteTextElement || !quoteDataElement) return;
-
-  let quotes = [];
-
-  try {
-    const parsed = JSON.parse(quoteDataElement.textContent || '[]');
-    quotes = parsed
-      .map((quote) => String(quote || '').trim())
-      .filter((quote) => quote.length > 0);
-  } catch (error) {
-    console.error('Quote rotator data error:', error);
-    return;
-  }
-
-  if (quotes.length <= 1) return;
-
-  if (quoteRotatorTimeoutId) {
-    window.clearTimeout(quoteRotatorTimeoutId);
-    quoteRotatorTimeoutId = null;
-  }
-
-  const displayDurationMs = Number.parseInt(rotator.dataset.quoteInterval || '5000', 10) || 5000;
-  const fadeDurationMs = Number.parseInt(rotator.dataset.quoteFadeMs || '600', 10) || 600;
-  let currentIndex = 0;
-
-  const transitionQuote = () => {
-    rotator.classList.add('is-fading');
-
-    window.setTimeout(() => {
-      const nextIndex = pickRandomQuoteIndex(quotes, currentIndex);
-      if (nextIndex < 0) return;
-
-      currentIndex = nextIndex;
-      quoteTextElement.textContent = quotes[currentIndex];
-      rotator.classList.remove('is-fading');
-      quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
-    }, fadeDurationMs);
-  };
-
-  quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
-};
-
 const initPage = () => {
   hydrateTransitionPresetFromStorage();
   resetNavigationState();
