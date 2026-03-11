@@ -8,6 +8,10 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
+    <div class="hero-quote-mist" data-quote-rotator data-quote-interval="5000" data-quote-fallback="Words are loading into the mist.">
+      <p class="hero-quote-mist-text" data-quote-text aria-live="polite" aria-atomic="true">{{ site.data.hero_quotes.quotes | first | default: "Words are loading into the mist." }}</p>
+      <script type="application/json" data-quote-source>{{ site.data.hero_quotes.quotes | default: empty | jsonify }}</script>
+    </div>
     <div class="hero-actions">
       <a class="button button-primary" href="/essays/">Essays <span aria-hidden="true">→</span></a>
       <a class="button button-secondary" href="/projects/">Projects <span aria-hidden="true">→</span></a>
