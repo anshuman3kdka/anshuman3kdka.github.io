@@ -406,13 +406,6 @@ button:focus-visible {
   background: linear-gradient(180deg, rgba(240, 236, 223, 0.05), rgba(240, 236, 223, 0.02));
 }
 
-.hero-quote-mist-label {
-  margin: 0 0 var(--space-2);
-  font-size: var(--step--1);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-sage);
-}
 
 .hero-quote-mist-text {
   margin: 0;

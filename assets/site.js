@@ -563,7 +563,7 @@ const initHeroQuoteRotator = () => {
   if (!quoteText || !quoteSource) return;
 
   const fallbackText = String(rotator.getAttribute('data-quote-fallback') || 'Words are loading into the mist.').trim();
-  const intervalMs = Math.max(1000, Number.parseInt(rotator.getAttribute('data-quote-interval') || '7000', 10) || 7000);
+  const intervalMs = Math.max(1000, Number.parseInt(rotator.getAttribute('data-quote-interval') || '5000', 10) || 5000);
 
   let parsedQuotes = [];
   try {
@@ -577,13 +577,18 @@ const initHeroQuoteRotator = () => {
     .map((item) => String(item || '').trim())
     .filter(Boolean);
 
+  const withDoubleQuotes = (value) => {
+    const raw = String(value || '').trim().replace(/^"+|"+$/g, '');
+    return raw ? `"${raw}"` : '""';
+  };
+
   if (!quotes.length) {
-    quoteText.textContent = fallbackText;
+    quoteText.textContent = withDoubleQuotes(fallbackText);
     return;
   }
 
   let activeIndex = Math.floor(Math.random() * quotes.length);
-  quoteText.textContent = quotes[activeIndex];
+  quoteText.textContent = withDoubleQuotes(quotes[activeIndex]);
 
   if (prefersReducedMotion || quotes.length < 2) return;
 
@@ -592,7 +597,7 @@ const initHeroQuoteRotator = () => {
     quoteText.classList.add('is-fading');
 
     window.setTimeout(() => {
-      quoteText.textContent = quotes[nextIndex];
+      quoteText.textContent = withDoubleQuotes(quotes[nextIndex]);
       quoteText.classList.remove('is-fading');
       activeIndex = nextIndex;
     }, 210);
