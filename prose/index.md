@@ -13,8 +13,8 @@ description: Step into short fiction and narrative experiments crafted to entert
   <div class="content-list">
     {% for prose in prose_items %}
     <article class="content-item">
-      {% if prose.eyebrow %}<p class="content-eyebrow">{{ prose.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ prose.url }}">{{ prose.title }}</a></h3>
+      {% if prose.eyebrow %}<p class="content-eyebrow">{{ prose.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ prose.url | escape }}">{{ prose.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>

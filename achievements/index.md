@@ -13,8 +13,8 @@ description: See milestones, recognitions, and progress snapshots that reflect c
   <div class="content-list">
     {% for achievement in achievement_items %}
     <article class="content-item">
-      {% if achievement.eyebrow %}<p class="content-eyebrow">{{ achievement.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ achievement.url }}">{{ achievement.title }}</a></h3>
+      {% if achievement.eyebrow %}<p class="content-eyebrow">{{ achievement.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ achievement.url | escape }}">{{ achievement.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>
