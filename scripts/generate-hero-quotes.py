@@ -18,19 +18,39 @@ def normalize_line(line: str) -> str:
 def extract_quotes(raw_text: str) -> list[str]:
     seen = set()
     quotes = []
+    buffer = []
+
+    def flush_buffer() -> None:
+        if not buffer:
+            return
+
+        candidate = normalize_line(" ".join(buffer))
+        buffer.clear()
+
+        if not candidate:
+            return
+
+        key = candidate.lower()
+        if key in seen:
+            return
+
+        seen.add(key)
+        quotes.append(candidate)
 
     for raw_line in (raw_text or "").splitlines():
         line = normalize_line(raw_line)
         if not line:
+            flush_buffer()
             continue
 
-        key = line.lower()
-        if key in seen:
-            continue
+        buffer.append(line)
 
-        seen.add(key)
-        quotes.append(line)
+        # PDF extraction often wraps long lines mid-sentence. Keep appending lines
+        # until we reach normal sentence-ending punctuation.
+        if line.endswith((".", "!", "?", "…", "\"", "'")):
+            flush_buffer()
 
+    flush_buffer()
     return quotes
 
 
