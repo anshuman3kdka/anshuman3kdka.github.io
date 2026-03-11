@@ -573,8 +573,35 @@ const initHeroQuoteRotator = () => {
     parsedQuotes = [];
   }
 
-  const quotes = parsedQuotes
-    .map((item) => String(item || '').trim())
+  const stitchBrokenQuoteLines = (items) => {
+    const stitched = [];
+    let buffer = [];
+
+    const flush = () => {
+      if (!buffer.length) return;
+      const combined = buffer.join(' ').trim().replace(/\s+/g, ' ');
+      buffer = [];
+      if (combined) stitched.push(combined);
+    };
+
+    items.forEach((item) => {
+      const line = String(item || '').trim();
+      if (!line) {
+        flush();
+        return;
+      }
+
+      buffer.push(line);
+      if (/[.!?…]["']?$/.test(line)) {
+        flush();
+      }
+    });
+
+    flush();
+    return stitched;
+  };
+
+  const quotes = stitchBrokenQuoteLines(parsedQuotes)
     .filter(Boolean);
 
   const withDoubleQuotes = (value) => {
