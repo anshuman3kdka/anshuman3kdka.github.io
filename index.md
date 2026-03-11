@@ -10,7 +10,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
     <div class="hero-quote-mist" data-quote-rotator data-quote-interval="7000" data-quote-fallback="Words are loading into the mist.">
       <p class="hero-quote-mist-label">Living quote mist</p>
-      <p class="hero-quote-mist-text" data-quote-text aria-live="polite" aria-atomic="true">{{ site.data.hero_quotes.quotes | first | default: "Words are loading into the mist." }}</p>
+      <p class="hero-quote-mist-text" data-quote-text aria-live="polite" aria-atomic="true">{{ site.data.hero_quotes.quotes | first | default: "Words are loading into the mist." | escape }}</p>
       <script type="application/json" data-quote-source>{{ site.data.hero_quotes.quotes | default: empty | jsonify }}</script>
     </div>
     <div class="hero-actions">
@@ -45,14 +45,14 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     {% if homepage_cards and homepage_cards.size > 0 %}
       {% for card in homepage_cards %}
       <article class="card">
-        <p class="card-label">{{ card.type }}</p>
-        <h3 class="card-title">{{ card.title }}</h3>
-        <p class="card-text">{{ card.description }}</p>
+        <p class="card-label">{{ card.type | escape }}</p>
+        <h3 class="card-title">{{ card.title | escape }}</h3>
+        <p class="card-text">{{ card.description | escape }}</p>
         {% assign card_href = card.link_url | default: '#' %}
         {% if card_href contains '://' or card_href contains 'mailto:' or card_href contains 'tel:' or card_href contains '#' %}
-        <a class="card-link" href="{{ card_href }}">{{ card.link_text }}</a>
+        <a class="card-link" href="{{ card_href | escape }}">{{ card.link_text | escape }}</a>
         {% else %}
-        <a class="card-link" href="{{ card_href | relative_url }}">{{ card.link_text }}</a>
+        <a class="card-link" href="{{ card_href | relative_url | escape }}">{{ card.link_text | escape }}</a>
         {% endif %}
       </article>
       {% endfor %}
