@@ -4,6 +4,37 @@ This repository hosts a static writing portfolio with two generated indexes:
 
 - `random-read.json` for the random-read button/card.
 - `search-index.json` for the dedicated `/search/` page.
+- `_data/hero_quotes.json` for the homepage "Living quote mist" rotator.
+
+## Homepage "Living quote mist" (PDF-powered quotes)
+
+The homepage hero can rotate one-line quotes without manually editing code each time.
+
+### Non-technical update workflow
+
+1. Upload/replace your PDF at: `assets/uploads/quotes/hero-quotes.pdf`
+   - A helper folder now exists at `assets/uploads/quotes/` so it is obvious where to upload.
+   - Backward compatibility still supports older locations/names, but the folder above is now the primary path.
+2. Run publish/build (or run `npm run build` locally).
+3. The site automatically extracts lines from the PDF and updates hero quotes.
+
+The quote extractor script is:
+
+- `scripts/generate-hero-quotes.py`
+
+What it does automatically:
+
+- reads `assets/uploads/quotes/hero-quotes.pdf` (with safe fallback to older paths and common naming variants)
+- trims each extracted line
+- removes empty lines
+- removes duplicates
+- writes the final list to `_data/hero_quotes.json`
+
+Run only the quote generation step with:
+
+```bash
+npm run generate:hero-quotes
+```
 
 ## Search system (new page-first UX)
 

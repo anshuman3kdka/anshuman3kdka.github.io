@@ -554,6 +554,51 @@ const initRandomReadCard = () => {
   renderRandomItem();
 };
 
+const initHeroQuoteRotator = () => {
+  const rotator = document.querySelector('[data-quote-rotator]');
+  if (!rotator) return;
+
+  const quoteText = rotator.querySelector('[data-quote-text]');
+  const quoteSource = rotator.querySelector('[data-quote-source]');
+  if (!quoteText || !quoteSource) return;
+
+  const fallbackText = String(rotator.getAttribute('data-quote-fallback') || 'Words are loading into the mist.').trim();
+  const intervalMs = Math.max(1000, Number.parseInt(rotator.getAttribute('data-quote-interval') || '7000', 10) || 7000);
+
+  let parsedQuotes = [];
+  try {
+    const raw = JSON.parse(quoteSource.textContent || '[]');
+    parsedQuotes = Array.isArray(raw) ? raw : [];
+  } catch (_error) {
+    parsedQuotes = [];
+  }
+
+  const quotes = parsedQuotes
+    .map((item) => String(item || '').trim())
+    .filter(Boolean);
+
+  if (!quotes.length) {
+    quoteText.textContent = fallbackText;
+    return;
+  }
+
+  let activeIndex = Math.floor(Math.random() * quotes.length);
+  quoteText.textContent = quotes[activeIndex];
+
+  if (prefersReducedMotion || quotes.length < 2) return;
+
+  window.setInterval(() => {
+    const nextIndex = (activeIndex + 1) % quotes.length;
+    quoteText.classList.add('is-fading');
+
+    window.setTimeout(() => {
+      quoteText.textContent = quotes[nextIndex];
+      quoteText.classList.remove('is-fading');
+      activeIndex = nextIndex;
+    }, 210);
+  }, intervalMs);
+};
+
 const initPage = () => {
   hydrateTransitionPresetFromStorage();
   resetNavigationState();
@@ -561,6 +606,7 @@ const initPage = () => {
   highlightCurrentNavLink();
   handlePageTransitions();
   initScrollProgress();
+  initHeroQuoteRotator();
   initRandomReadCard();
   initRandomReadButton();
 };
