@@ -183,6 +183,7 @@ The CMS now includes broad editing coverage for content + site chrome:
 4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
 5. **Home page cards:** `_data/home_cards.yml` provides repeatable cards with type, title, description, link text, and link URL fields.
 6. **Featured cards section copy:** site settings now include editable eyebrow, title, and subtitle text for the homepage featured cards area.
+7. **Home quote rotator:** `_data/home_quote_rotator.yml` provides an `enabled` toggle plus a repeatable quote list ("Add Item") used by the homepage fade-rotating quote card.
 
 These are wired into the live layout:
 
