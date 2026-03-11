@@ -15,8 +15,8 @@ The homepage hero can rotate one-line quotes without manually editing code each 
 1. Upload/replace your PDF at: `assets/uploads/quotes/hero-quotes.pdf`
    - A helper folder now exists at `assets/uploads/quotes/` so it is obvious where to upload.
    - Backward compatibility still supports older locations/names, but the folder above is now the primary path.
-2. Run publish/build (or run `npm run build` locally).
-3. The site automatically extracts lines from the PDF and updates hero quotes.
+2. Just save/publish your change from phone (no terminal needed).
+3. GitHub Actions runs automatically, extracts lines from the PDF, and updates hero quotes for you.
 
 The quote extractor script is:
 
@@ -29,6 +29,17 @@ What it does automatically:
 - removes empty lines
 - removes duplicates
 - writes the final list to `_data/hero_quotes.json`
+
+
+
+### Phone-friendly workflow (no terminal)
+
+If you edit/upload from your phone:
+
+1. Upload `hero-quotes.pdf` into `assets/uploads/quotes/`.
+2. Commit/publish that change to `main`.
+3. Wait ~1–2 minutes for the **Auto-update generated indexes** GitHub Action to finish.
+4. Your homepage quotes update automatically after deploy.
 
 Run only the quote generation step with:
 
