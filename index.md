@@ -43,28 +43,65 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
   <div class="page-intro page-intro--hero">
     <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
     <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
-    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Manage these cards in Pages CMS under Home Page Cards." }}</p>
+    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Mark projects, essays, and poems as featured in Pages CMS to show them here." }}</p>
   </div>
+
+  {% assign current_time = 'now' | date: '%s' %}
+  {% assign featured_projects = site.pages
+    | where_exp: "page", "page.path contains 'projects/'"
+    | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.featured == true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
+    | sort: "featured_rank" %}
+  {% assign featured_essays = site.pages
+    | where_exp: "page", "page.path contains 'essays/'"
+    | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.featured == true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
+    | sort: "featured_rank" %}
+  {% assign featured_poetry = site.pages
+    | where_exp: "page", "page.path contains 'poetry/'"
+    | where_exp: "page", "page.name != 'index.md'"
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.featured == true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
+    | sort: "featured_rank" %}
+
+  {% assign featured_count = featured_projects.size | plus: featured_essays.size | plus: featured_poetry.size %}
+  {% if featured_count > 0 %}
   <div class="grid grid-2">
-    {% assign homepage_cards = site.data.home_cards.cards %}
-    {% if homepage_cards and homepage_cards.size > 0 %}
-      {% for card in homepage_cards %}
-      <article class="card">
-        <p class="card-label">{{ card.type }}</p>
-        <h3 class="card-title">{{ card.title }}</h3>
-        <p class="card-text">{{ card.description }}</p>
-        {% assign card_href = card.link_url | default: '#' %}
-        {% if card_href contains '://' or card_href contains 'mailto:' or card_href contains 'tel:' or card_href contains '#' %}
-        <a class="card-link" href="{{ card_href }}">{{ card.link_text }}</a>
-        {% else %}
-        <a class="card-link" href="{{ card_href | relative_url }}">{{ card.link_text }}</a>
-        {% endif %}
-      </article>
-      {% endfor %}
-    {% else %}
-      <article class="card">
-        <p class="card-text">Add your first card in Pages CMS under Home Page Cards.</p>
-      </article>
-    {% endif %}
+    {% for project in featured_projects limit: 2 %}
+    <article class="card">
+      <p class="card-label">Project</p>
+      <h3 class="card-title">{{ project.title }}</h3>
+      {% if project.description %}<p class="card-text">{{ project.description }}</p>{% endif %}
+      <a class="card-link" href="{{ project.url | relative_url }}">Read more</a>
+    </article>
+    {% endfor %}
+
+    {% for essay in featured_essays limit: 2 %}
+    <article class="card">
+      <p class="card-label">Essay</p>
+      <h3 class="card-title">{{ essay.title }}</h3>
+      {% if essay.description %}<p class="card-text">{{ essay.description }}</p>{% endif %}
+      <a class="card-link" href="{{ essay.url | relative_url }}">Read more</a>
+    </article>
+    {% endfor %}
+
+    {% for poem in featured_poetry limit: 2 %}
+    <article class="card">
+      <p class="card-label">Poem</p>
+      <h3 class="card-title">{{ poem.title }}</h3>
+      {% if poem.description %}<p class="card-text">{{ poem.description }}</p>{% endif %}
+      <a class="card-link" href="{{ poem.url | relative_url }}">Read more</a>
+    </article>
+    {% endfor %}
   </div>
+  {% else %}
+  <div class="card">
+    <p class="card-text">No featured pieces yet. Mark projects, essays, or poems as featured in Pages CMS.</p>
+  </div>
+  {% endif %}
 </section>
