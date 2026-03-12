@@ -36,6 +36,14 @@ content:
         label: Draft
         type: boolean
         default: true
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: featured_rank
+        label: Featured order (lower shows first)
+        type: text
+        required: false
       - name: publish_date
         label: Publish Date (optional)
         type: date
@@ -79,6 +87,14 @@ content:
         label: Draft
         type: boolean
         default: true
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: featured_rank
+        label: Featured order (lower shows first)
+        type: text
+        required: false
       - name: publish_date
         label: Publish Date (optional)
         type: date
@@ -122,6 +138,14 @@ content:
         label: Draft
         type: boolean
         default: true
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: featured_rank
+        label: Featured order (lower shows first)
+        type: text
+        required: false
       - name: publish_date
         label: Publish Date (optional)
         type: date
@@ -161,6 +185,14 @@ content:
         label: Draft
         type: boolean
         default: true
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: featured_rank
+        label: Featured order (lower shows first)
+        type: text
+        required: false
       - name: publish_date
         label: Publish Date (optional)
         type: date

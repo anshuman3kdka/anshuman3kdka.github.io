@@ -9,12 +9,19 @@ description: Explore clear, thought-provoking essays where ideas are unpacked wi
     | where_exp: "page", "page.path contains 'essays/'"
     | where_exp: "page", "page.url != '/essays/'"
     | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
-    | sort: "title" %}
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time" %}
+  {% assign featured_essays = essay_items | where: "featured", true | sort: "featured_rank" %}
+  {% assign regular_essays = essay_items | where_exp: "page", "page.featured != true" | sort: "title" %}
 
   {% if essay_items.size > 0 %}
   <div class="content-list">
-    {% for essay in essay_items %}
+    {% for essay in featured_essays %}
+    <article class="content-item">
+      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
+      <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
+    </article>
+    {% endfor %}
+    {% for essay in regular_essays %}
     <article class="content-item">
       {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
       <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
