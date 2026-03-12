@@ -1,0 +1,24 @@
+npm warn exec The following package was not found and will be installed: serve@14.2.6
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /test-cert.html
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 301 in 280 ms
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /test-cert
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 200 in 15 ms
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /%7B%7B%20'/assets/style.css'%20%7C%20relative_url%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /%7B%7B%20intro_featured_image%20%7C%20relative_url%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /%7B%7B%20analytics.script_src%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:45:55 AM ::1 GET /%7B%7B%20'/assets/site.js'%20%7C%20relative_url%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 404 in 5 ms
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 404 in 7 ms
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 404 in 6 ms
+ HTTP  3/12/2026 9:45:55 AM ::1 Returned 404 in 7 ms
+ HTTP  3/12/2026 9:46:06 AM ::1 GET /%7B%7B%20analytics.script_src%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:46:06 AM ::1 Returned 404 in 2 ms
+ HTTP  3/12/2026 9:46:06 AM ::1 GET /%7B%7B%20intro_featured_image%20%7C%20relative_url%20%7C%20escape%20%7D%7D
+ HTTP  3/12/2026 9:46:06 AM ::1 Returned 404 in 1 ms
+ HTTP  3/12/2026 9:46:06 AM ::1 GET /assets/uploads/Screenshot_20260307-001550.png
+ HTTP  3/12/2026 9:46:06 AM ::1 GET /assets/uploads/Screenshot_20260307-001551.png
+ HTTP  3/12/2026 9:46:06 AM ::1 Returned 404 in 2 ms
+ HTTP  3/12/2026 9:46:06 AM ::1 Returned 200 in 7 ms
+
+ INFO  Gracefully shutting down. Please wait...
