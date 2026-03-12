@@ -198,8 +198,13 @@ const isNavigableDocumentLink = (link, href) => {
     return false;
   }
 
-  const path = new URL(href, window.location.origin).pathname;
-  const extensionMatch = path.match(/\.([a-z0-9]+)$/i);
+  const parsedUrl = new URL(href, window.location.origin);
+
+  if (parsedUrl.hash && parsedUrl.pathname === window.location.pathname && parsedUrl.search === window.location.search) {
+    return false;
+  }
+
+  const extensionMatch = parsedUrl.pathname.match(/\.([a-z0-9]+)$/i);
   if (!extensionMatch) return true;
 
   return extensionMatch[1] === 'html';
