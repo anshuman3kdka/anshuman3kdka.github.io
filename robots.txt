@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /sitemap.xml
+Disallow: /sitemap-pages.xml
+Disallow: /sitemap-collections.xml
+Disallow: /sitemap-assets.xml
+Disallow: /search-index.json
+Disallow: /random-read.json
 
 # Major AI crawlers (explicitly allowed)
 User-agent: GPTBot
