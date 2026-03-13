@@ -16,14 +16,14 @@ description: Read all the latest poetic endeavours of Anshuman3kdka
   <div class="content-list">
     {% for poem in featured_poems %}
     <article class="content-item">
-      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
+      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ poem.url | escape }}">{{ poem.title | escape }}</a></h3>
     </article>
     {% endfor %}
     {% for poem in regular_poems %}
     <article class="content-item">
-      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ poem.url }}">{{ poem.title }}</a></h3>
+      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ poem.url | escape }}">{{ poem.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>

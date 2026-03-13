@@ -17,14 +17,14 @@ description: Explore clear, thought-provoking essays where ideas are unpacked wi
   <div class="content-list">
     {% for essay in featured_essays %}
     <article class="content-item">
-      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
+      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ essay.url | escape }}">{{ essay.title | escape }}</a></h3>
     </article>
     {% endfor %}
     {% for essay in regular_essays %}
     <article class="content-item">
-      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ essay.url }}">{{ essay.title }}</a></h3>
+      {% if essay.eyebrow %}<p class="content-eyebrow">{{ essay.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ essay.url | escape }}">{{ essay.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>
