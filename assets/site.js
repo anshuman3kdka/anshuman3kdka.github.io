@@ -70,19 +70,21 @@ const clearTransitionPresetClasses = () => {
   });
 };
 
+// ⚡ Bolt: Hoist static array and RegExp objects out of frequently called route
+// classifier to prevent allocation overhead during page transitions.
+const ROUTE_PATTERNS = [
+  ['poetry', /^\/poetry(?:\/|$)/],
+  ['prose', /^\/prose(?:\/|$)/],
+  ['essays', /^\/essays(?:\/|$)/],
+  ['projects', /^\/projects(?:\/|$)/],
+  ['contact', /^\/contact(?:\/|$)/],
+];
+
 const classifyRoute = (pathname) => {
   const normalizedPath = normalizePathname(pathname);
   if (normalizedPath === '/') return 'home';
 
-  const routePatterns = [
-    ['poetry', /^\/poetry(?:\/|$)/],
-    ['prose', /^\/prose(?:\/|$)/],
-    ['essays', /^\/essays(?:\/|$)/],
-    ['projects', /^\/projects(?:\/|$)/],
-    ['contact', /^\/contact(?:\/|$)/],
-  ];
-
-  const matchedCategory = routePatterns.find(([, pattern]) => pattern.test(normalizedPath));
+  const matchedCategory = ROUTE_PATTERNS.find(([, pattern]) => pattern.test(normalizedPath));
   return matchedCategory ? matchedCategory[0] : 'unknown';
 };
 
