@@ -28,7 +28,7 @@
     <title>{{ page.title }} · {{ site_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ meta_description | escape }}" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="{{ page.robots | default: 'index,follow' | escape }}" />
     <link rel="canonical" href="{{ canonical_url | escape }}" />
     <meta property="og:title" content="{{ page.title | default: site_title | escape }}" />
     <meta property="og:description" content="{{ meta_description | escape }}" />
