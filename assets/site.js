@@ -323,15 +323,18 @@ const loadRandomReadData = async () => {
   const fallbackUrls = ['random-read.json', '/random-read.json'];
   let response = null;
 
-  for (const url of [...new Set(fallbackUrls)]) {
-    try {
-      const candidate = await fetch(url);
-      if (!candidate.ok) continue;
-      response = candidate;
-      break;
-    } catch (error) {
-      // Try the next fallback URL.
-    }
+  try {
+    // ⚡ Bolt: Launch fetches in parallel via Promise.any to adopt the fastest successful
+    // response without incurring the penalty of prior failed fetch delays.
+    response = await Promise.any(
+      [...new Set(fallbackUrls)].map(async (url) => {
+        const candidate = await fetch(url);
+        if (!candidate.ok) throw new Error('Failed to load');
+        return candidate;
+      })
+    );
+  } catch (error) {
+    // All fallback URLs failed to load.
   }
 
   if (!response) throw new Error('Failed to load random read index');
