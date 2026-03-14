@@ -2,8 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    {% assign theme_primary_color = site.data.theme.primary_color | default: '#163a2a' %}
+    {% assign theme_accent_color = site.data.theme.accent_color | default: '#d3b277' %}
+    {% assign theme_background_color = site.data.theme.background_color | default: '#0d1f17' %}
+    {% assign theme_base_font_size = site.data.theme.base_font_size | default: '16px' %}
+    {% assign theme_content_max_width = site.data.theme.content_max_width | default: '1240px' %}
+
+    {% if theme_primary_color.hex %}{% assign theme_primary_color = theme_primary_color.hex %}{% endif %}
+    {% if theme_primary_color.Hex %}{% assign theme_primary_color = theme_primary_color.Hex %}{% endif %}
+    {% if theme_primary_color.BHex %}{% assign theme_primary_color = theme_primary_color.BHex %}{% endif %}
+    {% if theme_accent_color.hex %}{% assign theme_accent_color = theme_accent_color.hex %}{% endif %}
+    {% if theme_accent_color.Hex %}{% assign theme_accent_color = theme_accent_color.Hex %}{% endif %}
+    {% if theme_accent_color.BHex %}{% assign theme_accent_color = theme_accent_color.BHex %}{% endif %}
+    {% if theme_background_color.hex %}{% assign theme_background_color = theme_background_color.hex %}{% endif %}
+    {% if theme_background_color.Hex %}{% assign theme_background_color = theme_background_color.Hex %}{% endif %}
+    {% if theme_background_color.BHex %}{% assign theme_background_color = theme_background_color.BHex %}{% endif %}
     <style>
       :root {
+        --theme-primary-color: {{ theme_primary_color }};
+        --theme-accent-color: {{ theme_accent_color }};
+        --theme-background-color: {{ theme_background_color }};
+        --theme-base-font-size: {{ theme_base_font_size }};
+        --theme-content-max-width: {{ theme_content_max_width }};
         --content-eyebrow-font-size: {{ site.data.site.content_eyebrow_font_size | default: '0.72rem' }};
       }
     </style>
