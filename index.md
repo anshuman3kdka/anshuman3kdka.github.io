@@ -5,9 +5,9 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 <section class="section section--hero hero hero--center-desktop" aria-labelledby="hero-title">
   <div class="hero-content">
-    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' }}</h1>
+    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' | escape }}</h1>
     <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
-    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." }}</p>
+    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." | escape }}</p>
     {% assign quote_rotator = site.data.home_quote_rotator %}
     {% assign quote_rotator_enabled = quote_rotator.enabled | append: '' | downcase %}
     {% if quote_rotator_enabled == 'true' and quote_rotator.quotes and quote_rotator.quotes.size > 0 %}
@@ -41,9 +41,9 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro page-intro--hero">
-    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" }}</p>
-    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" }}</h2>
-    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Mark projects, essays, and poems as featured in Pages CMS to show them here." }}</p>
+    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" | escape }}</p>
+    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" | escape }}</h2>
+    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Mark projects, essays, and poems as featured in Pages CMS to show them here." | escape }}</p>
   </div>
 
   {% assign current_time = 'now' | date: '%s' %}
@@ -75,27 +75,27 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     {% for project in featured_projects limit: 2 %}
     <article class="card">
       <p class="card-label">Project</p>
-      <h3 class="card-title">{{ project.title }}</h3>
-      {% if project.description %}<p class="card-text">{{ project.description }}</p>{% endif %}
-      <a class="card-link" href="{{ project.url | relative_url }}">Read more</a>
+      <h3 class="card-title">{{ project.title | escape }}</h3>
+      {% if project.description %}<p class="card-text">{{ project.description | escape }}</p>{% endif %}
+      <a class="card-link" href="{{ project.url | relative_url | escape }}">Read more</a>
     </article>
     {% endfor %}
 
     {% for essay in featured_essays limit: 2 %}
     <article class="card">
       <p class="card-label">Essay</p>
-      <h3 class="card-title">{{ essay.title }}</h3>
-      {% if essay.description %}<p class="card-text">{{ essay.description }}</p>{% endif %}
-      <a class="card-link" href="{{ essay.url | relative_url }}">Read more</a>
+      <h3 class="card-title">{{ essay.title | escape }}</h3>
+      {% if essay.description %}<p class="card-text">{{ essay.description | escape }}</p>{% endif %}
+      <a class="card-link" href="{{ essay.url | relative_url | escape }}">Read more</a>
     </article>
     {% endfor %}
 
     {% for poem in featured_poetry limit: 2 %}
     <article class="card">
       <p class="card-label">Poem</p>
-      <h3 class="card-title">{{ poem.title }}</h3>
-      {% if poem.description %}<p class="card-text">{{ poem.description }}</p>{% endif %}
-      <a class="card-link" href="{{ poem.url | relative_url }}">Read more</a>
+      <h3 class="card-title">{{ poem.title | escape }}</h3>
+      {% if poem.description %}<p class="card-text">{{ poem.description | escape }}</p>{% endif %}
+      <a class="card-link" href="{{ poem.url | relative_url | escape }}">Read more</a>
     </article>
     {% endfor %}
   </div>

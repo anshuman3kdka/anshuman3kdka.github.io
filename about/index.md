@@ -10,10 +10,10 @@ portrait_caption: Anshuman Pandey
     <div
       class="about-portrait"
       role="img"
-      aria-label="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' }}"
-      style="background-image: url('{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' }}');"
+      aria-label="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' | escape }}"
+      style="background-image: url('{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' | escape }}');"
     ></div>
-    <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' }}</figcaption>
+    <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' | escape }}</figcaption>
   </figure>
   <div class="about-text">
     <p>Words come out of me now and then. Not always planned - some stretch into essays that pull apart why mainstream stories collapse under their own weight. Others take shape as poems, handed to individuals who might never earn such attention. Once in a while, sentences build small worlds where figures stumble through decisions better left unmade, all painted in too much detail.</p>

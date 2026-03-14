@@ -16,8 +16,8 @@ description: Track completed courses and professional certificates in one place.
   <div class="content-list">
     {% for certificate in certificate_items %}
     <article class="content-item">
-      {% if certificate.eyebrow %}<p class="content-eyebrow">{{ certificate.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ certificate.url }}">{{ certificate.title }}</a></h3>
+      {% if certificate.eyebrow %}<p class="content-eyebrow">{{ certificate.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ certificate.url | relative_url | escape }}">{{ certificate.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>
