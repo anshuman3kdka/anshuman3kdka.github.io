@@ -77,7 +77,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
       <p class="card-label">Project</p>
       <h3 class="card-title">{{ project.title }}</h3>
       {% if project.description %}<p class="card-text">{{ project.description }}</p>{% endif %}
-      <a class="card-link" href="{{ project.url | relative_url }}">Read more</a>
+      <a class="card-link" href="{{ project.url | relative_url }}" aria-label="Read more about {{ project.title }}"><span aria-hidden="true">Read more</span></a>
     </article>
     {% endfor %}
 
@@ -86,7 +86,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
       <p class="card-label">Essay</p>
       <h3 class="card-title">{{ essay.title }}</h3>
       {% if essay.description %}<p class="card-text">{{ essay.description }}</p>{% endif %}
-      <a class="card-link" href="{{ essay.url | relative_url }}">Read more</a>
+      <a class="card-link" href="{{ essay.url | relative_url }}" aria-label="Read more about {{ essay.title }}"><span aria-hidden="true">Read more</span></a>
     </article>
     {% endfor %}
 
@@ -95,7 +95,7 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
       <p class="card-label">Poem</p>
       <h3 class="card-title">{{ poem.title }}</h3>
       {% if poem.description %}<p class="card-text">{{ poem.description }}</p>{% endif %}
-      <a class="card-link" href="{{ poem.url | relative_url }}">Read more</a>
+      <a class="card-link" href="{{ poem.url | relative_url }}" aria-label="Read more about {{ poem.title }}"><span aria-hidden="true">Read more</span></a>
     </article>
     {% endfor %}
   </div>
