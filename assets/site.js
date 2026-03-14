@@ -198,7 +198,14 @@ const isNavigableDocumentLink = (link, href) => {
     return false;
   }
 
-  const path = new URL(href, window.location.origin).pathname;
+  const parsedUrl = new URL(href, window.location.origin);
+
+  // Allow native browser scrolling for same-page anchor links
+  if (parsedUrl.hash && parsedUrl.pathname === window.location.pathname && parsedUrl.search === window.location.search) {
+    return false;
+  }
+
+  const path = parsedUrl.pathname;
   const extensionMatch = path.match(/\.([a-z0-9]+)$/i);
   if (!extensionMatch) return true;
 
