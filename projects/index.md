@@ -18,14 +18,14 @@ description: Build trust fast by browsing hands-on projects that show how I turn
   <div class="content-list content-list--compact">
     {% for project in featured_projects %}
     <article class="content-item">
-      {% if project.eyebrow %}<p class="content-eyebrow">{{ project.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+      {% if project.eyebrow %}<p class="content-eyebrow">{{ project.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ project.url | relative_url | escape }}">{{ project.title | escape }}</a></h3>
     </article>
     {% endfor %}
     {% for project in regular_projects %}
     <article class="content-item">
-      {% if project.eyebrow %}<p class="content-eyebrow">{{ project.eyebrow }}</p>{% endif %}
-      <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+      {% if project.eyebrow %}<p class="content-eyebrow">{{ project.eyebrow | escape }}</p>{% endif %}
+      <h3><a href="{{ project.url | relative_url | escape }}">{{ project.title | escape }}</a></h3>
     </article>
     {% endfor %}
   </div>
