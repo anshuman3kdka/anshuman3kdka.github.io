@@ -177,7 +177,7 @@ Use this quick process before publishing posts with images:
 
 The CMS now includes broad editing coverage for content + site chrome:
 
-1. **SEO fields:** collections and pages include optional `description` fields for metadata-friendly summaries.
+1. **SEO fields:** collections and pages include optional `description`, `seo_title`, `og_image`, `canonical_url`, and `noindex` fields for metadata-friendly summaries and indexing controls.
 2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
 3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, footer heading/note, contact info, and social links.
 4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
@@ -188,6 +188,10 @@ The CMS now includes broad editing coverage for content + site chrome:
 These are wired into the live layout:
 
 - `<meta name="description">` uses each page's `description` when provided.
+- `<title>`, `og:title`, and `twitter:title` prefer `seo_title` and then fall back to the existing page title/site title wiring.
+- `og:image` and `twitter:image` prefer `og_image` and then fall back to existing social/featured image wiring.
+- `<link rel="canonical">` prefers `canonical_url` when provided and otherwise uses the page URL.
+- `<meta name="robots">` switches to `noindex,follow` when `noindex: true`; otherwise it keeps existing robots behavior.
 - Header brand text/link and navigation read from `_data/site.yml`.
 - Footer heading/text/social links read from `_data/site.yml`.
 - Homepage hero title/tagline read from `_data/site.yml`.
