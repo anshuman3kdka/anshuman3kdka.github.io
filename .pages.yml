@@ -28,6 +28,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: featured_image
         label: Featured Image (optional)
         type: image
@@ -78,6 +94,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: featured_image
         label: Featured Image (optional)
@@ -130,6 +162,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: featured_image
         label: Featured Image (optional)
         type: image
@@ -176,6 +224,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: image
         label: Project Image (optional)
@@ -224,6 +288,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: image
         label: Image (optional)
         type: image
@@ -262,6 +342,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: draft
         label: Draft
@@ -307,6 +403,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Home Sections
         type: markdown
@@ -323,6 +435,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: portrait_image
         label: About Portrait Image
@@ -353,6 +481,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Content
         type: markdown
@@ -369,6 +513,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: body
         label: Content
@@ -387,6 +547,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Content
         type: markdown
@@ -403,6 +579,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: body
         label: Content
@@ -421,6 +613,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Content
         type: markdown
@@ -437,6 +645,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: body
         label: Content
@@ -455,6 +679,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Content
         type: markdown
@@ -471,6 +711,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: body
         label: Content
@@ -489,6 +745,22 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
       - name: body
         label: Content
         type: markdown
@@ -505,6 +777,22 @@ content:
       - name: description
         label: SEO Description (optional)
         type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
         required: false
       - name: body
         label: Content
