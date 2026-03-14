@@ -7,18 +7,18 @@
   color-scheme: dark;
 
   /* Color system */
-  --color-bg: #0d1f17;
+  --color-bg: var(--theme-background-color, #0d1f17);
   --color-bg-soft: #122a20;
   --color-surface: #173325;
   --color-surface-elevated: #1f3e2f;
   --color-ink: #f0ecdf;
   --color-ink-muted: #d7d2c2;
   --color-ink-soft: #aeb6a4;
-  --color-forest: #163a2a;
+  --color-forest: var(--theme-primary-color, #163a2a);
   --color-sage: #7f9a84;
   --color-moss: #5d7b5d;
   --color-olive: #6a7453;
-  --color-accent: #d3b277;
+  --color-accent: var(--theme-accent-color, #d3b277);
   --color-accent-soft: rgba(211, 178, 119, 0.14);
   --color-rule: rgba(232, 226, 206, 0.16);
 
@@ -77,7 +77,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: var(--step-0);
+  font-size: var(--theme-base-font-size, var(--step-0));
   line-height: 1.85;
   letter-spacing: 0.01em;
   color: var(--color-ink);
@@ -168,7 +168,7 @@ button:focus-visible {
 }
 
 .site-shell {
-  max-width: 1240px;
+  max-width: var(--theme-content-max-width, 1240px);
   margin: 0 auto;
   padding: clamp(0.9rem, 2.8vw, var(--space-6)) clamp(0.95rem, 3vw, var(--space-6)) clamp(3.5rem, 8vw, var(--space-9));
 }
