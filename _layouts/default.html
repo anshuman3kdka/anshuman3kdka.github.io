@@ -25,7 +25,7 @@
         {% assign social_image_url = site_base_url | append: social_image %}
       {% endif %}
     {% endif %}
-    <title>{{ page.title }} · {{ site_title }}</title>
+    <title>{{ page.title | escape }} · {{ site_title | escape }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ meta_description | escape }}" />
     <meta name="robots" content="{{ page.robots | default: 'index,follow' | escape }}" />
@@ -43,6 +43,7 @@
     {% if social_image_url != '' %}
     <meta name="twitter:image" content="{{ social_image_url | escape }}" />
     {% endif %}
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png?v=20260223' | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png?v=20260223' | relative_url }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png?v=20260223' | relative_url }}">
@@ -84,7 +85,7 @@
       <!-- Global navigation. Update nav labels/links in this file. -->
       <header class="site-header">
         <div class="nav-bar">
-          <a class="brand-link" href="{{ '/' | relative_url }}">{{ site_title }}</a>
+          <a class="brand-link" href="{{ '/' | relative_url | escape }}">{{ site_title | escape }}</a>
           <nav class="site-nav" aria-label="Primary">
             {% if site.data.site.header_links %}
               {% assign current_path = page.url | default: '/' %}
@@ -98,7 +99,7 @@
                 {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
               {% endif %}
               {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
-              <a href="{{ link.url | relative_url }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label }}</a>
+              <a href="{{ link.url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label | escape }}</a>
               {% endfor %}
             {% endif %}
           </nav>
