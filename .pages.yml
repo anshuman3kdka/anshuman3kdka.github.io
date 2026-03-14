@@ -559,6 +559,37 @@ content:
         addLabel: "Add Item"
         required: false
 
+
+  - name: theme_settings
+    label: Theme Settings
+    path: _data/theme.yml
+    type: file
+    fields:
+      - name: primary_color
+        label: Primary color
+        type: text
+        required: false
+        description: 'Hex color for core brand surfaces (example: #163a2a).'
+      - name: accent_color
+        label: Accent color
+        type: text
+        required: false
+        description: 'Hex color for highlights and links (example: #d3b277).'
+      - name: background_color
+        label: Background color
+        type: text
+        required: false
+        description: 'Hex color used for page background base (example: #0d1f17).'
+      - name: base_font_size
+        label: Base font size
+        type: text
+        required: false
+        description: 'CSS font size value for body text (example: 16px).'
+      - name: content_max_width
+        label: Content max width
+        type: text
+        required: false
+        description: 'CSS max-width value for overall layout width (example: 1240px).'
   - name: site_settings
     label: Site Settings
     path: _data/site.yml
