@@ -129,35 +129,40 @@ const initSearchPage = () => {
   };
 
   const runSearch = async () => {
-    const query = input.value.trim();
-    writeQueryToUrl(query);
+    input.setAttribute('aria-busy', 'true');
+    try {
+      const query = input.value.trim();
+      writeQueryToUrl(query);
 
-    if (!isValidQuery(query)) {
+      if (!isValidQuery(query)) {
+        renderSearchState({
+          listElement: list,
+          liveRegion,
+          message: 'Type at least 2 letters to search.',
+        });
+        return;
+      }
+
+      const searchData = await ensureLoaded();
+      const ranked = rankSearchResults(searchData, query).slice(0, MAX_RESULTS);
+
+      if (!ranked.length) {
+        renderSearchState({
+          listElement: list,
+          liveRegion,
+          message: 'No matches found. Try a shorter or different keyword.',
+        });
+        return;
+      }
+
       renderSearchState({
         listElement: list,
         liveRegion,
-        message: 'Type at least 2 letters to search.',
+        results: ranked,
       });
-      return;
+    } finally {
+      input.removeAttribute('aria-busy');
     }
-
-    const searchData = await ensureLoaded();
-    const ranked = rankSearchResults(searchData, query).slice(0, MAX_RESULTS);
-
-    if (!ranked.length) {
-      renderSearchState({
-        listElement: list,
-        liveRegion,
-        message: 'No matches found. Try a shorter or different keyword.',
-      });
-      return;
-    }
-
-    renderSearchState({
-      listElement: list,
-      liveRegion,
-      results: ranked,
-    });
   };
 
   const performSearch = () => {
