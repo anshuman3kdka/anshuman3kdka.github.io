@@ -70,19 +70,21 @@ const clearTransitionPresetClasses = () => {
   });
 };
 
+// ⚡ Bolt: Hoisted static arrays and regular expressions to the module scope
+// to prevent reallocation on every execution, reducing GC overhead.
+const ROUTE_PATTERNS = [
+  ['poetry', /^\/poetry(?:\/|$)/],
+  ['prose', /^\/prose(?:\/|$)/],
+  ['essays', /^\/essays(?:\/|$)/],
+  ['projects', /^\/projects(?:\/|$)/],
+  ['contact', /^\/contact(?:\/|$)/],
+];
+
 const classifyRoute = (pathname) => {
   const normalizedPath = normalizePathname(pathname);
   if (normalizedPath === '/') return 'home';
 
-  const routePatterns = [
-    ['poetry', /^\/poetry(?:\/|$)/],
-    ['prose', /^\/prose(?:\/|$)/],
-    ['essays', /^\/essays(?:\/|$)/],
-    ['projects', /^\/projects(?:\/|$)/],
-    ['contact', /^\/contact(?:\/|$)/],
-  ];
-
-  const matchedCategory = routePatterns.find(([, pattern]) => pattern.test(normalizedPath));
+  const matchedCategory = ROUTE_PATTERNS.find(([, pattern]) => pattern.test(normalizedPath));
   return matchedCategory ? matchedCategory[0] : 'unknown';
 };
 
