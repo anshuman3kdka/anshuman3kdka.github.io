@@ -198,7 +198,17 @@ const isNavigableDocumentLink = (link, href) => {
     return false;
   }
 
-  const path = new URL(href, window.location.origin).pathname;
+  const linkUrl = new URL(href, window.location.origin);
+  const currentUrl = new URL(window.location.href);
+
+  const isSameDocumentHashNavigation =
+    Boolean(linkUrl.hash) &&
+    linkUrl.pathname === currentUrl.pathname &&
+    linkUrl.search === currentUrl.search;
+
+  if (isSameDocumentHashNavigation) return false;
+
+  const path = linkUrl.pathname;
   const extensionMatch = path.match(/\.([a-z0-9]+)$/i);
   if (!extensionMatch) return true;
 
