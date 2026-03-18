@@ -9,7 +9,7 @@ description: Build trust fast by browsing hands-on projects that show how I turn
   {% assign project_items = site.pages
     | where_exp: "page", "page.path contains 'projects/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.draft | append: '' | downcase != 'true'"
     | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time" %}
   {% assign featured_projects = project_items | where: "featured", true | sort: "featured_rank" %}
   {% assign regular_projects = project_items | where_exp: "page", "page.featured != true" | sort: "title" %}

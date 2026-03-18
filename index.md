@@ -50,21 +50,21 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
   {% assign featured_projects = site.pages
     | where_exp: "page", "page.path contains 'projects/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.draft | append: '' | downcase != 'true'"
     | where_exp: "page", "page.featured == true"
     | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "featured_rank" %}
   {% assign featured_essays = site.pages
     | where_exp: "page", "page.path contains 'essays/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.draft | append: '' | downcase != 'true'"
     | where_exp: "page", "page.featured == true"
     | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "featured_rank" %}
   {% assign featured_poetry = site.pages
     | where_exp: "page", "page.path contains 'poetry/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.draft | append: '' | downcase != 'true'"
     | where_exp: "page", "page.featured == true"
     | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time"
     | sort: "featured_rank" %}

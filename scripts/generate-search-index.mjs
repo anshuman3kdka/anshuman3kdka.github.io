@@ -99,6 +99,17 @@ const extractTags = (frontMatterData) => {
   return [];
 };
 
+const isDraftedOff = (frontMatterData) => String(frontMatterData.draft ?? '').trim().toLowerCase() === 'true';
+
+const isScheduledForFuture = (frontMatterData) => {
+  if (!frontMatterData.publish_date) return false;
+
+  const publishDate = new Date(frontMatterData.publish_date instanceof Date ? frontMatterData.publish_date : String(frontMatterData.publish_date));
+  if (Number.isNaN(publishDate.getTime())) return false;
+
+  return publishDate.getTime() > Date.now();
+};
+
 const main = async () => {
   const allFiles = await walk(root);
 
@@ -110,6 +121,7 @@ const main = async () => {
     const raw = await fs.readFile(file, 'utf8');
     const { data: frontMatterData, body } = await extractFrontMatter(raw);
     if (frontMatterData.search === false || String(frontMatterData.search).toLowerCase() === 'false') return null;
+    if (isDraftedOff(frontMatterData) || isScheduledForFuture(frontMatterData)) return null;
 
     const title = extractTitle(body, frontMatterData, rel);
     const category = String(frontMatterData.category || categoryFromPath(rel)).trim();
