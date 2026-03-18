@@ -164,14 +164,14 @@
             {% endif %}
 
             {% if is_piece_page and is_published_piece %}
-            <header class="piece-detail-header section">
-              <h1 class="piece-detail-title">{{ intro_title | escape }}</h1>
-              {% if intro_featured_image %}
-              <figure class="piece-featured-media">
-                <img src="{{ intro_featured_image | relative_url | escape }}" alt="Featured image for {{ intro_title | escape }}" loading="eager" decoding="async">
-              </figure>
-              {% endif %}
-            </header>
+              <header class="piece-detail-header section">
+                <h1 class="piece-detail-title">{{ intro_title | escape }}</h1>
+                {% if intro_featured_image %}
+                  <figure class="piece-featured-media">
+                    <img src="{{ intro_featured_image | relative_url | escape }}" alt="Featured image for {{ intro_title | escape }}" loading="eager" decoding="async">
+                  </figure>
+                {% endif %}
+              </header>
             {% endif %}
 
             {% if is_piece_page and is_published_piece %}
