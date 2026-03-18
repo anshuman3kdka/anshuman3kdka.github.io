@@ -3,7 +3,7 @@ title: A merchant's Initiation
 author: Anshuman3kdka
 eyebrow: On Commodification of Love
 noindex: true
-draft: false
+draft: true
 featured: false
 ---
 One bright morn, guided by ambition,  
