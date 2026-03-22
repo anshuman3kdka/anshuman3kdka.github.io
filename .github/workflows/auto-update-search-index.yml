@@ -1,9 +1,7 @@
-name: Auto-update generated indexes
+name: Auto-update generated content
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '**/*.md'
       - '**/*.html'
@@ -34,7 +32,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Regenerate indexes
+      - name: Regenerate dynamic pages and indexes
         run: npm run build
 
       - name: Commit updated generated content
@@ -46,5 +44,5 @@ jobs:
             echo "No generated index changes to commit."
             exit 0
           fi
-          git commit -m "chore: auto-update generated indexes"
+          git commit -m "chore: auto-update generated content"
           git push

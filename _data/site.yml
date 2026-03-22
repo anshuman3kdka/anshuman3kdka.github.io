@@ -30,11 +30,7 @@ header_links:
     url: /achievements/
   - label: Certificates
     url: /certificates/
-  - label: Experience
-    url: /experience/
-dynamic_sections:
-  - label: Experience
-    slug: /experience/
+dynamic_sections: []
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/anshuman-pandey-b33362378
