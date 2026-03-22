@@ -39,6 +39,27 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
   </article>
 </section>
 
+<section class="section" aria-labelledby="homepage-cards-title">
+  {% assign home_cards = site.data.home_cards.cards %}
+  {% if home_cards and home_cards.size > 0 %}
+  <div class="page-intro page-intro--hero">
+    <p class="section-eyebrow">Homepage Cards</p>
+    <h2 class="section-title" id="homepage-cards-title">Fresh picks from the homepage editor</h2>
+    <p class="section-subtitle">These cards are rendered directly from <code>_data/home_cards.yml</code>, so CMS edits show up here automatically.</p>
+  </div>
+  <div class="grid grid-2">
+    {% for card in home_cards %}
+    <article class="card">
+      {% if card.type %}<p class="card-label">{{ card.type | escape }}</p>{% endif %}
+      {% if card.title %}<h2 class="card-title">{{ card.title | escape }}</h2>{% endif %}
+      {% if card.description %}<p class="card-text">{{ card.description | escape }}</p>{% endif %}
+      {% if card.link_text and card.link_url %}<a class="card-link" href="{{ card.link_url | escape }}">{{ card.link_text | escape }}</a>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
 <section class="section" aria-labelledby="featured-title">
   <div class="page-intro page-intro--hero">
     <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" | escape }}</p>

@@ -181,7 +181,7 @@ The CMS now includes broad editing coverage for content + site chrome:
 2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
 3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, footer heading/note, contact info, and social links.
 4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
-5. **Home page cards:** `_data/home_cards.yml` provides repeatable cards with type, title, description, link text, and link URL fields.
+5. **Home page cards:** `_data/home_cards.yml` now renders a repeatable homepage section using each card's type, title, description, link text, and link URL.
 6. **Featured cards section copy:** site settings now include editable eyebrow, title, and subtitle text for the homepage featured cards area.
 7. **Home quote rotator:** `_data/home_quote_rotator.yml` provides an `enabled` toggle plus a repeatable quote list ("Add Item") used by the homepage fade-rotating quote card.
 
