@@ -30,6 +30,7 @@ header_links:
     url: /achievements/
   - label: Certificates
     url: /certificates/
+dynamic_sections: []
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/anshuman-pandey-b33362378

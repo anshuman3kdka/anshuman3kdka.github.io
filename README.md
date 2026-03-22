@@ -179,7 +179,7 @@ The CMS now includes broad editing coverage for content + site chrome:
 
 1. **SEO fields:** collections and pages include optional `description`, `seo_title`, `og_image`, `canonical_url`, and `noindex` fields for metadata-friendly summaries and indexing controls.
 2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
-3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, footer heading/note, contact info, and social links.
+3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, footer heading/note, contact info, social links, and repeatable dynamic sections.
 4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
 5. **Home page cards:** `_data/home_cards.yml` now renders a repeatable homepage section using each card's type, title, description, link text, and link URL.
 6. **Featured cards section copy:** site settings now include editable eyebrow, title, and subtitle text for the homepage featured cards area.
@@ -229,3 +229,18 @@ Analytics loading is controlled via `_data/site.yml` under the `analytics` key:
 - `script_src`: analytics script URL
 
 Set `enabled: true` only when you are ready to collect real traffic data.
+
+
+### Dynamic sections from Site Settings
+
+You can now create a whole new writing section (for example, `Experience`) from **Site Settings → Dynamic Content Sections**.
+
+What happens after you add one:
+
+1. Add a section name like `Experience` (and optionally a custom slug like `experience`).
+2. The next automated build runs `npm run sync:dynamic-sections`.
+3. The repo gets a real folder page such as `experience/index.md`.
+4. Pages CMS gets a matching content area so you can add entries there just like Poetry/Prose.
+5. Search and random-read indexes include the new section automatically.
+
+Important: Pages CMS itself cannot invent brand-new sidebar sections in the browser without the repo changing first, so the section appears after the save triggers the repo sync/build commit. Refresh the CMS after that commit lands.
