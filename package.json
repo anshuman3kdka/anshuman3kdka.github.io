@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "description": "Static site build utilities",
   "scripts": {
-    "build": "npm run generate:random-read-index && npm run generate:search-index",
+    "build": "npm run sync:managed-sections && npm run generate:random-read-index && npm run generate:search-index",
     "check:seo": "./scripts/seo-health-check.sh",
     "generate:random-read-index": "node ./scripts/generate-random-read-index.mjs",
-    "generate:search-index": "node ./scripts/generate-search-index.mjs"
+    "generate:search-index": "node ./scripts/generate-search-index.mjs",
+    "sync:managed-sections": "node ./scripts/sync-managed-sections.mjs"
   },
   "dependencies": {
     "js-yaml": "^4.1.1"

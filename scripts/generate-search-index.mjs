@@ -6,7 +6,7 @@ const root = process.cwd();
 
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
-const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'creative', 'certificates']);
+const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'projects', 'achievements', 'creative', 'certificates', 'managed_sections']);
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });

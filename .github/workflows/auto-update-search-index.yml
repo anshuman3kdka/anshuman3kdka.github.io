@@ -9,6 +9,9 @@ on:
       - '**/*.html'
       - 'scripts/generate-random-read-index.mjs'
       - 'scripts/generate-search-index.mjs'
+      - 'scripts/sync-managed-sections.mjs'
+      - '_data/site.yml'
+      - '.pages.yml'
       - 'package.json'
       - '.github/workflows/auto-update-search-index.yml'
   workflow_dispatch:
@@ -34,14 +37,14 @@ jobs:
       - name: Regenerate indexes
         run: npm run build
 
-      - name: Commit updated indexes
+      - name: Commit regenerated site artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add random-read.json search-index.json
+          git add _data/site.yml managed_sections random-read.json search-index.json .pages.yml
           if git diff --cached --quiet; then
-            echo "No generated index changes to commit."
+            echo "No generated artifact changes to commit."
             exit 0
           fi
-          git commit -m "chore: auto-update generated indexes"
+          git commit -m "chore: sync managed sections and generated indexes"
           git push

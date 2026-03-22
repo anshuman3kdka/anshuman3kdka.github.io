@@ -5,7 +5,7 @@ import yaml from 'js-yaml';
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
-const allowedTopLevel = new Set(['poetry', 'prose', 'essays']);
+const allowedTopLevel = new Set(['poetry', 'prose', 'essays', 'managed_sections']);
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });

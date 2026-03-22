@@ -1,7 +1,8 @@
 site_title: Anshuman3kdka
-site_tagline: I write essays, fiction, and poetry. Usually about literature,
-  occasionally about why most of it fails. Currently a student, open to work
-  that doesn't require me to use the word 'synergy.'
+site_tagline: >-
+  I write essays, fiction, and poetry. Usually about literature, occasionally
+  about why most of it fails. Currently a student, open to work that doesn't
+  require me to use the word 'synergy.'
 brand_url: https://www.anshuman3kdka.in
 search_placeholder: Search essays, prose, projects, achievements, and certificates
 featured_cards_eyebrow: Featured Cards
@@ -13,6 +14,7 @@ footer_review_url: https://tally.so/r/rjlA4v
 footer_note: Built between lectures
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
+managed_sections: []
 header_links:
   - label: Search
     url: /search/

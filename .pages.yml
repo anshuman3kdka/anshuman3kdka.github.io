@@ -390,6 +390,72 @@ content:
             type: text
             required: false
 
+
+  - name: managed_sections_content
+    label: Auto-created Header Pages
+    path: managed_sections
+    type: collection
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Title
+        type: text
+        required: true
+      - name: eyebrow
+        label: Eyebrow Text (optional)
+        type: text
+        required: false
+      - name: description
+        label: SEO Description (optional)
+        type: text
+        required: false
+      - name: seo_title
+        label: SEO Title (optional)
+        type: text
+        required: false
+      - name: og_image
+        label: Open Graph Image (optional)
+        type: image
+        required: false
+      - name: canonical_url
+        label: Canonical URL (optional)
+        type: text
+        required: false
+      - name: noindex
+        label: Noindex (optional)
+        type: boolean
+        required: false
+      - name: featured_image
+        label: Featured Image (optional)
+        type: image
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        required: false
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        required: false
+      - name: featured_rank
+        label: Featured order (lower shows first)
+        type: text
+        required: false
+      - name: publish_date
+        label: Publish Date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+          time: true
+        required: false
+      - name: permalink
+        label: Permalink
+        type: text
+        required: false
+      - name: body
+        label: Content
+        type: markdown
+
   - name: landing_home
     label: Landing Home (index.md)
     path: index.md
@@ -953,6 +1019,71 @@ content:
           - name: url
             label: Header Link
             type: text
+      - name: managed_sections
+        label: Auto-created header pages
+        type: object
+        list: true
+        addLabel: "+auto page"
+        required: false
+        fields:
+          - name: title
+            label: Header Name
+            type: text
+            required: true
+          - name: slug
+            label: URL Slug (optional)
+            type: text
+            required: false
+          - name: eyebrow
+            label: Eyebrow Text (optional)
+            type: text
+            required: false
+          - name: description
+            label: SEO Description (optional)
+            type: text
+            required: false
+          - name: seo_title
+            label: SEO Title (optional)
+            type: text
+            required: false
+          - name: og_image
+            label: Open Graph Image (optional)
+            type: image
+            required: false
+          - name: canonical_url
+            label: Canonical URL (optional)
+            type: text
+            required: false
+          - name: noindex
+            label: Noindex (optional)
+            type: boolean
+            required: false
+          - name: featured_image
+            label: Featured Image (optional)
+            type: image
+            required: false
+          - name: draft
+            label: Draft
+            type: boolean
+            required: false
+          - name: featured
+            label: Feature on homepage
+            type: boolean
+            required: false
+          - name: featured_rank
+            label: Featured order (lower shows first)
+            type: text
+            required: false
+          - name: publish_date
+            label: Publish Date (optional)
+            type: date
+            options:
+              format: yyyy-MM-dd
+              time: true
+            required: false
+          - name: body
+            label: Page Content
+            type: markdown
       - name: social_links
         label: Footer Social Links
         type: object

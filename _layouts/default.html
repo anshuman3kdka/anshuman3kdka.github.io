@@ -38,7 +38,7 @@
         {% assign social_image_url = site_base_url | append: social_image %}
       {% endif %}
     {% endif %}
-    {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
+    {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/,managed_sections/' | split: ',' %}
     {% assign is_piece_page = false %}
     {% for collection_path in piece_collections %}
       {% if page.path contains collection_path and page.name != 'index.md' %}

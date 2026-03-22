@@ -180,10 +180,11 @@ The CMS now includes broad editing coverage for content + site chrome:
 1. **SEO fields:** collections and pages include optional `description`, `seo_title`, `og_image`, `canonical_url`, and `noindex` fields for metadata-friendly summaries and indexing controls.
 2. **Single-page editing:** all major page files are editable directly (`index.md`, `about`, `contact`, `resume`, `creative`, and listing pages).
 3. **Site settings panel:** `_data/site.yml` powers header title/link, nav links, footer heading/note, contact info, and social links.
-4. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
-5. **Home page cards:** `_data/home_cards.yml` provides repeatable cards with type, title, description, link text, and link URL fields.
-6. **Featured cards section copy:** site settings now include editable eyebrow, title, and subtitle text for the homepage featured cards area.
-7. **Home quote rotator:** `_data/home_quote_rotator.yml` provides an `enabled` toggle plus a repeatable quote list ("Add Item") used by the homepage fade-rotating quote card.
+4. **Auto-created header pages:** add entries under `managed_sections` in `_data/site.yml` (or the matching Pages CMS area) to generate both a nav link and a real page at `/<slug>/`.
+5. **About portrait controls:** about photo URL, alt text, and caption are editable through CMS and rendered directly on the page.
+6. **Home page cards:** `_data/home_cards.yml` provides repeatable cards with type, title, description, link text, and link URL fields.
+7. **Featured cards section copy:** site settings now include editable eyebrow, title, and subtitle text for the homepage featured cards area.
+8. **Home quote rotator:** `_data/home_quote_rotator.yml` provides an `enabled` toggle plus a repeatable quote list ("Add Item") used by the homepage fade-rotating quote card.
 
 These are wired into the live layout:
 
