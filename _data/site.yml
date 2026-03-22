@@ -37,5 +37,5 @@ social_links:
 analytics:
   enabled: true
   provider: umami
-  script_src: https://cloud.umami.is/script.js
   umami_website_id: d2d06d91-5128-41f4-be12-f48b3d6c731c
+  script_src: https://cloud.umami.is/script.js
