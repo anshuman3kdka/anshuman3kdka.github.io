@@ -30,6 +30,8 @@ header_links:
     url: /achievements/
   - label: Certificates
     url: /certificates/
+  - label: Experience
+    url: /experience/
 dynamic_sections:
   - label: Experience
     slug: /experience/
