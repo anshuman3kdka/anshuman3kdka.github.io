@@ -1,14 +1,15 @@
-name: Auto-update generated indexes
+name: Auto-update generated content
 
 on:
   push:
-    branches:
-      - main
     paths:
       - '**/*.md'
       - '**/*.html'
+      - '_data/site.yml'
+      - '.pages.yml'
       - 'scripts/generate-random-read-index.mjs'
       - 'scripts/generate-search-index.mjs'
+      - 'scripts/sync-dynamic-sections.mjs'
       - 'package.json'
       - '.github/workflows/auto-update-search-index.yml'
   workflow_dispatch:
@@ -31,17 +32,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Regenerate indexes
+      - name: Regenerate dynamic pages and indexes
         run: npm run build
 
-      - name: Commit updated indexes
+      - name: Commit updated generated content
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add random-read.json search-index.json
+          git add .pages.yml random-read.json search-index.json _data/site.yml */index.md
           if git diff --cached --quiet; then
             echo "No generated index changes to commit."
             exit 0
           fi
-          git commit -m "chore: auto-update generated indexes"
+          git commit -m "chore: auto-update generated content"
           git push
