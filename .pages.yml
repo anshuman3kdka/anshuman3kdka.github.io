@@ -3,6 +3,8 @@ media:
   output: /assets/uploads
 
 content:
+  # BEGIN GENERATED DYNAMIC SECTIONS
+  # END GENERATED DYNAMIC SECTIONS
   - name: poetry
     label: Poetry
     path: poetry
@@ -953,6 +955,25 @@ content:
           - name: url
             label: Header Link
             type: text
+      - name: dynamic_sections
+        label: Dynamic Content Sections
+        type: object
+        list: true
+        addLabel: "+dynamic section"
+        required: false
+        fields:
+          - name: label
+            label: Section Name
+            type: text
+            required: true
+          - name: slug
+            label: Section URL Slug (optional)
+            type: text
+            required: false
+          - name: description
+            label: Section Description (optional)
+            type: text
+            required: false
       - name: social_links
         label: Footer Social Links
         type: object
