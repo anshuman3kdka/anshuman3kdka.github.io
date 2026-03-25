@@ -5,7 +5,13 @@ import yaml from 'js-yaml';
 const root = process.cwd();
 const contentExtensions = new Set(['.md', '.html']);
 const ignoredDirs = new Set(['.git', 'node_modules', '.jekyll-cache', 'assets', 'scripts']);
-const allowedTopLevel = new Set(['poetry', 'prose', 'essays']);
+const defaultTopLevel = ['poetry', 'prose', 'essays'];
+const siteDataRaw = await fs.readFile(path.join(root, '_data', 'site.yml'), 'utf8');
+const siteData = yaml.load(siteDataRaw) || {};
+const dynamicTopLevel = (Array.isArray(siteData.dynamic_sections) ? siteData.dynamic_sections : [])
+  .map((section) => String(section?.slug || section?.label || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''))
+  .filter(Boolean);
+const allowedTopLevel = new Set([...defaultTopLevel, ...dynamicTopLevel]);
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
