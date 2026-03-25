@@ -122,19 +122,33 @@
         <div class="nav-bar">
           <a class="brand-link" href="{{ '/' | relative_url }}">{{ site_title | escape }}</a>
           <nav class="site-nav" aria-label="Primary">
-            {% if site.data.site.header_links %}
-              {% assign current_path = page.url | default: '/' %}
-              {% assign current_path_with_slash = current_path %}
-              {% if current_path_with_slash != '/' and current_path_with_slash | slice: -1, 1 != '/' %}
-                {% assign current_path_with_slash = current_path_with_slash | append: '/' %}
-              {% endif %}
-              {% for link in site.data.site.header_links %}
-              {% assign link_path_with_slash = link.url %}
-              {% if link_path_with_slash != '/' and link_path_with_slash | slice: -1, 1 != '/' %}
-                {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
-              {% endif %}
-              {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
-              <a href="{{ link.url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label | escape }}</a>
+            {% assign current_path = page.url | default: '/' %}
+            {% assign current_path_with_slash = current_path %}
+            {% if current_path_with_slash != '/' and current_path_with_slash | slice: -1, 1 != '/' %}
+              {% assign current_path_with_slash = current_path_with_slash | append: '/' %}
+            {% endif %}
+
+            {% if site.data.site.content_sections %}
+              {% for section in site.data.site.content_sections %}
+                {% assign section_enabled = section.enabled | append: '' | downcase %}
+                {% assign section_in_header = section.show_in_header | append: '' | downcase %}
+                {% if section.slug and section_enabled != 'false' and section_in_header == 'true' %}
+                  {% assign section_url = '/' | append: section.slug | append: '/' %}
+                  {% assign link_path_with_slash = section_url %}
+                  {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+                  <a href="{{ section_url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ section.label | escape }}</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if site.data.site.utility_links %}
+              {% for link in site.data.site.utility_links %}
+                {% assign link_path_with_slash = link.url %}
+                {% if link_path_with_slash != '/' and link_path_with_slash | slice: -1, 1 != '/' %}
+                  {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
+                {% endif %}
+                {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+                <a href="{{ link.url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label | escape }}</a>
               {% endfor %}
             {% endif %}
           </nav>
