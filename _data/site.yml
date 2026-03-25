@@ -13,28 +13,39 @@ footer_review_url: https://tally.so/r/rjlA4v
 footer_note: Built between lectures
 contact_email: thisisanshumanp@gmail.com
 location: Delhi, India
-header_links:
+content_sections:
+  - name: essays
+    label: Essays
+    slug: essays
+    enabled: true
+    show_in_header: true
+  - name: creative
+    label: Creative
+    slug: creative
+    enabled: true
+    show_in_header: true
+  - name: projects
+    label: Projects
+    slug: projects
+    enabled: true
+    show_in_header: true
+  - name: achievements
+    label: Achievements
+    slug: achievements
+    enabled: true
+    show_in_header: true
+  - name: certificates
+    label: Certificates
+    slug: certificates
+    enabled: true
+    show_in_header: true
+utility_links:
   - label: Search
     url: /search/
   - label: About
     url: /about/
-  - label: Essays
-    url: /essays/
-  - label: Creative
-    url: /creative/
-  - label: Projects
-    url: /projects/
   - label: Resume
     url: /resume/
-  - label: Achievements
-    url: /achievements/
-  - label: Certificates
-    url: /certificates/
-  - label: Experience
-    url: /experience/
-dynamic_sections:
-  - label: Experience
-    slug: /experience/
 social_links:
   - label: LinkedIn
     url: https://www.linkedin.com/in/anshuman-pandey-b33362378
