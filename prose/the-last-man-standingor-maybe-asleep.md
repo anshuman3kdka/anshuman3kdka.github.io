@@ -5,7 +5,7 @@ eyebrow: Post-Apocalypse
 description: Ansh isn't your typical apocalypse survivor.
 seo_title: The Last Man Standing(or maybe asleep?)
 noindex: false
-draft: true
+draft: false
 featured: false
 publish_date: 2026-04-08
 ---
