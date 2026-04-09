@@ -25,16 +25,28 @@
     {% assign site_base_url = site.url | default: site.data.site.brand_url | default: '' %}
     {% assign canonical_path = page.url | default: '/' %}
     {% assign canonical_url = page.canonical_url | default: canonical_path | absolute_url %}
-    {% if page.canonical_url and page.canonical_url contains '://' == false and site_base_url != '' %}
+    {% assign has_custom_canonical = false %}
+    {% if page.canonical_url and page.canonical_url != '' %}
+      {% assign has_custom_canonical = true %}
+    {% endif %}
+    {% assign canonical_is_absolute = false %}
+    {% if has_custom_canonical and page.canonical_url contains '://' %}
+      {% assign canonical_is_absolute = true %}
+    {% endif %}
+    {% if has_custom_canonical and canonical_is_absolute == false and site_base_url != '' %}
       {% assign canonical_url = site_base_url | append: page.canonical_url %}
-    {% elsif site_base_url != '' and (page.canonical_url == nil or page.canonical_url == '') %}
+    {% elsif site_base_url != '' and has_custom_canonical == false %}
       {% assign canonical_url = site_base_url | append: canonical_path %}
     {% endif %}
     {% assign social_image = page.og_image | default: page.social_image | default: page.featured_image | default: site.data.site.social_image | default: site.data.site.featured_image %}
     {% assign social_image_url = '' %}
     {% if social_image %}
       {% assign social_image_url = social_image | absolute_url %}
-      {% if site_base_url != '' and social_image contains '://' == false %}
+      {% assign social_image_is_absolute = false %}
+      {% if social_image contains '://' %}
+        {% assign social_image_is_absolute = true %}
+      {% endif %}
+      {% if site_base_url != '' and social_image_is_absolute == false %}
         {% assign social_image_url = site_base_url | append: social_image %}
       {% endif %}
     {% endif %}
@@ -58,7 +70,11 @@
 
     {% assign robots_content = page.robots | default: 'index,follow' %}
     {% assign page_noindex = page.noindex | append: '' | downcase %}
-    {% if page_noindex == 'true' or (is_piece_page and is_published_piece == false) %}
+    {% assign should_noindex_piece = false %}
+    {% if is_piece_page and is_published_piece == false %}
+      {% assign should_noindex_piece = true %}
+    {% endif %}
+    {% if page_noindex == 'true' or should_noindex_piece %}
       {% assign robots_content = 'noindex,nofollow' %}
     {% endif %}
     <title>{{ meta_title }} · {{ site_title }}</title>
@@ -124,7 +140,8 @@
           <nav class="site-nav" aria-label="Primary">
             {% assign current_path = page.url | default: '/' %}
             {% assign current_path_with_slash = current_path %}
-            {% if current_path_with_slash != '/' and current_path_with_slash | slice: -1, 1 != '/' %}
+            {% assign current_path_last_char = current_path_with_slash | slice: -1, 1 %}
+            {% if current_path_with_slash != '/' and current_path_last_char != '/' %}
               {% assign current_path_with_slash = current_path_with_slash | append: '/' %}
             {% endif %}
 
@@ -135,7 +152,10 @@
                 {% if section.slug and section_enabled != 'false' and section_in_header == 'true' %}
                   {% assign section_url = '/' | append: section.slug | append: '/' %}
                   {% assign link_path_with_slash = section_url %}
-                  {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+                  {% assign is_active_nav_link = false %}
+                  {% if link_path_with_slash == current_path_with_slash %}
+                    {% assign is_active_nav_link = true %}
+                  {% endif %}
                   <a href="{{ section_url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ section.label | escape }}</a>
                 {% endif %}
               {% endfor %}
@@ -144,10 +164,14 @@
             {% if site.data.site.utility_links %}
               {% for link in site.data.site.utility_links %}
                 {% assign link_path_with_slash = link.url %}
-                {% if link_path_with_slash != '/' and link_path_with_slash | slice: -1, 1 != '/' %}
+                {% assign link_path_last_char = link_path_with_slash | slice: -1, 1 %}
+                {% if link_path_with_slash != '/' and link_path_last_char != '/' %}
                   {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
                 {% endif %}
-                {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+                {% assign is_active_nav_link = false %}
+                {% if link_path_with_slash == current_path_with_slash %}
+                  {% assign is_active_nav_link = true %}
+                {% endif %}
                 <a href="{{ link.url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label | escape }}</a>
               {% endfor %}
             {% endif %}
@@ -159,9 +183,12 @@
       <main class="site-main" id="main-content" tabindex="-1">
         <div class="page-shell">
           <div class="page-body">
-            {% assign is_home = page.path == 'index.md' %}
-            {% assign is_resume = page.path contains 'resume/' %}
-            {% assign is_404 = page.path == '404.md' %}
+            {% assign is_home = false %}
+            {% if page.path == 'index.md' %}{% assign is_home = true %}{% endif %}
+            {% assign is_resume = false %}
+            {% if page.path contains 'resume/' %}{% assign is_resume = true %}{% endif %}
+            {% assign is_404 = false %}
+            {% if page.path == '404.md' %}{% assign is_404 = true %}{% endif %}
             {% assign show_page_intro = true %}
             {% if is_home or is_resume or is_404 %}{% assign show_page_intro = false %}{% endif %}
 

@@ -64,8 +64,8 @@ section_label: ${label}
   {% assign section_items = site.pages
     | where_exp: "page", "page.path contains section_path_prefix"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft | append: '' | downcase != 'true'"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date | date: '%s' <= current_time" %}
+    | where_exp: "page", "page.draft != true"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time" %}
   {% assign featured_section_items = section_items | where: "featured", true | sort: "featured_rank" %}
   {% assign regular_section_items = section_items | where_exp: "page", "page.featured != true" | sort: "title" %}
 
