@@ -3,9 +3,8 @@ title: Search
 description: Search all essays, prose, poetry, projects, and achievements.
 ---
 
-<section class="section search-page" aria-labelledby="search-page-title">
+<section class="section search-page" aria-label="Search">
   <header class="search-page-header">
-    <h1 class="page-title" id="search-page-title">Search</h1>
     <p class="page-lede">Find writing and projects quickly.</p>
   </header>
 
