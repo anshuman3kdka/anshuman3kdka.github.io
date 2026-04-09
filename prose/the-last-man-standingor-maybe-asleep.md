@@ -27,7 +27,7 @@ He reaches a four-way intersection, which in its prime days would host at least 
 
 Another reason why Ansh hates travelling.
 
-	He reaches the shop, shoos away the cashier monkey (which he was sure was just there to steal stuff), and fills his bag with at least a nation's yearly supply of banana chips. He heads back.
+He reaches the shop, shoos away the cashier monkey (which he was sure was just there to steal stuff), and fills his bag with at least a nation's yearly supply of banana chips. He heads back.
 
 *Dear Diary,
 Today was tiring. I think I'll take another nap.*
