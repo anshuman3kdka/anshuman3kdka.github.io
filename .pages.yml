@@ -15,7 +15,17 @@ content:
     fields:
       - name: title
         label: Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: author
         label: Author
@@ -24,11 +34,31 @@ content:
         hidden: true
       - name: eyebrow
         label: Eyebrow Text (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -71,7 +101,17 @@ content:
         required: false
       - name: body
         label: Poem
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: prose
     label: Prose
@@ -83,7 +123,17 @@ content:
     fields:
       - name: title
         label: Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: author
         type: text
@@ -91,11 +141,31 @@ content:
         hidden: true
       - name: eyebrow
         label: Eyebrow Text (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -138,7 +208,17 @@ content:
         required: false
       - name: body
         label: Prose
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: essays
     label: Essays
@@ -150,7 +230,17 @@ content:
     fields:
       - name: title
         label: Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: author
         type: text
@@ -158,11 +248,31 @@ content:
         hidden: true
       - name: eyebrow
         label: Eyebrow Text (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -205,7 +315,17 @@ content:
         required: false
       - name: body
         label: Essay
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: projects
     label: Projects
@@ -217,15 +337,45 @@ content:
     fields:
       - name: title
         label: Project Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: eyebrow
         label: Eyebrow Text (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -268,7 +418,17 @@ content:
         required: false
       - name: body
         label: Description
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: achievements
     label: Achievements
@@ -280,15 +440,45 @@ content:
     fields:
       - name: title
         label: Achievement
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: eyebrow
         label: Eyebrow Text (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -323,7 +513,17 @@ content:
         required: false
       - name: body
         label: Details
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: certificates
     label: Certificates
@@ -399,11 +599,31 @@ content:
     fields:
       - name: title
         label: Page Title (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -423,7 +643,17 @@ content:
         required: false
       - name: body
         label: Home Sections
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: about_page
     label: About Page
@@ -432,11 +662,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -460,15 +710,45 @@ content:
         required: false
       - name: portrait_alt
         label: About Portrait Alt Text
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: portrait_caption
         label: About Portrait Caption
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: contact_page
     label: Contact Page
@@ -477,11 +757,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -501,7 +801,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: resume_page
     label: Resume Page
@@ -510,11 +820,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -534,7 +864,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: creative_page
     label: Creative Page
@@ -543,11 +883,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -567,7 +927,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: poetry_page
     label: Poetry Listing Page
@@ -576,11 +946,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -600,7 +990,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: prose_page
     label: Prose Listing Page
@@ -609,11 +1009,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -633,7 +1053,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: essays_page
     label: Essays Listing Page
@@ -642,11 +1072,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -666,7 +1116,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: projects_page
     label: Projects Listing Page
@@ -675,11 +1135,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -699,7 +1179,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: achievements_page
     label: Achievements Listing Page
@@ -708,11 +1198,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -765,7 +1275,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: secondary_home_page
     label: Secondary Home Page
@@ -774,11 +1294,31 @@ content:
     fields:
       - name: title
         label: Page Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: description
         label: SEO Description (optional)
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: seo_title
         label: SEO Title (optional)
@@ -798,7 +1338,17 @@ content:
         required: false
       - name: body
         label: Content
-        type: markdown
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
 
   - name: home_page_cards
     label: Home Page Cards
@@ -814,19 +1364,59 @@ content:
         fields:
           - name: type
             label: Type of Card
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
             required: true
           - name: title
             label: Card Title
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
             required: true
           - name: description
             label: Card Description
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
             required: true
           - name: link_text
             label: Link Text
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
             required: true
           - name: link_url
             label: Link URL
@@ -887,15 +1477,45 @@ content:
     fields:
       - name: site_title
         label: Site Title
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: true
       - name: site_tagline
         label: Site Tagline
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: site_description
         label: Default SEO Description
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: brand_url
         label: Header Logo Link URL
@@ -903,28 +1523,88 @@ content:
         required: false
       - name: search_placeholder
         label: Search Placeholder Text
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: featured_cards_eyebrow
         label: Featured Cards Eyebrow Text
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: featured_cards_title
         label: Featured Cards Heading
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: featured_cards_subtitle
         label: Featured Cards Description
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: content_eyebrow_font_size
         label: Content Eyebrow Font Size
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
         description: CSS font-size value (e.g., 0.72rem or 12px) used on prose, poetry, essays, projects, achievements, and certificates listing cards.
       - name: footer_heading
         label: Footer Heading
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: footer_review_url
         label: Footer Review Link URL
@@ -932,7 +1612,17 @@ content:
         required: false
       - name: footer_note
         label: Footer Note
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: contact_email
         label: Contact Email
@@ -940,7 +1630,17 @@ content:
         required: false
       - name: location
         label: Location
-        type: text
+        type: rich-text
+        options:
+          toolbar:
+            - bold
+            - italic
+            - underline
+            - align
+            - font_size
+            - undo
+            - redo
+          fixed: true
         required: false
       - name: header_links
         label: Header Navigation Links
@@ -951,7 +1651,17 @@ content:
         fields:
           - name: label
             label: Header Name
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
           - name: url
             label: Header Link
             type: text
@@ -983,7 +1693,17 @@ content:
         fields:
           - name: label
             label: Social Name
-            type: text
+            type: rich-text
+            options:
+              toolbar:
+                - bold
+                - italic
+                - underline
+                - align
+                - font_size
+                - undo
+                - redo
+              fixed: true
           - name: url
             label: Social Link
             type: text
