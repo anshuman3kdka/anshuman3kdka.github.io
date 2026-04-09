@@ -20,7 +20,7 @@ description: Search all essays, prose, poetry, projects, and achievements.
         autocomplete="off"
         placeholder="Try: Poetry"
         data-search-input
-        data-search-index-url="{{ '/search-index.json' | relative_url }}"
+        data-search-index-url="{{ '/search-index.json' | relative_url | escape }}"
         aria-describedby="search-live-region"
         maxlength="100"
       >
@@ -32,4 +32,4 @@ description: Search all essays, prose, poetry, projects, and achievements.
   </div>
 </section>
 
-<script type="module" src="{{ '/assets/search.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/search.js' | relative_url | escape }}"></script>

@@ -13,14 +13,14 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     {% if quote_rotator_enabled == 'true' and quote_rotator.quotes and quote_rotator.quotes.size > 0 %}
     <div class="hero-quote-rotator" data-quote-rotator data-quote-interval="5000" data-quote-fade-ms="600" aria-live="polite">
       <p class="hero-quote-rotator-text" data-quote-rotator-text>
-        {{ quote_rotator.quotes | first | strip }}
+        {{ quote_rotator.quotes | first | strip | escape }}
       </p>
       <script type="application/json" data-quote-rotator-items>{{ quote_rotator.quotes | jsonify }}</script>
     </div>
     {% endif %}
     <div class="hero-actions">
-      <a class="button button-primary" href="/essays/">Essays <span aria-hidden="true">→</span></a>
-      <a class="button button-secondary" href="/projects/">Projects <span aria-hidden="true">→</span></a>
+      <a class="button button-primary" href="{{ '/essays/' | relative_url | escape }}">Essays <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="{{ '/projects/' | relative_url | escape }}">Projects <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
