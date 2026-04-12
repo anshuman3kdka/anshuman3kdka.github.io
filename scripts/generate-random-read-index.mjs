@@ -15,23 +15,20 @@ const allowedTopLevel = new Set([...defaultTopLevel, ...dynamicTopLevel]);
 
 const walk = async (dir) => {
   const entries = await fs.readdir(dir, { withFileTypes: true });
-  const files = [];
-
-  for (const entry of entries) {
-    if (entry.name.startsWith('.') && entry.name !== '.pages.yml') continue;
-    if (ignoredDirs.has(entry.name)) continue;
+  const results = await Promise.all(entries.map(async (entry) => {
+    if (entry.name.startsWith('.') && entry.name !== '.pages.yml') return [];
+    if (ignoredDirs.has(entry.name)) return [];
 
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      files.push(...(await walk(fullPath)));
-      continue;
+      return await walk(fullPath);
     }
 
     const ext = path.extname(entry.name).toLowerCase();
-    if (contentExtensions.has(ext)) files.push(fullPath);
-  }
+    return contentExtensions.has(ext) ? [fullPath] : [];
+  }));
 
-  return files;
+  return results.flat();
 };
 
 const extractFrontMatter = async (text) => {
