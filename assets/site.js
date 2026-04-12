@@ -518,12 +518,20 @@ const initRandomReadCard = () => {
     messageText = 'Please try again in a moment.',
     href = '#',
     linkLabel = 'Open random piece',
+    showArrow = false,
     disabled = false,
   } = {}) => {
     eyebrow.textContent = eyebrowText;
     title.textContent = titleText;
     message.textContent = messageText;
-    link.innerHTML = linkLabel;
+    link.textContent = linkLabel;
+
+    if (showArrow) {
+      const arrow = document.createElement('span');
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = ' →';
+      link.appendChild(arrow);
+    }
 
     if (disabled) {
       link.removeAttribute('href');
@@ -560,7 +568,8 @@ const initRandomReadCard = () => {
       titleText: item.title || 'Untitled piece',
       messageText: 'A random pick from the archive.',
       href: item.url,
-      linkLabel: 'Read this piece <span aria-hidden="true">→</span>',
+      linkLabel: 'Read this piece',
+      showArrow: true,
     });
   };
 
