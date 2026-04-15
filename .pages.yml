@@ -942,19 +942,48 @@ content:
         label: Location
         type: text
         required: false
-      - name: header_links
-        label: Header Navigation Links
+      - name: content_sections
+        label: Header Content Sections
         type: object
         list: true
-        addLabel: "+header navigation link"
+        addLabel: "+header content section"
+        required: false
+        fields:
+          - name: name
+            label: Internal Name
+            type: text
+            required: false
+          - name: label
+            label: Header Label
+            type: text
+            required: true
+          - name: slug
+            label: Section URL Slug
+            type: text
+            required: true
+          - name: enabled
+            label: Enabled
+            type: boolean
+            required: false
+          - name: show_in_header
+            label: Show in Header
+            type: boolean
+            required: false
+      - name: utility_links
+        label: Header Utility Links
+        type: object
+        list: true
+        addLabel: "+header utility link"
         required: false
         fields:
           - name: label
-            label: Header Name
+            label: Header Label
             type: text
+            required: true
           - name: url
-            label: Header Link
+            label: Header URL
             type: text
+            required: true
       - name: dynamic_sections
         label: Dynamic Content Sections
         type: object
