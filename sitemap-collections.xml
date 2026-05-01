@@ -9,8 +9,7 @@ robots: noindex,nofollow
   {% for collection in site.collections %}
     {% assign sorted_docs = collection.docs | sort: 'url' %}
     {% for d in sorted_docs %}
-      {% assign include_doc = d.sitemap != false and d.url %}
-      {% if include_doc %}
+      {% if d.sitemap != false and d.url %}
         {% assign collection_url_count = collection_url_count | plus: 1 %}
   <url>
     <loc>{{ d.url | absolute_url | xml_escape }}</loc>
