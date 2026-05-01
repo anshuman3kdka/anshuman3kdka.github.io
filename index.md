@@ -3,126 +3,76 @@ title: Home
 description: Anshuman’s personal site featuring thoughtful essays, original poetry, and hands-on projects, with notes on writing, literature, and creative experiments.
 ---
 
-<section class="section section--hero hero hero--center-desktop" aria-labelledby="hero-title">
-  <div class="hero-content">
-    <h1 class="hero-title" id="hero-title">{{ site.data.site.site_title | default: 'Anshuman3kdka' | escape }}</h1>
-    <p class="section-eyebrow">Writer · Student · Occasionally vibe-codes</p>
-    <p class="hero-lead">{{ site.data.site.site_tagline | default: "I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails." | escape }}</p>
-    {% assign quote_rotator = site.data.home_quote_rotator %}
-    {% assign quote_rotator_enabled = quote_rotator.enabled | append: '' | downcase %}
-    {% if quote_rotator_enabled == 'true' and quote_rotator.quotes and quote_rotator.quotes.size > 0 %}
-    <div class="hero-quote-rotator" data-quote-rotator data-quote-interval="5000" data-quote-fade-ms="600" aria-live="polite">
-      <p class="hero-quote-rotator-text" data-quote-rotator-text>
-        {{ quote_rotator.quotes | first | strip }}
-      </p>
-      <script type="application/json" data-quote-rotator-items>{{ quote_rotator.quotes | jsonify }}</script>
-    </div>
-    {% endif %}
+<section class="section section--hero home-hero" aria-labelledby="hero-title">
+  <div class="home-hero__left">
+    <p class="home-eyebrow">WRITER · STUDENT · THINKING IN PUBLIC</p>
+    <h1 class="home-hero__title" id="hero-title">You don’t read me.<br>You <em>argue</em> with me.</h1>
+    <p class="home-hero__lead">Essays, fiction, and poetry about literature, and why most of it fails.</p>
     <div class="hero-actions">
-      <a class="button button-primary" href="/essays/">Essays <span aria-hidden="true">→</span></a>
-      <a class="button button-secondary" href="/projects/">Projects <span aria-hidden="true">→</span></a>
+      <a class="button button-primary" href="/essays/">Enter Essays <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="/projects/">Explore Projects <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <aside class="home-hero__right" aria-label="Currently reading">
+    <article class="currently-reading">
+      <p class="card-label">Currently Reading</p>
+      <p class="section-eyebrow card-random-read-eyebrow">From the archive</p>
+      <h2 class="card-title">Finding a thought worth arguing with</h2>
+      <p class="card-text">Pick a surprise read from essays, prose, and poetry.</p>
+      <div class="card-random-read-actions">
+        <a class="card-link" href="/essays/">Read now</a>
+        <button class="button button-secondary" type="button">Shuffle</button>
+      </div>
+    </article>
+  </aside>
+</section>
+
+<section class="section" aria-labelledby="categories-title">
+  <h2 class="section-title home-section-title" id="categories-title">Explore by Category</h2>
+  <div class="home-category-grid">
+    <article class="card home-min-card"><p class="card-title">Essays</p><p class="card-text">Arguments, ideas, and literary reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
+    <article class="card home-min-card"><p class="card-title">Creative</p><p class="card-text">Stories, scenes, poems, and imagined worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
+    <article class="card home-min-card"><p class="card-title">Projects</p><p class="card-text">Things I’m building and experimenting with.</p><a class="card-link" href="/projects/">View projects</a></article>
+    <article class="card home-min-card"><p class="card-title">Achievements</p><p class="card-text">Milestones, recognitions, and certificates.</p><a class="card-link" href="/achievements/">See achievements</a></article>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="featured-writing-title">
+  <h2 class="section-title home-section-title" id="featured-writing-title">Featured Writing</h2>
+  <div class="home-featured-layout">
+    <article class="card home-feature home-feature--main">
+      <p class="card-label">Featured Essay</p>
+      <h3 class="card-title">On Lost Idealism</h3>
+      <p class="card-text">A literary meditation on what happens when belief meets the world as it is.</p>
+      <a class="card-link" href="/essays/">Read essay</a>
+    </article>
+    <div class="home-featured-stack">
+      <article class="card home-feature"><p class="card-label">Featured Poem</p><h3 class="card-title">Things That Don’t Heal</h3><p class="card-text">A brief poem about what survives after the noise fades.</p><a class="card-link" href="/poetry/">Read poem</a></article>
+      <article class="card home-feature"><p class="card-label">Featured Prose</p><h3 class="card-title">A Letter to You</h3><p class="card-text">A prose piece that refuses comfort and asks for honesty instead.</p><a class="card-link" href="/prose/">Read prose</a></article>
     </div>
   </div>
 </section>
 
-
-<section class="section" aria-labelledby="random-read-title">
-  <article class="card card-random-read" data-random-read-card>
-    <p class="card-label">Random Read</p>
-    <p class="section-eyebrow card-random-read-eyebrow" data-random-read-eyebrow>Loading something good…</p>
-    <h2 class="card-title" id="random-read-title" data-random-read-title>Finding a random piece from poetry, prose, and essays</h2>
-    <p class="card-text" data-random-read-message>Pick a surprise read from the archive.</p>
+<section class="section" aria-labelledby="archive-title">
+  <div class="page-intro page-intro--hero">
+    <h2 class="section-title" id="archive-title">From the Archive</h2>
+    <p class="section-subtitle">A piece worth revisiting.</p>
+  </div>
+  <article class="card home-archive" data-random-read-card>
+    <h3 class="card-title" id="archive-random-title" data-random-read-title>Finding a random piece from the archive</h3>
+    <p class="card-text" data-random-read-message>Open a revisit-worthy entry from poetry, prose, or essays.</p>
     <div class="card-random-read-actions">
-      <a class="card-link" data-random-read-link aria-disabled="true">Open random piece</a>
-      <button class="button button-secondary" type="button" data-random-read-refresh>Pick another</button>
+      <a class="button button-primary" data-random-read-link aria-disabled="true">Read now</a>
+      <button class="button button-secondary" type="button" data-random-read-refresh>Shuffle archive</button>
     </div>
   </article>
 </section>
 
-<section class="section" aria-labelledby="homepage-cards-title">
-  {% assign home_cards = site.data.home_cards.cards %}
-  {% if home_cards and home_cards.size > 0 %}
-  <div class="page-intro page-intro--hero">
-    <p class="section-eyebrow">Homepage Cards</p>
-    <h2 class="section-title" id="homepage-cards-title">Fresh picks from the homepage editor</h2>
-    <p class="section-subtitle">These cards are rendered directly from <code>_data/home_cards.yml</code>, so CMS edits show up here automatically.</p>
-  </div>
-  <div class="grid grid-2">
-    {% for card in home_cards %}
-    <article class="card">
-      {% if card.type %}<p class="card-label">{{ card.type | escape }}</p>{% endif %}
-      {% if card.title %}<h2 class="card-title">{{ card.title | escape }}</h2>{% endif %}
-      {% if card.description %}<p class="card-text">{{ card.description | escape }}</p>{% endif %}
-      {% if card.link_text and card.link_url %}<a class="card-link" href="{{ card.link_url | escape }}">{{ card.link_text | escape }}</a>{% endif %}
-    </article>
-    {% endfor %}
-  </div>
-  {% endif %}
+<section class="section home-metrics" aria-label="Site metrics">
+  <p>28 essays <span aria-hidden="true">·</span> 15 stories <span aria-hidden="true">·</span> 6 projects</p>
 </section>
 
-<section class="section" aria-labelledby="featured-title">
-  <div class="page-intro page-intro--hero">
-    <p class="section-eyebrow">{{ site.data.site.featured_cards_eyebrow | default: "Featured Cards" | escape }}</p>
-    <h2 class="section-title" id="featured-title">{{ site.data.site.featured_cards_title | default: "Highlights from the archive" | escape }}</h2>
-    <p class="section-subtitle">{{ site.data.site.featured_cards_subtitle | default: "Mark projects, essays, and poems as featured in Pages CMS to show them here." | escape }}</p>
-  </div>
-
-  {% assign current_time = 'now' | date: '%s' %}
-  {% assign featured_projects = site.pages
-    | where_exp: "page", "page.path contains 'projects/'"
-    | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.featured == true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time"
-    | sort: "featured_rank" %}
-  {% assign featured_essays = site.pages
-    | where_exp: "page", "page.path contains 'essays/'"
-    | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.featured == true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time"
-    | sort: "featured_rank" %}
-  {% assign featured_poetry = site.pages
-    | where_exp: "page", "page.path contains 'poetry/'"
-    | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.featured == true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time"
-    | sort: "featured_rank" %}
-
-  {% assign featured_count = featured_projects.size | plus: featured_essays.size | plus: featured_poetry.size %}
-  {% if featured_count > 0 %}
-  <div class="grid grid-2">
-    {% for project in featured_projects limit: 2 %}
-    <article class="card">
-      <p class="card-label">Project</p>
-      <h3 class="card-title">{{ project.title | escape }}</h3>
-      {% if project.description %}<p class="card-text">{{ project.description | escape }}</p>{% endif %}
-      <a class="card-link" href="{{ project.url | relative_url | escape }}">Read more</a>
-    </article>
-    {% endfor %}
-
-    {% for essay in featured_essays limit: 2 %}
-    <article class="card">
-      <p class="card-label">Essay</p>
-      <h3 class="card-title">{{ essay.title | escape }}</h3>
-      {% if essay.description %}<p class="card-text">{{ essay.description | escape }}</p>{% endif %}
-      <a class="card-link" href="{{ essay.url | relative_url | escape }}">Read more</a>
-    </article>
-    {% endfor %}
-
-    {% for poem in featured_poetry limit: 2 %}
-    <article class="card">
-      <p class="card-label">Poem</p>
-      <h3 class="card-title">{{ poem.title | escape }}</h3>
-      {% if poem.description %}<p class="card-text">{{ poem.description | escape }}</p>{% endif %}
-      <a class="card-link" href="{{ poem.url | relative_url | escape }}">Read more</a>
-    </article>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="card">
-    <p class="card-text">No featured pieces yet. Mark projects, essays, or poems as featured in Pages CMS.</p>
-  </div>
-  {% endif %}
+<section class="section home-signature" aria-label="Signature line">
+  <p><span></span><em>“I write to understand. You read to feel less alone.”</em><span></span></p>
 </section>
