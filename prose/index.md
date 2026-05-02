@@ -4,12 +4,12 @@ description: Step into short fiction and narrative experiments crafted to entert
 ---
 
 <section class="section">
-  {% assign current_time = 'now' | date: '%s' %}
+  {% assign today = site.time | date: "%F" %}
   {% assign prose_items = site.pages
     | where_exp: "page", "page.path contains 'prose/'"
     | where_exp: "page", "page.name != 'index.md'"
     | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time"
+    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or (page.publish_date | date: '%F') <= today"
     | sort: "title" %}
 
   {% if prose_items.size > 0 %}
