@@ -3,7 +3,7 @@ title: The Last Man Standing(or maybe asleep?)
 author: Anshuman3kdka
 eyebrow: Post-Apocalypse
 noindex: false
-draft: true
+draft: false
 featured: false
 publish_date: 2026-05-02
 ---
