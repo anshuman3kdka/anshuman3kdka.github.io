@@ -114,7 +114,7 @@
     {% endif %}
   </head>
 
-  <body class="is-loading">
+  <body class="is-loading{% if page.path == 'index.md' %} page--home{% endif %}">
     <div class="scroll-progress" aria-hidden="true" data-scroll-progress>
       <div class="scroll-progress__fill" data-scroll-progress-fill></div>
     </div>
