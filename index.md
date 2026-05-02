@@ -31,10 +31,10 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 <section class="section" aria-labelledby="categories-title">
   <h2 class="section-title home-section-title" id="categories-title">Explore by Category</h2>
   <div class="home-category-grid">
-    <article class="card home-min-card"><p class="card-title">Essays</p><p class="card-text">Ideas, arguments and reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
-    <article class="card home-min-card"><p class="card-title">Creative</p><p class="card-text">Stories, scenes and worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
-    <article class="card home-min-card"><p class="card-title">Projects</p><p class="card-text">Things I’m building and experimenting.</p><a class="card-link" href="/projects/">View projects</a></article>
-    <article class="card home-min-card"><p class="card-title">Achievements</p><p class="card-text">Milestones and recognitions.</p><a class="card-link" href="/achievements/">See achievements</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Essays</h3><p class="card-text">Ideas, arguments and reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Creative</h3><p class="card-text">Stories, scenes and worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Projects</h3><p class="card-text">Things I’m building and experimenting.</p><a class="card-link" href="/projects/">View projects</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Achievements</h3><p class="card-text">Milestones and recognitions.</p><a class="card-link" href="/achievements/">See achievements</a></article>
   </div>
 </section>
 
