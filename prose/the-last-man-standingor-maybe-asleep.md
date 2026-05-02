@@ -9,7 +9,7 @@ publish_date: 2026-05-02
 ---
 In around sixty to seventy years, the last human would die. Then it would result in the other fauna reclaiming their land. But until then Ansh can walk the earth, like Adam but without Eve.
 
-	The issue is- Ansh hates walking. One would think that an apocalypse which wiped out humanity would finally urge our introverted protagonist to head out. Nope. *I have enough food at home,* he argues with himself, *and I still have my video games and books.* We are not going to tell him, of course, that his abundant food supply is mostly comprised of stuff that needs cooking.
+The issue is- Ansh hates walking. One would think that an apocalypse which wiped out humanity would finally urge our introverted protagonist to head out. Nope. *I have enough food at home,* he argues with himself, *and I still have my video games and books.* We are not going to tell him, of course, that his abundant food supply is mostly comprised of stuff that needs cooking.
 
 A skill he hasn't mastered yet. Or even begun the process of.
 
