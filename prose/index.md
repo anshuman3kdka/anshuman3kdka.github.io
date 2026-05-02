@@ -4,12 +4,9 @@ description: Step into short fiction and narrative experiments crafted to entert
 ---
 
 <section class="section">
-  {% assign today = site.time | date: "%F" %}
   {% assign prose_items = site.pages
     | where_exp: "page", "page.path contains 'prose/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == empty or page.publish_date <= today"
     | sort: "title" %}
 
   {% if prose_items.size > 0 %}
