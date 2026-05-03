@@ -23,7 +23,7 @@
   --color-accent-secondary: #a3664f;
   --color-rule: rgba(232, 226, 206, 0.16);
 
-  /* Typography: classical serif stack only */
+  /* Typography: serif stack (heading + body) and monospace register */
   --font-heading: "Libre Baskerville", "Baskerville", "Georgia", serif;
   --font-body: "Source Serif 4", "Georgia", serif;
   --font-mono: "Courier Prime", "Courier New", monospace;
@@ -1600,7 +1600,7 @@ body.page--home .button-secondary { border-color: var(--border); }
 
 .home-hero__left { padding-top: .3rem; }
 
-.home-thread-label {
+body.page--home .home-thread-label {
   font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -1609,7 +1609,7 @@ body.page--home .button-secondary { border-color: var(--border); }
   margin: 0 0 .5rem;
 }
 
-.home-index-entry {
+body.page--home .home-index-entry {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: clamp(1.2rem, 2vw, 1.5rem);
