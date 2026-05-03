@@ -62,7 +62,7 @@
   --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.35);
   --shadow-card: 0 14px 28px rgba(0, 0, 0, 0.24);
   --ease-gentle: 220ms ease;
-  --focus-ring: 0 0 0 3px rgba(211, 178, 119, 0.42);
+  --focus-ring: 0 0 0 3px rgba(185, 151, 90, 0.42);
 }
 
 *,
@@ -104,7 +104,7 @@ body {
   transform: translateX(-50%);
   width: min(680px, 74vw);
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(211, 178, 119, 0.36), transparent);
+  background: linear-gradient(90deg, transparent, rgba(185, 151, 90, 0.36), transparent);
 }
 
 img {
@@ -136,7 +136,7 @@ button:focus-visible {
   left: 0;
   width: 100%;
   height: 3px;
-  background: rgba(211, 178, 119, 0.14);
+  background: rgba(185, 151, 90, 0.14);
   z-index: 80;
   pointer-events: none;
 }
@@ -220,20 +220,20 @@ button:focus-visible {
 }
 
 .site-nav a:hover {
-  border-color: rgba(211, 178, 119, 0.4);
-  background: rgba(211, 178, 119, 0.08);
+  border-color: rgba(185, 151, 90, 0.4);
+  background: rgba(185, 151, 90, 0.08);
 }
 
 .site-nav a.is-active {
   color: #fff7e5;
-  border-color: rgba(211, 178, 119, 0.95);
-  background: rgba(211, 178, 119, 0.26);
+  border-color: rgba(185, 151, 90, 0.95);
+  background: rgba(185, 151, 90, 0.26);
   font-weight: 600;
 }
 
 .site-nav a.is-active:hover {
-  border-color: rgba(211, 178, 119, 1);
-  background: rgba(211, 178, 119, 0.32);
+  border-color: rgba(185, 151, 90, 1);
+  background: rgba(185, 151, 90, 0.32);
 }
 
 .site-nav a.is-active:focus-visible {
@@ -402,7 +402,7 @@ button:focus-visible {
 .hero-quote-rotator {
   width: min(100%, 40rem);
   padding: var(--space-4);
-  border: 1px solid rgba(211, 178, 119, 0.28);
+  border: 1px solid rgba(185, 151, 90, 0.28);
   border-radius: var(--radius-md);
   background: linear-gradient(180deg, rgba(240, 236, 223, 0.05), rgba(240, 236, 223, 0.02));
   transition: opacity 0.6s ease;
@@ -436,7 +436,7 @@ button:focus-visible {
 .button-primary {
   background: linear-gradient(180deg, #dcc08b, var(--color-accent));
   color: #172516 !important;
-  border-color: rgba(211, 178, 119, 0.85);
+  border-color: rgba(185, 151, 90, 0.85);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -460,7 +460,7 @@ button:focus-visible {
 
 .button-secondary:hover {
   background: rgba(95, 123, 93, 0.22);
-  border-color: rgba(211, 178, 119, 0.34);
+  border-color: rgba(185, 151, 90, 0.34);
 }
 
 .grid {
@@ -485,7 +485,7 @@ button:focus-visible {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-soft);
-  border-color: rgba(211, 178, 119, 0.3);
+  border-color: rgba(185, 151, 90, 0.3);
 }
 
 .card-label {
@@ -513,15 +513,15 @@ button:focus-visible {
 }
 
 .card-random-read {
-  border-color: rgba(211, 178, 119, 0.38);
+  border-color: rgba(185, 151, 90, 0.38);
   background:
-    radial-gradient(900px 500px at 8% -8%, rgba(211, 178, 119, 0.2), transparent 62%),
+    radial-gradient(900px 500px at 8% -8%, rgba(185, 151, 90, 0.2), transparent 62%),
     linear-gradient(165deg, rgba(22, 50, 36, 0.92) 0%, rgba(14, 34, 25, 0.96) 100%);
 }
 
 .card-random-read-eyebrow {
   margin: 0 0 0.25rem;
-  color: rgba(211, 178, 119, 0.62);
+  color: rgba(185, 151, 90, 0.62);
   text-shadow: 0 1px 8px rgba(8, 18, 13, 0.4);
 }
 
@@ -614,7 +614,7 @@ button:focus-visible {
 }
 
 .content-item:hover {
-  border-color: rgba(211, 178, 119, 0.42);
+  border-color: rgba(185, 151, 90, 0.42);
   transform: translateY(-1px);
 }
 
@@ -1024,7 +1024,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 .random-read-button:hover:not(:disabled) {
   background: rgba(32, 64, 48, 0.85);
   color: var(--color-ink);
-  border-color: rgba(211, 178, 119, 0.45);
+  border-color: rgba(185, 151, 90, 0.45);
 }
 
 .random-read-button:disabled {
@@ -1038,7 +1038,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   padding: 0.2rem 0.55rem;
   border-radius: 8px;
   background: rgba(14, 35, 25, 0.92);
-  border: 1px solid rgba(211, 178, 119, 0.28);
+  border: 1px solid rgba(185, 151, 90, 0.28);
   color: var(--color-ink-soft);
   font-size: 0.76rem;
   white-space: nowrap;
@@ -1081,7 +1081,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   position: relative;
   background:
     linear-gradient(165deg, rgba(20, 47, 34, 0.97) 0%, rgba(13, 31, 23, 0.96) 55%, rgba(10, 24, 18, 0.98) 100%);
-  border: 1px solid rgba(211, 178, 119, 0.32);
+  border: 1px solid rgba(185, 151, 90, 0.32);
   border-radius: 18px;
   padding: clamp(1.2rem, 3vw, 2rem);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(232, 226, 206, 0.06);
@@ -1095,8 +1095,8 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0.8rem;
-  background: rgba(211, 178, 119, 0.1);
-  border: 1px solid rgba(211, 178, 119, 0.4);
+  background: rgba(185, 151, 90, 0.1);
+  border: 1px solid rgba(185, 151, 90, 0.4);
   border-radius: 8px;
   color: var(--color-accent);
   font-family: var(--font-body);
@@ -1108,7 +1108,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 }
 
 .resume-download-btn:hover {
-  background: rgba(211, 178, 119, 0.2);
+  background: rgba(185, 151, 90, 0.2);
   border-color: var(--color-accent);
   transform: translateY(-1px);
 }
@@ -1121,7 +1121,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 .resume-header {
   margin-bottom: var(--space-7);
   padding-bottom: var(--space-5);
-  border-bottom: 1px solid rgba(211, 178, 119, 0.34);
+  border-bottom: 1px solid rgba(185, 151, 90, 0.34);
 }
 
 .resume-kicker {
@@ -1139,7 +1139,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   content: "";
   width: clamp(50px, 10vw, 90px);
   height: 1px;
-  background: linear-gradient(90deg, rgba(211, 178, 119, 0.8), rgba(211, 178, 119, 0));
+  background: linear-gradient(90deg, rgba(185, 151, 90, 0.8), rgba(185, 151, 90, 0));
 }
 
 .resume-header--left {
@@ -1199,13 +1199,13 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 .resume-item {
   margin-bottom: var(--space-4);
   padding: clamp(0.85rem, 2vw, 1.1rem) clamp(0.9rem, 2.2vw, 1.3rem);
-  border: 1px solid rgba(211, 178, 119, 0.2);
+  border: 1px solid rgba(185, 151, 90, 0.2);
   border-radius: 14px;
   background: rgba(8, 20, 15, 0.26);
 }
 
 .resume-item:hover {
-  border-color: rgba(211, 178, 119, 0.34);
+  border-color: rgba(185, 151, 90, 0.34);
   background: rgba(15, 35, 26, 0.38);
 }
 
@@ -1256,7 +1256,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 
 .resume-skills-list li {
   padding: 0.72rem 0.9rem;
-  border-left: 2px solid rgba(211, 178, 119, 0.65);
+  border-left: 2px solid rgba(185, 151, 90, 0.65);
   background: rgba(11, 26, 19, 0.35);
   color: var(--color-ink-muted);
 }
@@ -1570,6 +1570,7 @@ body.page--home {
   --text-main: #E8E6E3;
   --text-muted: #b2a591;
   --border: rgba(198,167,106,0.15);
+
   background:
     radial-gradient(900px 520px at 18% 8%, rgba(198,167,106,.12), transparent 62%),
     radial-gradient(760px 420px at 85% 10%, rgba(49,38,26,.38), transparent 68%),
