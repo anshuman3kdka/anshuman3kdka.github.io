@@ -29,12 +29,13 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 </section>
 
 <section class="section" aria-labelledby="categories-title">
+  <p class="home-thread-label">Catalog Thread I</p>
   <h2 class="section-title home-section-title" id="categories-title">Explore by Category</h2>
   <div class="home-category-grid">
-    <article class="card home-min-card"><h3 class="card-title">Essays</h3><p class="card-text">Ideas, arguments and reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
-    <article class="card home-min-card"><h3 class="card-title">Creative</h3><p class="card-text">Stories, scenes and worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
-    <article class="card home-min-card"><h3 class="card-title">Projects</h3><p class="card-text">Things I’m building and experimenting.</p><a class="card-link" href="/projects/">View projects</a></article>
-    <article class="card home-min-card"><h3 class="card-title">Achievements</h3><p class="card-text">Milestones and recognitions.</p><a class="card-link" href="/achievements/">See achievements</a></article>
+    <article class="card home-min-card"><h3 class="card-title home-index-entry">Essays</h3><p class="card-text">Ideas, arguments and reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
+    <article class="card home-min-card"><h3 class="card-title home-index-entry">Creative</h3><p class="card-text">Stories, scenes and worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
+    <article class="card home-min-card"><h3 class="card-title home-index-entry">Projects</h3><p class="card-text">Things I’m building and experimenting.</p><a class="card-link" href="/projects/">View projects</a></article>
+    <article class="card home-min-card"><h3 class="card-title home-index-entry">Achievements</h3><p class="card-text">Milestones and recognitions.</p><a class="card-link" href="/achievements/">See achievements</a></article>
   </div>
 </section>
 
@@ -44,13 +45,16 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 
 <section class="section" aria-labelledby="featured-writing-title">
   <div class="home-featured-head">
-    <h2 class="section-title home-section-title" id="featured-writing-title">Recent from the Desk</h2>
+    <div>
+      <p class="home-thread-label">Catalog Thread II</p>
+      <h2 class="section-title home-section-title" id="featured-writing-title">Recent from the Desk</h2>
+    </div>
     <a class="button button-secondary" href="/essays/">View all essays</a>
   </div>
   <div class="home-desk-grid">
-    <article class="card home-feature"><p class="card-label">Horror</p><h3 class="card-title">A Letter to You (Red Pen Edit)</h3><p class="card-text">Not every letter is meant to comfort you.</p><a class="card-link" href="/prose/A_letter_to_you/">Read prose</a></article>
-    <article class="card home-feature"><p class="card-label">Essay</p><h3 class="card-title">On Lost Idealism</h3><p class="card-text">Chasing ideals in a world that moved on.</p><a class="card-link" href="/essays/">Read essay</a></article>
-    <article class="card home-feature"><p class="card-label">Poetry</p><h3 class="card-title">Things That Don’t Heal</h3><p class="card-text">A small attempt at saying what stays.</p><a class="card-link" href="/poetry/">Read poem</a></article>
+    <article class="card home-feature"><p class="card-label home-thread-label">Horror</p><h3 class="card-title home-index-entry">A Letter to You (Red Pen Edit)</h3><p class="card-text">Not every letter is meant to comfort you.</p><a class="card-link" href="/prose/A_letter_to_you/">Read prose</a></article>
+    <article class="card home-feature"><p class="card-label home-thread-label">Essay</p><h3 class="card-title home-index-entry">On Lost Idealism</h3><p class="card-text">Chasing ideals in a world that moved on.</p><a class="card-link" href="/essays/">Read essay</a></article>
+    <article class="card home-feature"><p class="card-label home-thread-label">Poetry</p><h3 class="card-title home-index-entry">Things That Don’t Heal</h3><p class="card-text">A small attempt at saying what stays.</p><a class="card-link" href="/poetry/">Read poem</a></article>
   </div>
 </section>
 

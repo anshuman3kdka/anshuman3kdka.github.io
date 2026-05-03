@@ -23,9 +23,10 @@
   --color-accent-secondary: #a3664f;
   --color-rule: rgba(232, 226, 206, 0.16);
 
-  /* Typography: classical serif stack only */
+  /* Typography: serif stack (heading + body) and monospace register */
   --font-heading: "Libre Baskerville", "Baskerville", "Georgia", serif;
   --font-body: "Source Serif 4", "Georgia", serif;
+  --font-mono: "Courier Prime", "Courier New", monospace;
 
   --step--1: clamp(0.88rem, 0.86rem + 0.12vw, 0.96rem);
   --step-0: clamp(1.02rem, 0.96rem + 0.25vw, 1.14rem);
@@ -1598,6 +1599,25 @@ body.page--home .button-secondary { border-color: var(--border); }
 }
 
 .home-hero__left { padding-top: .3rem; }
+
+body.page--home .home-thread-label {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .7rem;
+  color: var(--text-muted);
+  margin: 0 0 .5rem;
+}
+
+body.page--home .home-index-entry {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+
 .home-eyebrow { display:inline-block; padding:.3rem .7rem; border:1px solid var(--border); border-radius:999px; letter-spacing:.14em; color:var(--text-muted); font-size:.72rem; text-transform:uppercase; }
 .home-hero__title { font-family:var(--font-heading); font-size:clamp(2.7rem,6.2vw,5rem); max-width:9ch; line-height:1.05; margin:.25rem 0 1.1rem; }
 .home-hero__title em { color:var(--accent); font-style:italic; }
@@ -1625,15 +1645,17 @@ body.page--home .button-secondary { border-color: var(--border); }
 .home-section-title { text-transform:uppercase; letter-spacing:.11em; font-size:clamp(1rem,2vw,1.22rem); text-align:center; color:var(--accent); margin-bottom:1.2rem; }
 .home-category-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
 .home-min-card { min-height:260px; display:flex; flex-direction:column; justify-content:flex-end; }
-.home-min-card .card-title { text-transform:uppercase; }
+.home-min-card .card-title { text-transform:none; }
+.home-min-card .card-text { line-height: 1.6; }
 
 /* Metrics */
 .home-metrics { border:1px solid var(--border); border-radius:20px; padding:1.15rem 1.5rem; background:rgba(15,42,34,.32); }
-.home-metrics p { margin:0; text-align:center; text-transform:uppercase; font-size:clamp(.9rem,1.7vw,1.15rem); color:var(--accent); font-family:var(--font-heading); letter-spacing:.06em; }
+.home-metrics p { margin:0; text-align:center; text-transform:uppercase; font-size:clamp(.75rem,1.3vw,.9rem); color:var(--accent); font-family:var(--font-mono); letter-spacing:.08em; }
 
 /* Recent from the Desk */
 .home-featured-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
 .home-featured-head .home-section-title { margin:0; text-align:left; }
+.home-feature .card-text { line-height: 1.6; }
 .home-desk-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
 .home-feature { min-height:320px; display:flex; flex-direction:column; justify-content:flex-end; }
 
