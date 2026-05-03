@@ -1,25 +1,26 @@
 /*
   Forest editorial theme
   - Keeps existing content untouched while improving readability, rhythm, and visual atmosphere.
-  - Uses a restrained dark-green palette with warm parchment highlights for a literary tone.
+  - Uses a warm umbra palette with parchment highlights for a literary, lamp-lit tone.
 */
 :root {
   color-scheme: dark;
 
   /* Color system */
-  --color-bg: var(--theme-background-color, #0d1f17);
-  --color-bg-soft: #122a20;
-  --color-surface: #173325;
-  --color-surface-elevated: #1f3e2f;
+  --color-bg: var(--theme-background-color, #131009);
+  --color-bg-soft: #1c1810;
+  --color-surface: #1c1810;
+  --color-surface-elevated: #252016;
   --color-ink: #f0ecdf;
-  --color-ink-muted: #d7d2c2;
-  --color-ink-soft: #aeb6a4;
-  --color-forest: var(--theme-primary-color, #163a2a);
-  --color-sage: #7f9a84;
-  --color-moss: #5d7b5d;
-  --color-olive: #6a7453;
-  --color-accent: var(--theme-accent-color, #d3b277);
-  --color-accent-soft: rgba(211, 178, 119, 0.14);
+  --color-ink-muted: #d6cdbb;
+  --color-ink-soft: #a99d88;
+  --color-forest: var(--theme-primary-color, #2a3024);
+  --color-sage: #9a8f7a;
+  --color-moss: #6d6550;
+  --color-olive: #7a6d53;
+  --color-accent: var(--theme-accent-color, #b9975a);
+  --color-accent-soft: rgba(185, 151, 90, 0.14);
+  --color-accent-secondary: #a3664f;
   --color-rule: rgba(232, 226, 206, 0.16);
 
   /* Typography: classical serif stack only */
@@ -84,7 +85,7 @@ body {
   background:
     radial-gradient(1200px 600px at 15% -10%, rgba(95, 123, 93, 0.22), transparent 60%),
     radial-gradient(1000px 500px at 90% 0%, rgba(22, 58, 42, 0.3), transparent 58%),
-    linear-gradient(180deg, #112b1f 0%, var(--color-bg) 44%, #0a1812 100%);
+    linear-gradient(180deg, #1f1911 0%, var(--color-bg) 46%, #0f0c08 100%);
   min-height: 100vh;
   overflow-x: clip;
 }
@@ -327,7 +328,7 @@ button:focus-visible {
   font-size: var(--step--1);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--color-sage);
+  color: color-mix(in srgb, var(--color-accent-secondary) 85%, #c6aa87 15%);
   margin: 0 0 var(--space-3);
 }
 
@@ -335,7 +336,7 @@ button:focus-visible {
   font-size: var(--content-eyebrow-font-size, 0.72rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: rgba(127, 154, 132, 0.74);
+  color: color-mix(in srgb, var(--color-accent-secondary) 78%, #d7c2a9 22%);
   margin: 0 0 var(--space-3);
 }
 
@@ -491,7 +492,7 @@ button:focus-visible {
   font-size: var(--step--1);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-sage);
+  color: color-mix(in srgb, var(--color-accent-secondary) 85%, #c6aa87 15%);
   margin: 0 0 var(--space-3);
 }
 
@@ -1563,22 +1564,22 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
 
 /* Home redesign: editorial dark literary layout — scoped to home page only */
 body.page--home {
-  --bg: #0B1210;
-  --primary: #0F2A22;
-  --accent: #C6A76A;
+  --bg: #131009;
+  --primary: #1f2a20;
+  --accent: #b9975a;
   --text-main: #E8E6E3;
-  --text-muted: #9CA3AF;
+  --text-muted: #b2a591;
   --border: rgba(198,167,106,0.15);
   background:
     radial-gradient(900px 520px at 18% 8%, rgba(198,167,106,.12), transparent 62%),
-    radial-gradient(760px 420px at 85% 10%, rgba(15,42,34,.46), transparent 68%),
+    radial-gradient(760px 420px at 85% 10%, rgba(49,38,26,.38), transparent 68%),
     var(--bg);
   color: var(--text-main);
 }
 
 body.page--home .card {
   border: 1px solid var(--border);
-  background: linear-gradient(165deg, rgba(15,42,34,.42), rgba(11,18,16,.62));
+  background: linear-gradient(165deg, rgba(36,30,21,.48), rgba(19,16,12,.72));
 }
 body.page--home .card:hover { transform: translateY(-4px); border-color: rgba(198,167,106,.4); box-shadow: 0 0 0 1px rgba(198,167,106,.2), var(--shadow-card); }
 
@@ -1610,7 +1611,7 @@ body.page--home .button-secondary { border-color: var(--border); }
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: clamp(1.25rem, 2.2vw, 1.8rem);
-  background: linear-gradient(160deg, rgba(15,42,34,.65), rgba(11,18,16,.7));
+  background: linear-gradient(160deg, rgba(38,31,22,.68), rgba(20,16,12,.78));
   animation: floatCard 7s ease-in-out infinite;
   min-height: 450px;
   display: flex;
