@@ -670,14 +670,7 @@ const initHomeThreadMap = () => {
 const initInlineRandomReadLink = () => {
   const link = document.querySelector('[data-random-read-inline]');
   if (!link) return;
-
-  link.addEventListener('click', async (event) => {
-    event.preventDefault();
-    const item = await fetchRandomReadItem();
-    if (item?.url) {
-      runNavigableTransition(item.url);
-    }
-  });
+  bindRandomReadTrigger({ trigger: link, disableWhileLoading: true });
 };
 
 const initPage = () => {

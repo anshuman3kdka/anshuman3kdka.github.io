@@ -1721,7 +1721,7 @@ body.page--home .home-index-entry {
 .home-thread-tag {
   width: 100%; text-align: left; font-family: var(--font-mono); font-size: 0.76rem; text-transform: lowercase;
   color: var(--color-ink-soft); background: transparent; border: 1px solid var(--color-rule); border-radius: 999px;
-  padding: 0.35rem 0.65rem; cursor: pointer;
+  padding: 0.35rem 0.65rem; cursor: pointer; min-height: 44px; display: flex; align-items: center;
 }
 .home-thread-tag:hover,
 .home-thread-tag.is-active { color: var(--color-accent); border-color: var(--color-accent); }
