@@ -631,6 +631,55 @@ const initQuoteRotator = () => {
   quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
 };
 
+
+const initHomeThreadMap = () => {
+  const tagButtons = Array.from(document.querySelectorAll('[data-thread-tag]'));
+  const threadItems = Array.from(document.querySelectorAll('[data-thread-item]'));
+  if (!tagButtons.length || !threadItems.length) return;
+
+  const clearHighlight = () => {
+    tagButtons.forEach((button) => button.classList.remove('is-active'));
+    threadItems.forEach((item) => {
+      item.classList.remove('is-highlighted', 'is-dimmed');
+    });
+  };
+
+  const applyHighlight = (tagValue, activeButton) => {
+    tagButtons.forEach((button) => button.classList.remove('is-active'));
+    activeButton?.classList.add('is-active');
+
+    threadItems.forEach((item) => {
+      const tags = String(item.dataset.tags || '').split('|').map((tag) => tag.trim()).filter(Boolean);
+      const isMatch = tags.includes(tagValue);
+      item.classList.toggle('is-highlighted', isMatch);
+      item.classList.toggle('is-dimmed', !isMatch);
+    });
+  };
+
+  tagButtons.forEach((button) => {
+    const tagValue = String(button.dataset.threadTag || '').trim().toLowerCase();
+    if (!tagValue) return;
+
+    button.addEventListener('mouseenter', () => applyHighlight(tagValue, button));
+    button.addEventListener('focus', () => applyHighlight(tagValue, button));
+    button.addEventListener('mouseleave', clearHighlight);
+    button.addEventListener('blur', clearHighlight);
+  });
+};
+
+const initInlineRandomReadLink = () => {
+  const link = document.querySelector('[data-random-read-inline]');
+  if (!link) return;
+
+  link.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const item = await fetchRandomReadItem();
+    if (item?.url) {
+      runNavigableTransition(item.url);
+    }
+  });
+};
+
 const initPage = () => {
   hydrateTransitionPresetFromStorage();
   resetNavigationState();
@@ -641,6 +690,8 @@ const initPage = () => {
   initRandomReadCard();
   initRandomReadButton();
   initQuoteRotator();
+  initHomeThreadMap();
+  initInlineRandomReadLink();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
