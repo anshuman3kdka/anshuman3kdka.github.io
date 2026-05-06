@@ -104,6 +104,7 @@ body::after {
   pointer-events: none;
   z-index: 0;
   animation: grain-drift 8s linear infinite;
+  will-change: background-position;
 }
 
 body > * {
