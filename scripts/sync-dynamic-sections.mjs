@@ -1,6 +1,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
+import { slugify, toSentenceCase, buildIndexPage, uniqueSections } from './content-utils.mjs';
 
 const root = process.cwd();
 const siteDataPath = path.join(root, '_data', 'site.yml');
@@ -40,66 +42,6 @@ const pageFields = [
   { name: 'noindex', label: 'Noindex (optional)', type: 'boolean', required: false },
   { name: 'body', label: 'Content', type: 'markdown' },
 ];
-
-const slugify = (value) => String(value || '')
-  .trim()
-  .toLowerCase()
-  .replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '');
-
-const toSentenceCase = (value) => String(value || '')
-  .replace(/[-_]+/g, ' ')
-  .replace(/\b\w/g, (char) => char.toUpperCase());
-
-const buildIndexPage = ({ label, slug, description }) => `---
-title: ${label}
-description: ${description || `Browse ${label} entries.`}
-section_key: ${slug}
-section_label: ${label}
----
-
-<section class="section">
-  {% assign current_time = 'now' | date: '%s' %}
-  {% capture section_path_prefix %}{{ page.section_key }}/{% endcapture %}
-  {% assign section_items = site.pages
-    | where_exp: "page", "page.path contains section_path_prefix"
-    | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time" %}
-  {% assign featured_section_items = section_items | where: "featured", true | sort: "featured_rank" %}
-  {% assign regular_section_items = section_items | where_exp: "page", "page.featured != true" | sort: "title" %}
-
-  {% if section_items.size > 0 %}
-  <div class="content-list">
-    {% for item in featured_section_items %}
-    <article class="content-item">
-      {% if item.eyebrow %}<p class="content-eyebrow">{{ item.eyebrow | escape }}</p>{% endif %}
-      <h3><a href="{{ item.url | relative_url | escape }}">{{ item.title | escape }}</a></h3>
-    </article>
-    {% endfor %}
-    {% for item in regular_section_items %}
-    <article class="content-item">
-      {% if item.eyebrow %}<p class="content-eyebrow">{{ item.eyebrow | escape }}</p>{% endif %}
-      <h3><a href="{{ item.url | relative_url | escape }}">{{ item.title | escape }}</a></h3>
-    </article>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="card">
-    <p class="card-text">${label} entries will appear here as they are added.</p>
-  </div>
-  {% endif %}
-</section>
-`;
-
-const uniqueSections = (sections) => {
-  const seen = new Set();
-  return sections.filter((section) => {
-    if (!section.slug || seen.has(section.slug)) return false;
-    seen.add(section.slug);
-    return true;
-  });
-};
 
 const main = async () => {
   const rawSiteData = await fs.readFile(siteDataPath, 'utf8');
@@ -158,7 +100,9 @@ ${generatedYaml}${generatedMarkerEnd}`;
   console.log(`Synced ${dynamicSections.length} dynamic sections.`);
 };
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
