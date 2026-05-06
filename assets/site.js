@@ -568,67 +568,62 @@ const initRandomReadCard = () => {
   renderRandomItem();
 };
 
-const pickRandomQuoteIndex = (quotes, previousIndex) => {
-  if (!Array.isArray(quotes) || quotes.length === 0) return -1;
-  if (quotes.length === 1) return 0;
-
-  let nextIndex = previousIndex;
-  while (nextIndex === previousIndex) {
-    nextIndex = Math.floor(Math.random() * quotes.length);
-  }
-
-  return nextIndex;
-};
-
 const initQuoteRotator = () => {
   const rotator = document.querySelector('[data-quote-rotator]');
   if (!rotator) return;
 
-  const quoteTextElement = rotator.querySelector('[data-quote-rotator-text]');
-  const quoteDataElement = rotator.querySelector('[data-quote-rotator-items]');
-  if (!quoteTextElement || !quoteDataElement) return;
-
-  let quotes = [];
-
-  try {
-    const parsed = JSON.parse(quoteDataElement.textContent || '[]');
-    quotes = parsed
-      .map((quote) => String(quote || '').trim())
-      .filter((quote) => quote.length > 0);
-  } catch (error) {
-    console.error('Quote rotator data error:', error);
-    return;
-  }
-
-  if (!quotes.length) return;
+  const quoteElements = Array.from(rotator.querySelectorAll('[data-quote-item]'));
+  if (quoteElements.length === 0) return;
 
   if (quoteRotatorTimeoutId) {
     window.clearTimeout(quoteRotatorTimeoutId);
     quoteRotatorTimeoutId = null;
   }
 
-  const displayDurationMs = Number.parseInt(rotator.dataset.quoteInterval || '5000', 10) || 5000;
-  const fadeDurationMs = Number.parseInt(rotator.dataset.quoteFadeMs || '600', 10) || 600;
-  let currentIndex = Math.floor(Math.random() * quotes.length);
-  quoteTextElement.textContent = quotes[currentIndex];
+  // Check prefers-reduced-motion and show only the first quote without animation
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (quoteRotatorTimeoutId) {
+      window.clearTimeout(quoteRotatorTimeoutId);
+      quoteRotatorTimeoutId = null;
+    }
 
-  if (quotes.length === 1) return;
+    // Set only the first quote as active
+    quoteElements.forEach((element, index) => {
+      if (index === 0) {
+        element.classList.add('is-active');
+      }
+      element.classList.remove('is-fading-out');
+    });
 
-  const transitionQuote = () => {
-    rotator.classList.add('is-fading');
+    return;
+  }
 
-    window.setTimeout(() => {
-      const nextIndex = pickRandomQuoteIndex(quotes, currentIndex);
-      if (nextIndex < 0) return;
+  let currentIndex = 0;
 
-      currentIndex = nextIndex;
-      quoteTextElement.textContent = quotes[currentIndex];
-      rotator.classList.remove('is-fading');
-      quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
-    }, fadeDurationMs);
+  const runRotatorCycle = () => {
+    const currentElement = quoteElements[currentIndex];
+
+    // Fade in
+    currentElement.classList.add('is-active');
+
+    // Hold for 5 seconds
+    quoteRotatorTimeoutId = window.setTimeout(() => {
+      // Start fade out
+      currentElement.classList.remove('is-active');
+      currentElement.classList.add('is-fading-out');
+
+      // Wait 1s for fade out, then hold 1.5s dark (2.5s total)
+      quoteRotatorTimeoutId = window.setTimeout(() => {
+        currentElement.classList.remove('is-fading-out');
+        currentIndex = (currentIndex + 1) % quoteElements.length;
+        runRotatorCycle();
+      }, 2500);
+
+    }, 5000);
   };
 
-  quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
+  // Start the first cycle
+  runRotatorCycle();
 };
 
 const initPage = () => {
