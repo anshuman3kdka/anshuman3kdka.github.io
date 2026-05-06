@@ -1,7 +1,7 @@
 ---
 title: Another Poet
 author: Anshuman3kdka
-eyebrow: on ruinous devotion
+eyebrow: On ruinous devotion
 ---
 The morrow’s lark, the midnight dark,  
 The hue of noon, the evening’s moon,  

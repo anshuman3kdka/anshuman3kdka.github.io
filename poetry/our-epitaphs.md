@@ -1,7 +1,7 @@
 ---
 title: Our Epitaphs
 author: Anshuman3kdka
-eyebrow: on waiting
+eyebrow: On waiting
 ---
 An unused toothbrush beside mine  
 It’s there for weeks, exactly nine.  

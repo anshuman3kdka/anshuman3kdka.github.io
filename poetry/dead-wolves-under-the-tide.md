@@ -1,7 +1,7 @@
 ---
 title: Dead Wolves Under The Tide
 author: Anshuman3kdka
-eyebrow: on fate
+eyebrow: On fate
 ---
 The yarn of Fate. The farm of hate,  
 The harm would sate but not abate,  

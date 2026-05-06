@@ -1,7 +1,7 @@
 ---
 title: The Villain
 author: Anshuman3kdka
-eyebrow: on revolution
+eyebrow: On revolution
 ---
 We shed our skins in twilight's hush,  
 Our scars like constellations blush.  

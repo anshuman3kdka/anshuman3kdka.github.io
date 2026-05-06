@@ -1,7 +1,7 @@
 ---
 title: A merchant's Initiation
 author: Anshuman3kdka
-eyebrow: On Commodification of Love
+eyebrow: On commodification of love
 noindex: true
 draft: true
 featured: false

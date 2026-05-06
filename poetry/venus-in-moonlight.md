@@ -1,7 +1,7 @@
 ---
 title: Venus in Moonlight
 author: Anshuman3kdka
-eyebrow: on silent bewitchment
+eyebrow: On silent bewitchment
 ---
 And sometimes when your cup goes cold,  
 From frost of words that went untold,  

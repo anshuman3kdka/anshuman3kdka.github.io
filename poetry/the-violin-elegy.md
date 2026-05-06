@@ -1,7 +1,7 @@
 ---
 title: The Violin Elegy
 author: Anshuman3kdka
-eyebrow: on fatal love
+eyebrow: On fatal love
 ---
 The violins struck a higher note,  
 My corpse flows down in wooden boat.  

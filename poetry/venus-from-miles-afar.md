@@ -1,7 +1,7 @@
 ---
 title: Venus From Miles Afar
 author: Anshuman3kdka
-eyebrow: on unrequited longing
+eyebrow: On unrequited longing
 ---
 That drunken gaze from miles afar,  
 Those drooping lids like falling star,  

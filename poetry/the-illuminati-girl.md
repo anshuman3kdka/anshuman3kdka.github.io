@@ -1,7 +1,7 @@
 ---
 title: The Illuminati Girl
 author: Anshuman3kdka
-eyebrow: on new love
+eyebrow: On new love
 ---
 [Verse 1]  
 I'm bad at this, as you'll now see,  

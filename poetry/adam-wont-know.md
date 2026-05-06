@@ -1,7 +1,7 @@
 ---
 title: Adam Won’t Know
 author: Anshuman3kdka
-eyebrow: on temptation
+eyebrow: On temptation
 ---
 It’s right there, just within your reach,  
 Care not about the trust you’ll breach,  

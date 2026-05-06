@@ -1,6 +1,6 @@
 ---
 title: Anshuman3kdka.In
-eyebrow: On This Site
+eyebrow: On this site
 description: The project that had no business existing.
 image: /assets/uploads/Screenshot_20260305-125803.webp
 ---

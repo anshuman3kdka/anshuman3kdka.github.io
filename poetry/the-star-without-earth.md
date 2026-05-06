@@ -1,7 +1,7 @@
 ---
 title: The Star Without Earth
 author: Anshuman3kdka
-eyebrow: on grief
+eyebrow: On grief
 ---
 There's much to say when Earth is dead,  
 When Sun next day sees one less head,  
