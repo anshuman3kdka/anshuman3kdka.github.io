@@ -581,54 +581,47 @@ const pickRandomQuoteIndex = (quotes, previousIndex) => {
 };
 
 const initQuoteRotator = () => {
-  const rotator = document.querySelector('[data-quote-rotator]');
+  const rotator = document.querySelector('[data-quote-rotator-v2]');
   if (!rotator) return;
 
-  const quoteTextElement = rotator.querySelector('[data-quote-rotator-text]');
-  const quoteDataElement = rotator.querySelector('[data-quote-rotator-items]');
-  if (!quoteTextElement || !quoteDataElement) return;
-
-  let quotes = [];
-
-  try {
-    const parsed = JSON.parse(quoteDataElement.textContent || '[]');
-    quotes = parsed
-      .map((quote) => String(quote || '').trim())
-      .filter((quote) => quote.length > 0);
-  } catch (error) {
-    console.error('Quote rotator data error:', error);
-    return;
-  }
-
-  if (!quotes.length) return;
+  const items = Array.from(rotator.querySelectorAll('[data-quote-rotator-item]'));
+  if (!items.length) return;
 
   if (quoteRotatorTimeoutId) {
     window.clearTimeout(quoteRotatorTimeoutId);
     quoteRotatorTimeoutId = null;
   }
 
-  const displayDurationMs = Number.parseInt(rotator.dataset.quoteInterval || '5000', 10) || 5000;
-  const fadeDurationMs = Number.parseInt(rotator.dataset.quoteFadeMs || '600', 10) || 600;
-  let currentIndex = Math.floor(Math.random() * quotes.length);
-  quoteTextElement.textContent = quotes[currentIndex];
+  const FADE_IN_MS = 1200;
+  const HOLD_MS = 5000;
+  const FADE_OUT_MS = 1000;
+  const DARK_HOLD_MS = 1500;
+  let currentIndex = 0;
 
-  if (quotes.length === 1) return;
+  const showNext = (index) => {
+    const item = items[index];
+    item.style.transition = `opacity ${FADE_IN_MS}ms ease`;
+    item.style.opacity = '1';
 
-  const transitionQuote = () => {
-    rotator.classList.add('is-fading');
+    quoteRotatorTimeoutId = window.setTimeout(() => {
+      item.style.transition = `opacity ${FADE_OUT_MS}ms ease`;
+      item.style.opacity = '0';
 
-    window.setTimeout(() => {
-      const nextIndex = pickRandomQuoteIndex(quotes, currentIndex);
-      if (nextIndex < 0) return;
-
-      currentIndex = nextIndex;
-      quoteTextElement.textContent = quotes[currentIndex];
-      rotator.classList.remove('is-fading');
-      quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
-    }, fadeDurationMs);
+      quoteRotatorTimeoutId = window.setTimeout(() => {
+        currentIndex = (index + 1) % items.length;
+        showNext(currentIndex);
+      }, FADE_OUT_MS + DARK_HOLD_MS);
+    }, FADE_IN_MS + HOLD_MS);
   };
 
-  quoteRotatorTimeoutId = window.setTimeout(transitionQuote, displayDurationMs);
+  if (items.length === 1) {
+    const item = items[0];
+    item.style.transition = `opacity ${FADE_IN_MS}ms ease`;
+    item.style.opacity = '1';
+    return;
+  }
+
+  quoteRotatorTimeoutId = window.setTimeout(() => showNext(currentIndex), 500);
 };
 
 const initPage = () => {

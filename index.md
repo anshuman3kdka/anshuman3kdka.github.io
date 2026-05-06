@@ -14,6 +14,14 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
     </div>
   </div>
 
+  {% if site.data.home_quote_rotator.enabled %}
+  <div class="home-quote-rotator" data-quote-rotator-v2 aria-label="Rotating quote">
+    {% for quote in site.data.home_quote_rotator.quotes %}
+    <p class="home-quote-rotator__item" data-quote-rotator-item>{{ quote }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <aside class="home-hero__right" aria-label="Random read">
     <article class="currently-reading" data-random-read-card>
       <p class="card-label">Random Read</p>
