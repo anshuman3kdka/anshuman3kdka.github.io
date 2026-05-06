@@ -3,6 +3,15 @@ title: Home
 description: Anshuman’s personal site featuring thoughtful essays, original poetry, and hands-on projects, with notes on writing, literature, and creative experiments.
 ---
 
+{% assign quote_rotator = site.data.home_quote_rotator %}
+{% if quote_rotator.enabled and quote_rotator.quotes.size > 0 %}
+<div class="home-quote-container" data-quote-rotator>
+  {% for quote in quote_rotator.quotes %}
+  <p class="home-quote-text" data-quote-item>{{ quote | escape }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
 <section class="section section--hero home-hero" aria-labelledby="hero-title">
   <div class="home-hero__left">
     <p class="home-eyebrow">WRITER · STUDENT · OCCASIONALLY VIBE-CODES</p>
