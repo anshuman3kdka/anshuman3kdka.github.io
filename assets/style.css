@@ -1327,6 +1327,10 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
     font-size: 11pt !important;
   }
 
+  body::after {
+    display: none;
+  }
+
   .site-header,
   .site-footer,
   .resume-download-btn,
