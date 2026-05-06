@@ -178,7 +178,7 @@ button:focus-visible {
   position: sticky;
   top: clamp(0.5rem, 2vw, var(--space-4));
   z-index: 20;
-  background: color-mix(in srgb, var(--color-surface) 86%, black 14% / 78%);
+  background: rgba(14, 35, 25, 0.78);
   border: 1px solid var(--color-rule);
   border-radius: 999px;
   box-shadow: var(--shadow-soft);
@@ -220,24 +220,24 @@ button:focus-visible {
 }
 
 .site-nav a:hover {
-  border-color: color-mix(in srgb, var(--color-accent) 70%, transparent);
-  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  border-color: rgba(185, 151, 90, 0.4);
+  background: rgba(185, 151, 90, 0.08);
 }
 
 .site-nav a.is-active {
-  color: color-mix(in srgb, var(--color-ink) 94%, #fff7e5 6%);
-  border-color: color-mix(in srgb, var(--color-accent) 95%, #f2d5a4 5%);
-  background: color-mix(in srgb, var(--color-accent) 34%, transparent);
+  color: #fff7e5;
+  border-color: rgba(185, 151, 90, 0.95);
+  background: rgba(185, 151, 90, 0.26);
   font-weight: 600;
 }
 
 .site-nav a.is-active:hover {
-  border-color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 42%, transparent);
+  border-color: rgba(185, 151, 90, 1);
+  background: rgba(185, 151, 90, 0.32);
 }
 
 .site-nav a.is-active:focus-visible {
-  outline-color: color-mix(in srgb, var(--color-accent) 76%, #ffe2aa 24%);
+  outline-color: #ffe2aa;
 }
 
 .site-main {
@@ -329,6 +329,10 @@ button:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: color-mix(in srgb, var(--color-accent-secondary) 85%, var(--color-accent) 15%);
+  margin: 0 0 var(--space-3);
+}
+
+.content-eyebrow {
   font-size: var(--content-eyebrow-font-size, 0.72rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -398,7 +402,7 @@ button:focus-visible {
 .hero-quote-rotator {
   width: min(100%, 40rem);
   padding: var(--space-4);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  border: 1px solid rgba(185, 151, 90, 0.28);
   border-radius: var(--radius-md);
   background: linear-gradient(180deg, rgba(240, 236, 223, 0.05), rgba(240, 236, 223, 0.02));
   transition: opacity 0.6s ease;
@@ -1033,8 +1037,8 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   margin: 0.45rem 0 0;
   padding: 0.2rem 0.55rem;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--color-surface) 90%, black 10%);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  background: rgba(14, 35, 25, 0.92);
+  border: 1px solid rgba(185, 151, 90, 0.28);
   color: var(--color-ink-soft);
   font-size: 0.76rem;
   white-space: nowrap;
