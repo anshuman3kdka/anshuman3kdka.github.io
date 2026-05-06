@@ -580,6 +580,24 @@ const initQuoteRotator = () => {
     quoteRotatorTimeoutId = null;
   }
 
+  // Check prefers-reduced-motion and show only the first quote without animation
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (quoteRotatorTimeoutId) {
+      window.clearTimeout(quoteRotatorTimeoutId);
+      quoteRotatorTimeoutId = null;
+    }
+
+    // Set only the first quote as active
+    quoteElements.forEach((element, index) => {
+      if (index === 0) {
+        element.classList.add('is-active');
+      }
+      element.classList.remove('is-fading-out');
+    });
+
+    return;
+  }
+
   let currentIndex = 0;
 
   const runRotatorCycle = () => {
