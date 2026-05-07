@@ -1,7 +1,7 @@
 ---
 title:  About
 description: About Anshuman Pandey and his writing background.
-portrait_image: /assets/uploads/IMG_20260218_133159763 (1) (1).webp
+portrait_image: /assets/uploads/img-20260218-133159763-1-1.webp
 portrait_alt: Portrait of Anshuman Pandey
 portrait_caption: Anshuman Pandey
 ---
@@ -11,7 +11,7 @@ portrait_caption: Anshuman Pandey
       class="about-portrait"
       role="img"
       aria-label="{{ page.portrait_alt | default: 'Portrait of Anshuman Pandey' | escape }}"
-      style="background-image: url('{{ page.portrait_image | default: '/assets/WA_1771760315348.jpg' | escape }}');"
+      style="background-image: url('{{ page.portrait_image | default: '/assets/about-portrait-default.jpg' | escape }}');"
     ></div>
     <figcaption class="about-caption">{{ page.portrait_caption | default: 'Anshuman Pandey' | escape }}</figcaption>
   </figure>
