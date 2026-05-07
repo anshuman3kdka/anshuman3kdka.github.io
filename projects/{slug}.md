@@ -2,7 +2,7 @@
 title: Anshuman3kdka.In
 eyebrow: On This Site
 description: The project that had no business existing.
-image: /assets/uploads/Screenshot_20260305-125803.webp
+image: /assets/uploads/screenshot-20260305-125803.webp
 ---
 ### The project that had no business existing.
 
