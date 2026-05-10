@@ -1,35 +1,72 @@
 ---
 title: Poetry
 description: Read all the latest poetic endeavours of Anshuman3kdka
+category_browse: true
 ---
-<section class="section">
+
+<section class="section category-browse" aria-label="Poetry entries">
   {% assign current_time = 'now' | date: '%s' %}
   {% assign poems = site.pages
     | where_exp: "page", "page.path contains 'poetry/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
-    | where_exp: "page", "page.publish_date == nil or page.publish_date == '' or page.publish_date <= site.time" %}
+    | where_exp: "page", "page.draft != true" %}
   {% assign featured_poems = poems | where: "featured", true | sort: "featured_rank" %}
   {% assign regular_poems = poems | where_exp: "page", "page.featured != true" | sort: "title" %}
+  {% assign public_item_count = 0 %}
+  {% for poem in poems %}
+    {% assign item_publish_time = poem.publish_date | date: '%s' %}
+    {% assign item_is_public = true %}
+    {% if poem.publish_date and poem.publish_date != '' and item_publish_time > current_time %}
+      {% assign item_is_public = false %}
+    {% endif %}
+    {% if item_is_public %}
+      {% assign public_item_count = public_item_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
 
-  {% if poems.size > 0 %}
-  <div class="content-list">
+  <div class="category-browse-summary tactile-deboss">
+    <p class="category-browse-summary__label">Poetry shelf</p>
+    <p class="category-browse-summary__count">{{ public_item_count }} {% if public_item_count == 1 %}piece{% else %}pieces{% endif %}</p>
+  </div>
+
+  {% if public_item_count > 0 %}
+  <div class="category-browse-list">
     {% for poem in featured_poems %}
-    <article class="content-item">
-      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow | escape }}</p>{% endif %}
-      <h3><a href="{{ poem.url | relative_url | escape }}">{{ poem.title | escape }}</a></h3>
+    {% assign item_publish_time = poem.publish_date | date: '%s' %}
+    {% unless poem.publish_date and poem.publish_date != '' and item_publish_time > current_time %}
+    {% assign item_words = poem.content | strip_html | number_of_words %}
+    {% assign read_minutes = item_words | divided_by: 180 %}
+    {% if read_minutes < 1 %}{% assign read_minutes = 1 %}{% endif %}
+    <article class="category-browse-item tactile-card">
+      <a class="category-browse-item__link" href="{{ poem.url | relative_url | escape }}">
+        <span class="category-browse-item__meta">{% if poem.eyebrow %}{{ poem.eyebrow | escape }}{% else %}Poetry{% endif %}</span>
+        <span class="category-browse-item__time tactile-deboss">{{ read_minutes }} min</span>
+        <h2>{{ poem.title | escape }}</h2>
+        <p>{% if poem.description %}{{ poem.description | escape }}{% else %}{{ poem.content | strip_html | normalize_whitespace | truncate: 150 }}{% endif %}</p>
+      </a>
     </article>
+    {% endunless %}
     {% endfor %}
     {% for poem in regular_poems %}
-    <article class="content-item">
-      {% if poem.eyebrow %}<p class="content-eyebrow">{{ poem.eyebrow | escape }}</p>{% endif %}
-      <h3><a href="{{ poem.url | relative_url | escape }}">{{ poem.title | escape }}</a></h3>
+    {% assign item_publish_time = poem.publish_date | date: '%s' %}
+    {% unless poem.publish_date and poem.publish_date != '' and item_publish_time > current_time %}
+    {% assign item_words = poem.content | strip_html | number_of_words %}
+    {% assign read_minutes = item_words | divided_by: 180 %}
+    {% if read_minutes < 1 %}{% assign read_minutes = 1 %}{% endif %}
+    <article class="category-browse-item tactile-card">
+      <a class="category-browse-item__link" href="{{ poem.url | relative_url | escape }}">
+        <span class="category-browse-item__meta">{% if poem.eyebrow %}{{ poem.eyebrow | escape }}{% else %}Poetry{% endif %}</span>
+        <span class="category-browse-item__time tactile-deboss">{{ read_minutes }} min</span>
+        <h2>{{ poem.title | escape }}</h2>
+        <p>{% if poem.description %}{{ poem.description | escape }}{% else %}{{ poem.content | strip_html | normalize_whitespace | truncate: 150 }}{% endif %}</p>
+      </a>
     </article>
+    {% endunless %}
     {% endfor %}
   </div>
   {% else %}
-  <div class="card">
-    <p class="card-text">No poems yet. Check back soon.</p>
+  <div class="category-browse-empty tactile-deboss">
+    <p>The desk is empty here. Poems will appear as they are added.</p>
   </div>
   {% endif %}
 </section>
