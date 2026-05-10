@@ -626,47 +626,6 @@ const initQuoteRotator = () => {
   runRotatorCycle();
 };
 
-
-const initReadingRoom = () => {
-  const readingRoom = document.querySelector('[data-reading-room]');
-  const header = document.querySelector('[data-reading-room-header]');
-  if (!readingRoom) return;
-  if (readingRoom.dataset.readingRoomInitialized === 'true') return;
-  readingRoom.dataset.readingRoomInitialized = 'true';
-
-  const blocks = Array.from(readingRoom.querySelectorAll('p, ul, ol, blockquote, h2, h3, h4'));
-  blocks.forEach((block) => {
-    block.classList.add('reading-room-block');
-  });
-
-  const updateHeaderState = () => {
-    if (!header) return;
-    document.body.classList.toggle('is-reading-room-scrolled', window.scrollY > 80);
-  };
-
-  updateHeaderState();
-  window.addEventListener('scroll', updateHeaderState, { passive: true });
-
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    blocks.forEach((block) => block.classList.add('is-visible'));
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, {
-    root: null,
-    rootMargin: '0px 0px -20% 0px',
-    threshold: 0.12,
-  });
-
-  blocks.forEach((block) => observer.observe(block));
-};
-
 const initPage = () => {
   hydrateTransitionPresetFromStorage();
   resetNavigationState();
@@ -677,7 +636,6 @@ const initPage = () => {
   initRandomReadCard();
   initRandomReadButton();
   initQuoteRotator();
-  initReadingRoom();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
@@ -687,7 +645,6 @@ document.addEventListener("pageshow", () => {
   resetTransientUiState();
   highlightCurrentNavLink();
   initScrollProgress();
-  initReadingRoom();
 });
 
 document.addEventListener("pagehide", () => {

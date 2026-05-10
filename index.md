@@ -3,93 +3,63 @@ title: Home
 description: Anshuman’s personal site featuring thoughtful essays, original poetry, and hands-on projects, with notes on writing, literature, and creative experiments.
 ---
 
-{% assign home_essays = site.pages | where_exp: "page", "page.path contains 'essays/'" | where_exp: "page", "page.name != 'index.md'" | where_exp: "page", "page.draft != true" %}
-{% assign home_poems = site.pages | where_exp: "page", "page.path contains 'poetry/'" | where_exp: "page", "page.name != 'index.md'" | where_exp: "page", "page.draft != true" %}
-{% assign home_prose = site.pages | where_exp: "page", "page.path contains 'prose/'" | where_exp: "page", "page.name != 'index.md'" | where_exp: "page", "page.draft != true" %}
-{% assign home_projects = site.pages | where_exp: "page", "page.path contains 'projects/'" | where_exp: "page", "page.name != 'index.md'" | where_exp: "page", "page.draft != true" %}
-{% assign home_creative_count = home_poems.size | plus: home_prose.size %}
-
 {% assign quote_rotator = site.data.home_quote_rotator %}
 {% if quote_rotator.enabled and quote_rotator.quotes.size > 0 %}
-<div class="home-quote-container" data-quote-rotator aria-label="Rotating writing fragments">
+<div class="home-quote-container" data-quote-rotator>
   {% for quote in quote_rotator.quotes %}
   <p class="home-quote-text" data-quote-item>{{ quote | escape }}</p>
   {% endfor %}
 </div>
 {% endif %}
 
-<section class="section section--hero home-entry" aria-labelledby="hero-title">
-  <div class="home-entry__copy">
-    <p class="home-eyebrow tactile-deboss">WRITER · STUDENT · OCCASIONALLY VIBE-CODES</p>
-    <h1 class="home-entry__title" id="hero-title">Words that <em>question</em>. Stories that <em>stay</em>.</h1>
-    <p class="home-entry__lead">A small reading room for essays, poems, stories, projects, and other attempts at understanding the world before it understands me first.</p>
+<section class="section section--hero home-hero" aria-labelledby="hero-title">
+  <div class="home-hero__left">
+    <p class="home-eyebrow">WRITER · STUDENT · OCCASIONALLY VIBE-CODES</p>
+    <h1 class="home-hero__title" id="hero-title">Words that question.<br><em>Stories that stay.</em></h1>
+    <p class="home-hero__lead">I write essays, fiction, and poetry. Usually about literature, occasionally about why most of it fails.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/essays/">Explore Essays <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="/projects/">Browse Projects <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 
-  <aside class="home-random" aria-labelledby="random-read-title">
-    <p class="card-label">Serendipitous Discovery</p>
-    <h2 id="random-read-title">Don’t choose. Let the archive choose.</h2>
-    <button class="tactile-orb tactile-deboss home-random__orb" type="button" data-random-read aria-describedby="random-read-status">
-      <span>Roll<br>the Dice</span>
-    </button>
-    <p class="home-random__status" id="random-read-status" data-random-read-status aria-live="polite">Tap for a random read.</p>
+  <aside class="home-hero__right" aria-label="Random read">
+    <article class="currently-reading" data-random-read-card>
+      <p class="card-label">Random Read</p>
+      <p class="section-eyebrow card-random-read-eyebrow" data-random-read-eyebrow>On lost idealism</p>
+      <h2 class="card-title" data-random-read-title>Merchants of Lush II</h2>
+      <p class="card-text" data-random-read-message>A random pick from the archive.</p>
+      <div class="card-random-read-actions">
+        <a class="card-link" data-random-read-link aria-disabled="true">Read this piece</a>
+        <button class="button button-secondary" type="button" data-random-read-refresh>Pick another</button>
+      </div>
+    </article>
   </aside>
 </section>
 
-<section class="section home-categories" aria-labelledby="categories-title">
-  <div class="home-section-kicker">Browse the shelves</div>
-  <h2 class="section-title home-section-title" id="categories-title">Choose a door, not a menu.</h2>
-
-  <div class="home-category-grid" aria-label="Writing categories">
-    <a class="home-category-card home-category-card--essays tactile-card" href="/essays/">
-      <span class="home-category-card__label">Essays</span>
-      <strong>Ideas, arguments, and literary autopsies.</strong>
-      <span class="home-category-card__count">{{ home_essays.size }} {% if home_essays.size == 1 %}piece{% else %}pieces{% endif %}</span>
-    </a>
-
-    <a class="home-category-card home-category-card--creative tactile-card" href="/creative/">
-      <span class="home-category-card__label">Creative</span>
-      <strong>Poetry, prose, horror, and strange little worlds.</strong>
-      <span class="home-category-card__count">{{ home_creative_count }} {% if home_creative_count == 1 %}piece{% else %}pieces{% endif %}</span>
-    </a>
-
-    <a class="home-category-card home-category-card--projects tactile-card" href="/projects/">
-      <span class="home-category-card__label">Projects</span>
-      <strong>Things built while learning what the buttons do.</strong>
-      <span class="home-category-card__count">{{ home_projects.size }} {% if home_projects.size == 1 %}project{% else %}projects{% endif %}</span>
-    </a>
+<section class="section" aria-labelledby="categories-title">
+  <h2 class="section-title home-section-title" id="categories-title">Explore by Category</h2>
+  <div class="home-category-grid">
+    <article class="card home-min-card"><h3 class="card-title">Essays</h3><p class="card-text">Ideas, arguments and reflections.</p><a class="card-link" href="/essays/">Browse essays</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Creative</h3><p class="card-text">Stories, scenes and worlds.</p><a class="card-link" href="/creative/">Browse creative</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Projects</h3><p class="card-text">Things I’m building and experimenting.</p><a class="card-link" href="/projects/">View projects</a></article>
+    <article class="card home-min-card"><h3 class="card-title">Achievements</h3><p class="card-text">Milestones and recognitions.</p><a class="card-link" href="/achievements/">See achievements</a></article>
   </div>
 </section>
 
-<section class="section home-recent" aria-labelledby="featured-writing-title">
+<section class="section home-metrics" aria-label="Site metrics">
+  <p>28+ essays written <span aria-hidden="true">·</span> 15+ creative pieces <span aria-hidden="true">·</span> 6 active projects <span aria-hidden="true">·</span> 8+ achievements</p>
+</section>
+
+<section class="section" aria-labelledby="featured-writing-title">
   <div class="home-featured-head">
-    <div>
-      <div class="home-section-kicker">Recent from the desk</div>
-      <h2 class="section-title home-section-title" id="featured-writing-title">Three ways in.</h2>
-    </div>
-    <a class="button button-secondary" href="/search/">Search archive <span aria-hidden="true">→</span></a>
+    <h2 class="section-title home-section-title" id="featured-writing-title">Recent from the Desk</h2>
+    <a class="button button-secondary" href="/essays/">View all essays</a>
   </div>
-
   <div class="home-desk-grid">
-    <article class="home-feature tactile-card">
-      <p class="card-label">Horror</p>
-      <h3 class="card-title">A Letter to You (Red Pen Edit)</h3>
-      <p class="card-text">Not every letter is meant to comfort you.</p>
-      <a class="card-link" href="/prose/A_letter_to_you/">Read prose</a>
-    </article>
-
-    <article class="home-feature tactile-card">
-      <p class="card-label">Poetry</p>
-      <h3 class="card-title">Merchants of Lush II</h3>
-      <p class="card-text">A poem about lost idealism, bargains, and the glass we keep rebuilding.</p>
-      <a class="card-link" href="/poetry/merchants-of-lush-ii/">Read poem</a>
-    </article>
-
-    <article class="home-feature tactile-card">
-      <p class="card-label">Project</p>
-      <h3 class="card-title">Anshuman3kdka.In</h3>
-      <p class="card-text">The project that had no business existing, built one confusing button at a time.</p>
-      <a class="card-link" href="/projects/">View project</a>
-    </article>
+    <article class="card home-feature"><p class="card-label">Horror</p><h3 class="card-title">A Letter to You (Red Pen Edit)</h3><p class="card-text">Not every letter is meant to comfort you.</p><a class="card-link" href="/prose/A_letter_to_you/">Read prose</a></article>
+    <article class="card home-feature"><p class="card-label">Essay</p><h3 class="card-title">On Lost Idealism</h3><p class="card-text">Chasing ideals in a world that moved on.</p><a class="card-link" href="/essays/">Read essay</a></article>
+    <article class="card home-feature"><p class="card-label">Poetry</p><h3 class="card-title">Things That Don’t Heal</h3><p class="card-text">A small attempt at saying what stays.</p><a class="card-link" href="/poetry/">Read poem</a></article>
   </div>
 </section>
 

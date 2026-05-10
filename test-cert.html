@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      :root {
+        --content-eyebrow-font-size: {{ site.data.site.content_eyebrow_font_size | default: '0.72rem' }};
+      }
+    </style>
+    {% assign site_title = site.data.site.site_title | default: 'Anshuman3kdka' %}
+    {% assign site_tagline = site.data.site.site_tagline | default: 'Writing portfolio' %}
+    {% assign site_description = site.data.site.site_description | default: 'Anshuman3kdka — essays, projects, and creative technology.' %}
+    {% assign meta_description = page.description | default: site_description %}
+    {% assign site_base_url = site.url | default: site.data.site.brand_url | default: '' %}
+    {% assign canonical_path = page.url | default: '/' %}
+    {% assign canonical_url = canonical_path | absolute_url %}
+    {% if site_base_url != '' %}
+      {% assign canonical_url = site_base_url | append: canonical_path %}
+    {% endif %}
+    {% assign social_image = page.social_image | default: page.featured_image | default: site.data.site.social_image | default: site.data.site.featured_image %}
+    {% assign social_image_url = '' %}
+    {% if social_image %}
+      {% assign social_image_url = social_image | absolute_url %}
+      {% if site_base_url != '' and social_image contains '://' == false %}
+        {% assign social_image_url = site_base_url | append: social_image %}
+      {% endif %}
+    {% endif %}
+    <title>{{ page.title | escape }} · {{ site_title | escape }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ meta_description | escape }}" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="{{ canonical_url | escape }}" />
+    <meta property="og:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta property="og:description" content="{{ meta_description | escape }}" />
+    <meta property="og:type" content="{{ page.og_type | default: 'website' | escape }}" />
+    <meta property="og:url" content="{{ canonical_url | escape }}" />
+    {% if social_image_url != '' %}
+    <meta property="og:image" content="{{ social_image_url | escape }}" />
+    {% endif %}
+    <meta name="twitter:card" content="{{ page.twitter_card | default: 'summary_large_image' | escape }}" />
+    <meta name="twitter:title" content="{{ page.title | default: site_title | escape }}" />
+    <meta name="twitter:description" content="{{ meta_description | escape }}" />
+    {% if social_image_url != '' %}
+    <meta name="twitter:image" content="{{ social_image_url | escape }}" />
+    {% endif %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png?v=20260223' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png?v=20260223' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png?v=20260223' | relative_url }}">
+    <link rel="shortcut icon" href="{{ '/favicon.ico?v=20260223' | relative_url }}">
+    <link rel="manifest" href="{{ '/site.webmanifest?v=20260223' | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    {% assign analytics = site.data.site.analytics %}
+    {% if analytics and analytics.enabled %}
+      {% if analytics.provider == 'plausible' and analytics.domain and analytics.script_src %}
+      <script defer data-domain="{{ analytics.domain | escape }}" src="{{ analytics.script_src | escape }}"></script>
+      {% elsif analytics.provider == 'umami' and analytics.umami_website_id and analytics.script_src %}
+      <script defer data-website-id="{{ analytics.umami_website_id | escape }}" src="{{ analytics.script_src | escape }}"></script>
+      {% endif %}
+    {% endif %}
+  </head>
+
+  <body class="is-loading">
+    <div class="scroll-progress" aria-hidden="true" data-scroll-progress>
+      <div class="scroll-progress__fill" data-scroll-progress-fill></div>
+    </div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="header-quick-actions" data-header-quick-actions>
+      <button class="random-read-button" type="button" data-random-read>Random Read</button>
+      <a class="quick-action-link" href="{{ '/contact/' | relative_url }}" aria-label="Hire me contact page">
+        <svg class="quick-action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span aria-hidden="true">Hire Me</span>
+      </a>
+      <p class="random-read-status" data-random-read-status aria-live="polite"></p>
+    </div>
+
+    <div class="site-shell">
+      <!-- Global navigation. Update nav labels/links in this file. -->
+      <header class="site-header">
+        <div class="nav-bar">
+          <a class="brand-link" href="{{ '/' | relative_url }}">{{ site_title | escape }}</a>
+          <nav class="site-nav" aria-label="Primary">
+            {% if site.data.site.header_links %}
+              {% assign current_path = page.url | default: '/' %}
+              {% assign current_path_with_slash = current_path %}
+              {% if current_path_with_slash != '/' and current_path_with_slash | slice: -1, 1 != '/' %}
+                {% assign current_path_with_slash = current_path_with_slash | append: '/' %}
+              {% endif %}
+              {% for link in site.data.site.header_links %}
+              {% assign link_path_with_slash = link.url %}
+              {% if link_path_with_slash != '/' and link_path_with_slash | slice: -1, 1 != '/' %}
+                {% assign link_path_with_slash = link_path_with_slash | append: '/' %}
+              {% endif %}
+              {% assign is_active_nav_link = link_path_with_slash == current_path_with_slash %}
+              <a href="{{ link.url | relative_url | escape }}"{% if is_active_nav_link %} class="is-active" aria-current="page"{% endif %}>{{ link.label | escape }}</a>
+              {% endfor %}
+            {% endif %}
+          </nav>
+        </div>
+      </header>
+
+      <!-- Page-specific content lives in each page's markdown file. -->
+      <main class="site-main" id="main-content" tabindex="-1">
+        <div class="page-shell">
+          <div class="page-body">
+            {% assign is_home = page.path == 'index.md' %}
+            {% assign is_resume = page.path contains 'resume/' %}
+            {% assign show_page_intro = true %}
+            {% if is_home or is_resume %}{% assign show_page_intro = false %}{% endif %}
+
+            {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
+            {% assign is_piece_page = true %}
+            {% for collection_path in piece_collections %}
+              {% if page.path contains collection_path and page.name != 'index.md' %}
+                {% assign is_piece_page = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
+            {% assign intro_featured_image = page.featured_image | default: page.image %}
+
+            {% if show_page_intro and is_piece_page == false %}
+            <header class="section page-intro{% if page.intro_spacing_class %} {{ page.intro_spacing_class | escape }}{% endif %}">
+              <h1 class="page-title">{{ intro_title | escape }}</h1>
+              {% if intro_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ intro_featured_image | relative_url | escape }}" alt="Featured image for {{ intro_title | escape }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
+            </header>
+            {% endif %}
+
+            {% if is_piece_page %}
+            <header class="piece-detail-header section">
+              <h1 class="piece-detail-title">{{ intro_title | escape }}</h1>
+              {% if intro_featured_image %}
+              <figure class="piece-featured-media">
+                <img src="{{ intro_featured_image | relative_url | escape }}" alt="Featured image for {{ intro_title | escape }}" loading="eager" decoding="async">
+              </figure>
+              {% endif %}
+            </header>
+            {% endif %}
+
+            {% if is_piece_page %}
+            <article class="piece-detail">
+
+
+
+
+<div class="certificate-list">
+    <div class="certificate-item" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+        <div class="certificate-details" style="margin-bottom: var(--space-2);">
+            <p>Completed the foundations course on AI.</p>
+        </div>
+        <figure class="piece-featured-media" style="margin-bottom: var(--space-2);">
+            <img src="/assets/uploads/screenshot-20260307-001550.png" alt="Certificate Image" loading="lazy" decoding="async">
+        </figure>
+        <div class="certificate-credentials" style="margin-top: var(--space-2);">
+            <a href="https://coursera.org/verify/12345" target="_blank" rel="noopener noreferrer">Credentials</a>
+        </div>
+    </div>
+
+    <div class="certificate-item" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+        <div class="certificate-details" style="margin-bottom: var(--space-2);">
+            <p>Completed advanced prompt engineering.</p>
+        </div>
+        <figure class="piece-featured-media" style="margin-bottom: var(--space-2);">
+            <img src="/assets/uploads/Screenshot_20260307-001551.png" alt="Certificate Image" loading="lazy" decoding="async">
+        </figure>
+        <div class="certificate-credentials" style="margin-top: var(--space-2);">
+            <a href="https://coursera.org/verify/67890" target="_blank" rel="noopener noreferrer">Credentials</a>
+        </div>
+    </div>
+</div>
+
+            </article>
+            {% else %}
+
+
+            {% endif %}
+          </div>
+        </div>
+      </main>
+
+      <!-- Global footer. Keep contact + social info here. -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div>
+            <p class="footer-title">
+              {% if site.data.site.footer_review_url %}
+              <a href="{{ site.data.site.footer_review_url | escape }}" target="_blank" rel="noopener noreferrer">{{ site.data.site.footer_heading | default: "Leave a review" | escape }}</a>
+              {% else %}
+              {{ site.data.site.footer_heading | default: "Let's connect" | escape }}
+              {% endif %}
+            </p>
+            <p class="footer-text">
+              {% if site.data.site.contact_email %}
+              <a href="mailto:{{ site.data.site.contact_email | escape }}">{{ site.data.site.contact_email | escape }}</a>
+              {% endif %}
+              {% if site.data.site.location %}
+              {% if site.data.site.contact_email %} · {% endif %}Based in {{ site.data.site.location | escape }}
+              {% endif %}
+            </p>
+          </div>
+          <div class="footer-links" aria-label="Social links">
+            {% if site.data.site.social_links %}
+              {% for social in site.data.site.social_links %}
+              <a href="{{ social.url | escape }}" target="_blank" rel="noopener noreferrer">{{ social.label | escape }}</a>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <p class="footer-meta">© {{ site.time | date: "%Y" }} {{ site_title | escape }} · {{ site.data.site.footer_note | default: "Built between deadlines" | escape }}</p>
+      </footer>
+    </div>
+    <script src="{{ '/assets/site.js' | relative_url }}" defer></script>
+  </body>
+</html>

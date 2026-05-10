@@ -51,17 +51,10 @@
       {% endif %}
     {% endif %}
     {% assign piece_collections = 'poetry/,prose/,essays/,projects/,achievements/,certificates/' | split: ',' %}
-    {% assign reading_room_collections = 'poetry/,prose/,essays/,projects/' | split: ',' %}
     {% assign is_piece_page = false %}
-    {% assign is_reading_room_page = false %}
     {% for collection_path in piece_collections %}
       {% if page.path contains collection_path and page.name != 'index.md' %}
         {% assign is_piece_page = true %}
-      {% endif %}
-    {% endfor %}
-    {% for collection_path in reading_room_collections %}
-      {% if page.path contains collection_path and page.name != 'index.md' %}
-        {% assign is_reading_room_page = true %}
       {% endif %}
     {% endfor %}
     {% assign current_time = 'now' | date: '%s' %}
@@ -121,7 +114,7 @@
     {% endif %}
   </head>
 
-  <body class="is-loading{% if page.path == 'index.md' %} page--home{% endif %}{% if is_reading_room_page and is_published_piece %} page--reading-room{% endif %}{% if page.category_browse %} page--category-browse{% endif %}{% if page.desk_page %} page--desk{% endif %}">
+  <body class="is-loading{% if page.path == 'index.md' %} page--home{% endif %}">
     <div class="scroll-progress" aria-hidden="true" data-scroll-progress>
       <div class="scroll-progress__fill" data-scroll-progress-fill></div>
     </div>
@@ -204,14 +197,8 @@
             {% endif %}
 
             {% if is_piece_page and is_published_piece %}
-              <header class="piece-detail-header{% if is_reading_room_page %} reading-room-header tactile-emboss{% endif %} section"{% if is_reading_room_page %} data-reading-room-header{% endif %}>
-                {% if page.eyebrow %}
-                  <p class="piece-detail-eyebrow">{{ page.eyebrow | escape }}</p>
-                {% endif %}
+              <header class="piece-detail-header section">
                 <h1 class="piece-detail-title">{{ intro_title | escape }}</h1>
-                {% if page.description %}
-                  <p class="piece-detail-description">{{ page.description | escape }}</p>
-                {% endif %}
                 {% if intro_featured_image %}
                   <figure class="piece-featured-media">
                     <img src="{{ intro_featured_image | relative_url | escape }}" alt="Featured image for {{ intro_title | escape }}" loading="eager" decoding="async">
@@ -221,7 +208,7 @@
             {% endif %}
 
             {% if is_piece_page and is_published_piece %}
-            <article class="piece-detail{% if is_reading_room_page %} reading-room-detail prose{% endif %}"{% if is_reading_room_page %} data-reading-room{% endif %}>
+            <article class="piece-detail">
               {{ content }}
 
               {% if page.path contains 'certificates/' and page.certificate_list %}
@@ -251,9 +238,6 @@
                 </div>
               {% endif %}
             </article>
-            {% if is_reading_room_page %}
-              <a class="reading-room-home-orb tactile-deboss" href="{{ '/' | relative_url }}" aria-label="Return home">↑</a>
-            {% endif %}
             {% elsif is_piece_page %}
             <section class="section">
               <div class="card">
