@@ -830,18 +830,26 @@ body.page--desk .page-intro {
 }
 
 .desk-bio-card {
-  display: grid;
-  grid-template-columns: minmax(12rem, 0.35fr) minmax(0, 1fr);
-  gap: clamp(var(--space-5), 5vw, var(--space-7));
-  align-items: center;
+  display: block;
+}
+
+.desk-bio-card::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .desk-portrait-frame {
-  margin: 0;
+  float: left;
+  width: min(280px, 45vw);
+  margin: 0 1.5rem 1rem 0;
+  shape-outside: circle(48% at 50% 48%);
+  shape-margin: 1.5rem;
   text-align: center;
 }
 
 .desk-portrait {
+  border-radius: 50%;
   box-shadow: var(--shadow-deboss);
   border-color: rgba(212, 184, 134, 0.22);
 }
@@ -1023,7 +1031,14 @@ body.page--desk .page-intro {
 }
 
 @media (max-width: 760px) {
-  .desk-bio-card,
+  .desk-portrait-frame {
+    float: none;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 2rem;
+    shape-outside: none;
+  }
+
   .desk-link-grid {
     grid-template-columns: 1fr;
   }
@@ -1386,7 +1401,8 @@ body.is-reading-room-scrolled .reading-room-header .piece-detail-title {
 
 /* About page portrait */
 .about-portrait {
-  width: min(280px, 66vw);
+  width: 100%;
+  max-width: min(280px, 66vw);
   aspect-ratio: 1;
   margin: 0 auto var(--space-3);
   border-radius: 50%;
@@ -1395,7 +1411,7 @@ body.is-reading-room-scrolled .reading-room-header .piece-detail-title {
   background-color: rgba(8, 24, 18, 0.86);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 115%;
   pointer-events: none;
   user-select: none;
 }
@@ -1681,7 +1697,7 @@ body.is-transition-dissolve-lift.is-leaving .page-shell {
   }
 
   .about-portrait {
-    width: min(230px, 70vw);
+    max-width: min(230px, 70vw);
   }
 
 
