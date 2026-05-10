@@ -116,12 +116,12 @@ const applyTransitionPreset = (preset) => {
 };
 
 const runNavigableTransition = (href) => {
-  const fallbackDurationMs = 180;
+  const fallbackDurationMs = 280;
 
   try {
     const targetPathname = new URL(href, window.location.origin).pathname;
     const transitionPreset = resolveTransitionPreset(window.location.pathname, targetPathname);
-    const transitionDurationMs = transitionPreset ? 220 : fallbackDurationMs;
+    const transitionDurationMs = transitionPreset ? 360 : fallbackDurationMs;
 
     applyTransitionPreset(transitionPreset);
 
@@ -266,13 +266,13 @@ const initScrollProgress = () => {
 
     if (maxScrollableDistance <= 120) {
       progressBar.hidden = true;
-      progressFill.style.width = '0%';
+      progressFill.style.transform = 'scaleX(0)';
       return;
     }
 
     progressBar.hidden = false;
     const progress = Math.min(Math.max(scrollTop / maxScrollableDistance, 0), 1);
-    progressFill.style.width = `${progress * 100}%`;
+    progressFill.style.transform = `scaleX(${progress})`;
   };
 
   updateScrollProgress();
@@ -612,12 +612,12 @@ const initQuoteRotator = () => {
       currentElement.classList.remove('is-active');
       currentElement.classList.add('is-fading-out');
 
-      // Wait 1s for fade out, then hold 1.5s dark (2.5s total)
+      // Wait through the longer fade, then hold a short dark pause before the next quote.
       quoteRotatorTimeoutId = window.setTimeout(() => {
         currentElement.classList.remove('is-fading-out');
         currentIndex = (currentIndex + 1) % quoteElements.length;
         runRotatorCycle();
-      }, 2500);
+      }, 2200);
 
     }, 5000);
   };
