@@ -120,6 +120,8 @@
   {% if page.path contains 'resume/' %}{% assign is_resume = true %}{% endif %}
   {% assign is_404 = false %}
   {% if page.path == '404.md' %}{% assign is_404 = true %}{% endif %}
+  {% assign show_page_intro = true %}
+  {% if is_home or is_resume or is_404 %}{% assign show_page_intro = false %}{% endif %}
 
   <body class="is-loading{% if is_home %} page--home{% endif %}">
     <div class="scroll-progress" aria-hidden="true" data-scroll-progress>
@@ -179,13 +181,13 @@
       <!-- Page-specific content lives in each page's markdown file. -->
       <main class="site-main" id="main-content" tabindex="-1">
         <div class="loading-skeleton" aria-hidden="true">
-          {% unless is_home %}
+          {% if show_page_intro %}
           <div class="skeleton-section skeleton-section--intro">
             {% unless is_piece_page %}<span class="skeleton-pill skeleton-shimmer"></span>{% endunless %}
             <span class="skeleton-line skeleton-line--title skeleton-shimmer"></span>
             <span class="skeleton-line skeleton-line--lead skeleton-shimmer"></span>
           </div>
-          {% endunless %}
+          {% endif %}
 
           {% if is_home %}
           <div class="skeleton-home-grid">
@@ -250,9 +252,6 @@
 
         <div class="page-shell">
           <div class="page-body">
-            {% assign show_page_intro = true %}
-            {% if is_home or is_resume or is_404 %}{% assign show_page_intro = false %}{% endif %}
-
             {% assign intro_title = page.title | default: page.name | replace: '.md', '' | replace: '-', ' ' %}
             {% assign intro_featured_image = page.featured_image | default: page.image %}
 
