@@ -29,7 +29,7 @@ category_browse: true
 
   <div class="category-browse-summary tactile-deboss">
     <p class="category-browse-summary__label">Experience shelf</p>
-    <p class="category-browse-summary__count">{{ public_item_count }} {% if public_item_count == 1 %}entry{% else %}entrys{% endif %}</p>
+    <p class="category-browse-summary__count">{{ public_item_count }} {% if public_item_count == 1 %}entry{% else %}entries{% endif %}</p>
   </div>
 
   {% if public_item_count > 0 %}

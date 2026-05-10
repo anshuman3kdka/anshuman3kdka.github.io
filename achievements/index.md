@@ -29,10 +29,12 @@ desk_page: true
   <div class="desk-timeline" aria-label="Achievement nodes">
     <div class="desk-timeline-track" aria-hidden="true"></div>
     <div class="desk-timeline-list">
+      {% assign first_public_rendered = false %}
       {% for achievement in achievement_items %}
       {% assign item_publish_time = achievement.publish_date | date: '%s' %}
       {% unless achievement.publish_date and achievement.publish_date != '' and item_publish_time > current_time %}
-      <details class="desk-node tactile-card"{% if forloop.first %} open{% endif %}>
+      <details class="desk-node tactile-card"{% unless first_public_rendered %} open{% endunless %}>
+      {% assign first_public_rendered = true %}
         <summary>
           <span class="desk-node-dot" aria-hidden="true"></span>
           <span>
