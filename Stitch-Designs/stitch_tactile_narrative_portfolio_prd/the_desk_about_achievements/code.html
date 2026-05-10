@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Desk - Tactile Narrative Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#e69b19",
+          "background-light": "#f8f7f6",
+          "background-dark": "#16241D",
+          "surface-dark": "#1A2A22",
+          "text-light": "#F4F1E1",
+          "muted-green": "#7A9684",
+          "accent-terracotta": "#E8A365"
+        },
+        fontFamily: {
+          "display": ["Literata", "serif"]
+        },
+        borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+        boxShadow: {
+          'emboss': '6px 6px 12px #101B15, -4px -4px 10px #21352A, inset 1px 1px 1px rgba(255,255,255,0.05)',
+          'deboss': 'inset 4px 4px 8px #101B15, inset -4px -4px 8px #21352A'
+        },
+        animation: {
+          'draw-line': 'drawLine 1s ease-out forwards',
+        },
+        keyframes: {
+          drawLine: {
+            '0%': { height: '0' },
+            '100%': { height: '100%' },
+          }
+        }
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.background-dark');
+    color: theme('colors.text-light');
+    font-family: theme('fontFamily.display');
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Timeline track animation styling */
+  .timeline-track {
+    height: 0;
+    transform-origin: top;
+    animation: drawLine 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Node expansion styling (CSS-only approximation for the requirement) */
+  .node-wrapper {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .node-content {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .node-toggle:checked ~ .node-content {
+    max-width: 200px;
+    opacity: 1;
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .node-toggle:checked ~ .node-dot .inner-dot {
+    background-color: theme('colors.primary');
+    transform: scale(1.5);
+  }
+  
+  .inner-dot {
+    transition: all 0.3s ease;
+  }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen overflow-x-hidden flex flex-col bg-background-dark text-text-light">
+<!-- Top App Bar Excluded (Destination screen, but BottomNav is present) -->
+<!-- Main Content -->
+<main class="flex-1 px-4 py-8 pb-24 flex flex-col gap-12">
+<!-- Top Bio Card -->
+<section class="w-full max-w-md mx-auto">
+<div class="bg-surface-dark rounded-[24px] shadow-emboss p-6 flex flex-col items-center gap-6 relative overflow-hidden border border-[#2A3F33]/30">
+<!-- Subtle inner highlight -->
+<div class="absolute inset-0 rounded-[24px] border border-white/5 pointer-events-none"></div>
+<div class="w-32 h-32 rounded-full shadow-deboss p-1.5 flex-shrink-0">
+<div class="w-full h-full rounded-full overflow-hidden relative shadow-emboss">
+<img alt="Portrait of the author" class="w-full h-full object-cover filter grayscale contrast-125" data-alt="A striking, high-contrast monochrome portrait of a young male writer. The lighting is dramatic, casting deep shadows that emphasize thoughtful features against a stark background. The mood is introspective and literary, perfectly matching a dark, tactile neumorphic aesthetic. Deep forest green undertones subtlely blend the black and white image into the surrounding dark green UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7uQsYKVUa_0B9ZwXpihKv0hLTm2X1fz6tHgWx5g2xJK0vLoingL5cxJYcn8CE_BMLeHrOag0fbQxY2X3JeOHc4P3spf99sJPzbioIT9a9mevM7Ok9e_kPMisVw4PO-dtdbA7ihLEw2H6SXjgEzzonaz7E-UyLnpI2N5lkrwAWp7PwFau0-bjM8K0q__-IUpUwiIzyDkQay420gJua3M12CZV8hYESwLq6-iq2CPrbZWOKZgtvjH5g0VfyfQ8F57tyV56zgGgh3Q"/>
+</div>
+</div>
+<div class="text-center flex flex-col gap-3">
+<h1 class="text-3xl font-semibold tracking-wide">Anshuman<span class="text-muted-green font-light tracking-widest text-xl ml-1">3kdka</span></h1>
+<p class="text-base leading-relaxed text-text-light/90 italic">
+            "Writing not as fleeting text, but as <span class="text-primary font-medium not-italic">physical narrative artifacts</span> carved into the digital canvas."
+          </p>
+<div class="flex justify-center gap-4 mt-2">
+<a class="w-10 h-10 rounded-full shadow-emboss flex items-center justify-center text-muted-green hover:text-primary transition-colors border border-[#2A3F33]/30" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</a>
+<a class="w-10 h-10 rounded-full shadow-emboss flex items-center justify-center text-muted-green hover:text-primary transition-colors border border-[#2A3F33]/30" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="link">link</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="w-full max-w-md mx-auto relative mt-4">
+<h2 class="text-center text-muted-green text-sm uppercase tracking-[0.2em] mb-12">The Journey</h2>
+<div class="relative w-full pb-12">
+<!-- The Debossed Track -->
+<div class="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-surface-dark shadow-deboss rounded-full overflow-hidden">
+<div class="w-full bg-primary/20 timeline-track origin-top"></div>
+</div>
+<!-- Timeline Nodes List -->
+<div class="flex flex-col gap-16 relative z-10 w-full pt-4">
+<!-- Node 1 (Left aligned text) -->
+<div class="w-full flex items-start justify-center relative node-wrapper">
+<!-- Hidden Checkbox for interaction -->
+<input class="hidden node-toggle" id="node-1" type="checkbox"/>
+<label class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-surface-dark shadow-emboss flex items-center justify-center cursor-pointer z-20 border border-[#2A3F33]/30 node-dot" for="node-1">
+<div class="w-1.5 h-1.5 rounded-full bg-muted-green inner-dot"></div>
+</label>
+<!-- Content Area (Left side) -->
+<div class="w-1/2 pr-8 flex flex-col items-end text-right self-start ml-0 mr-auto pt-1">
+<span class="text-primary font-medium text-sm">2023</span>
+<h3 class="text-lg font-semibold mt-1">First Publication</h3>
+<!-- Expandable Card -->
+<div class="node-content bg-surface-dark shadow-emboss rounded-xl border border-[#2A3F33]/30">
+<p class="text-sm text-text-light/80 leading-snug">
+                  "Echoes in the Forest" published in The Atlantic's emergent writer series. Explored themes of digital isolation.
+                </p>
+</div>
+</div>
+</div>
+<!-- Node 2 (Right aligned text) -->
+<div class="w-full flex items-start justify-center relative node-wrapper">
+<input class="hidden node-toggle" id="node-2" type="checkbox"/>
+<label class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-surface-dark shadow-emboss flex items-center justify-center cursor-pointer z-20 border border-[#2A3F33]/30 node-dot" for="node-2">
+<div class="w-1.5 h-1.5 rounded-full bg-muted-green inner-dot"></div>
+</label>
+<!-- Content Area (Right side) -->
+<div class="w-1/2 pl-8 flex flex-col items-start text-left self-start mr-0 ml-auto pt-1">
+<span class="text-primary font-medium text-sm">2022</span>
+<h3 class="text-lg font-semibold mt-1">National Essay Award</h3>
+<!-- Expandable Card -->
+<div class="node-content bg-surface-dark shadow-emboss rounded-xl border border-[#2A3F33]/30">
+<p class="text-sm text-text-light/80 leading-snug">
+                  Awarded first place for the piece "Tactile Memories," defining the core aesthetic of this portfolio.
+                </p>
+</div>
+</div>
+</div>
+<!-- Node 3 (Left aligned text) -->
+<div class="w-full flex items-start justify-center relative node-wrapper">
+<input class="hidden node-toggle" id="node-3" type="checkbox"/>
+<label class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-surface-dark shadow-emboss flex items-center justify-center cursor-pointer z-20 border border-[#2A3F33]/30 node-dot" for="node-3">
+<div class="w-1.5 h-1.5 rounded-full bg-muted-green inner-dot"></div>
+</label>
+<!-- Content Area (Left side) -->
+<div class="w-1/2 pr-8 flex flex-col items-end text-right self-start ml-0 mr-auto pt-1">
+<span class="text-primary font-medium text-sm">2021</span>
+<h3 class="text-lg font-semibold mt-1">The Substack Era</h3>
+<!-- Expandable Card -->
+<div class="node-content bg-surface-dark shadow-emboss rounded-xl border border-[#2A3F33]/30">
+<p class="text-sm text-text-light/80 leading-snug">
+                  Launched weekly newsletter detailing the intersection of design, philosophy, and modern architecture.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared BottomNavBar -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<div class="relative flex h-auto w-full flex-col bg-[#16241D] dark group/design-root overflow-x-hidden shadow-[0_-4px_12px_rgba(16,27,21,0.5)]">
+<div class="flex gap-2 border-t border-[#2A3F33]/50 bg-[#1A2A22] px-4 pb-3 pt-2 shadow-emboss">
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#7A9684]" href="#">
+<div class="text-[#7A9684] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+</svg>
+</div>
+<p class="text-[#7A9684] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#7A9684]" href="#">
+<div class="text-[#7A9684] flex h-8 items-center justify-center" data-icon="List" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+</svg>
+</div>
+<p class="text-[#7A9684] text-xs font-medium leading-normal tracking-[0.015em]">Browse</p>
+</a>
+<!-- Active State for 'Desk' -->
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#e69b19]" href="#">
+<div class="text-[#e69b19] flex h-8 items-center justify-center drop-shadow-[0_0_8px_rgba(230,155,25,0.4)]" data-icon="User" data-size="24px" data-weight="fill">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M230.93,220a8,8,0,0,1-6.93,4H32a8,8,0,0,1-6.92-12c15.23-26.33,38.7-45.21,66.09-54.16a72,72,0,1,1,73.66,0c27.39,8.95,50.86,27.83,66.09,54.16A8,8,0,0,1,230.93,220Z"></path>
+</svg>
+</div>
+<p class="text-[#e69b19] text-xs font-medium leading-normal tracking-[0.015em]">Desk</p>
+</a>
+</div>
+<div class="flex items-center bg-[#1A2A22] p-4 pb-2 justify-between">
+<div class="text-[#7A9684] flex size-12 shrink-0 items-center" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewbox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</div>
+<h2 class="text-text-light text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">The Desk</h2>
+</div>
+<div class="h-5 bg-[#1A2A22]"></div>
+</div>
+</div>
+</body></html>

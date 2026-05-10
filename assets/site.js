@@ -487,16 +487,33 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
   });
 };
 
-const initRandomReadButton = () => {
-  const button = document.querySelector('[data-random-read]');
-  const status = document.querySelector('[data-random-read-status]');
-  if (!button || !status) return;
+const resolveRandomReadStatus = (trigger) => {
+  const describedBy = trigger.getAttribute('aria-describedby');
+  if (describedBy) {
+    const statusById = document.getElementById(describedBy);
+    if (statusById) return statusById;
+  }
 
-  bindRandomReadTrigger({
-    trigger: button,
-    statusElement: status,
-    disableWhileLoading: true,
-    idleStatus: '',
+  const localScope = trigger.closest('.header-quick-actions, .home-random');
+  return localScope?.querySelector('[data-random-read-status]') || null;
+};
+
+const initRandomReadButton = () => {
+  const buttons = Array.from(document.querySelectorAll('[data-random-read]'));
+  if (!buttons.length) return;
+
+  buttons.forEach((button) => {
+    if (button.dataset.randomReadBound === 'true') return;
+    const status = resolveRandomReadStatus(button);
+    if (!status) return;
+
+    button.dataset.randomReadBound = 'true';
+    bindRandomReadTrigger({
+      trigger: button,
+      statusElement: status,
+      disableWhileLoading: true,
+      idleStatus: status.textContent || '',
+    });
   });
 };
 
@@ -626,6 +643,47 @@ const initQuoteRotator = () => {
   runRotatorCycle();
 };
 
+
+const initReadingRoom = () => {
+  const readingRoom = document.querySelector('[data-reading-room]');
+  const header = document.querySelector('[data-reading-room-header]');
+  if (!readingRoom) return;
+  if (readingRoom.dataset.readingRoomInitialized === 'true') return;
+  readingRoom.dataset.readingRoomInitialized = 'true';
+
+  const blocks = Array.from(readingRoom.querySelectorAll('p, ul, ol, blockquote, h2, h3, h4'));
+  blocks.forEach((block) => {
+    block.classList.add('reading-room-block');
+  });
+
+  const updateHeaderState = () => {
+    if (!header) return;
+    document.body.classList.toggle('is-reading-room-scrolled', window.scrollY > 80);
+  };
+
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    blocks.forEach((block) => block.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -20% 0px',
+    threshold: 0.12,
+  });
+
+  blocks.forEach((block) => observer.observe(block));
+};
+
 const initPage = () => {
   hydrateTransitionPresetFromStorage();
   resetNavigationState();
@@ -636,6 +694,7 @@ const initPage = () => {
   initRandomReadCard();
   initRandomReadButton();
   initQuoteRotator();
+  initReadingRoom();
 };
 
 document.addEventListener("DOMContentLoaded", initPage);
@@ -645,6 +704,7 @@ document.addEventListener("pageshow", () => {
   resetTransientUiState();
   highlightCurrentNavLink();
   initScrollProgress();
+  initReadingRoom();
 });
 
 document.addEventListener("pagehide", () => {
