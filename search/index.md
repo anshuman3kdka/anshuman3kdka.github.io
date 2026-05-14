@@ -20,12 +20,12 @@ description: Search all essays, prose, poetry, projects, and achievements.
         placeholder="Try: Poetry"
         data-search-input
         data-search-index-url="{{ '/search-index.json' | relative_url }}"
-        aria-describedby="search-live-region"
+        aria-describedby="search-hint search-live-region"
         maxlength="100"
       >
     </form>
 
-    <p class="search-hint">Tip: use 2+ letters. Multiple words work too, and your search stays in the URL for sharing.</p>
+    <p class="search-hint" id="search-hint">Tip: use 2+ letters. Multiple words work too, and your search stays in the URL for sharing.</p>
     <p class="search-live" id="search-live-region" data-search-live aria-live="polite"></p>
     <ul class="search-results" data-search-results></ul>
   </div>
