@@ -5,3 +5,7 @@
 ## 2024-03-22 - Hide Redundant and Decorative Text from Screen Readers
 **Learning:** Screen readers will stutter or read duplicate text when a button or link has both an `aria-label` and visible text content (e.g. `aria-label="Download PDF"` with `<span>PDF</span>`). Additionally, decorative arrows (like `→`) read aloud disruptively, polluting the auditory flow.
 **Action:** Always add `aria-hidden="true"` to child text elements/icons if their parent already provides a fully descriptive `aria-label`. Wrap decorative characters like arrows in `<span aria-hidden="true">` to preserve visual rhythm without breaking auditory clarity.
+
+## 2024-05-18 - Asynchronous State Announcements
+**Learning:** Elements triggering background or asynchronous tasks (like fetching a random read) do not natively inform screen readers that work is in progress.
+**Action:** Elements triggering asynchronous tasks must toggle `aria-busy="true"` during execution and remove it when the task finishes to ensure screen readers provide correct feedback about ongoing operations.

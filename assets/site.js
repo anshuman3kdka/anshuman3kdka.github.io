@@ -452,6 +452,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
     if (isFetching) return;
 
     isFetching = true;
+    trigger.setAttribute('aria-busy', 'true');
 
     if (disableWhileLoading) {
       trigger.disabled = true;
@@ -469,6 +470,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
       }
 
       runNavigableTransition(item.url);
+      trigger.removeAttribute('aria-busy');
       return;
     }
 
@@ -483,6 +485,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
       trigger.disabled = false;
     }
 
+    trigger.removeAttribute('aria-busy');
     isFetching = false;
   });
 };
@@ -554,6 +557,7 @@ const initRandomReadCard = () => {
   };
 
   const renderRandomItem = async () => {
+    refresh.setAttribute('aria-busy', 'true');
     setCardState({
       eyebrowText: 'Random Read',
       titleText: 'Picking a random piece…',
@@ -569,6 +573,7 @@ const initRandomReadCard = () => {
         messageText: 'Try again after updating site content.',
         disabled: true,
       });
+      refresh.removeAttribute('aria-busy');
       return;
     }
 
@@ -579,6 +584,7 @@ const initRandomReadCard = () => {
       href: item.url,
       linkLabel: 'Read this piece <span aria-hidden="true">→</span>',
     });
+    refresh.removeAttribute('aria-busy');
   };
 
   refresh.addEventListener('click', renderRandomItem);
