@@ -452,6 +452,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
     if (isFetching) return;
 
     isFetching = true;
+    trigger.setAttribute('aria-busy', 'true');
 
     if (disableWhileLoading) {
       trigger.disabled = true;
@@ -469,6 +470,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
       }
 
       runNavigableTransition(item.url);
+      trigger.removeAttribute('aria-busy');
       return;
     }
 
@@ -483,6 +485,7 @@ const bindRandomReadTrigger = ({ trigger, statusElement, disableWhileLoading = f
       trigger.disabled = false;
     }
 
+    trigger.removeAttribute('aria-busy');
     isFetching = false;
   });
 };
@@ -554,31 +557,36 @@ const initRandomReadCard = () => {
   };
 
   const renderRandomItem = async () => {
-    setCardState({
-      eyebrowText: 'Random Read',
-      titleText: 'Picking a random piece…',
-      messageText: 'One sec while I grab poetry/prose/essay content.',
-      disabled: true,
-    });
-
-    const item = await fetchRandomReadItem();
-
-    if (!item) {
+    refresh.setAttribute('aria-busy', 'true');
+    try {
       setCardState({
-        titleText: 'No poetry, prose, or essay items were found.',
-        messageText: 'Try again after updating site content.',
+        eyebrowText: 'Random Read',
+        titleText: 'Picking a random piece…',
+        messageText: 'One sec while I grab poetry/prose/essay content.',
         disabled: true,
       });
-      return;
-    }
 
-    setCardState({
-      eyebrowText: item.eyebrow || item.category || 'Random Read',
-      titleText: item.title || 'Untitled piece',
-      messageText: 'A random pick from the archive.',
-      href: item.url,
-      linkLabel: 'Read this piece <span aria-hidden="true">→</span>',
-    });
+      const item = await fetchRandomReadItem();
+
+      if (!item) {
+        setCardState({
+          titleText: 'No poetry, prose, or essay items were found.',
+          messageText: 'Try again after updating site content.',
+          disabled: true,
+        });
+        return;
+      }
+
+      setCardState({
+        eyebrowText: item.eyebrow || item.category || 'Random Read',
+        titleText: item.title || 'Untitled piece',
+        messageText: 'A random pick from the archive.',
+        href: item.url,
+        linkLabel: 'Read this piece <span aria-hidden="true">→</span>',
+      });
+    } finally {
+      refresh.removeAttribute('aria-busy');
+    }
   };
 
   refresh.addEventListener('click', renderRandomItem);
