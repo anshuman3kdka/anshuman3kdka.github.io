@@ -2592,6 +2592,12 @@ body.page--home .card-link:focus-visible::after {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  min-width: 0;
+}
+
+/* Keep long titles and URLs inside each card on narrow screens. */
+.home-feature :is(.card-title, .card-text, .card-link) {
+  overflow-wrap: anywhere;
 }
 
 /* Signature */
