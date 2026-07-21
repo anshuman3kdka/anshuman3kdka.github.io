@@ -877,7 +877,8 @@ body.page--desk .page-intro {
 
 .desk-bio-copy p:not(.desk-kicker),
 .desk-timeline-heading p:not(.desk-kicker),
-.desk-node p {
+.desk-node p,
+.desk-node-detail-block {
   color: var(--color-ink-muted);
 }
 
@@ -1017,9 +1018,34 @@ body.page--desk .page-intro {
   line-height: 1.12;
 }
 
-.desk-node p,
-.desk-node .card-link {
+.desk-node-details {
+  display: grid;
+  gap: var(--space-3);
   margin: 0 var(--space-4) var(--space-4) calc(var(--space-4) + 2.5rem);
+}
+
+.desk-node-details p,
+.desk-node-detail-block p {
+  margin: 0;
+}
+
+.desk-node-details strong,
+.desk-node-detail-block > strong {
+  color: var(--color-accent);
+}
+
+.desk-node-detail-block {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.desk-node-detail-block img {
+  width: 100%;
+  max-height: 18rem;
+  object-fit: cover;
+  border: 1px solid rgba(212, 184, 134, 0.2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-deboss);
 }
 
 .desk-node[open] {

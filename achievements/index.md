@@ -6,19 +6,11 @@ desk_page: true
 ---
 
 <section class="section desk-page desk-achievements" aria-label="Achievement timeline">
-  {% assign current_time = 'now' | date: '%s' %}
   {% assign achievement_items = site.pages
     | where_exp: "page", "page.path contains 'achievements/'"
     | where_exp: "page", "page.name != 'index.md'"
-    | where_exp: "page", "page.draft != true"
     | sort: "title" %}
-  {% assign public_item_count = 0 %}
-  {% for achievement in achievement_items %}
-    {% assign item_publish_time = achievement.publish_date | date: '%s' %}
-    {% unless achievement.publish_date and achievement.publish_date != '' and item_publish_time > current_time %}
-      {% assign public_item_count = public_item_count | plus: 1 %}
-    {% endunless %}
-  {% endfor %}
+  {% assign public_item_count = achievement_items | size %}
 
   <div class="desk-timeline-heading desk-timeline-heading--intro tactile-deboss">
     <p class="desk-kicker">The Desk</p>
@@ -32,21 +24,22 @@ desk_page: true
     <div class="desk-timeline-list">
       {% assign first_public_rendered = false %}
       {% for achievement in achievement_items %}
-      {% assign item_publish_time = achievement.publish_date | date: '%s' %}
-      {% unless achievement.publish_date and achievement.publish_date != '' and item_publish_time > current_time %}
       <details class="desk-node tactile-card"{% unless first_public_rendered %} open{% endunless %}>
       {% assign first_public_rendered = true %}
         <summary>
           <span class="desk-node-dot" aria-hidden="true"></span>
           <span>
             <small>{% if achievement.eyebrow %}{{ achievement.eyebrow | escape }}{% else %}Achievement{% endif %}</small>
-            <strong>{{ achievement.title | escape }}</strong>
+            <strong>{% if achievement.title %}{{ achievement.title | escape }}{% else %}Untitled achievement{% endif %}</strong>
           </span>
         </summary>
-        <p>{% if achievement.description %}{{ achievement.description | escape }}{% else %}{{ page.default_card_description | default: 'More details coming soon.' | escape }}{% endif %}</p>
-        <a class="card-link" href="{{ achievement.url | relative_url | escape }}">Open record</a>
+        <div class="desk-node-details">
+          <p><strong>Title:</strong> {% if achievement.title %}{{ achievement.title | escape }}{% endif %}</p>
+          <p><strong>Date:</strong> {% if achievement.date %}{{ achievement.date | date: '%B %-d, %Y' }}{% endif %}</p>
+          <div class="desk-node-detail-block"><strong>Details:</strong>{% if achievement.content != '' %}{{ achievement.content }}{% elsif achievement.details %}<p>{{ achievement.details | escape }}</p>{% endif %}</div>
+          <div class="desk-node-detail-block"><strong>Image:</strong>{% if achievement.image %}<img src="{{ achievement.image | relative_url | escape }}" alt="{% if achievement.title %}{{ achievement.title | escape }} image{% else %}Achievement image{% endif %}" loading="lazy">{% endif %}</div>
+        </div>
       </details>
-      {% endunless %}
       {% endfor %}
     </div>
   </div>
