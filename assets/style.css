@@ -1014,14 +1014,46 @@ body.page--desk .page-intro {
   display: block;
   color: var(--color-ink);
   font-family: var(--font-heading);
-  font-size: clamp(1.18rem, 4vw, 1.55rem);
-  line-height: 1.12;
+  font-size: clamp(1.35rem, 4.5vw, 1.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.desk-node summary em {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--color-accent);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .desk-node-details {
   display: grid;
   gap: var(--space-3);
   margin: 0 var(--space-4) var(--space-4) calc(var(--space-4) + 2.5rem);
+  padding-top: var(--space-2);
+  border-top: 1px solid rgba(212, 184, 134, 0.16);
+}
+
+.desk-node-details h3 {
+  margin: 0;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 5vw, 2.05rem);
+  line-height: 1.05;
+}
+
+.desk-node-details time {
+  width: fit-content;
+  padding: 0.28rem 0.72rem;
+  border: 1px solid rgba(212, 184, 134, 0.24);
+  border-radius: 999px;
+  color: var(--color-sage);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .desk-node-details p,
@@ -1029,17 +1061,14 @@ body.page--desk .page-intro {
   margin: 0;
 }
 
-.desk-node-details strong,
-.desk-node-detail-block > strong {
-  color: var(--color-accent);
-}
-
 .desk-node-detail-block {
   display: grid;
   gap: var(--space-2);
+  font-size: 1.02rem;
+  line-height: 1.7;
 }
 
-.desk-node-detail-block img {
+.desk-node-details > img {
   width: 100%;
   max-height: 18rem;
   object-fit: cover;

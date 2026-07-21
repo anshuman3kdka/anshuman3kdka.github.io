@@ -278,8 +278,12 @@ content:
     exclude:
       - index.md
     fields:
+      - name: display_title
+        label: Big Card Title
+        type: text
+        required: false
       - name: title
-        label: Title
+        label: Achievement Title
         type: text
         required: false
       - name: date
