@@ -279,43 +279,11 @@ content:
       - index.md
     fields:
       - name: title
-        label: Achievement
-        type: text
-        required: true
-      - name: eyebrow
-        label: Eyebrow Text (optional)
+        label: Title
         type: text
         required: false
-      - name: description
-        label: SEO Description (optional)
-        type: text
-        required: false
-      - name: seo_title
-        label: SEO Title (optional)
-        type: text
-        required: false
-      - name: og_image
-        label: Open Graph Image (optional)
-        type: image
-        required: false
-      - name: canonical_url
-        label: Canonical URL (optional)
-        type: text
-        required: false
-      - name: noindex
-        label: Noindex (optional)
-        type: boolean
-        required: false
-      - name: image
-        label: Image (optional)
-        type: image
-        required: false
-      - name: draft
-        label: Draft
-        type: boolean
-        default: true
-      - name: publish_date
-        label: Publish Date (optional)
+      - name: date
+        label: Date
         type: date
         options:
           format: yyyy-MM-dd
@@ -324,6 +292,11 @@ content:
       - name: body
         label: Details
         type: markdown
+        required: false
+      - name: image
+        label: Image
+        type: image
+        required: false
 
   - name: certificates
     label: Certificates

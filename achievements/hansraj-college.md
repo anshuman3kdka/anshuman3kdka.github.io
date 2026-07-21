@@ -1,8 +1,6 @@
 ---
 title: Hansraj College
 eyebrow: Creative Writing
-description: 1st Place in the Tabula Rasa storywriting competition
-noindex: false
-draft: true
+details: 1st Place in the Tabula Rasa storywriting competition
 ---
 1st Place in the Tabula Rasa storywriting competition
