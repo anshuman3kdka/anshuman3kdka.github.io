@@ -1,6 +1,7 @@
 ---
 title: Achievements
 description: See milestones, recognitions, and progress snapshots that reflect consistent effort, growth, and real-world impact.
+default_card_description: More details coming soon.
 desk_page: true
 ---
 
@@ -42,7 +43,7 @@ desk_page: true
             <strong>{{ achievement.title | escape }}</strong>
           </span>
         </summary>
-        <p>{% if achievement.description %}{{ achievement.description | escape }}{% else %}A recorded milestone from the writing and college archive.{% endif %}</p>
+        <p>{% if achievement.description %}{{ achievement.description | escape }}{% else %}{{ page.default_card_description | default: 'More details coming soon.' | escape }}{% endif %}</p>
         <a class="card-link" href="{{ achievement.url | relative_url | escape }}">Open record</a>
       </details>
       {% endunless %}
