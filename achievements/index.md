@@ -29,15 +29,18 @@ desk_page: true
         <summary>
           <span class="desk-node-dot" aria-hidden="true"></span>
           <span>
+            {% assign achievement_heading = achievement.display_title | default: achievement.title %}
             <small>{% if achievement.eyebrow %}{{ achievement.eyebrow | escape }}{% else %}Achievement{% endif %}</small>
-            <strong>{% if achievement.title %}{{ achievement.title | escape }}{% else %}Untitled achievement{% endif %}</strong>
+            <strong>{% if achievement_heading %}{{ achievement_heading | escape }}{% else %}Untitled achievement{% endif %}</strong>
+            {% if achievement.title and achievement.title != achievement_heading %}<em>{{ achievement.title | escape }}</em>{% endif %}
           </span>
         </summary>
         <div class="desk-node-details">
-          <p><strong>Title:</strong> {% if achievement.title %}{{ achievement.title | escape }}{% endif %}</p>
-          <p><strong>Date:</strong> {% if achievement.date %}{{ achievement.date | date: '%B %-d, %Y' }}{% endif %}</p>
-          <div class="desk-node-detail-block"><strong>Details:</strong>{% if achievement.content != '' %}{{ achievement.content }}{% elsif achievement.details %}<p>{{ achievement.details | escape }}</p>{% endif %}</div>
-          <div class="desk-node-detail-block"><strong>Image:</strong>{% if achievement.image %}<img src="{{ achievement.image | relative_url | escape }}" alt="{% if achievement.title %}{{ achievement.title | escape }} image{% else %}Achievement image{% endif %}" loading="lazy">{% endif %}</div>
+          {% assign achievement_heading = achievement.display_title | default: achievement.title %}
+          {% if achievement.title and achievement.title != achievement_heading %}<h3>{{ achievement.title | escape }}</h3>{% endif %}
+          {% if achievement.date %}<time datetime="{{ achievement.date | date_to_xmlschema }}">{{ achievement.date | date: '%B %-d, %Y' }}</time>{% endif %}
+          {% if achievement.content != '' %}<div class="desk-node-detail-block">{{ achievement.content }}</div>{% elsif achievement.details %}<p>{{ achievement.details | escape }}</p>{% endif %}
+          {% if achievement.image %}<img src="{{ achievement.image | relative_url | escape }}" alt="{% if achievement.display_title %}{{ achievement.display_title | escape }}{% elsif achievement.title %}{{ achievement.title | escape }}{% else %}Achievement{% endif %} image" loading="lazy">{% endif %}
         </div>
       </details>
       {% endfor %}
