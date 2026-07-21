@@ -714,6 +714,11 @@ content:
         label: SEO Description (optional)
         type: text
         required: false
+      - name: default_card_description
+        label: Default card description
+        type: text
+        default: More details coming soon.
+        required: false
       - name: seo_title
         label: SEO Title (optional)
         type: text
