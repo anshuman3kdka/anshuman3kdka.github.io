@@ -37,9 +37,10 @@ description: Anshuman’s personal site featuring thoughtful essays, original po
 {% endfor %}
 
 {% assign quote_rotator = site.data.home_quote_rotator %}
-{% if quote_rotator.enabled and quote_rotator.quotes.size > 0 %}
+{% assign hero_quotes = site.data.hero_quotes %}
+{% if quote_rotator.enabled and hero_quotes.size > 0 %}
 <div class="home-quote-container" data-quote-rotator aria-label="Rotating writing fragments">
-  {% for quote in quote_rotator.quotes %}
+  {% for quote in hero_quotes %}
   <p class="home-quote-text" data-quote-item>{{ quote | escape }}</p>
   {% endfor %}
 </div>
